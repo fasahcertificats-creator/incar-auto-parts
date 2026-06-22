@@ -1,0 +1,7 @@
+▲ Next.js 16.2.9 (Turbopack)
+- Local:         http://localhost:3000
+- Network:       http://0.0.0.0:3000
+✓ Ready in 770ms
+Creating turbopack project { dir: 'D:\\in car\\auto-parts-sourcing', testMode: true }
+
+ GET / 200 in 843ms (next.js: 248ms, application-code: 595ms)

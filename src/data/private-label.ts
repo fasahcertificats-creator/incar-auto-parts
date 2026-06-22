@@ -1,0 +1,137 @@
+import type {
+  PrivateLabelCategoryDetail,
+  PrivateLabelProcessStep,
+  PrivateLabelService,
+  PrivateLabelTrustPoint,
+} from "@/types/private-label";
+
+export const privateLabelTrustPoints: PrivateLabelTrustPoint[] = [
+  { id: "china-factory-sourcing", label: "China factory sourcing" },
+  { id: "custom-packaging", label: "Custom packaging" },
+  { id: "quality-inspection", label: "Quality inspection" },
+  { id: "saudi-wholesale-focus", label: "Saudi wholesale market focus" },
+];
+
+export const privateLabelServices: PrivateLabelService[] = [
+  {
+    id: "product-sourcing",
+    title: "Product sourcing",
+    description:
+      "Identify suitable product programs by category, MOQ, quality grade, and Saudi wholesale demand.",
+  },
+  {
+    id: "factory-matching",
+    title: "Factory matching",
+    description:
+      "Compare factory options by capability, export readiness, sample timing, and packaging support.",
+  },
+  {
+    id: "custom-packaging",
+    title: "Custom packaging",
+    description:
+      "Plan box structure, material, label placement, carton marks, and market-ready packaging details.",
+  },
+  {
+    id: "logo-printing",
+    title: "Logo printing",
+    description:
+      "Coordinate logo placement across boxes, labels, product inserts, and approved brand materials.",
+  },
+  {
+    id: "barcode-label-design",
+    title: "Barcode and label design",
+    description:
+      "Prepare barcode, product label, and Arabic/English packaging details for wholesale distribution.",
+  },
+  {
+    id: "oem-odm-support",
+    title: "OEM / ODM support",
+    description:
+      "Support specification alignment, OEM reference matching, sample review, and production coordination.",
+  },
+  {
+    id: "quality-inspection",
+    title: "Quality inspection",
+    description:
+      "Set inspection checkpoints for samples, packaging, label accuracy, and pre-shipment consistency.",
+  },
+  {
+    id: "export-documentation",
+    title: "Export documentation",
+    description:
+      "Coordinate invoice, packing list, carton details, and export-ready documentation with suppliers.",
+  },
+  {
+    id: "shipping-saudi-arabia",
+    title: "Shipping coordination to Saudi Arabia",
+    description:
+      "Align production timing, packing details, and shipment coordination for Saudi wholesale import flows.",
+  },
+];
+
+export const privateLabelProcessSteps: PrivateLabelProcessStep[] = [
+  {
+    step: "01",
+    title: "Choose product category",
+    description:
+      "Select the launch category and share target part types, quality grade, MOQ range, and priority market.",
+  },
+  {
+    step: "02",
+    title: "Share brand requirements",
+    description:
+      "Provide brand name, logo status, preferred packaging direction, label language, and buyer requirements.",
+  },
+  {
+    step: "03",
+    title: "Packaging and label planning",
+    description:
+      "Define box design, logo placement, barcode label, carton marking, and Arabic/English information needs.",
+  },
+  {
+    step: "04",
+    title: "Sample confirmation",
+    description:
+      "Review product samples, packaging samples, label details, and supplier readiness before production.",
+  },
+  {
+    step: "05",
+    title: "Production and quality inspection",
+    description:
+      "Coordinate production checkpoints, packaging inspection, label verification, and consistency checks.",
+  },
+  {
+    step: "06",
+    title: "Export and shipping coordination",
+    description:
+      "Prepare export documentation, packing details, supplier communication, and Saudi Arabia shipping coordination.",
+  },
+];
+
+export const privateLabelCategories: PrivateLabelCategoryDetail[] = [
+  {
+    category: "Brake System",
+    description:
+      "Fast-moving brake items can support clear brand positioning when quality grade, fitment, and packaging are controlled.",
+  },
+  {
+    category: "Suspension Parts",
+    description:
+      "Suspension programs benefit from durable packaging, consistent supplier checks, and clear wholesale labeling.",
+  },
+  {
+    category: "Filters",
+    description:
+      "Filter lines are suitable for private label because packaging, barcode labeling, and reorder planning are central to distribution.",
+  },
+  {
+    category: "Engine Parts",
+    description:
+      "Selected engine service parts can support branded sourcing when OEM references and sample confirmation are handled carefully.",
+  },
+  {
+    category: "Interior Parts",
+    description:
+      "Interior items can use private label packaging for organized range building, product labels, and showroom-ready presentation.",
+  },
+];
