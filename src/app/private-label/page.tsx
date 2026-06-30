@@ -1,9 +1,9 @@
 import { SectionHeader } from "@/components/SectionHeader";
 import {
-  privateLabelCategories,
-  privateLabelProcessSteps,
-  privateLabelServices,
-  privateLabelTrustPoints,
+  getPrivateLabelCategories,
+  getPrivateLabelProcessSteps,
+  getPrivateLabelServices,
+  getPrivateLabelTrustPoints,
 } from "@/data/private-label";
 import { getTrustPillarsBySlug } from "@/data/trust";
 import {
@@ -16,57 +16,52 @@ import {
   PrivateLabelServiceCard,
 } from "@/features/private-label/components";
 import { TrustProofPoints } from "@/features/trust/components";
+import { getDictionary } from "@/i18n/dictionaries";
+import { getServerLocale } from "@/i18n/server";
 import { pageMetadata } from "@/lib/seo";
 
 export const metadata = pageMetadata(
   "Private Label Auto Parts",
-  "Private Label auto parts sourcing, custom packaging, logo printing, barcode labels, quality inspection, and China export support for Saudi wholesale buyers.",
+  "Private Label auto parts sourcing, custom packaging, logo printing, barcode labels, quality inspection, and China export support for Saudi and UAE wholesale buyers.",
 );
 
-const privateLabelReasons = [
-  "Higher margin potential through owned brand positioning and controlled packaging.",
-  "Stronger customer loyalty when buyers recognize a consistent wholesale product line.",
-  "Better brand control across product labels, box information, and market presentation.",
-  "Less direct price comparison than generic unbranded sourcing programs.",
-  "Market differentiation through focused categories, packaging standards, and service support.",
-  "Long-term business value from repeatable sourcing, quality checks, and export coordination.",
-];
+export default async function PrivateLabelPage() {
+  const locale = await getServerLocale();
+  const dictionary = getDictionary(locale);
+  const privateLabelTrustPoints = getPrivateLabelTrustPoints(locale);
+  const privateLabelServices = getPrivateLabelServices(locale);
+  const privateLabelProcessSteps = getPrivateLabelProcessSteps(locale);
+  const privateLabelCategories = getPrivateLabelCategories(locale);
+  const privateLabelTrustPillars = getTrustPillarsBySlug(
+    [
+      "packaging-control",
+      "quality-inspection-system",
+      "factory-verification",
+      "export-documentation",
+      "saudi-market-focus",
+    ],
+    locale,
+  );
 
-const packagingDetails = [
-  "Box design",
-  "Logo placement",
-  "Product label",
-  "Barcode",
-  "Carton marking",
-  "Arabic/English packaging readiness",
-  "Market-specific packaging information",
-];
-
-const privateLabelTrustPillars = getTrustPillarsBySlug([
-  "packaging-control",
-  "quality-inspection-system",
-  "factory-verification",
-  "export-documentation",
-  "saudi-market-focus",
-]);
-
-export default function PrivateLabelPage() {
   return (
     <>
-      <PrivateLabelHero trustPoints={privateLabelTrustPoints} />
+      <PrivateLabelHero
+        trustPoints={privateLabelTrustPoints}
+        dictionary={dictionary}
+      />
 
       <section className="bg-surface px-4 py-16 sm:px-6 lg:px-8">
         <div className="mx-auto grid max-w-7xl gap-10 lg:grid-cols-[0.85fr_1.15fr]">
           <SectionHeader
-            eyebrow="Why private label matters"
-            title="A stronger wholesale position starts with controlled brand development."
-            description="Private Label can help Saudi wholesale buyers build a clearer market position when product selection, packaging, quality checks, and export details are managed with discipline."
+            eyebrow={dictionary.pages.privateLabel.whyEyebrow}
+            title={dictionary.pages.privateLabel.whyTitle}
+            description={dictionary.pages.privateLabel.whyDescription}
           />
           <div className="grid gap-4 sm:grid-cols-2">
-            {privateLabelReasons.map((reason, index) => (
+            {dictionary.pages.privateLabel.reasons.map((reason, index) => (
               <article key={reason} className="incar-card-elevated rounded-lg p-5">
                 <span className="text-sm font-bold text-primary">
-                  0{index + 1}
+                  {String(index + 1).padStart(2, "0")}
                 </span>
                 <p className="mt-4 text-sm leading-6 text-metallic-silver">
                   {reason}
@@ -80,9 +75,9 @@ export default function PrivateLabelPage() {
       <section className="bg-background px-4 py-16 sm:px-6 lg:px-8">
         <div className="mx-auto max-w-7xl">
           <SectionHeader
-            eyebrow="Service scope"
-            title="Private Label services for China-to-Saudi sourcing."
-            description="INCAR supports the commercial, packaging, inspection, and export details needed to prepare a professional wholesale private label program."
+            eyebrow={dictionary.pages.privateLabel.scopeEyebrow}
+            title={dictionary.pages.privateLabel.scopeTitle}
+            description={dictionary.pages.privateLabel.scopeDescription}
           />
           <div className="mt-10 grid gap-4 md:grid-cols-2 xl:grid-cols-3">
             {privateLabelServices.map((service) => (
@@ -95,9 +90,9 @@ export default function PrivateLabelPage() {
       <section className="bg-surface px-4 py-16 sm:px-6 lg:px-8">
         <div className="mx-auto max-w-7xl">
           <SectionHeader
-            eyebrow="Private label process"
-            title="A professional sourcing workflow from category selection to export."
-            description="Each step is designed for wholesale buyers who need organized requirements, supplier coordination, sample review, quality checkpoints, and shipping support."
+            eyebrow={dictionary.pages.privateLabel.processEyebrow}
+            title={dictionary.pages.privateLabel.processTitle}
+            description={dictionary.pages.privateLabel.processDescription}
           />
           <div className="mt-10">
             <PrivateLabelProcessSteps steps={privateLabelProcessSteps} />
@@ -108,9 +103,9 @@ export default function PrivateLabelPage() {
       <section className="bg-background px-4 py-16 sm:px-6 lg:px-8">
         <div className="mx-auto max-w-7xl">
           <SectionHeader
-            eyebrow="Suitable categories"
-            title="Initial product categories for private label programs."
-            description="The private label scope follows the current INCAR launch categories so sourcing, RFQ, and product data stay aligned."
+            eyebrow={dictionary.pages.privateLabel.categoriesEyebrow}
+            title={dictionary.pages.privateLabel.categoriesTitle}
+            description={dictionary.pages.privateLabel.categoriesDescription}
           />
           <div className="mt-10 grid gap-4 md:grid-cols-2 xl:grid-cols-5">
             {privateLabelCategories.map((category) => (
@@ -126,12 +121,12 @@ export default function PrivateLabelPage() {
       <section className="bg-surface px-4 py-16 sm:px-6 lg:px-8">
         <div className="mx-auto grid max-w-7xl gap-10 lg:grid-cols-[0.82fr_1.18fr]">
           <SectionHeader
-            eyebrow="Packaging and brand development"
-            title="Turn sourcing requirements into market-ready packaging plans."
-            description="INCAR helps buyers organize private label packaging requirements without claiming unverified client work or completed brand programs."
+            eyebrow={dictionary.pages.privateLabel.packagingEyebrow}
+            title={dictionary.pages.privateLabel.packagingTitle}
+            description={dictionary.pages.privateLabel.packagingDescription}
           />
           <div className="grid gap-4 sm:grid-cols-2">
-            {packagingDetails.map((detail) => (
+            {dictionary.pages.privateLabel.packagingDetails.map((detail) => (
               <div key={detail} className="incar-card rounded-lg p-5">
                 <p className="font-semibold text-white">{detail}</p>
               </div>
@@ -143,9 +138,9 @@ export default function PrivateLabelPage() {
       <section className="bg-background px-4 py-16 sm:px-6 lg:px-8">
         <div className="mx-auto max-w-7xl">
           <SectionHeader
-            eyebrow="Trust support for Private Label"
-            title="Private Label programs need controlled supplier, packaging, and export details."
-            description="INCAR connects packaging control, label verification, quality inspection, factory matching, and export support into one review path for Saudi wholesale brand development."
+            eyebrow={dictionary.pages.privateLabel.trustEyebrow}
+            title={dictionary.pages.privateLabel.trustTitle}
+            description={dictionary.pages.privateLabel.trustDescription}
           />
           <div className="mt-10">
             <TrustProofPoints pillars={privateLabelTrustPillars} />
@@ -153,7 +148,7 @@ export default function PrivateLabelPage() {
         </div>
       </section>
 
-      <PrivateLabelQualitySection />
+      <PrivateLabelQualitySection dictionary={dictionary} />
 
       <section
         id="private-label-inquiry"
@@ -161,15 +156,15 @@ export default function PrivateLabelPage() {
       >
         <div className="mx-auto grid max-w-7xl gap-10 lg:grid-cols-[0.8fr_1.2fr]">
           <SectionHeader
-            eyebrow="Start inquiry"
-            title="Tell us about your private label program."
-            description="Share your contact details, brand direction, product category, target market, estimated quantity, and packaging requirements. This frontend-only inquiry will later connect to the private label request pipeline."
+            eyebrow={dictionary.pages.privateLabel.inquiryEyebrow}
+            title={dictionary.pages.privateLabel.inquiryTitle}
+            description={dictionary.pages.privateLabel.inquiryDescription}
           />
           <PrivateLabelInquiryForm />
         </div>
       </section>
 
-      <PrivateLabelFinalCTA />
+      <PrivateLabelFinalCTA dictionary={dictionary} />
     </>
   );
 }

@@ -60,6 +60,13 @@ body {
     Arial, Helvetica, sans-serif;
 }
 
+[dir="rtl"] body {
+  text-align: right;
+  font-family:
+    "Segoe UI", Tahoma, Arial, ui-sans-serif, system-ui, -apple-system,
+    BlinkMacSystemFont, sans-serif;
+}
+
 html {
   scroll-behavior: smooth;
   scroll-padding-top: 88px;
@@ -79,6 +86,11 @@ textarea {
 
 img {
   max-width: 100%;
+}
+
+html,
+body {
+  overflow-x: clip;
 }
 
 [dir="rtl"] .right-5 {

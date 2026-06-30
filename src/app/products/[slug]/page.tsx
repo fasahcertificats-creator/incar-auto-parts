@@ -9,6 +9,8 @@ import {
   getProductBySlug,
   getRelatedProducts,
 } from "@/lib/products";
+import { getDictionary } from "@/i18n/dictionaries";
+import { getServerLocale } from "@/i18n/server";
 import { pageMetadata } from "@/lib/seo";
 import type { ProductFitment } from "@/types/product";
 
@@ -16,9 +18,9 @@ type ProductDetailsPageProps = {
   params: Promise<{ slug: string }>;
 };
 
-function formatFitmentYears(fitment: ProductFitment) {
+function formatFitmentYears(fitment: ProductFitment, fallback: string) {
   if (!fitment.yearFrom || !fitment.yearTo) {
-    return "Compatibility details available upon RFQ review.";
+    return fallback;
   }
 
   return `${fitment.yearFrom}-${fitment.yearTo}`;
@@ -43,6 +45,8 @@ export async function generateMetadata({ params }: ProductDetailsPageProps) {
 }
 
 export default async function ProductDetailsPage({ params }: ProductDetailsPageProps) {
+  const locale = await getServerLocale();
+  const dictionary = getDictionary(locale);
   const { slug } = await params;
   const product = getProductBySlug(slug);
 
@@ -57,14 +61,13 @@ export default async function ProductDetailsPage({ params }: ProductDetailsPageP
       <section className="bg-background px-4 py-12 text-white sm:px-6 lg:px-8">
         <div className="mx-auto max-w-7xl">
           <Link href="/products" className="incar-focus rounded-sm text-sm font-semibold text-metallic-silver hover:text-white">
-            Back to products
+            {dictionary.pages.products.back}
           </Link>
           <h1 className="mt-5 max-w-4xl text-4xl font-semibold md:text-6xl">
             {product.name}
           </h1>
           <p className="mt-5 max-w-2xl text-lg leading-8 text-metallic-silver/72">
-            RFQ-based wholesale sourcing from China with MOQ, OEM matching,
-            inspection, and private label options.
+            {dictionary.pages.products.detailDescription}
           </p>
         </div>
       </section>
@@ -80,17 +83,24 @@ export default async function ProductDetailsPage({ params }: ProductDetailsPageP
           <div className="incar-card rounded-lg p-6">
             <div className="grid gap-4 sm:grid-cols-2">
               {[
-                ["Brand", product.brand],
-                ["Vehicle model", product.vehicleModel],
-                ["Category", product.category],
-                ["Part number", product.partNumber],
-                ["OEM number", product.oemNumber],
-                ["MOQ", `${product.moq} pcs`],
-                ["Origin", product.origin],
-                ["Data status", product.isSampleData ? "Sample data" : "Verified"],
+                [dictionary.productLabels.brand, product.brand],
+                [dictionary.productLabels.vehicleModel, product.vehicleModel],
+                [dictionary.productLabels.category, dictionary.categories[product.category]],
+                [dictionary.productLabels.partNumber, product.partNumber],
+                [dictionary.productLabels.oemNumber, product.oemNumber],
+                [dictionary.productLabels.moq, `${product.moq} ${dictionary.common.pcs}`],
+                [dictionary.productLabels.origin, dictionary.common.china],
                 [
-                  "Private label available",
-                  product.privateLabelAvailable ? "Yes" : "No",
+                  dictionary.productLabels.dataStatus,
+                  product.isSampleData
+                    ? dictionary.common.sampleData
+                    : dictionary.common.verified,
+                ],
+                [
+                  dictionary.productLabels.privateLabelAvailable,
+                  product.privateLabelAvailable
+                    ? dictionary.common.yes
+                    : dictionary.common.no,
                 ],
               ].map(([label, value]) => (
                 <div key={label} className="rounded-md bg-background p-4">
@@ -104,7 +114,7 @@ export default async function ProductDetailsPage({ params }: ProductDetailsPageP
 
             <div className="mt-6">
               <h2 className="text-lg font-semibold text-white">
-                Compatible vehicles
+                {dictionary.productLabels.compatibleVehicles}
               </h2>
               <div className="mt-3 grid gap-3">
                 {product.compatibility.map((fitment) => (
@@ -115,7 +125,12 @@ export default async function ProductDetailsPage({ params }: ProductDetailsPageP
                     <p className="font-semibold text-white">
                       {fitment.brand} {fitment.model}
                     </p>
-                    <p className="mt-1">{formatFitmentYears(fitment)}</p>
+                    <p className="mt-1">
+                      {formatFitmentYears(
+                        fitment,
+                        dictionary.pages.products.compatibilityFallback,
+                      )}
+                    </p>
                     {fitment.generation ? <p className="mt-1">{fitment.generation}</p> : null}
                     {fitment.engineNotes ? (
                       <p className="mt-1">{fitment.engineNotes}</p>
@@ -128,7 +143,7 @@ export default async function ProductDetailsPage({ params }: ProductDetailsPageP
 
             <div className="mt-6">
               <h2 className="text-lg font-semibold text-white">
-                Specifications
+                {dictionary.productLabels.specifications}
               </h2>
               <dl className="mt-3 grid gap-2 text-sm leading-6 text-muted">
                 {Object.entries(product.specifications).map(([label, value]) => (
@@ -150,8 +165,8 @@ export default async function ProductDetailsPage({ params }: ProductDetailsPageP
       <section className="bg-surface px-4 py-16 sm:px-6 lg:px-8">
         <div className="mx-auto max-w-7xl">
           <SectionHeader
-            eyebrow="Related sourcing options"
-            title="Similar RFQ-ready products"
+            eyebrow={dictionary.pages.products.relatedEyebrow}
+            title={dictionary.pages.products.relatedTitle}
           />
           <div className="mt-8 grid gap-6 md:grid-cols-3">
             {related.map((item) => (

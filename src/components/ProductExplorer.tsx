@@ -7,6 +7,8 @@ import {
   getActiveCategories,
   getActiveVehicleModels,
 } from "@/lib/products";
+import { useLocale } from "@/contexts/LocaleContext";
+import { getDictionary } from "@/i18n/dictionaries";
 import type { BrandName, ProductCategory } from "@/types/product";
 import { ProductCard } from "./ProductCard";
 
@@ -19,6 +21,8 @@ export function ProductExplorer({ fixedBrand }: ProductExplorerProps) {
   const [brand, setBrand] = useState<BrandName | "All">(fixedBrand ?? "All");
   const [model, setModel] = useState("All");
   const [category, setCategory] = useState<ProductCategory | "All">("All");
+  const { locale } = useLocale();
+  const dictionary = getDictionary(locale);
 
   const activeBrands = getActiveBrands();
   const activeCategories = getActiveCategories();
@@ -43,7 +47,7 @@ export function ProductExplorer({ fixedBrand }: ProductExplorerProps) {
       <div className="mx-auto max-w-7xl">
         <div className="incar-card grid gap-3 rounded-lg p-4 md:grid-cols-[1.4fr_0.8fr_0.8fr_0.8fr]">
           <label className="grid gap-2 text-sm font-semibold text-white">
-            Search part number, OEM, or model
+            {dictionary.pages.products.searchLabel}
             <input
               value={search}
               onChange={(event) => setSearch(event.target.value)}
@@ -54,7 +58,7 @@ export function ProductExplorer({ fixedBrand }: ProductExplorerProps) {
 
           {!fixedBrand ? (
             <label className="grid gap-2 text-sm font-semibold text-white">
-              Brand
+              {dictionary.pages.products.brandLabel}
               <select
                 value={brand}
                 onChange={(event) => {
@@ -63,7 +67,7 @@ export function ProductExplorer({ fixedBrand }: ProductExplorerProps) {
                 }}
                 className="incar-input px-4 text-sm font-normal"
               >
-                <option value="All">All</option>
+                <option value="All">{dictionary.common.all}</option>
                 {activeBrands.map((brandOption) => (
                   <option key={brandOption.id} value={brandOption.name}>
                     {brandOption.displayName}
@@ -74,13 +78,13 @@ export function ProductExplorer({ fixedBrand }: ProductExplorerProps) {
           ) : null}
 
           <label className="grid gap-2 text-sm font-semibold text-white">
-            Model
+            {dictionary.pages.products.modelLabel}
             <select
               value={model}
               onChange={(event) => setModel(event.target.value)}
               className="incar-input px-4 text-sm font-normal"
             >
-              <option>All</option>
+              <option value="All">{dictionary.common.all}</option>
               {availableModels.map((modelOption) => (
                 <option key={modelOption.id} value={modelOption.name}>
                   {modelOption.displayName}
@@ -90,16 +94,16 @@ export function ProductExplorer({ fixedBrand }: ProductExplorerProps) {
           </label>
 
           <label className="grid gap-2 text-sm font-semibold text-white">
-            Category
+            {dictionary.pages.products.categoryLabel}
             <select
               value={category}
               onChange={(event) => setCategory(event.target.value as ProductCategory | "All")}
               className="incar-input px-4 text-sm font-normal"
             >
-              <option value="All">All</option>
+              <option value="All">{dictionary.common.all}</option>
               {activeCategories.map((categoryOption) => (
                 <option key={categoryOption.id} value={categoryOption.name}>
-                  {categoryOption.displayName}
+                  {dictionary.categories[categoryOption.name]}
                 </option>
               ))}
             </select>
@@ -107,8 +111,10 @@ export function ProductExplorer({ fixedBrand }: ProductExplorerProps) {
         </div>
 
         <div className="mt-6 flex items-center justify-between gap-4 text-sm text-muted">
-          <p>{filteredProducts.length} wholesale RFQ-ready products</p>
-          <p className="hidden sm:block">Toyota and Hyundai launch catalog</p>
+          <p>
+            {filteredProducts.length} {dictionary.pages.products.resultSuffix}
+          </p>
+          <p className="hidden sm:block">{dictionary.pages.products.launchCatalog}</p>
         </div>
 
         <div className="mt-8 grid gap-6 md:grid-cols-2 xl:grid-cols-3">
@@ -119,9 +125,11 @@ export function ProductExplorer({ fixedBrand }: ProductExplorerProps) {
 
         {filteredProducts.length === 0 ? (
           <div className="mt-8 rounded-lg border border-dashed border-metallic-silver/24 bg-surface p-8 text-center">
-            <p className="text-lg font-semibold text-white">No products found</p>
+            <p className="text-lg font-semibold text-white">
+              {dictionary.pages.products.noProducts}
+            </p>
             <p className="mt-2 text-sm text-muted">
-              Send an RFQ with your OEM number or Excel list and our sourcing team will match factories.
+              {dictionary.pages.products.noProductsDescription}
             </p>
           </div>
         ) : null}

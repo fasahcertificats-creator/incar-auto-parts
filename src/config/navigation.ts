@@ -8,39 +8,27 @@ export type NavigationItem = {
     | "about"
     | "rfq"
     | "contact";
-  label: string;
   href: string;
-  arLabel: string;
 };
 
 export const mainNavigation: NavigationItem[] = [
-  { key: "home", label: "Home", href: "/", arLabel: "الرئيسية" },
-  { key: "products", label: "Products", href: "/products", arLabel: "المنتجات" },
-  { key: "catalogs", label: "Catalogs", href: "/catalogs", arLabel: "الكتالوجات" },
-  {
-    key: "private-label",
-    label: "Private Label",
-    href: "/private-label",
-    arLabel: "العلامة الخاصة",
-  },
-  {
-    key: "quality-control",
-    label: "Quality Control",
-    href: "/quality-control",
-    arLabel: "مراقبة الجودة",
-  },
-  { key: "about", label: "About", href: "/about", arLabel: "من نحن" },
-  { key: "rfq", label: "RFQ", href: "/rfq", arLabel: "طلب عرض سعر" },
-  { key: "contact", label: "Contact", href: "/contact", arLabel: "اتصل بنا" },
+  { key: "home", href: "/" },
+  { key: "products", href: "/products" },
+  { key: "catalogs", href: "/catalogs" },
+  { key: "private-label", href: "/private-label" },
+  { key: "quality-control", href: "/quality-control" },
+  { key: "about", href: "/about" },
+  { key: "rfq", href: "/rfq" },
+  { key: "contact", href: "/contact" },
 ];
 
 export const footerNavigation = mainNavigation.filter(
   (item) => item.key !== "home",
 );
 
-export const footerCapabilities = [
-  "China Sourcing",
-  "Quality Inspection",
-  "Private Label",
-  "Export Support",
-];
+export const footerCapabilityKeys = [
+  "china-sourcing",
+  "quality-inspection",
+  "private-label",
+  "export-support",
+] as const;

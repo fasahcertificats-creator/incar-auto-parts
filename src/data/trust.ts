@@ -1,4 +1,7 @@
 import type { TrustPillar, TrustProcessStep } from "@/types/trust";
+import { defaultLocale } from "@/i18n/config";
+import { getDictionary } from "@/i18n/dictionaries";
+import type { Locale } from "@/i18n/types";
 
 export const trustPillars: TrustPillar[] = [
   {
@@ -213,5 +216,36 @@ export const trustProcessSteps: TrustProcessStep[] = [
 export const futureTrustProofAssets =
   "Future proof assets may include inspection photos, packaging samples, export document examples, and verified case studies.";
 
-export const getTrustPillarsBySlug = (slugs: string[]) =>
-  trustPillars.filter((pillar) => slugs.includes(pillar.slug));
+export function getLocalizedTrustPillars(locale: Locale = defaultLocale): TrustPillar[] {
+  const dictionary = getDictionary(locale);
+
+  return trustPillars.map((pillar) => {
+    const localized = dictionary.trust.pillars[pillar.slug as keyof typeof dictionary.trust.pillars];
+
+    return {
+      ...pillar,
+      title: localized.title,
+      shortDescription: localized.shortDescription,
+      longDescription: localized.longDescription,
+      highlights: [...localized.highlights],
+      proofPoints: [...localized.proofPoints],
+      relatedCTA: {
+        ...pillar.relatedCTA,
+        label: localized.cta,
+      },
+    };
+  });
+}
+
+export function getTrustProcessSteps(locale: Locale = defaultLocale): TrustProcessStep[] {
+  return getDictionary(locale).trust.process.map((step) => ({ ...step }));
+}
+
+export function getFutureTrustProofAssets(locale: Locale = defaultLocale) {
+  return getDictionary(locale).trust.futureAssets;
+}
+
+export const getTrustPillarsBySlug = (
+  slugs: string[],
+  locale: Locale = defaultLocale,
+) => getLocalizedTrustPillars(locale).filter((pillar) => slugs.includes(pillar.slug));

@@ -1,13 +1,13 @@
 import Image from "next/image";
-import { brand } from "@/lib/brand";
+import type { Dictionary } from "@/i18n/dictionaries";
 import { CTAButton } from "./CTAButton";
 
-export function Hero() {
+export function Hero({ dictionary }: { dictionary: Dictionary }) {
   return (
     <section className="relative isolate overflow-hidden bg-background text-white">
       <Image
         src="/images/hero-sourcing.png"
-        alt="INCAR AUTO PARTS global sourcing desk and export-ready auto parts"
+        alt="INCAR AUTO PARTS sourcing desk and export-ready auto parts"
         fill
         priority
         sizes="100vw"
@@ -17,21 +17,24 @@ export function Hero() {
       <div className="mx-auto grid min-h-[calc(100vh-76px)] max-w-7xl content-center px-4 py-20 sm:px-6 lg:px-8">
         <div className="max-w-3xl">
           <p className="mb-5 text-xs font-bold uppercase tracking-[0.2em] text-metallic-silver">
-            {brand.name}
+            {dictionary.hero.eyebrow}
           </p>
-          <h1 className="metallic-text text-4xl font-semibold leading-[1.04] md:text-6xl lg:text-7xl">
-            {brand.positioning}
+          <h1 className="metallic-text text-4xl font-semibold leading-[1.15] md:text-6xl lg:text-7xl">
+            {dictionary.hero.title}
           </h1>
           <p className="mt-6 max-w-2xl text-lg leading-8 text-metallic-silver md:text-xl">
-            {brand.coreMessage}
+            {dictionary.hero.description}
           </p>
           <div className="mt-9 flex flex-col gap-3 sm:flex-row">
-            <CTAButton href="/rfq">Request Quotation</CTAButton>
+            <CTAButton href="/rfq">{dictionary.hero.primary}</CTAButton>
+            <CTAButton href="/products" variant="secondary">
+              {dictionary.hero.tertiary}
+            </CTAButton>
             <CTAButton
               href="/private-label#private-label-inquiry"
               variant="secondary"
             >
-              Start Private Label Inquiry
+              {dictionary.hero.secondary}
             </CTAButton>
           </div>
         </div>

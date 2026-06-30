@@ -8,6 +8,8 @@ import {
   RFQ_MAX_FILE_SIZE_BYTES,
   RFQ_MAX_FILE_SIZE_MB,
 } from "@/config/upload";
+import { useLocale } from "@/contexts/LocaleContext";
+import { getDictionary } from "@/i18n/dictionaries";
 import type { UploadedRFQFileMeta } from "@/types/upload";
 
 type RFQExcelUploadProps = {
@@ -19,9 +21,6 @@ type RFQExcelUploadProps = {
 
 const acceptedFormats = "XLSX, XLS, CSV";
 const acceptedExtensions = RFQ_ALLOWED_FILE_EXTENSIONS.join(",");
-const invalidTypeMessage =
-  "Please upload a valid Excel or CSV file: .xlsx, .xls, or .csv.";
-const fileTooLargeMessage = "File size must be 10 MB or less.";
 
 function getFileExtension(fileName: string) {
   const dotIndex = fileName.lastIndexOf(".");
@@ -51,6 +50,8 @@ export function RFQExcelUpload({
   onErrorChange,
 }: RFQExcelUploadProps) {
   const inputRef = useRef<HTMLInputElement>(null);
+  const { locale } = useLocale();
+  const dictionary = getDictionary(locale);
 
   function clearSelectedFile() {
     if (inputRef.current) inputRef.current.value = "";
@@ -74,13 +75,13 @@ export function RFQExcelUpload({
 
     if (!hasAllowedExtension) {
       onChange(null);
-      onErrorChange(invalidTypeMessage);
+      onErrorChange(dictionary.forms.upload.typeError);
       return;
     }
 
     if (fileMeta.size > RFQ_MAX_FILE_SIZE_BYTES) {
       onChange(null);
-      onErrorChange(fileTooLargeMessage);
+      onErrorChange(dictionary.forms.upload.sizeError);
       return;
     }
 
@@ -94,14 +95,13 @@ export function RFQExcelUpload({
   return (
     <div className="md:col-span-2">
       <label className="grid gap-3 text-sm font-semibold text-white">
-        Upload RFQ file
+        {dictionary.forms.upload.label}
         <span className="text-sm font-normal leading-6 text-muted">
-          Upload an Excel or CSV file with part numbers, OEM numbers, vehicle
-          models, quantities, and notes.
+          {dictionary.forms.upload.description}
         </span>
         <input
           ref={inputRef}
-          className="rounded-md border border-dashed border-metallic-silver/24 bg-background px-4 py-4 text-sm text-metallic-silver file:mr-4 file:rounded-md file:border-0 file:bg-primary file:px-4 file:py-2 file:text-sm file:font-semibold file:text-white hover:border-metallic-silver/45"
+          className="rounded-md border border-dashed border-metallic-silver/24 bg-background px-4 py-4 text-sm text-metallic-silver file:me-4 file:rounded-md file:border-0 file:bg-primary file:px-4 file:py-2 file:text-sm file:font-semibold file:text-white hover:border-metallic-silver/45"
           name="excelFile"
           type="file"
           accept={acceptedExtensions}
@@ -112,18 +112,20 @@ export function RFQExcelUpload({
       <div className="mt-3 grid gap-3 rounded-md border border-border bg-background p-4 text-sm text-muted">
         <div className="grid gap-1 sm:grid-cols-2">
           <p>
-            <span className="font-semibold text-metallic-silver">Accepted:</span>{" "}
+            <span className="font-semibold text-metallic-silver">{dictionary.forms.upload.accepted}</span>{" "}
             {acceptedFormats}
           </p>
           <p>
-            <span className="font-semibold text-metallic-silver">Max size:</span>{" "}
+            <span className="font-semibold text-metallic-silver">{dictionary.forms.upload.maxSize}</span>{" "}
             {RFQ_MAX_FILE_SIZE_MB} MB
           </p>
         </div>
         <div>
-          <p className="font-semibold text-metallic-silver">Recommended columns</p>
+          <p className="font-semibold text-metallic-silver">
+            {dictionary.forms.upload.columnsTitle}
+          </p>
           <p className="mt-1">
-            Part Number, OEM Number, Vehicle Model, Quantity, Notes
+            {dictionary.forms.upload.columns}
           </p>
         </div>
         {value ? (
@@ -132,7 +134,7 @@ export function RFQExcelUpload({
               <p className="font-semibold text-white">{value.name}</p>
               <p className="mt-1 text-xs text-metallic-silver">
                 {formatFileSize(value.size)} | {value.extension.toUpperCase()} |{" "}
-                {value.type || "Browser did not report a MIME type"}
+                {value.type || dictionary.forms.upload.mimeFallback}
               </p>
             </div>
             <button
@@ -140,7 +142,7 @@ export function RFQExcelUpload({
               onClick={clearSelectedFile}
               className="incar-focus min-h-10 rounded-md border border-border px-3 text-sm font-semibold text-metallic-silver transition hover:border-metallic-silver/45 hover:text-white"
             >
-              Remove file
+              {dictionary.forms.upload.remove}
             </button>
           </div>
         ) : null}
@@ -150,9 +152,8 @@ export function RFQExcelUpload({
           </p>
         ) : null}
         <p className="text-xs leading-5 text-muted">
-          Format is validated by file extension and size in this frontend mock.
-          Browser MIME type is captured as metadata when available.
-          Recognized MIME types include {RFQ_ALLOWED_MIME_TYPES.join(", ")}.
+          {dictionary.forms.upload.note} {dictionary.forms.upload.mimeTypes}{" "}
+          {RFQ_ALLOWED_MIME_TYPES.join(", ")}.
         </p>
       </div>
     </div>

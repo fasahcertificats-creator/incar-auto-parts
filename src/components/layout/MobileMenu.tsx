@@ -6,7 +6,9 @@ import { useEffect, useId, useState } from "react";
 import { mainNavigation } from "@/config/navigation";
 import { useLocale } from "@/contexts/LocaleContext";
 import { useRfq } from "@/contexts/RfqContext";
+import { getDictionary } from "@/i18n/dictionaries";
 import { brand } from "@/lib/brand";
+import { LanguageSwitcher } from "../LanguageSwitcher";
 
 function isActivePath(pathname: string, href: string) {
   if (href === "/") return pathname === "/";
@@ -17,8 +19,9 @@ export function MobileMenu() {
   const [open, setOpen] = useState(false);
   const menuId = useId();
   const pathname = usePathname();
-  const { locale, toggleLocale } = useLocale();
+  const { locale } = useLocale();
   const { itemCount } = useRfq();
+  const dictionary = getDictionary(locale);
 
   useEffect(() => {
     if (!open) return;
@@ -38,19 +41,22 @@ export function MobileMenu() {
     };
   }, [open]);
 
-  const quoteLabel = itemCount > 0 ? `Request Quotation (${itemCount})` : "Request Quotation";
+  const quoteLabel =
+    itemCount > 0
+      ? dictionary.common.requestQuotationCount.replace("{count}", String(itemCount))
+      : dictionary.common.requestQuotation;
 
   return (
     <div className="lg:hidden">
       <button
         type="button"
-        aria-label="Open navigation menu"
+        aria-label={dictionary.navigation.menu}
         aria-controls={menuId}
         aria-expanded={open}
         onClick={() => setOpen(true)}
         className="incar-focus inline-flex min-h-11 items-center justify-center rounded-md border border-border px-4 text-sm font-semibold text-metallic-silver transition hover:bg-white/[0.04] hover:text-white"
       >
-        Menu
+        {dictionary.navigation.menu}
       </button>
 
       {open ? (
@@ -59,8 +65,8 @@ export function MobileMenu() {
             id={menuId}
             role="dialog"
             aria-modal="true"
-            aria-label="Navigation menu"
-            className="ms-auto flex h-full w-full max-w-sm flex-col border-l border-border bg-surface shadow-[0_28px_80px_rgba(0,0,0,0.52)]"
+            aria-label={dictionary.navigation.menu}
+            className="ms-auto flex h-full w-full max-w-sm flex-col border-s border-border bg-surface shadow-[0_28px_80px_rgba(0,0,0,0.52)]"
           >
             <div className="flex items-center justify-between gap-4 border-b border-border px-5 py-4">
               <Link
@@ -77,11 +83,11 @@ export function MobileMenu() {
               </Link>
               <button
                 type="button"
-                aria-label="Close navigation menu"
+                aria-label={dictionary.navigation.close}
                 onClick={() => setOpen(false)}
                 className="incar-focus min-h-10 rounded-md border border-border px-3 text-sm font-semibold text-metallic-silver transition hover:bg-white/[0.04] hover:text-white"
               >
-                Close
+                {dictionary.navigation.close}
               </button>
             </div>
 
@@ -101,20 +107,16 @@ export function MobileMenu() {
                         : "hover:bg-background hover:text-white"
                     }`}
                   >
-                    {locale === "ar" ? item.arLabel : item.label}
+                    {dictionary.navigation[item.key]}
                   </Link>
                 );
               })}
             </nav>
 
             <div className="mt-auto border-t border-border px-5 py-5">
-              <button
-                type="button"
-                onClick={toggleLocale}
-                className="incar-focus mb-3 min-h-11 w-full rounded-md border border-border px-4 text-sm font-semibold text-metallic-silver transition hover:bg-background hover:text-white"
-              >
-                {locale === "en" ? "العربية" : "EN"}
-              </button>
+              <div className="mb-3">
+                <LanguageSwitcher fullWidth />
+              </div>
               <Link
                 href="/rfq"
                 onClick={() => setOpen(false)}

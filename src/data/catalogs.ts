@@ -1,4 +1,7 @@
 import type { Catalog } from "@/types";
+import { defaultLocale } from "@/i18n/config";
+import { getDictionary } from "@/i18n/dictionaries";
+import type { Locale } from "@/i18n/types";
 
 export type { Catalog } from "@/types";
 
@@ -48,3 +51,19 @@ export const catalogs: Catalog[] = [
     audience: "Purchasing teams submitting multi-SKU RFQs",
   },
 ];
+
+export function getLocalizedCatalogs(locale: Locale = defaultLocale): Catalog[] {
+  const dictionary = getDictionary(locale);
+
+  return catalogs.map((catalog) => {
+    const localized = dictionary.catalogs[catalog.id as keyof typeof dictionary.catalogs];
+
+    return {
+      ...catalog,
+      title: localized.title,
+      description: localized.description,
+      items: localized.items,
+      audience: localized.audience,
+    };
+  });
+}

@@ -6,61 +6,57 @@ import {
   useContext,
   useEffect,
   useMemo,
-  useRef,
   useState,
 } from "react";
-
-type Locale = "en" | "ar";
+import { defaultLocale, getDirection } from "@/i18n/config";
+import type { Direction, Locale } from "@/i18n/types";
 
 type LocaleContextValue = {
   locale: Locale;
-  direction: "ltr" | "rtl";
+  direction: Direction;
+  setLocale: (locale: Locale) => void;
   toggleLocale: () => void;
 };
 
 const LocaleContext = createContext<LocaleContextValue | null>(null);
 const storageKey = "incar-locale";
 
-export function LocaleProvider({ children }: { children: React.ReactNode }) {
-  const [locale, setLocale] = useState<Locale>("en");
-  const hydratedRef = useRef(false);
+export function LocaleProvider({
+  children,
+  initialLocale = defaultLocale,
+}: {
+  children: React.ReactNode;
+  initialLocale?: Locale;
+}) {
+  const [locale, setLocaleState] = useState<Locale>(initialLocale);
 
   useEffect(() => {
-    const timeout = window.setTimeout(() => {
-      const stored = window.localStorage.getItem(storageKey);
-      hydratedRef.current = true;
-
-      if (stored === "ar" || stored === "en") {
-        setLocale(stored);
-      } else {
-        window.localStorage.setItem(storageKey, "en");
-      }
-    }, 0);
-
-    return () => window.clearTimeout(timeout);
-  }, []);
-
-  useEffect(() => {
-    const direction = locale === "ar" ? "rtl" : "ltr";
+    const direction = getDirection(locale);
     document.documentElement.lang = locale;
     document.documentElement.dir = direction;
-
-    if (hydratedRef.current) {
-      window.localStorage.setItem(storageKey, locale);
-    }
   }, [locale]);
 
+  const setLocale = useCallback((nextLocale: Locale) => {
+    window.localStorage.setItem(storageKey, nextLocale);
+    setLocaleState(nextLocale);
+  }, []);
+
   const toggleLocale = useCallback(() => {
-    setLocale((current) => (current === "en" ? "ar" : "en"));
+    setLocaleState((current) => {
+      const nextLocale = current === "en" ? "ar" : "en";
+      window.localStorage.setItem(storageKey, nextLocale);
+      return nextLocale;
+    });
   }, []);
 
   const value = useMemo<LocaleContextValue>(
     () => ({
       locale,
-      direction: locale === "ar" ? "rtl" : "ltr",
+      direction: getDirection(locale),
+      setLocale,
       toggleLocale,
     }),
-    [locale, toggleLocale],
+    [locale, setLocale, toggleLocale],
   );
 
   return (

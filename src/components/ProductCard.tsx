@@ -1,20 +1,27 @@
+"use client";
+
 import Link from "next/link";
+import { useLocale } from "@/contexts/LocaleContext";
+import { getDictionary } from "@/i18n/dictionaries";
 import type { Product } from "@/types/product";
 import { AddToRfqButton } from "./AddToRfqButton";
 import { ProductImage } from "./ProductImage";
 
-function formatFitment(product: Product) {
+function formatFitment(product: Product, reviewRequired: string) {
   return product.compatibility
     .slice(0, 2)
     .map((fitment) =>
       fitment.yearFrom && fitment.yearTo
         ? `${fitment.model} ${fitment.yearFrom}-${fitment.yearTo}`
-        : `${fitment.model} review required`,
+        : `${fitment.model} ${reviewRequired}`,
     )
     .join(", ");
 }
 
 export function ProductCard({ product }: { product: Product }) {
+  const { locale } = useLocale();
+  const dictionary = getDictionary(locale);
+
   return (
     <article className="incar-card group flex h-full flex-col overflow-hidden rounded-lg transition hover:-translate-y-1 hover:border-metallic-silver/35">
       <Link href={`/products/${product.slug}`} className="incar-focus block rounded-md">
@@ -34,7 +41,7 @@ export function ProductCard({ product }: { product: Product }) {
             {product.vehicleModel}
           </span>
           <span className="rounded-sm border border-primary/24 bg-primary/10 px-2.5 py-1 text-metallic-silver">
-            {product.category}
+            {dictionary.categories[product.category]}
           </span>
         </div>
         <Link href={`/products/${product.slug}`} className="incar-focus block rounded-sm">
@@ -44,31 +51,38 @@ export function ProductCard({ product }: { product: Product }) {
         </Link>
         <dl className="mt-4 grid gap-2 text-sm text-muted">
           <div className="flex justify-between gap-4">
-            <dt>Part number</dt>
+            <dt>{dictionary.productLabels.partNumber}</dt>
             <dd className="font-semibold text-white">{product.partNumber}</dd>
           </div>
           <div className="flex justify-between gap-4">
-            <dt>OEM</dt>
+            <dt>{dictionary.productLabels.oemNumber}</dt>
             <dd className="font-semibold text-white">{product.oemNumber}</dd>
           </div>
           <div className="flex justify-between gap-4">
-            <dt>MOQ</dt>
-            <dd className="font-semibold text-white">{product.moq} pcs</dd>
-          </div>
-          <div className="flex justify-between gap-4">
-            <dt>Origin</dt>
-            <dd className="font-semibold text-white">{product.origin}</dd>
-          </div>
-          <div className="flex justify-between gap-4">
-            <dt>Private Label</dt>
+            <dt>{dictionary.productLabels.moq}</dt>
             <dd className="font-semibold text-white">
-              {product.privateLabelAvailable ? "Available" : "By review"}
+              {product.moq} {dictionary.common.pcs}
+            </dd>
+          </div>
+          <div className="flex justify-between gap-4">
+            <dt>{dictionary.productLabels.origin}</dt>
+            <dd className="font-semibold text-white">{dictionary.common.china}</dd>
+          </div>
+          <div className="flex justify-between gap-4">
+            <dt>{dictionary.productLabels.privateLabel}</dt>
+            <dd className="font-semibold text-white">
+              {product.privateLabelAvailable
+                ? dictionary.common.available
+                : dictionary.common.byReview}
             </dd>
           </div>
         </dl>
         <div className="mt-5 flex-1">
           <p className="text-sm leading-6 text-muted">
-            Compatible with {formatFitment(product)}.
+            {dictionary.pages.products.compatibleWith.replace(
+              "{fitment}",
+              formatFitment(product, dictionary.pages.products.reviewRequired),
+            )}
           </p>
         </div>
         <div className="mt-5">

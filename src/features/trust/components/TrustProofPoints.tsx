@@ -12,7 +12,7 @@ export function TrustProofPoints({ pillars }: TrustProofPointsProps) {
           <h3 className="text-lg font-semibold text-white">{pillar.title}</h3>
           <ul className="mt-4 grid gap-3 text-sm leading-6 text-muted">
             {pillar.proofPoints.map((proofPoint) => (
-              <li key={proofPoint} className="border-l-2 border-primary/70 pl-3">
+              <li key={proofPoint} className="border-s-2 border-primary/70 ps-3">
                 {proofPoint}
               </li>
             ))}

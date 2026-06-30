@@ -1,5 +1,7 @@
 import { ProductExplorer } from "@/components/ProductExplorer";
 import { SectionHeader } from "@/components/SectionHeader";
+import { getDictionary } from "@/i18n/dictionaries";
+import { getServerLocale } from "@/i18n/server";
 import { getActiveVehicleModels } from "@/lib/products";
 import { pageMetadata } from "@/lib/seo";
 
@@ -8,7 +10,9 @@ export const metadata = pageMetadata(
   "Hyundai auto parts sourcing from China for Saudi wholesale buyers, covering Accent, Elantra, Sonata, Tucson, Santa Fe, and Creta.",
 );
 
-export default function HyundaiProductsPage() {
+export default async function HyundaiProductsPage() {
+  const locale = await getServerLocale();
+  const dictionary = getDictionary(locale);
   const hyundaiModels = getActiveVehicleModels("Hyundai");
 
   return (
@@ -17,9 +21,9 @@ export default function HyundaiProductsPage() {
         <div className="mx-auto max-w-7xl">
           <SectionHeader
             inverse
-            eyebrow="Hyundai products"
-            title="Hyundai sourcing catalog for Saudi wholesalers"
-            description="Focused launch coverage for Accent, Elantra, Sonata, Tucson, Santa Fe, and Creta parts."
+            eyebrow="Hyundai"
+            title={dictionary.pages.products.hyundaiTitle}
+            description={dictionary.pages.products.hyundaiDescription}
           />
           <div className="mt-8 flex flex-wrap gap-2">
             {hyundaiModels.map((model) => (

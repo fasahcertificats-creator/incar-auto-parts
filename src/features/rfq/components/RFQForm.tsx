@@ -4,6 +4,8 @@ import type { FormEvent } from "react";
 import { useMemo, useState } from "react";
 import type { RFQFormData } from "@/types/rfq";
 import type { UploadedRFQFileMeta } from "@/types/upload";
+import { useLocale } from "@/contexts/LocaleContext";
+import { getDictionary } from "@/i18n/dictionaries";
 import { useRFQ } from "../use-rfq";
 import { RFQExcelUpload } from "./RFQExcelUpload";
 
@@ -17,6 +19,8 @@ function getText(formData: FormData, name: string) {
 
 export function RFQForm() {
   const { items, submitRFQ, submission } = useRFQ();
+  const { locale } = useLocale();
+  const dictionary = getDictionary(locale);
   const [excelFile, setExcelFile] = useState<UploadedRFQFileMeta | null>(null);
   const [excelFileError, setExcelFileError] = useState("");
   const [errors, setErrors] = useState<string[]>([]);
@@ -44,19 +48,17 @@ export function RFQForm() {
     };
     const nextErrors: string[] = [];
 
-    if (!formValues.fullName) nextErrors.push("Full name is required.");
-    if (!formValues.companyName) nextErrors.push("Company name is required.");
+    if (!formValues.fullName) nextErrors.push(dictionary.forms.rfq.errors.fullName);
+    if (!formValues.companyName) nextErrors.push(dictionary.forms.rfq.errors.companyName);
     if (!formValues.email && !formValues.whatsapp) {
-      nextErrors.push("Email or WhatsApp number is required.");
+      nextErrors.push(dictionary.forms.rfq.errors.contact);
     }
     if (
       items.length === 0 &&
       !formValues.interestedProductsText &&
       !formValues.excelFile
     ) {
-      nextErrors.push(
-        "Please add products to RFQ, enter part numbers, or upload an Excel/CSV file.",
-      );
+      nextErrors.push(dictionary.forms.rfq.errors.products);
     }
     if (excelFileError) nextErrors.push(excelFileError);
     const requestedQuantity = Number(formValues.requestedQuantityText);
@@ -64,7 +66,7 @@ export function RFQForm() {
       formValues.requestedQuantityText &&
       (!Number.isFinite(requestedQuantity) || requestedQuantity <= 0)
     ) {
-      nextErrors.push("Quantity must be positive if provided.");
+      nextErrors.push(dictionary.forms.rfq.errors.quantity);
     }
 
     setErrors(nextErrors);
@@ -77,58 +79,56 @@ export function RFQForm() {
     <form className="incar-card rounded-lg p-5 md:p-7" onSubmit={handleSubmit}>
       <div>
         <p className="text-sm font-bold uppercase tracking-[0.16em] text-metallic-silver">
-          Wholesale Inquiry
+          {dictionary.forms.rfq.eyebrow}
         </p>
         <h2 className="mt-2 text-2xl font-semibold text-white">
-          Submit RFQ details
+          {dictionary.forms.rfq.title}
         </h2>
         <p className="mt-3 text-sm leading-6 text-muted">
-          Upload an Excel or CSV file, select products from the RFQ list, or
-          enter part numbers manually. File processing is not connected yet; the
-          mock RFQ submission captures metadata only.
+          {dictionary.forms.rfq.description}
         </p>
       </div>
 
       <div className="mt-6 grid gap-4 md:grid-cols-2">
         <label className={labelClass}>
-          Full name
+          {dictionary.forms.common.fullName}
           <input className={inputClass} name="fullName" required />
         </label>
         <label className={labelClass}>
-          Company name
+          {dictionary.forms.common.companyName}
           <input className={inputClass} name="companyName" required />
         </label>
         <label className={labelClass}>
-          Country
-          <input className={inputClass} name="country" defaultValue="Saudi Arabia" />
+          {dictionary.forms.common.country}
+          <input className={inputClass} name="country" defaultValue={dictionary.forms.common.countryDefault} />
         </label>
         <label className={labelClass}>
-          City
-          <input className={inputClass} name="city" placeholder="Riyadh, Jeddah, Dammam" />
+          {dictionary.forms.common.city}
+          <input className={inputClass} name="city" placeholder={dictionary.forms.common.cityPlaceholder} />
         </label>
         <label className={labelClass}>
-          Email
+          {dictionary.forms.common.email}
           <input className={inputClass} type="email" name="email" />
         </label>
         <label className={labelClass}>
-          WhatsApp number
+          {dictionary.forms.common.whatsapp}
           <input className={inputClass} name="whatsapp" placeholder="+966" />
         </label>
         <label className={labelClass}>
-          Interested products / part numbers
+          {dictionary.forms.rfq.products}
           <input
             className={inputClass}
             name="interestedProductsText"
             defaultValue={defaultInterestedProducts}
-            placeholder="Part numbers, OEM numbers, or categories"
+            placeholder={dictionary.forms.rfq.productsPlaceholder}
           />
         </label>
         <label className={labelClass}>
-          Quantity
+          {dictionary.forms.rfq.quantity}
           <input
             className={inputClass}
             name="requestedQuantityText"
-            placeholder="Estimated total quantity"
+            placeholder={dictionary.forms.rfq.quantityPlaceholder}
           />
         </label>
         <RFQExcelUpload
@@ -138,11 +138,11 @@ export function RFQForm() {
           onErrorChange={setExcelFileError}
         />
         <label className={`${labelClass} md:col-span-2`}>
-          Message
+          {dictionary.forms.common.message}
           <textarea
             className="incar-input min-h-32 px-4 py-3 text-sm"
             name="message"
-            placeholder="Share OEM numbers, target quality, packaging preference, and destination port."
+            placeholder={dictionary.forms.rfq.messagePlaceholder}
           />
         </label>
       </div>
@@ -158,8 +158,8 @@ export function RFQForm() {
       {submission ? (
         <div className="mt-6 rounded-md border border-metallic-silver/24 bg-background p-4 text-sm leading-6 text-metallic-silver">
           {submission.excelFile
-            ? "Your RFQ has been prepared with the selected file. Our sourcing team will review your request and contact you through WhatsApp or email."
-            : "Your RFQ has been received. Our sourcing team will review your request and contact you through WhatsApp or email."}
+            ? dictionary.forms.rfq.receivedWithFile
+            : dictionary.forms.rfq.received}
         </div>
       ) : null}
 
@@ -167,7 +167,7 @@ export function RFQForm() {
         type="submit"
         className="incar-focus mt-6 min-h-12 w-full rounded-md bg-primary px-5 text-sm font-semibold text-white shadow-[0_14px_34px_rgba(215,25,32,0.24)] transition hover:bg-primary-hover md:w-auto"
       >
-        Submit RFQ
+        {dictionary.forms.rfq.submit}
       </button>
     </form>
   );

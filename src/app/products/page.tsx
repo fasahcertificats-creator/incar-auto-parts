@@ -1,6 +1,8 @@
 import { CTAButton } from "@/components/CTAButton";
 import { PageHero } from "@/components/PageHero";
 import { ProductExplorer } from "@/components/ProductExplorer";
+import { getDictionary } from "@/i18n/dictionaries";
+import { getServerLocale } from "@/i18n/server";
 import { pageMetadata } from "@/lib/seo";
 
 export const metadata = pageMetadata(
@@ -8,22 +10,24 @@ export const metadata = pageMetadata(
   "Search Toyota and Hyundai wholesale auto parts by part number, OEM number, model, and category for Saudi RFQ sourcing.",
 );
 
-export default function ProductsPage() {
+export default async function ProductsPage() {
+  const locale = await getServerLocale();
+  const dictionary = getDictionary(locale);
+
   return (
     <>
       <PageHero
-        eyebrow="Products"
-        title="RFQ-ready Toyota and Hyundai parts"
-        description="Search by part number, OEM number, car model, brand, and category. Add products to your RFQ list or upload your own Excel file."
+        eyebrow={dictionary.pages.products.eyebrow}
+        title={dictionary.pages.products.title}
+        description={dictionary.pages.products.description}
       />
       <section className="bg-surface px-4 py-8 sm:px-6 lg:px-8">
         <div className="mx-auto flex max-w-7xl flex-col justify-between gap-4 rounded-lg border border-border bg-background p-5 md:flex-row md:items-center">
           <p className="text-sm leading-6 text-metallic-silver">
-            Can&apos;t find the part you need? Send the part number, OEM number,
-            vehicle model, or product photo through a sourcing request.
+            {dictionary.pages.products.missing}
           </p>
           <CTAButton href="/contact" variant="secondary" className="shrink-0">
-            Send Sourcing Request
+            {dictionary.pages.products.cta}
           </CTAButton>
         </div>
       </section>

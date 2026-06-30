@@ -3,6 +3,8 @@
 import type { FormEvent } from "react";
 import { useState } from "react";
 import { privateLabelCategories } from "@/data/private-label";
+import { useLocale } from "@/contexts/LocaleContext";
+import { getDictionary } from "@/i18n/dictionaries";
 import type {
   PrivateLabelCategory,
   PrivateLabelInquiry,
@@ -38,29 +40,42 @@ function isNumeric(value: string) {
   return value.trim() !== "" && !Number.isNaN(Number(value));
 }
 
-function validateForm(form: PrivateLabelInquiryFormState) {
+function validateForm(
+  form: PrivateLabelInquiryFormState,
+  dictionary: ReturnType<typeof getDictionary>,
+) {
   const errors: string[] = [];
 
-  if (!form.fullName.trim()) errors.push("Full name is required.");
-  if (!form.companyName.trim()) errors.push("Company name is required.");
-  if (!form.email.trim() && !form.whatsapp.trim()) {
-    errors.push("Email or WhatsApp number is required.");
+  if (!form.fullName.trim()) errors.push(dictionary.forms.privateLabel.errors.fullName);
+  if (!form.companyName.trim()) {
+    errors.push(dictionary.forms.privateLabel.errors.companyName);
   }
-  if (!form.productCategory) errors.push("Product category is required.");
+  if (!form.email.trim() && !form.whatsapp.trim()) {
+    errors.push(dictionary.forms.privateLabel.errors.contact);
+  }
+  if (!form.productCategory) {
+    errors.push(dictionary.forms.privateLabel.errors.productCategory);
+  }
   if (!form.estimatedQuantity.trim()) {
-    errors.push("Estimated quantity is required.");
+    errors.push(dictionary.forms.privateLabel.errors.estimatedQuantity);
   } else if (isNumeric(form.estimatedQuantity) && Number(form.estimatedQuantity) <= 0) {
-    errors.push("Estimated quantity must be positive.");
+    errors.push(dictionary.forms.privateLabel.errors.estimatedQuantityPositive);
   }
   if (!form.packagingRequirements.trim() && !form.message.trim()) {
-    errors.push("Packaging requirements or message is required.");
+    errors.push(dictionary.forms.privateLabel.errors.packaging);
   }
 
   return errors;
 }
 
 export function PrivateLabelInquiryForm() {
-  const [form, setForm] = useState<PrivateLabelInquiryFormState>(initialFormState);
+  const { locale } = useLocale();
+  const dictionary = getDictionary(locale);
+  const [form, setForm] = useState<PrivateLabelInquiryFormState>(() => ({
+    ...initialFormState,
+    country: dictionary.forms.common.countryDefault,
+    targetMarket: dictionary.brand.market,
+  }));
   const [errors, setErrors] = useState<string[]>([]);
   const [submittedInquiry, setSubmittedInquiry] =
     useState<PrivateLabelInquiry | null>(null);
@@ -75,7 +90,7 @@ export function PrivateLabelInquiryForm() {
   function handleSubmit(event: FormEvent<HTMLFormElement>) {
     event.preventDefault();
 
-    const nextErrors = validateForm(form);
+    const nextErrors = validateForm(form, dictionary);
     setErrors(nextErrors);
 
     if (nextErrors.length > 0) {
@@ -100,7 +115,7 @@ export function PrivateLabelInquiryForm() {
     >
       <div className="grid gap-4 md:grid-cols-2">
         <label className={labelClass}>
-          Full name
+          {dictionary.forms.privateLabel.fullName}
           <input
             className={inputClass}
             name="fullName"
@@ -109,7 +124,7 @@ export function PrivateLabelInquiryForm() {
           />
         </label>
         <label className={labelClass}>
-          Company name
+          {dictionary.forms.privateLabel.companyName}
           <input
             className={inputClass}
             name="companyName"
@@ -118,7 +133,7 @@ export function PrivateLabelInquiryForm() {
           />
         </label>
         <label className={labelClass}>
-          Country
+          {dictionary.forms.common.country}
           <input
             className={inputClass}
             name="country"
@@ -127,7 +142,7 @@ export function PrivateLabelInquiryForm() {
           />
         </label>
         <label className={labelClass}>
-          City
+          {dictionary.forms.common.city}
           <input
             className={inputClass}
             name="city"
@@ -136,7 +151,7 @@ export function PrivateLabelInquiryForm() {
           />
         </label>
         <label className={labelClass}>
-          Email
+          {dictionary.forms.common.email}
           <input
             className={inputClass}
             name="email"
@@ -146,7 +161,7 @@ export function PrivateLabelInquiryForm() {
           />
         </label>
         <label className={labelClass}>
-          WhatsApp number
+          {dictionary.forms.common.whatsapp}
           <input
             className={inputClass}
             name="whatsapp"
@@ -155,7 +170,7 @@ export function PrivateLabelInquiryForm() {
           />
         </label>
         <label className={labelClass}>
-          Brand name
+          {dictionary.forms.privateLabel.brandName}
           <input
             className={inputClass}
             name="brandName"
@@ -164,7 +179,7 @@ export function PrivateLabelInquiryForm() {
           />
         </label>
         <label className={labelClass}>
-          Product category
+          {dictionary.forms.privateLabel.productCategory}
           <select
             className={inputClass}
             name="productCategory"
@@ -178,13 +193,13 @@ export function PrivateLabelInquiryForm() {
           >
             {privateLabelCategories.map((item) => (
               <option key={item.category} value={item.category}>
-                {item.category}
+                {dictionary.categories[item.category]}
               </option>
             ))}
           </select>
         </label>
         <label className={labelClass}>
-          Target market
+          {dictionary.forms.privateLabel.targetMarket}
           <input
             className={inputClass}
             name="targetMarket"
@@ -193,7 +208,7 @@ export function PrivateLabelInquiryForm() {
           />
         </label>
         <label className={labelClass}>
-          Estimated quantity
+          {dictionary.forms.privateLabel.estimatedQuantity}
           <input
             className={inputClass}
             name="estimatedQuantity"
@@ -201,11 +216,11 @@ export function PrivateLabelInquiryForm() {
             onChange={(event) =>
               updateField("estimatedQuantity", event.target.value)
             }
-            placeholder="First order or monthly quantity"
+            placeholder={dictionary.forms.privateLabel.quantityPlaceholder}
           />
         </label>
         <label className={labelClass}>
-          Do you already have a logo?
+          {dictionary.forms.privateLabel.logoStatus}
           <select
             className={inputClass}
             name="logoStatus"
@@ -214,13 +229,13 @@ export function PrivateLabelInquiryForm() {
               updateField("logoStatus", event.target.value as PrivateLabelLogoStatus)
             }
           >
-            <option value="yes">Yes</option>
-            <option value="no">No</option>
-            <option value="in_progress">In progress</option>
+            <option value="yes">{dictionary.forms.privateLabel.logoYes}</option>
+            <option value="no">{dictionary.forms.privateLabel.logoNo}</option>
+            <option value="in_progress">{dictionary.forms.privateLabel.logoProgress}</option>
           </select>
         </label>
         <label className={`${labelClass} md:col-span-2`}>
-          Packaging requirements
+          {dictionary.forms.privateLabel.packagingRequirements}
           <textarea
             className={textareaClass}
             name="packagingRequirements"
@@ -228,17 +243,17 @@ export function PrivateLabelInquiryForm() {
             onChange={(event) =>
               updateField("packagingRequirements", event.target.value)
             }
-            placeholder="Box design, logo placement, barcode, label language, carton marking, and market information."
+            placeholder={dictionary.forms.privateLabel.packagingPlaceholder}
           />
         </label>
         <label className={`${labelClass} md:col-span-2`}>
-          Message
+          {dictionary.forms.common.message}
           <textarea
             className={textareaClass}
             name="message"
             value={form.message}
             onChange={(event) => updateField("message", event.target.value)}
-            placeholder="Share target products, quality grade, timing, or sourcing requirements."
+            placeholder={dictionary.forms.privateLabel.messagePlaceholder}
           />
         </label>
       </div>
@@ -253,8 +268,7 @@ export function PrivateLabelInquiryForm() {
 
       {submittedInquiry ? (
         <div className="mt-6 rounded-md border border-metallic-silver/24 bg-background p-4 text-sm leading-6 text-metallic-silver">
-          Your Private Label inquiry has been received. Our sourcing team will
-          review your requirements and contact you through WhatsApp or email.
+          {dictionary.forms.privateLabel.received}
         </div>
       ) : null}
 
@@ -262,7 +276,7 @@ export function PrivateLabelInquiryForm() {
         type="submit"
         className="incar-focus mt-6 min-h-12 rounded-md bg-primary px-5 text-sm font-semibold text-white shadow-[0_14px_34px_rgba(215,25,32,0.24)] transition hover:bg-primary-hover"
       >
-        Start Private Label Inquiry
+        {dictionary.forms.privateLabel.submit}
       </button>
     </form>
   );

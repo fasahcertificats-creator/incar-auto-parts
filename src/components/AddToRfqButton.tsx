@@ -3,6 +3,8 @@
 import Link from "next/link";
 import { useState } from "react";
 import { useRFQ } from "@/features/rfq/use-rfq";
+import { useLocale } from "@/contexts/LocaleContext";
+import { getDictionary } from "@/i18n/dictionaries";
 import { getProductById } from "@/lib/products";
 import type { Product } from "@/types/product";
 
@@ -18,6 +20,8 @@ export function AddToRfqButton({
   compact = false,
 }: AddToRfqButtonProps) {
   const { addItem } = useRFQ();
+  const { locale } = useLocale();
+  const dictionary = getDictionary(locale);
   const [added, setAdded] = useState(false);
   const rfqProduct = product ?? (productId ? getProductById(productId) : undefined);
 
@@ -37,14 +41,14 @@ export function AddToRfqButton({
         disabled={!rfqProduct}
         className="incar-focus inline-flex min-h-11 items-center justify-center rounded-md bg-primary px-4 py-2 text-sm font-semibold text-white shadow-[0_14px_30px_rgba(215,25,32,0.22)] transition hover:bg-primary-hover"
       >
-        {added ? "Added to RFQ" : "Add to RFQ"}
+        {added ? dictionary.common.addedToRfq : dictionary.common.addToRfq}
       </button>
       {!compact ? (
         <Link
           href="/rfq"
           className="incar-focus inline-flex min-h-11 items-center justify-center rounded-md border border-border bg-surface-elevated px-4 py-2 text-sm font-semibold text-metallic-silver transition hover:border-metallic-silver/45 hover:text-white"
         >
-          Request Quotation
+          {dictionary.common.requestQuotation}
         </Link>
       ) : null}
     </div>

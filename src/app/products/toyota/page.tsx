@@ -1,5 +1,7 @@
 import { ProductExplorer } from "@/components/ProductExplorer";
 import { SectionHeader } from "@/components/SectionHeader";
+import { getDictionary } from "@/i18n/dictionaries";
+import { getServerLocale } from "@/i18n/server";
 import { getActiveVehicleModels } from "@/lib/products";
 import { pageMetadata } from "@/lib/seo";
 
@@ -8,7 +10,9 @@ export const metadata = pageMetadata(
   "Toyota auto parts sourcing from China for Saudi wholesale buyers, covering Camry, Corolla, Hilux, Yaris, Land Cruiser, and Fortuner.",
 );
 
-export default function ToyotaProductsPage() {
+export default async function ToyotaProductsPage() {
+  const locale = await getServerLocale();
+  const dictionary = getDictionary(locale);
   const toyotaModels = getActiveVehicleModels("Toyota");
 
   return (
@@ -17,9 +21,9 @@ export default function ToyotaProductsPage() {
         <div className="mx-auto max-w-7xl">
           <SectionHeader
             inverse
-            eyebrow="Toyota products"
-            title="Toyota sourcing catalog for Saudi wholesalers"
-            description="Focused launch coverage for Camry, Corolla, Hilux, Yaris, Land Cruiser, and Fortuner parts."
+            eyebrow="Toyota"
+            title={dictionary.pages.products.toyotaTitle}
+            description={dictionary.pages.products.toyotaDescription}
           />
           <div className="mt-8 flex flex-wrap gap-2">
             {toyotaModels.map((model) => (

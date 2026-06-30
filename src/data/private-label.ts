@@ -4,6 +4,9 @@ import type {
   PrivateLabelService,
   PrivateLabelTrustPoint,
 } from "@/types/private-label";
+import { defaultLocale } from "@/i18n/config";
+import { getDictionary } from "@/i18n/dictionaries";
+import type { Locale } from "@/i18n/types";
 
 export const privateLabelTrustPoints: PrivateLabelTrustPoint[] = [
   { id: "china-factory-sourcing", label: "China factory sourcing" },
@@ -135,3 +138,47 @@ export const privateLabelCategories: PrivateLabelCategoryDetail[] = [
       "Interior items can use private label packaging for organized range building, product labels, and showroom-ready presentation.",
   },
 ];
+
+export function getPrivateLabelTrustPoints(
+  locale: Locale = defaultLocale,
+): PrivateLabelTrustPoint[] {
+  const labels = getDictionary(locale).privateLabelData.trustPoints;
+
+  return privateLabelTrustPoints.map((point, index) => ({
+    ...point,
+    label: labels[index] ?? point.label,
+  }));
+}
+
+export function getPrivateLabelServices(locale: Locale = defaultLocale): PrivateLabelService[] {
+  const services = getDictionary(locale).privateLabelData.services;
+
+  return privateLabelServices.map((service, index) => ({
+    ...service,
+    title: services[index]?.title ?? service.title,
+    description: services[index]?.description ?? service.description,
+  }));
+}
+
+export function getPrivateLabelProcessSteps(
+  locale: Locale = defaultLocale,
+): PrivateLabelProcessStep[] {
+  const steps = getDictionary(locale).privateLabelData.process;
+
+  return privateLabelProcessSteps.map((step, index) => ({
+    ...step,
+    title: steps[index]?.title ?? step.title,
+    description: steps[index]?.description ?? step.description,
+  }));
+}
+
+export function getPrivateLabelCategories(
+  locale: Locale = defaultLocale,
+): PrivateLabelCategoryDetail[] {
+  const categoryDescriptions = getDictionary(locale).privateLabelData.categories;
+
+  return privateLabelCategories.map((category) => ({
+    ...category,
+    description: categoryDescriptions[category.category],
+  }));
+}

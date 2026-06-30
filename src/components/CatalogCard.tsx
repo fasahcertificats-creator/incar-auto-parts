@@ -1,7 +1,13 @@
 import type { Catalog } from "@/types";
 import { CTAButton } from "./CTAButton";
 
-export function CatalogCard({ catalog }: { catalog: Catalog }) {
+export function CatalogCard({
+  catalog,
+  ctaLabel,
+}: {
+  catalog: Catalog;
+  ctaLabel: string;
+}) {
   return (
     <article className="incar-card rounded-lg p-6 text-white">
       <div className="flex flex-wrap items-center justify-between gap-3">
@@ -22,7 +28,7 @@ export function CatalogCard({ catalog }: { catalog: Catalog }) {
           variant="primary"
           className="min-h-11 px-4 py-2"
         >
-          Request Catalog
+          {ctaLabel}
         </CTAButton>
       </div>
     </article>
