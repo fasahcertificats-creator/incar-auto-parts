@@ -13,6 +13,7 @@ export type TrustPillar = {
   highlights: string[];
   proofPoints: string[];
   relatedCTA: TrustCTA;
+  pageUsage: string[];
 };
 
 export type TrustProcessStep = {

@@ -61,12 +61,24 @@ export default function ContactPage() {
                 Business inquiry types
               </p>
               <div className="mt-4 flex flex-wrap gap-2 text-sm text-metallic-silver">
-                {["RFQ", "Private Label", "Catalog Request", "Sourcing Request"].map((item) => (
+                {[
+                  "RFQ",
+                  "Private Label",
+                  "Catalog Request",
+                  "Sourcing Request",
+                  "Quality Control Question",
+                  "General Business Inquiry",
+                ].map((item) => (
                   <span key={item} className="rounded-sm border border-border px-3 py-2">
                     {item}
                   </span>
                 ))}
               </div>
+              <p className="mt-4 text-sm leading-6 text-muted">
+                Can&apos;t find the part you need? Send the part number, OEM
+                number, vehicle model, or product photo through a sourcing
+                request.
+              </p>
             </div>
           </aside>
           <ContactForm />

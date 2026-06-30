@@ -64,8 +64,10 @@ export default function AboutPage() {
             <div className="incar-card rounded-lg p-6">
               <h2 className="text-2xl font-semibold text-white">Our Journey</h2>
               <p className="mt-4 text-sm leading-7 text-muted">
-                This section is reserved for the real founder and project story
-                once it is ready to publish.
+                INCAR is being built to connect Saudi wholesale auto parts
+                buyers with China-based sourcing, inspection, packaging, and
+                private label support. This section will later include the real
+                founder journey and project story.
               </p>
             </div>
           </div>

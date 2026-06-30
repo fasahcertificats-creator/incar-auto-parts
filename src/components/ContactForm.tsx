@@ -42,6 +42,8 @@ export function ContactForm() {
             <option>Private Label</option>
             <option>Catalog Request</option>
             <option>Sourcing Request</option>
+            <option>Quality Control Question</option>
+            <option>General Business Inquiry</option>
           </select>
         </label>
         <label className={`${labelClass} md:col-span-2`}>
@@ -58,7 +60,7 @@ export function ContactForm() {
         type="submit"
         className="incar-focus mt-6 min-h-12 rounded-md bg-primary px-5 text-sm font-semibold text-white shadow-[0_14px_34px_rgba(215,25,32,0.24)] transition hover:bg-primary-hover"
       >
-        Contact via WhatsApp
+        Submit Inquiry
       </button>
     </form>
   );

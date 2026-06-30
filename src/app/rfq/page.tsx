@@ -9,10 +9,10 @@ export const metadata = pageMetadata(
 );
 
 const rfqTrustNotes = [
-  "Your RFQ is reviewed by the INCAR sourcing team.",
-  "Product information, quantities, and packaging notes are checked before supplier coordination.",
-  "You can send part numbers, an Excel or CSV file, or products selected from the catalog.",
+  "Buyers can send selected products, part numbers, OEM numbers, or Excel and CSV files.",
+  "INCAR reviews RFQ details before quotation preparation and supplier coordination.",
   "Communication can continue through WhatsApp or email after review.",
+  "The RFQ process is designed for wholesale sourcing, not retail ordering.",
 ];
 
 export default function RfqPage() {

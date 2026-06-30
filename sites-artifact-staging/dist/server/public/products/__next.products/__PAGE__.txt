@@ -1,6 +1,0 @@
-1:"$Sreact.fragment"
-2:I[80790,["/_next/static/chunks/06-57rl3tsz6e.js","/_next/static/chunks/14mrh2-p_w84d.js","/_next/static/chunks/0529-tlegrbcr.js"],"ProductExplorer"]
-3:I[97367,["/_next/static/chunks/06-57rl3tsz6e.js","/_next/static/chunks/14mrh2-p_w84d.js"],"OutletBoundary"]
-4:"$Sreact.suspense"
-0:{"rsc":["$","$1","c",{"children":[[["$","section",null,{"className":"bg-background px-4 py-20 text-white sm:px-6 lg:px-8","children":["$","div",null,{"className":"mx-auto max-w-7xl","children":["$","div",null,{"className":"mx-auto max-w-3xl text-center","children":[["$","p",null,{"className":"mb-3 text-xs font-bold uppercase tracking-[0.18em] text-metallic-silver","children":"Products"}],["$","h2",null,{"className":"text-3xl font-semibold leading-tight md:text-5xl text-white","children":"RFQ-ready Toyota and Hyundai parts"}],["$","p",null,{"className":"mt-4 text-base leading-7 md:text-lg text-metallic-silver/72","children":"Search by part number, OEM number, car model, brand, and category. Add products to your RFQ list or upload your own Excel file."}]]}]}]}],["$","$L2",null,{}]],[["$","script","script-0",{"src":"/_next/static/chunks/0529-tlegrbcr.js","async":true}]],["$","$L3",null,{"children":["$","$4",null,{"name":"Next.MetadataOutlet","children":"$@5"}]}]]}],"isPartial":false,"staleTime":300,"varyParams":null,"buildId":"Pl2KoDZIbHKLA5F0hDZaW"}
-5:null

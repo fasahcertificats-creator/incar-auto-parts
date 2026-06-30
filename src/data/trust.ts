@@ -26,6 +26,7 @@ export const trustPillars: TrustPillar[] = [
       href: "/rfq",
       variant: "primary",
     },
+    pageUsage: ["home", "about", "private-label", "quality-control", "rfq"],
   },
   {
     id: "factory-verification",
@@ -48,10 +49,11 @@ export const trustPillars: TrustPillar[] = [
       "Supplier notes are presented as review support, not as blanket approval claims.",
     ],
     relatedCTA: {
-      label: "Learn About INCAR",
-      href: "/about",
+      label: "Start Sourcing Request",
+      href: "/contact",
       variant: "secondary",
     },
+    pageUsage: ["home", "about", "private-label", "quality-control"],
   },
   {
     id: "packaging-control",
@@ -78,6 +80,7 @@ export const trustPillars: TrustPillar[] = [
       href: "/private-label#private-label-inquiry",
       variant: "primary",
     },
+    pageUsage: ["home", "private-label", "quality-control", "catalogs"],
   },
   {
     id: "export-documentation",
@@ -100,10 +103,11 @@ export const trustPillars: TrustPillar[] = [
       "INCAR assists with sourcing documentation without making legal or border-process guarantees.",
     ],
     relatedCTA: {
-      label: "Request Quotation",
-      href: "/rfq",
+      label: "Speak With INCAR",
+      href: "/contact",
       variant: "primary",
     },
+    pageUsage: ["home", "about", "private-label", "quality-control", "rfq"],
   },
   {
     id: "saudi-market-focus",
@@ -130,6 +134,7 @@ export const trustPillars: TrustPillar[] = [
       href: "/rfq",
       variant: "primary",
     },
+    pageUsage: ["home", "about", "quality-control", "catalogs", "rfq"],
   },
   {
     id: "china-advantage",
@@ -152,43 +157,61 @@ export const trustPillars: TrustPillar[] = [
       "Private Label requirements can be reviewed close to the sourcing and production workflow.",
     ],
     relatedCTA: {
-      label: "Learn About INCAR",
-      href: "/about",
+      label: "Explore Services",
+      href: "/",
       variant: "secondary",
     },
+    pageUsage: ["home", "about", "quality-control"],
   },
 ];
 
 export const trustProcessSteps: TrustProcessStep[] = [
   {
     id: "requirements-review",
-    title: "Review buyer requirements",
+    title: "Requirement Review",
     description:
       "Check part numbers, categories, quantities, packaging needs, and target market details before supplier coordination.",
     order: 1,
   },
   {
-    id: "supplier-comparison",
-    title: "Compare supplier options",
+    id: "supplier-product-matching",
+    title: "Supplier / Product Matching",
     description:
-      "Help compare factory options by category fit, MOQ, sample readiness, lead time, packaging support, and export readiness.",
+      "Help compare factory options and product families by category fit, MOQ, sample readiness, lead time, packaging support, and export readiness.",
     order: 2,
   },
   {
-    id: "sample-packaging-check",
-    title: "Check samples and packaging",
+    id: "sample-specification-check",
+    title: "Sample or Specification Check",
     description:
-      "Support sample review, packaging inspection, label verification, and product consistency checkpoints.",
+      "Support sample review, OEM number checks, specification review, and product consistency checkpoints before quotation or production coordination.",
     order: 3,
   },
   {
-    id: "export-coordination",
-    title: "Coordinate export details",
+    id: "packaging-label-review",
+    title: "Packaging and Label Review",
     description:
-      "Assist with packing information, product details, supplier communication, and shipment document coordination.",
+      "Review box details, barcode and label information, Arabic/English readiness, and carton marking requirements.",
     order: 4,
   },
+  {
+    id: "pre-shipment-readiness",
+    title: "Pre-shipment Readiness Review",
+    description:
+      "Prepare practical checkpoints for packaging, quantities, product information, and inspection notes before goods leave China.",
+    order: 5,
+  },
+  {
+    id: "rfq-export-coordination",
+    title: "RFQ / Export Coordination",
+    description:
+      "Assist with RFQ follow-up, supplier communication, packing information, and export coordination documents for Saudi buyers.",
+    order: 6,
+  },
 ];
+
+export const futureTrustProofAssets =
+  "Future proof assets may include inspection photos, packaging samples, export document examples, and verified case studies.";
 
 export const getTrustPillarsBySlug = (slugs: string[]) =>
   trustPillars.filter((pillar) => slugs.includes(pillar.slug));

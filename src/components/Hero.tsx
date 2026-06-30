@@ -27,11 +27,11 @@ export function Hero() {
           </p>
           <div className="mt-9 flex flex-col gap-3 sm:flex-row">
             <CTAButton href="/rfq">Request Quotation</CTAButton>
-            <CTAButton href="/products" variant="secondary">
-              Explore Products
-            </CTAButton>
-            <CTAButton href="/private-label" variant="secondary">
-              Private Label Solutions
+            <CTAButton
+              href="/private-label#private-label-inquiry"
+              variant="secondary"
+            >
+              Start Private Label Inquiry
             </CTAButton>
           </div>
         </div>

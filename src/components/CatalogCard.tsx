@@ -17,7 +17,11 @@ export function CatalogCard({ catalog }: { catalog: Catalog }) {
       <p className="mt-5 text-sm text-metallic-silver">{catalog.audience}</p>
       <div className="mt-6 flex flex-wrap items-center justify-between gap-4">
         <p className="text-sm font-semibold text-white">{catalog.items}</p>
-        <CTAButton href="/rfq" variant="primary" className="min-h-11 px-4 py-2">
+        <CTAButton
+          href="/catalogs#catalog-request"
+          variant="primary"
+          className="min-h-11 px-4 py-2"
+        >
           Request Catalog
         </CTAButton>
       </div>

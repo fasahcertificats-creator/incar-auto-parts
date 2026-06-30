@@ -1,10 +1,10 @@
-# Trust System
+# INCAR Trust System
 
 ## Purpose
 
-The INCAR trust system exists to reduce hesitation for Saudi wholesale buyers before they submit an RFQ or Private Label inquiry. It explains what INCAR helps review, coordinate, prepare, and compare during China-to-Saudi sourcing.
+The INCAR Trust System helps Saudi wholesale auto parts buyers understand how INCAR supports China-based sourcing before they submit an RFQ, catalog request, sourcing request, or Private Label inquiry.
 
-Trust content must stay professional, service-oriented, and credible. It should help buyers understand the sourcing workflow without claiming certifications, facilities, client outcomes, or completed projects that are not backed by real project data.
+The system is commercial, but careful. It explains what INCAR helps review, coordinate, prepare, assist with, and compare without inventing certifications, warehouses, client history, completed projects, or guaranteed outcomes.
 
 ## Six Trust Pillars
 
@@ -13,7 +13,7 @@ Trust content must stay professional, service-oriented, and credible. It should 
    - Product consistency checks.
    - Packaging inspection.
    - Label verification.
-   - Pre-shipment checking.
+   - Pre-shipment review support.
 
 2. Factory Verification
    - Supplier screening.
@@ -33,8 +33,8 @@ Trust content must stay professional, service-oriented, and credible. It should 
    - Commercial invoice support.
    - Packing list support.
    - Product information preparation.
-   - Shipment coordination documents.
-   - Saudi buyer communication support.
+   - Shipment coordination document support.
+   - Buyer communication support.
 
 5. Saudi Market Focus
    - Saudi wholesale buyer focus.
@@ -48,46 +48,92 @@ Trust content must stay professional, service-oriented, and credible. It should 
    - Supplier comparison.
    - Product sourcing flexibility.
    - Private Label support.
-   - Faster communication with Chinese factories.
+   - Faster communication with Chinese suppliers.
 
-## No Fake Claims Rule
+## Page Usage Strategy
 
-Trust content must not claim guaranteed outcomes, certified suppliers, exclusive partnerships, warehouses, client names, completed projects, market leadership, or legal/export outcomes unless those facts are supported by real evidence in the project.
+Home:
+Use a concise trust section that shows all six pillars briefly. The primary CTA is Request Quotation and the secondary CTA is Learn About INCAR.
 
-Recommended language:
+About:
+Use deeper trust narrative around China Advantage, Saudi Market Focus, Factory Verification, Quality Inspection System, Export Documentation, and Private Label capability. The page should build credibility without inventing fake company history.
 
-- We support.
+Private Label:
+Use Packaging Control, Quality Inspection System, Factory Verification, and Export Documentation to make buyers trust the Private Label process.
+
+RFQ:
+Show a small confidence block near the form. Explain that buyers can send selected products, part numbers, OEM numbers, or Excel and CSV files, and that INCAR reviews RFQ details before quotation preparation.
+
+Catalogs:
+Explain that catalog requests help buyers review product families, part numbers, MOQ, compatibility notes, and Private Label availability before INCAR sends relevant catalog information.
+
+Quality Control:
+Use the full Trust System. This is the most detailed trust page and should explain what INCAR helps review, what INCAR coordinates, and what INCAR does not claim to promise.
+
+## Approved Language Style
+
+Use service-oriented language:
+
 - We help review.
 - We coordinate.
+- We support.
 - We prepare.
 - We assist.
 - We help compare.
 - We focus on.
 
+Avoid absolute or unsupported claims. Trust content should sound premium, technical, industrial, calm, credible, and B2B.
+
+## Forbidden Claims
+
+Do not claim the following unless verified proof is added later:
+
+- Guaranteed quality.
+- 100% safe.
+- Certified factories.
+- Lowest price.
+- Biggest supplier.
+- Official distributor.
+- Warehouse in Saudi.
+- Guaranteed delivery.
+- Customs guaranteed.
+
+Also avoid implied versions of these claims, such as legal certainty, border-process certainty, famous client proof, completed project proof, or exclusive partnerships without real evidence.
+
+## CTA Alignment
+
+Quality Inspection System:
+Request Quotation.
+
+Factory Verification:
+Start Sourcing Request.
+
+Packaging Control:
+Private Label Inquiry.
+
+Export Documentation:
+Speak With INCAR.
+
+Saudi Market Focus:
+Request Quotation.
+
+China Advantage:
+Explore Services or Request Quotation.
+
+## Future Proof Assets
+
+Future proof assets may include inspection photos, packaging samples, export document examples, and verified case studies.
+
+These are future proof placeholders only. Do not display fake proof as if it already exists.
+
 ## RFQ Conversion Support
 
-Trust content supports RFQ conversion by explaining that buyer requests are reviewed by the sourcing team, product details and quantities are checked, and buyers can submit part numbers, uploaded spreadsheet metadata, or selected catalog products.
+The Trust System supports RFQ conversion by reducing uncertainty before a buyer submits product details. It explains that INCAR reviews part numbers, OEM numbers, quantities, packaging preferences, supplier options, and export coordination needs before quotation preparation.
 
-The RFQ trust block should reduce uncertainty without promising response times or supplier outcomes.
+Trust content should guide buyers toward RFQ submission without using retail transaction language or payment-oriented language.
 
 ## Private Label Conversion Support
 
-Private Label trust content should focus on packaging control, label verification, factory matching, inspection checkpoints, export document support, and Saudi market requirements.
+The Trust System supports Private Label conversion by showing that packaging control, label verification, factory matching, sample review, inspection checkpoints, and export document support are part of the service conversation.
 
-It should not imply that INCAR has completed specific brand projects unless verified project proof is added later.
-
-## Future Proof Types
-
-Future trust assets may include:
-
-- Factory photos.
-- Inspection reports.
-- Packaging samples.
-- Export document examples.
-- Real customer case studies.
-
-These are future proof types only. They are not claimed as currently available assets in the active UI.
-
-## Business Language Boundary
-
-Trust content must remain B2B, RFQ-led, and sourcing-led. It must avoid consumer transaction language and direct-to-consumer order mechanics. Approved language includes Add to RFQ, Request Quotation, Submit RFQ, Wholesale Inquiry, Sourcing Request, and Private Label Inquiry.
+Private Label trust content must not imply completed brand projects or client outcomes unless verified proof is added later.
