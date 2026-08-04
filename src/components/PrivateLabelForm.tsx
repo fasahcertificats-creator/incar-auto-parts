@@ -29,7 +29,7 @@ export function PrivateLabelForm() {
         </label>
         <label className={labelClass}>
           Target market
-          <input className={inputClass} name="market" defaultValue="Saudi Arabia" />
+          <input className={inputClass} name="market" placeholder="Middle Eastern target market" />
         </label>
         <label className={labelClass}>
           Estimated quantity

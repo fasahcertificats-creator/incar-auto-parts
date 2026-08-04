@@ -5,7 +5,7 @@ import { absoluteSiteUrl } from "./site-url";
 
 const siteName = brand.name;
 const baseDescription =
-  "China-based automotive sourcing, quality inspection, private label packaging, and export support for Saudi wholesale auto parts buyers.";
+  "Wholesale auto parts sourcing from China for auto parts wholesalers and importers across the Middle East, including part discovery, bulk request lists, sourcing, and private label coordination.";
 
 export function pageMetadata(title: string, description = baseDescription): Metadata {
   return {
@@ -13,13 +13,13 @@ export function pageMetadata(title: string, description = baseDescription): Meta
     description,
     keywords: [
       "auto parts sourcing China",
-      "Saudi Arabia wholesale auto parts",
+      "Middle East wholesale auto parts sourcing",
       "Toyota spare parts China",
       "Hyundai spare parts China",
       "private label auto parts",
       "OEM packaging auto parts",
       "INCAR AUTO PARTS",
-      "China to Saudi B2B sourcing",
+      "China to Middle East B2B sourcing",
     ],
     openGraph: {
       title: `${title} | ${siteName}`,
@@ -35,6 +35,7 @@ type LocalizedPageMetadataOptions = {
   locale: Locale;
   path?: string;
   title: string;
+  absoluteTitle?: string;
   description: string;
   noindex?: boolean;
 };
@@ -43,6 +44,7 @@ export function localizedPageMetadata({
   locale,
   path = "",
   title,
+  absoluteTitle,
   description,
   noindex = false,
 }: LocalizedPageMetadataOptions): Metadata {
@@ -52,7 +54,7 @@ export function localizedPageMetadata({
   const canonical = locale === "ar" ? arUrl : enUrl;
 
   return {
-    title: `${title} | ${siteName}`,
+    title: absoluteTitle ? { absolute: absoluteTitle } : `${title} | ${siteName}`,
     description,
     alternates: {
       canonical,
@@ -64,13 +66,13 @@ export function localizedPageMetadata({
     },
     robots: noindex ? { index: false, follow: true } : undefined,
     openGraph: {
-      title: `${title} | ${siteName}`,
+      title: absoluteTitle ?? `${title} | ${siteName}`,
       description,
       type: "website",
       siteName,
       url: canonical,
-      locale: locale === "ar" ? "ar_SA" : "en_US",
-      alternateLocale: locale === "ar" ? ["en_US"] : ["ar_SA"],
+      locale,
+      alternateLocale: locale === "ar" ? ["en"] : ["ar"],
       images: [absoluteSiteUrl("/images/hero-sourcing.png")],
     },
   };

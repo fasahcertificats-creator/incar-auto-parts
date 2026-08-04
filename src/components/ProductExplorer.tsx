@@ -131,7 +131,7 @@ export function ProductExplorer({
 
         <div className="mt-8 grid gap-6 md:grid-cols-2 xl:grid-cols-3">
           {filteredProducts.map((product) => (
-            <ProductCard key={product.id} product={product} />
+            <ProductCard key={product.internalProductId} product={product} />
           ))}
         </div>
 

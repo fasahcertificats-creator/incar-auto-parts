@@ -2,11 +2,11 @@
 
 ## Role in INCAR
 
-Private Label is a core business feature for INCAR AUTO PARTS, not a secondary marketing section. It supports the platform position as a premium B2B sourcing, export, RFQ, and brand development partner based in China for Saudi wholesale buyers.
+Private Label is a core business feature for INCAR AUTO PARTS, not a secondary marketing section. It supports the platform position as a premium B2B sourcing, export, RFQ, and brand development partner based in China for Middle Eastern wholesale buyers.
 
 ## Target Customer
 
-The primary customer is a Saudi wholesale buyer, importer, distributor, or purchasing team that wants to build an owned auto parts brand through China sourcing while keeping product selection, packaging, quality checks, and export coordination organized.
+The primary customer is a Middle Eastern wholesale buyer, importer, distributor, or purchasing team that wants to build an owned auto parts brand through China sourcing while keeping product selection, packaging, quality checks, and export coordination organized.
 
 ## Customer Pain Points
 
@@ -14,7 +14,7 @@ The primary customer is a Saudi wholesale buyer, importer, distributor, or purch
 - Turning a brand idea into packaging, labels, barcode details, and carton marking requirements.
 - Avoiding inconsistent supplier communication across product, packaging, and export stages.
 - Reviewing samples and packaging details before production.
-- Coordinating China export documents and Saudi Arabia shipping requirements.
+- Coordinating China export documents and target-destination shipping requirements.
 
 ## Service Scope
 
@@ -28,7 +28,7 @@ INCAR supports:
 - OEM / ODM support.
 - Quality inspection.
 - Export documentation.
-- Shipping coordination to Saudi Arabia.
+- Shipping coordination for the buyer's Middle Eastern destination.
 
 The current category scope follows the active product data standard:
 

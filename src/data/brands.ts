@@ -1,6 +1,6 @@
-import type { Brand } from "@/types/product";
+import type { SampleMakeRecord } from "@/types/sample-product";
 
-export const brands: Brand[] = [
+export const brands: SampleMakeRecord[] = [
   {
     id: "toyota",
     slug: "toyota",
@@ -18,4 +18,3 @@ export const brands: Brand[] = [
 ];
 
 export const launchBrands = brands.filter((brand) => brand.isActive);
-

@@ -2,7 +2,7 @@
 
 ## Target Visitor
 
-The target visitor is a Saudi wholesale auto parts buyer who needs China-based sourcing support, product matching, Private Label planning, catalog material, or export-ready RFQ coordination.
+The target visitor is a Middle Eastern wholesale auto parts buyer who needs China-based sourcing support, product matching, Private Label planning, catalog material, or export-ready RFQ coordination.
 
 ## Main Conversion Paths
 
@@ -42,7 +42,7 @@ The catalog request journey qualifies buyer interest before sharing catalog mate
 
 ## WhatsApp Role
 
-WhatsApp is the fastest direct contact path for Saudi wholesale buyers. It should support RFQ follow-up, catalog clarification, sourcing requests, and Private Label discussion after a buyer shares enough context.
+Verified direct contact channels should support RFQ follow-up, catalog clarification, sourcing requests, and Private Label discussion after a buyer shares enough context.
 
 ## Sourcing Request Role
 

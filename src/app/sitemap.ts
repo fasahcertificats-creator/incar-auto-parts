@@ -1,5 +1,9 @@
 import type { MetadataRoute } from "next";
-import { getActiveProducts } from "@/lib/products";
+import {
+  getIndexedMakes,
+  getIndexedModelsForMake,
+  getIndexedProducts,
+} from "@/features/discovery/repository";
 import { absoluteSiteUrl } from "@/lib/site-url";
 
 export const dynamic = "force-static";
@@ -31,12 +35,21 @@ function localizedEntry(locale: "ar" | "en", route: string) {
 }
 
 export default function sitemap(): MetadataRoute.Sitemap {
-  const products = getActiveProducts();
+  const makes = getIndexedMakes();
+  const products = getIndexedProducts();
 
   return [
     ...publicRoutes.flatMap((route) => [
       localizedEntry("ar", route),
       localizedEntry("en", route),
+    ]),
+    ...makes.flatMap((make) => [
+      localizedEntry("ar", `/parts/${make.slug}`),
+      localizedEntry("en", `/parts/${make.slug}`),
+      ...getIndexedModelsForMake(make.id).flatMap((model) => [
+        localizedEntry("ar", `/parts/${make.slug}/${model.slug}`),
+        localizedEntry("en", `/parts/${make.slug}/${model.slug}`),
+      ]),
     ]),
     ...products.flatMap((product) => [
       localizedEntry("ar", `/products/${product.slug}`),

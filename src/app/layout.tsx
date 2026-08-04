@@ -15,7 +15,7 @@ export const metadata: Metadata = {
     template: `%s | ${brand.name}`,
   },
   description:
-    "China-based automotive sourcing, quality inspection, private label packaging, and export support for Saudi wholesale auto parts buyers.",
+    "Wholesale auto parts sourcing from China for auto parts wholesalers and importers across the Middle East.",
 };
 
 export default async function RootLayout({

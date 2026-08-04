@@ -6,8 +6,8 @@ import { getActiveVehicleModels } from "@/lib/products";
 import { pageMetadata } from "@/lib/seo";
 
 export const metadata = pageMetadata(
-  "Toyota Products",
-  "Toyota auto parts sourcing from China for Saudi wholesale buyers, covering Camry, Corolla, Hilux, Yaris, Land Cruiser, and Fortuner.",
+  "Toyota Parts Browsing",
+  "Legacy Toyota browsing route for the INCAR parts discovery workspace. Published coverage is determined by current eligibility rules.",
 );
 
 export default async function ToyotaProductsPage() {

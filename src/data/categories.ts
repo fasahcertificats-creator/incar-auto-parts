@@ -1,6 +1,6 @@
-import type { Category } from "@/types/product";
+import type { SampleCategoryRecord } from "@/types/sample-product";
 
-export const categories: Category[] = [
+export const categories: SampleCategoryRecord[] = [
   {
     id: "brake-system",
     slug: "brake-system",
@@ -14,7 +14,7 @@ export const categories: Category[] = [
     slug: "suspension-parts",
     name: "Suspension Parts",
     displayName: "Suspension Parts",
-    description: "Shock absorbers, control arms, and chassis components for Saudi road demand.",
+    description: "Shock absorbers, control arms, and chassis components for varied road-use requirements.",
     isActive: true,
   },
   {
@@ -42,4 +42,3 @@ export const categories: Category[] = [
     isActive: true,
   },
 ];
-

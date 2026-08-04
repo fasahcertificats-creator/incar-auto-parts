@@ -17,7 +17,7 @@ import { pageMetadata } from "@/lib/seo";
 
 export const metadata = pageMetadata(
   "Quality Control and Trust System",
-  "INCAR quality inspection, supplier review, packaging control, and export documentation support for Saudi and UAE wholesale auto parts buyers.",
+  "INCAR quality-review coordination, supplier review, packaging control, and export information support for auto parts wholesalers across the Middle East.",
 );
 
 export default async function QualityControlPage() {
@@ -29,7 +29,7 @@ export default async function QualityControlPage() {
       "factory-verification",
       "packaging-control",
       "export-documentation",
-      "saudi-market-focus",
+      "middle-east-market-focus",
       "china-advantage",
     ],
     locale,

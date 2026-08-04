@@ -14,6 +14,10 @@ export async function generateMetadata({ params }: Props): Promise<Metadata> {
   return localizedPageMetadata({
     locale,
     path: "/private-label",
+    absoluteTitle:
+      locale === "ar"
+        ? "حلول العلامة الخاصة لقطع الغيار في الشرق الأوسط | INCAR"
+        : "Private Label Auto Parts for Middle Eastern Markets | INCAR",
     title: copy.heroTitle,
     description: copy.heroDescription,
   });

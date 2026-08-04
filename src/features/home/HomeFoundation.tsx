@@ -1,7 +1,10 @@
 import Link from "next/link";
 import { CTAButton } from "@/components/CTAButton";
 import { SectionHeader } from "@/components/SectionHeader";
-import { getActiveBrands, getActiveVehicleModels } from "@/lib/products";
+import {
+  getEligibleModelsForMake,
+  getPublishedMakes,
+} from "@/features/discovery/repository";
 import { getDictionary } from "@/i18n/dictionaries";
 import { localizeHref } from "@/i18n/routing";
 import { getServerLocale } from "@/i18n/server";
@@ -10,7 +13,7 @@ export async function HomeFoundation() {
   const locale = await getServerLocale();
   const dictionary = getDictionary(locale);
   const copy = dictionary.homeFoundation;
-  const brands = getActiveBrands();
+  const makes = getPublishedMakes();
 
   return (
     <>
@@ -60,27 +63,43 @@ export async function HomeFoundation() {
             title={copy.browse.title}
             description={copy.browse.description}
           />
-          <div className="mt-8 grid gap-5 lg:grid-cols-2">
-            {brands.map((brand) => (
-              <article key={brand.id} className="incar-card rounded-lg p-6">
-                <h2 className="text-2xl font-semibold text-white">{brand.displayName}</h2>
-                <div className="mt-4 flex flex-wrap gap-2">
-                  {getActiveVehicleModels(brand.name).map((model) => (
-                    <Link
-                      key={model.id}
-                      href={localizeHref(
-                        locale,
-                        `/parts?brand=${encodeURIComponent(brand.name)}&model=${encodeURIComponent(model.name)}`,
-                      )}
-                      className="incar-focus inline-flex min-h-11 items-center rounded-md border border-border px-4 text-sm font-semibold text-metallic-silver hover:text-white"
-                    >
-                      {model.displayName}
-                    </Link>
-                  ))}
-                </div>
-              </article>
-            ))}
-          </div>
+          {makes.length ? (
+            <div className="mt-8 grid gap-5 lg:grid-cols-2">
+              {makes.map((make) => (
+                <article key={make.id} className="incar-card rounded-lg p-6">
+                  {make.isSampleData ? (
+                    <p className="mb-3 text-xs font-semibold text-metallic-silver">
+                      {dictionary.discovery.sampleNotice}
+                    </p>
+                  ) : null}
+                  <Link
+                    href={localizeHref(locale, `/parts/${make.slug}`)}
+                    className="incar-focus rounded-sm text-2xl font-semibold text-white hover:text-metallic-silver"
+                  >
+                    {make.name}
+                  </Link>
+                  <div className="mt-4 flex flex-wrap gap-2">
+                    {getEligibleModelsForMake(make.id).map((model) => (
+                      <Link
+                        key={model.id}
+                        href={localizeHref(locale, `/parts/${make.slug}/${model.slug}`)}
+                        className="incar-focus inline-flex min-h-11 items-center rounded-md border border-border px-4 text-sm font-semibold text-metallic-silver hover:text-white"
+                      >
+                        {model.name}
+                      </Link>
+                    ))}
+                  </div>
+                </article>
+              ))}
+            </div>
+          ) : (
+            <div className="mt-8 rounded-lg border border-dashed border-metallic-silver/25 bg-background p-7">
+              <h2 className="text-xl font-semibold text-white">{copy.browse.emptyTitle}</h2>
+              <p className="mt-2 max-w-3xl text-sm leading-7 text-muted">
+                {copy.browse.emptyDescription}
+              </p>
+            </div>
+          )}
         </div>
       </section>
 

@@ -5,6 +5,7 @@ import { useState } from "react";
 import { useRFQ } from "@/features/rfq/use-rfq";
 import { useLocale } from "@/contexts/LocaleContext";
 import { getDictionary } from "@/i18n/dictionaries";
+import { localizeHref } from "@/i18n/routing";
 import { getProductById } from "@/lib/products";
 import type { Product } from "@/types/product";
 
@@ -45,7 +46,7 @@ export function AddToRfqButton({
       </button>
       {!compact ? (
         <Link
-          href="/rfq"
+          href={localizeHref(locale, "/rfq")}
           className="incar-focus inline-flex min-h-11 items-center justify-center rounded-md border border-border bg-surface-elevated px-4 py-2 text-sm font-semibold text-metallic-silver transition hover:border-metallic-silver/45 hover:text-white"
         >
           {dictionary.common.requestQuotation}

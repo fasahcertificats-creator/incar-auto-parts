@@ -21,6 +21,10 @@ export async function generateMetadata({
   return localizedPageMetadata({
     locale,
     path: "/sourcing-services",
+    absoluteTitle:
+      locale === "ar"
+        ? "توريد قطع غيار السيارات من الصين إلى الشرق الأوسط | INCAR"
+        : "Auto Parts Sourcing from China for the Middle East | INCAR",
     title: copy.title,
     description: copy.description,
   });

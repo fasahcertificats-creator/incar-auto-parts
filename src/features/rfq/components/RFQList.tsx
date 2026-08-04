@@ -61,20 +61,16 @@ export function RFQList() {
                       <dt className="text-xs uppercase tracking-[0.14em] text-metallic-silver">
                         {dictionary.productLabels.partNumber}
                       </dt>
-                      <dd className="mt-1 font-semibold text-white">{item.partNumber}</dd>
+                      <dd dir="ltr" className="mt-1 font-semibold text-white">
+                        {item.partNumber}
+                      </dd>
                     </div>
                     <div>
                       <dt className="text-xs uppercase tracking-[0.14em] text-metallic-silver">
                         {dictionary.productLabels.oemNumber}
                       </dt>
-                      <dd className="mt-1 font-semibold text-white">{item.oemNumber}</dd>
-                    </div>
-                    <div>
-                      <dt className="text-xs uppercase tracking-[0.14em] text-metallic-silver">
-                        {dictionary.productLabels.moq}
-                      </dt>
-                      <dd className="mt-1 font-semibold text-white">
-                        {item.moq} {dictionary.common.pcs}
+                      <dd dir="ltr" className="mt-1 font-semibold text-white">
+                        {item.oemNumber}
                       </dd>
                     </div>
                   </dl>

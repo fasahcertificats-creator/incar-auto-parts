@@ -12,7 +12,7 @@ export const privateLabelTrustPoints: PrivateLabelTrustPoint[] = [
   { id: "china-factory-sourcing", label: "China factory sourcing" },
   { id: "custom-packaging", label: "Custom packaging" },
   { id: "quality-inspection", label: "Quality inspection" },
-  { id: "saudi-wholesale-focus", label: "Saudi wholesale market focus" },
+  { id: "middle-east-wholesale-focus", label: "Middle Eastern wholesale market focus" },
 ];
 
 export const privateLabelServices: PrivateLabelService[] = [
@@ -20,7 +20,7 @@ export const privateLabelServices: PrivateLabelService[] = [
     id: "product-sourcing",
     title: "Product sourcing",
     description:
-      "Identify suitable product programs by category, MOQ, quality grade, and Saudi wholesale demand.",
+      "Identify suitable product programs by category, quantity range, quality grade, and target-market demand.",
   },
   {
     id: "factory-matching",
@@ -65,10 +65,10 @@ export const privateLabelServices: PrivateLabelService[] = [
       "Coordinate invoice, packing list, carton details, and export-ready documentation with suppliers.",
   },
   {
-    id: "shipping-saudi-arabia",
-    title: "Shipping coordination to Saudi Arabia",
+    id: "export-coordination-middle-east",
+    title: "Export coordination for Middle Eastern markets",
     description:
-      "Align production timing, packing details, and shipment coordination for Saudi wholesale import flows.",
+      "Align production timing, packing details, and destination requirements for a Middle Eastern wholesale market.",
   },
 ];
 
@@ -107,7 +107,7 @@ export const privateLabelProcessSteps: PrivateLabelProcessStep[] = [
     step: "06",
     title: "Export and shipping coordination",
     description:
-      "Prepare export documentation, packing details, supplier communication, and Saudi Arabia shipping coordination.",
+      "Prepare export documentation, packing details, supplier communication, and destination requirements for the target market.",
   },
 ];
 

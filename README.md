@@ -1,20 +1,20 @@
 # INCAR AUTO PARTS
 
-INCAR AUTO PARTS is a premium B2B automotive supply, sourcing, export, and private label company based in China and focused on Saudi wholesale buyers.
+INCAR AUTO PARTS is a B2B auto parts platform supporting wholesalers and importers across the Middle East with sourcing and private label coordination from China.
 
 ## Brand Identity
 
 - Brand name: INCAR AUTO PARTS
 - Short brand name: INCAR
-- Positioning: Global Automotive Supply & Private Label Solutions
-- Extended positioning: Global Automotive Supply & Private Label Solutions from China to Saudi Arabia
+- Positioning: Wholesale Auto Parts Sourcing for Middle Eastern Markets
+- Extended positioning: Wholesale Auto Parts Sourcing from China for the Middle East
 - Core workflow: RFQ-only B2B sourcing
 
 ## Business Focus
 
-INCAR helps Saudi wholesale buyers source reliable auto parts directly from China with factory sourcing, quality inspection, private label packaging, and export support.
+INCAR supports auto parts wholesalers and importers across the Middle East with part discovery, bulk request lists, sourcing, and private label coordination from China.
 
-The platform supports product discovery, RFQ lists, bulk Excel requirements, catalog lead capture, private label inquiries, and China-to-Saudi export coordination. It is built for wholesale sourcing conversations rather than consumer shopping flows.
+The platform supports product discovery, local RFQ drafts, sourcing-service review, and private label requirements for Middle Eastern markets. It is built for wholesale sourcing conversations rather than consumer shopping flows.
 
 ## Local Development
 

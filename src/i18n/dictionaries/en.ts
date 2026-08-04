@@ -8,18 +8,18 @@ export const en = {
   brand: {
     name: "INCAR AUTO PARTS",
     shortName: "INCAR",
-    tagline: "Global Automotive Supply & Private Label Solutions",
-    positioning: "Global automotive sourcing solutions from China",
+    tagline: "Wholesale Auto Parts Sourcing for Middle Eastern Markets",
+    positioning: "Wholesale Auto Parts Sourcing from China for the Middle East",
     description:
-      "China-based automotive sourcing, export, quality inspection, and private label solutions for Saudi and UAE wholesale buyers.",
+      "INCAR is a B2B platform supporting auto parts wholesalers and importers across the Middle East with sourcing from China.",
     coreMessage:
-      "We help wholesale auto parts buyers in Saudi Arabia and the UAE reach reliable sourcing channels from China, with support for quality inspection, packaging, Private Label, and professional RFQ preparation.",
-    routeFocus: "China-to-Saudi/UAE B2B sourcing and export support",
+      "INCAR supports auto parts wholesalers and importers across the Middle East with part discovery, bulk request lists, sourcing, and private label coordination from China.",
+    routeFocus: "China-to-Middle East B2B auto parts sourcing",
     office: "Guangzhou, China",
-    market: "Saudi Arabia and United Arab Emirates",
+    market: "Middle Eastern markets",
     leadDesk: "Lead Desk",
     footerNote:
-      "RFQ-only B2B sourcing for China-to-Saudi/UAE supply and private label programs.",
+      "B2B auto parts sourcing and private label coordination from China for Middle Eastern markets.",
   },
   navigation: {
     home: "Home",
@@ -92,19 +92,19 @@ export const en = {
   },
   hero: {
     eyebrow: "INCAR AUTO PARTS",
-    title: "Global automotive sourcing solutions from China",
+    title: "Wholesale Auto Parts Sourcing from China for the Middle East",
     description:
-      "We help wholesale auto parts buyers in Saudi Arabia and the UAE reach reliable sourcing channels from China, with support for quality inspection, packaging, Private Label, and professional RFQ preparation.",
+      "INCAR supports auto parts wholesalers and importers across the Middle East with part discovery, bulk request lists, sourcing, and private label coordination from China.",
     primary: "Request Quotation",
     secondary: "Private Label Solutions",
     tertiary: "Explore Products",
   },
   homeFoundation: {
     search: {
-      eyebrow: "Search & Request Hub",
-      title: "Start with a Part Number or OEM reference.",
+      eyebrow: "B2B Parts Sourcing",
+      title: "Wholesale Auto Parts Sourcing from China for the Middle East",
       description:
-        "Search the current parts workspace or prepare an RFQ draft without retail checkout or payment steps.",
+        "INCAR supports auto parts wholesalers and importers across the Middle East with part discovery, bulk request lists, sourcing, and private label coordination from China.",
       label: "Part Number / OEM",
       placeholder: "Enter Part Number or OEM",
       action: "Search Parts",
@@ -115,6 +115,9 @@ export const en = {
       title: "Choose a make, then a model.",
       description:
         "This is an initial browsing structure by make and model only. The options do not indicate published products or catalogs, and fitment details are reviewed later with part references.",
+      emptyTitle: "No makes or models currently qualify for publication",
+      emptyDescription:
+        "Development fixtures are not presented as production coverage. Search by reference or review the sourcing-services scope.",
     },
     upload: {
       eyebrow: "Upload Parts List",
@@ -127,7 +130,7 @@ export const en = {
       eyebrow: "Sourcing Services",
       title: "Share enough information for a structured sourcing review.",
       description:
-        "Part references, vehicle context, quantity ranges, quality expectations, packaging needs, and destination details help organize the review.",
+        "Part references, vehicle context, quantity ranges, quality expectations, packaging needs, and destination details help buyers across Middle Eastern markets organize a sourcing review.",
       items: [
         "Part and supplier search coordination",
         "Quality-review checkpoint coordination",
@@ -146,14 +149,14 @@ export const en = {
       eyebrow: "About INCAR",
       title: "Understand the scope before sending a request.",
       description:
-        "INCAR presents a sourcing-led workflow for wholesale buyers and keeps commercial confirmation outside the public website until a request is reviewed.",
+        "INCAR is a B2B auto parts platform for wholesalers and importers across the Middle East, with commercial confirmation kept outside the public website until a request is reviewed.",
       action: "About INCAR",
     },
     ready: {
       eyebrow: "Ready to Request",
       title: "Prepare the references your sourcing request needs.",
       description:
-        "Use the parts search or RFQ workspace to organize part numbers and vehicle information.",
+        "Use the parts search or RFQ workspace to prepare a sourcing request from China for your Middle Eastern market.",
     },
   },
   home: {
@@ -161,11 +164,11 @@ export const en = {
       eyebrow: "Trust system",
       title: "Six ways INCAR reduces sourcing uncertainty.",
       description:
-        "Wholesale buyers need clear sourcing support before submitting RFQs. INCAR explains quality checks, supplier review, packaging control, export support, Saudi/UAE market focus, and China-based coordination in one structured system.",
+        "Wholesale buyers need clear sourcing support before submitting RFQs. INCAR explains quality checks, supplier review, packaging control, export support, and China-based coordination for Middle Eastern markets.",
     },
     why: {
       eyebrow: "Why source with INCAR",
-      title: "A focused sourcing desk for Saudi and UAE wholesale buyers.",
+      title: "A focused sourcing desk for Middle Eastern wholesale buyers.",
       description:
         "INCAR focuses on factory screening, practical MOQ planning, private-label readiness, and export details that matter once the order leaves China.",
       reasons: [
@@ -239,7 +242,7 @@ export const en = {
         "Request catalog material with brand, model, MOQ, compatibility, and Private Label context before INCAR follows up through WhatsApp or email.",
     },
     finalCta: {
-      eyebrow: "China to Saudi/UAE RFQ desk",
+      eyebrow: "China-to-Middle East RFQ desk",
       title: "Send your RFQ list and get factory sourcing options.",
     },
   },
@@ -247,7 +250,7 @@ export const en = {
     eyebrow: "Private label",
     title: "Build a market-ready auto parts brand through China sourcing.",
     description:
-      "A preview of INCAR private label support for Saudi and UAE wholesale buyers, including sourcing, packaging planning, logo printing, quality inspection, and export coordination.",
+      "A preview of INCAR private label support for wholesalers and importers across the Middle East, including sourcing, packaging planning, label requirements, and production coordination from China.",
     cta: "Explore Private Label Solutions",
   },
   processPreview: {
@@ -278,12 +281,99 @@ export const en = {
       },
     ],
   },
+  discovery: {
+    breadcrumbs: {
+      home: "Home",
+      parts: "Parts",
+    },
+    parts: {
+      eyebrow: "Parts Discovery Hub",
+      title: "Find Auto Parts",
+      description:
+        "Search by part number or OEM reference, browse available vehicles, and prepare your sourcing request from China for your market in the Middle East.",
+      browseTitle: "Browse by Vehicle",
+      browseDescription:
+        "Only makes with at least one eligible model linked to published data are shown.",
+      noMakesTitle: "No vehicle makes are currently published",
+      noMakesDescription:
+        "Development fixtures are not presented as production coverage. You can keep searching by reference or review the sourcing-services scope.",
+    },
+    search: {
+      label: "Part Number / OEM",
+      placeholder: "Enter Part Number or OEM",
+      action: "Search",
+      exactTitle: "Exact Reference Match",
+      possibleTitle: "Declared Possible Matches",
+      originalQuery: "Search results for",
+      noResultsTitle: "No reference results",
+      noResultsDescription:
+        "No exact or explicitly declared possible match exists for this reference among currently published products.",
+      errorTitle: "Search could not be completed",
+      errorDescription:
+        "The search failed and was not treated as an empty result. Modify the search or try again later.",
+      modify: "Modify Search",
+      viewDetails: "View Product Details",
+      reviewMatch: "Review Match",
+      requestVerification: "Request Compatibility Verification",
+      verificationUnavailable: "Verification workflow is not active yet",
+    },
+    actions: {
+      uploadTitle: "Multi-part list",
+      uploadDescription:
+        "The local draft workspace is available, but file upload and submission are not active in Sprint 1B.",
+      uploadAction: "Open Request Draft",
+      sourcingTitle: "Sourcing Services",
+      sourcingDescription:
+        "Review the information needed to organize a sourcing request without a simulated submission form.",
+      sourcingAction: "View Sourcing Services",
+    },
+    sampleNotice: "Development sample data — not published in production and not indexable.",
+    make: {
+      description: "Browse only the eligible models within this make.",
+      modelsTitle: "Eligible Models",
+      searchLabel: "Search within this make",
+      partialCoverageTitle: "Partial coverage",
+      partialCoverageDescription:
+        "Only models that pass the current eligibility rules are shown; this is not a claim of full make coverage.",
+    },
+    model: {
+      searchLabel: "Search within this model",
+      yearsTitle: "Verified Year Ranges",
+      categoriesTitle: "Linked Parts Categories",
+      productsTitle: "Published Product Preview",
+      viewAll: "View All Model Products",
+      catalogTitle: "Catalog Status",
+      catalogNone: "No real catalog is currently published for this model.",
+      contentFallback: "No model-specific content is published yet.",
+    },
+    product: {
+      sampleNotice: "This sample record is visible in development mode only.",
+      noImage: "No published image",
+      referencesTitle: "References",
+      compatibilityTitle: "Compatibility Status",
+      requestTitle: "Request Eligibility",
+      compatibility: {
+        verified: "Verified",
+        "requires-confirmation": "Requires confirmation",
+        "not-verified": "Not verified",
+        "not-applicable": "Not applicable",
+      },
+      request: {
+        requestable: "Can be added to the draft",
+        "verification-required": "Verification required first",
+        "not-currently-requestable": "Not currently requestable",
+      },
+      returnToSearch: "Return to Search Results",
+      returnToModel: "Return to Model",
+      returnToParts: "Return to Parts Hub",
+    },
+  },
   pages: {
     sourcingServices: {
       eyebrow: "Sourcing Services",
-      title: "A structured path for parts sourcing information.",
+      title: "Auto Parts Sourcing from China for the Middle East",
       description:
-        "INCAR helps organize the information needed to review sourcing options. Final commercial terms remain subject to request review.",
+        "INCAR helps auto parts wholesalers and importers across Middle Eastern markets submit part requirements, review references, and coordinate sourcing from China.",
       scopeTitle: "What the sourcing review can cover",
       scopeDescription:
         "The scope starts with clear part references and buyer requirements, without guaranteed results or fixed commercial promises.",
@@ -297,7 +387,7 @@ export const en = {
         "Requirements can include sample checks, specification comparison, packaging details, and agreed inspection checkpoints. This is coordination support, not a blanket certification claim.",
       exportTitle: "Export information coordination",
       exportDescription:
-        "Destination, packing information, label requirements, and document needs can be organized with the request before supplier follow-up.",
+        "Destination, packing information, label requirements, and document needs can be organized for a Middle Eastern target market before supplier follow-up.",
       statusTitle: "Online sourcing submission is not active yet.",
       statusDescription:
         "No request is submitted from this page in Sprint 1A. Use the parts workspace to prepare references while the secure request workflow is being implemented.",
@@ -331,7 +421,7 @@ export const en = {
         "These models are an initial browsing structure and do not indicate published parts or catalogs.",
       back: "Back to products",
       detailDescription:
-        "RFQ-based wholesale sourcing from China with MOQ, OEM matching, inspection, and private label options.",
+        "Review published part references, compatibility status, and request eligibility in the INCAR discovery workspace.",
       relatedEyebrow: "Related sourcing options",
       relatedTitle: "Similar RFQ-ready products",
       compatibilityFallback: "Compatibility details available upon RFQ review.",
@@ -340,9 +430,9 @@ export const en = {
     },
     catalogs: {
       eyebrow: "Catalogs",
-      title: "Request catalog material for wholesale sourcing teams",
+      title: "Published Product Catalogs",
       description:
-        "Catalogs are a qualified B2B lead path for purchasing teams reviewing Toyota, Hyundai, Private Label, or bulk RFQ sourcing options.",
+        "No verified product catalogs are currently published. A download link will appear only when a real file is available.",
       explorerLabel: "Catalog focus",
       explorerDescription:
         "Catalog requests can include part numbers, photos, specifications, MOQ, compatibility, and packaging notes.",
@@ -368,12 +458,12 @@ export const en = {
     },
     privateLabel: {
       heroEyebrow: "Private Label",
-      heroTitle: "Build Your Own Auto Parts Brand Through China Sourcing",
+      heroTitle: "Private Label Auto Parts Solutions for Middle Eastern Markets",
       heroDescription:
-        "INCAR helps Saudi and UAE wholesale buyers develop private label auto parts with product sourcing, custom packaging, logo printing, barcode labeling, quality inspection, and export support from China.",
+        "INCAR supports auto parts wholesalers and importers with private label requirements, packaging, labels, and production coordination from China.",
       heroPanelEyebrow: "Strategic sourcing program",
       heroPanelCopy:
-        "Built for wholesale buyers who need supplier coordination, controlled packaging, clear quality checkpoints, and China-to-Saudi/UAE export support.",
+        "Built for wholesalers and importers across the Middle East who need supplier coordination, controlled packaging, clear review checkpoints, and production coordination from China.",
       whyEyebrow: "Why private label matters",
       whyTitle: "A stronger wholesale position starts with controlled brand development.",
       whyDescription:
@@ -387,7 +477,7 @@ export const en = {
         "Long-term business value from repeatable sourcing, quality checks, and export coordination.",
       ],
       scopeEyebrow: "Service scope",
-      scopeTitle: "Private Label services for China-to-Saudi/UAE sourcing.",
+      scopeTitle: "Private Label services for Middle Eastern auto parts markets.",
       scopeDescription:
         "INCAR supports the commercial, packaging, inspection, and export details needed to prepare a professional wholesale private label program.",
       processEyebrow: "Private label process",
@@ -443,9 +533,9 @@ export const en = {
       description:
         "INCAR helps wholesale buyers review sourcing details before production and export coordination, using practical checkpoints, supplier communication, and clear service boundaries.",
       foundationEyebrow: "Trust foundation",
-      foundationTitle: "Six trust pillars for China-to-Saudi/UAE sourcing.",
+      foundationTitle: "Six trust pillars for China-to-Middle East sourcing.",
       foundationDescription:
-        "The quality-control foundation covers inspection support, factory review, packaging control, export documentation, Saudi/UAE market focus, and the practical China sourcing advantage.",
+        "The quality-control foundation covers inspection support, factory review, packaging control, export documentation, Middle Eastern market requirements, and the practical China sourcing advantage.",
       workflowEyebrow: "Quality inspection workflow",
       workflowTitle:
         "A practical review workflow from requirement review to export coordination.",
@@ -469,16 +559,16 @@ export const en = {
         "Supplier screening based on category fit, MOQ, communication readiness, and export support.",
         "Production capability review without claiming blanket approval for every supplier option.",
         "Factory communication support so buyer requirements are understood before quotation review.",
-        "Supplier option comparison for Saudi and UAE wholesale buyers evaluating China sourcing programs.",
+        "Supplier option comparison for Middle Eastern wholesale buyers evaluating China sourcing programs.",
       ],
       packagingEyebrow: "Packaging and labeling control",
       packagingTitle: "Packaging details matter before a wholesale order leaves China.",
       packagingDescription:
-        "The packaging-control layer supports private label planning, export carton review, barcode checks, and Saudi/UAE-ready product information.",
+        "The packaging-control layer supports private label planning, export carton review, barcode checks, and market-appropriate product information.",
       packagingControls: [
         "Export carton review and carton marking support.",
         "Private Label packaging coordination for logo, label, barcode, and box information.",
-        "Arabic/English packaging readiness support for Saudi and UAE market expectations.",
+        "Arabic/English packaging readiness support for Middle Eastern market requirements.",
         "Label verification before production or shipment coordination moves forward.",
       ],
       exportEyebrow: "Export documentation support",
@@ -492,7 +582,7 @@ export const en = {
         "Shipment coordination document support without legal or border-process promises.",
         "WhatsApp and email follow-up for wholesale purchasing teams.",
       ],
-      marketEyebrow: "Saudi and UAE wholesale buyer focus",
+      marketEyebrow: "Middle Eastern wholesale buyer focus",
       marketTitle: "Trust content is organized around RFQ behavior.",
       marketDescription:
         "The quality-control page supports buyers who need part-number review, Toyota and Hyundai launch focus, Private Label readiness, WhatsApp-friendly follow-up, and China export coordination.",
@@ -515,9 +605,9 @@ export const en = {
     },
     about: {
       eyebrow: "About us",
-      title: "A China-based sourcing desk for Saudi and UAE auto parts wholesalers.",
+      title: "A B2B auto parts sourcing platform for the Middle East.",
       description:
-        "INCAR AUTO PARTS supports wholesale buyers with China-based sourcing, inspection workflows, private label packaging, and export coordination.",
+        "INCAR is a B2B auto parts platform supporting wholesalers and importers across the Middle East with part discovery, bulk RFQs, sourcing, and private label coordination from China.",
       trustEyebrow: "How INCAR builds trust",
       trustTitle: "A sourcing partner should make the review process clear.",
       trustDescription:
@@ -540,8 +630,8 @@ export const en = {
           copy: "INCAR assists with product information, packing details, invoice and packing list support, and shipment document coordination.",
         },
         {
-          title: "Saudi and UAE market focus",
-          copy: "The platform is built around wholesale RFQ behavior, WhatsApp-friendly communication, and focused Toyota and Hyundai launch programs.",
+          title: "Middle Eastern market focus",
+          copy: "The platform is built for wholesalers, importers, distributors, and B2B auto parts buyers across Middle Eastern markets, with an RFQ-led sourcing workflow.",
         },
         {
           title: "Private Label capability",
@@ -550,7 +640,7 @@ export const en = {
       ],
       journeyTitle: "Our Journey",
       journeyCopy:
-        "INCAR is being built to connect wholesale auto parts buyers in Saudi Arabia and the UAE with China-based sourcing, inspection, packaging, and private label support. This section will later include the real founder journey and project story.",
+        "INCAR is being built to support auto parts wholesalers and importers across the Middle East with part discovery, bulk requests, sourcing, packaging, and private label coordination from China. This section will later include the real founder journey and project story.",
       pillarsEyebrow: "Trust pillars",
       pillarsTitle: "Structured support for serious wholesale sourcing.",
       pillarsDescription:
@@ -566,7 +656,7 @@ export const en = {
       eyebrow: "Local Draft Workspace",
       title: "Local RFQ Draft Workspace",
       description:
-        "Organize part references and quantities in a draft stored locally on this device. File upload and request submission are not active yet.",
+        "Organize part references and quantities for sourcing from China to your Middle Eastern market in a draft stored locally on this device. File upload and request submission are not active yet.",
       draftStatusTitle: "Upload and submission status",
       draftStatusDescription:
         "Submission and file upload are not active in Sprint 1A. Selected parts remain a local draft on this device only.",
@@ -576,14 +666,14 @@ export const en = {
         "Buyers can send selected products, part numbers, OEM numbers, or Excel and CSV files.",
         "INCAR reviews RFQ details before quotation preparation and supplier coordination.",
         "Communication can continue through WhatsApp or email after review.",
-        "The RFQ process is designed for wholesale sourcing, not retail ordering.",
+        "The RFQ process is designed for wholesale sourcing and request review.",
       ],
     },
     contact: {
       eyebrow: "Contact",
-      title: "Talk to the China sourcing desk",
+      title: "Contact the China sourcing desk",
       description:
-        "Send your RFQ, private label requirements, catalog request, or sourcing question. WhatsApp is the fastest route for urgent wholesale requests.",
+        "Choose the appropriate request path and provide your company and target market details. Verified contact channels will be published after approval.",
       details: "Contact details",
       whatsapp: "WhatsApp",
       email: "Email",
@@ -616,8 +706,8 @@ export const en = {
       submitInquiry: "Submit Inquiry",
       mockInquiry:
         "Your inquiry has been prepared for the INCAR team. This is a mock confirmation until live submission is connected.",
-      countryDefault: "Saudi Arabia",
-      cityPlaceholder: "Riyadh, Jeddah, Dammam",
+      countryDefault: "",
+      cityPlaceholder: "Enter your city",
     },
     rfq: {
       eyebrow: "Wholesale Inquiry",
@@ -803,14 +893,14 @@ export const en = {
         ],
         cta: "Speak With INCAR",
       },
-      "saudi-market-focus": {
-        title: "Saudi and UAE Market Focus",
+      "middle-east-market-focus": {
+        title: "Middle Eastern Market Focus",
         shortDescription:
-          "RFQ-based sourcing for Saudi and UAE wholesale buyers with Toyota and Hyundai launch focus and WhatsApp-friendly communication.",
+          "RFQ-based sourcing for auto parts wholesalers and importers across Middle Eastern markets.",
         longDescription:
-          "INCAR focuses on wholesale buyers in Saudi Arabia and the UAE, RFQ-based sourcing, Toyota and Hyundai launch programs, WhatsApp-friendly communication, and Private Label support for market requirements.",
+          "INCAR supports wholesalers, importers, distributors, and B2B auto parts buyers across the Middle East through RFQ-based sourcing and Private Label coordination from China.",
         highlights: [
-          "Saudi and UAE wholesale buyer focus",
+          "Middle Eastern wholesale buyer focus",
           "Toyota and Hyundai launch focus",
           "RFQ-based sourcing",
           "WhatsApp-friendly communication",
@@ -894,7 +984,7 @@ export const en = {
       "China factory sourcing",
       "Custom packaging",
       "Quality inspection",
-      "Saudi and UAE wholesale market focus",
+      "Middle Eastern wholesale market focus",
     ],
     services: [
       {
@@ -938,7 +1028,7 @@ export const en = {
           "Coordinate invoice, packing list, carton details, and export-ready documentation with suppliers.",
       },
       {
-        title: "Export coordination to Saudi/UAE",
+        title: "Export coordination for Middle Eastern markets",
         description:
           "Align production timing, packing details, and shipment coordination for wholesale import flows.",
       },
@@ -972,7 +1062,7 @@ export const en = {
       {
         title: "Export and shipping coordination",
         description:
-          "Prepare export documentation, packing details, supplier communication, and Saudi/UAE shipping coordination.",
+          "Prepare export documentation, packing details, supplier communication, and destination requirements for a Middle Eastern target market.",
       },
     ],
     categories: {
@@ -990,31 +1080,31 @@ export const en = {
   },
   catalogs: {
     "toyota-fast-moving": {
-      title: "Toyota Fast-Moving Parts Catalog",
+      title: "Toyota Catalog Development Fixture",
       description:
-        "Brake, filter, suspension, engine, and interior SKUs for wholesale buyers.",
-      items: "320+ SKUs",
+        "Development-only catalog structure. No verified Toyota catalog file is published.",
+      items: "No published file",
       audience: "Toyota spare parts importers and wholesalers",
     },
     "hyundai-fast-moving": {
-      title: "Hyundai Fast-Moving Parts Catalog",
+      title: "Hyundai Catalog Development Fixture",
       description:
-        "High-demand Hyundai replacement parts with MOQ and export packing notes.",
-      items: "280+ SKUs",
+        "Development-only catalog structure. No verified Hyundai catalog file is published.",
+      items: "No published file",
       audience: "Hyundai and Korean vehicle parts distributors",
     },
     "private-label-packaging": {
-      title: "Private Label Packaging Guide",
+      title: "Private Label Guide Development Fixture",
       description:
-        "Box structures, label options, barcode workflows, and OEM/ODM packaging samples.",
-      items: "Packaging systems",
+        "Development-only guide structure. No verified packaging guide file is published.",
+      items: "No published file",
       audience: "Buyers building owned auto parts brands",
     },
     "bulk-rfq-template": {
-      title: "Bulk RFQ Excel Template",
+      title: "Bulk RFQ Template Development Fixture",
       description:
-        "Upload-ready format for part number, OEM number, car model, target quantity, and notes.",
-      items: "RFQ template",
+        "Development-only template structure. No verified downloadable file is published.",
+      items: "No published file",
       audience: "Purchasing teams submitting multi-SKU RFQs",
     },
   },

@@ -12,7 +12,7 @@ import { pageMetadata } from "@/lib/seo";
 
 export const metadata = pageMetadata(
   "About Us",
-  "About INCAR AUTO PARTS, a China-based sourcing partner for Saudi and UAE wholesale auto parts buyers.",
+  "INCAR is a B2B auto parts platform supporting wholesalers and importers across the Middle East with sourcing and private label coordination from China.",
 );
 
 export default async function AboutPage() {

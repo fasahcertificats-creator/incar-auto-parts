@@ -2,7 +2,7 @@ import { TrustCard } from "./TrustCard";
 
 const indicators = [
   ["China supply network", "Factory sourcing and category-level matching"],
-  ["Saudi RFQ desk", "Wholesale import support for Saudi buyers"],
+  ["Middle East RFQ focus", "Wholesale import request support"],
   ["Inspection-first", "Sample, packaging, and pre-shipment checks"],
   ["Private label ready", "Packaging boxes, labels, barcode, and OEM/ODM support"],
 ];

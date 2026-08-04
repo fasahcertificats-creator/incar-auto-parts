@@ -12,7 +12,7 @@ import { getPublishedCatalogs } from "@/lib/catalogs";
 
 export const metadata = pageMetadata(
   "Catalogs",
-  "Request Toyota, Hyundai, private label, and bulk RFQ catalog material for Saudi wholesale auto parts sourcing.",
+  "No verified product catalogs are currently published. Catalog information will appear only when real files are approved.",
 );
 
 export default async function CatalogsPage() {
@@ -20,7 +20,7 @@ export default async function CatalogsPage() {
   const dictionary = getDictionary(locale);
   const publishedCatalogs = getPublishedCatalogs(locale);
   const catalogTrustPillars = getTrustPillarsBySlug([
-    "saudi-market-focus",
+    "middle-east-market-focus",
     "packaging-control",
     "quality-inspection-system",
     "china-advantage",

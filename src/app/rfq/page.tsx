@@ -6,8 +6,8 @@ import { getServerLocale } from "@/i18n/server";
 import { pageMetadata } from "@/lib/seo";
 
 export const metadata = pageMetadata(
-  "Request for Quotation",
-  "Submit an RFQ for wholesale auto parts sourcing from China to Saudi Arabia, including product list, quantity, Excel upload, and WhatsApp contact.",
+  "Local RFQ Draft Workspace",
+  "Prepare part references and quantities for sourcing from China to your Middle Eastern market. Upload and submission are not active.",
 );
 
 export default async function RfqPage() {

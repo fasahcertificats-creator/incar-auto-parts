@@ -6,8 +6,8 @@ import { getActiveVehicleModels } from "@/lib/products";
 import { pageMetadata } from "@/lib/seo";
 
 export const metadata = pageMetadata(
-  "Hyundai Products",
-  "Hyundai auto parts sourcing from China for Saudi wholesale buyers, covering Accent, Elantra, Sonata, Tucson, Santa Fe, and Creta.",
+  "Hyundai Parts Browsing",
+  "Legacy Hyundai browsing route for the INCAR parts discovery workspace. Published coverage is determined by current eligibility rules.",
 );
 
 export default async function HyundaiProductsPage() {

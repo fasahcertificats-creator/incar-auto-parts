@@ -20,8 +20,8 @@ import { getServerLocale } from "@/i18n/server";
 import { pageMetadata } from "@/lib/seo";
 
 export const metadata = pageMetadata(
-  "Private Label Auto Parts",
-  "Private Label auto parts sourcing, custom packaging, logo printing, barcode labels, quality inspection, and China export support for Saudi and UAE wholesale buyers.",
+  "Private Label Auto Parts for Middle Eastern Markets",
+  "Private Label requirements, packaging, labels, and production coordination from China for auto parts wholesalers and importers across the Middle East.",
 );
 
 export default async function PrivateLabelPage() {
@@ -37,7 +37,7 @@ export default async function PrivateLabelPage() {
       "quality-inspection-system",
       "factory-verification",
       "export-documentation",
-      "saudi-market-focus",
+      "middle-east-market-focus",
     ],
     locale,
   );

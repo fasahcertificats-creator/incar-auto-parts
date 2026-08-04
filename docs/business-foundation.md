@@ -2,13 +2,13 @@
 
 ## Positioning
 
-INCAR AUTO PARTS is positioned as a premium China-based automotive supply, sourcing, export, RFQ, and Private Label company for Saudi wholesale auto parts buyers.
+INCAR AUTO PARTS is positioned as a premium China-based automotive supply, sourcing, export, RFQ, and Private Label company for wholesale auto parts buyers across the Middle East.
 
-Core positioning: Global Automotive Supply & Private Label Solutions from China to Saudi Arabia.
+Core positioning: Wholesale Auto Parts Sourcing from China for the Middle East.
 
 ## Target Customer
 
-The primary customer is a Saudi wholesale auto parts buyer, distributor, importer, garage supplier, or purchasing team that needs reliable China sourcing support, RFQ handling, catalog review, packaging coordination, and export preparation.
+The primary customer is a Middle Eastern wholesale auto parts buyer, distributor, importer, garage supplier, or purchasing team that needs reliable China sourcing support, RFQ handling, catalog review, packaging coordination, and export preparation.
 
 ## Business Model
 
@@ -18,7 +18,7 @@ INCAR supports B2B sourcing from China through:
 - RFQ-based wholesale quotation workflows.
 - Private Label product and packaging support.
 - Quality inspection, packaging review, and sample confirmation support.
-- Export coordination for China-to-Saudi supply.
+- Export coordination for China-to-Middle East supply.
 - Catalog and sourcing request conversations that qualify buyer demand.
 
 ## RFQ-First Rule
@@ -43,7 +43,7 @@ Catalogs should operate as a qualified lead path. Buyers request catalogs by sha
 
 ## Trust-First Website Strategy
 
-Every page should answer: why should a Saudi wholesale buyer trust INCAR and send an inquiry?
+Every page should answer: why should a Middle Eastern wholesale buyer trust INCAR and send an inquiry?
 
 The trust strategy should emphasize careful service language:
 
@@ -54,7 +54,7 @@ The trust strategy should emphasize careful service language:
 - We assist.
 - We help compare.
 
-The website should avoid unverified claims such as guaranteed quality, certified factories, lowest price, biggest supplier, official distributor status, Saudi warehousing, guaranteed delivery, or customs guarantees.
+The website should avoid unverified claims such as guaranteed quality, certified factories, lowest price, biggest supplier, official distributor status, regional warehousing, guaranteed delivery, or customs guarantees.
 
 ## Toyota and Hyundai Launch Focus
 

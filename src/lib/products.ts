@@ -1,8 +1,15 @@
-import { brands } from "@/data/brands";
-import { categories } from "@/data/categories";
-import { vehicleModels } from "@/data/models";
-import { products } from "@/data/products";
-import { sampleDataEnabled } from "@/config/sample-data";
+import {
+  getCategoriesForModel,
+  getEligibleModelsForMake,
+  getMakeById,
+  getModelById,
+  getPublishedMakeBySlug,
+  getPublishedMakes,
+  getPublishedProductById,
+  getPublishedProductBySlug,
+  getPublishedProducts,
+  searchProductsByReference,
+} from "@/features/discovery/repository";
 import type { BrandName, Product, ProductCategory } from "@/types/product";
 
 export type ProductFilters = {
@@ -12,51 +19,29 @@ export type ProductFilters = {
   query?: string;
 };
 
-function normalize(value: string) {
-  return value.trim().toLowerCase();
-}
-
-function productSearchText(product: Product) {
-  return [
-    product.name,
-    product.partNumber,
-    product.oemNumber,
-    product.brand,
-    product.vehicleModel,
-    product.category,
-    product.compatibility
-      .map(
-        (fitment) =>
-          `${fitment.brand} ${fitment.model} ${fitment.generation} ${fitment.yearFrom} ${fitment.yearTo}`,
-      )
-      .join(" "),
-  ]
-    .join(" ")
-    .toLowerCase();
-}
-
 export function getAllProducts() {
-  return products;
+  return getPublishedProducts();
 }
 
 export function getActiveProducts() {
-  return products.filter(
-    (product) =>
-      product.status === "active" &&
-      (!product.isSampleData || sampleDataEnabled),
-  );
+  return getPublishedProducts();
 }
 
 export function getProductBySlug(slug: string) {
-  return getActiveProducts().find((product) => product.slug === slug);
+  return getPublishedProductBySlug(slug);
 }
 
 export function getProductById(id: string) {
-  return getActiveProducts().find((product) => product.id === id);
+  return getPublishedProductById(id);
 }
 
 export function getProductsByBrand(brand: BrandName) {
-  return getActiveProducts().filter((product) => product.brand === brand);
+  const makeId = brand.toLowerCase();
+  return getPublishedProducts().filter((product) =>
+    product.vehicleRelationships.some(
+      (relationship) => relationship.makeId === makeId,
+    ),
+  );
 }
 
 export function getProductsByCategory(category: ProductCategory) {
@@ -64,19 +49,18 @@ export function getProductsByCategory(category: ProductCategory) {
 }
 
 export function getProductsByVehicleModel(model: string) {
-  return getActiveProducts().filter(
-    (product) =>
-      product.vehicleModel === model ||
-      product.compatibility.some((fitment) => fitment.model === model),
+  return getPublishedProducts().filter((product) =>
+    product.vehicleRelationships.some(
+      (relationship) => getModelById(relationship.modelId)?.name === model,
+    ),
   );
 }
 
 export function searchProducts(query: string) {
-  const normalizedQuery = normalize(query);
-  if (!normalizedQuery) return getActiveProducts();
-
-  return getActiveProducts().filter((product) =>
-    productSearchText(product).includes(normalizedQuery),
+  if (!query.trim()) return getPublishedProducts();
+  const result = searchProductsByReference(query);
+  return [...result.exactMatches, ...result.possibleMatches].map(
+    (match) => match.product,
   );
 }
 
@@ -84,13 +68,17 @@ export function filterProducts(filters: ProductFilters) {
   const queryResults = searchProducts(filters.query ?? "");
 
   return queryResults.filter((product) => {
+    const make = product.vehicleRelationships[0]
+      ? getMakeById(product.vehicleRelationships[0].makeId)
+      : undefined;
     const brandMatches =
-      !filters.brand || filters.brand === "All" || product.brand === filters.brand;
+      !filters.brand || filters.brand === "All" || make?.name === filters.brand;
     const modelMatches =
       !filters.model ||
       filters.model === "All" ||
-      product.vehicleModel === filters.model ||
-      product.compatibility.some((fitment) => fitment.model === filters.model);
+      product.vehicleRelationships.some(
+        (relationship) => getModelById(relationship.modelId)?.name === filters.model,
+      );
     const categoryMatches =
       !filters.category ||
       filters.category === "All" ||
@@ -108,24 +96,48 @@ export function getRelatedProducts(product: Product, limit = 3) {
   return getActiveProducts()
     .filter(
       (item) =>
-        item.id !== product.id &&
-        (item.brand === product.brand ||
-          item.vehicleModel === product.vehicleModel ||
-          item.category === product.category),
+        item.internalProductId !== product.internalProductId &&
+        (item.category === product.category ||
+          item.vehicleRelationships.some((relationship) =>
+            product.vehicleRelationships.some(
+              (candidate) => candidate.modelId === relationship.modelId,
+            ),
+          )),
     )
     .slice(0, limit);
 }
 
 export function getActiveBrands() {
-  return brands.filter((brand) => brand.isActive);
+  return getPublishedMakes().map((make) => ({
+    ...make,
+    displayName: make.name,
+    isActive: true,
+  }));
 }
 
 export function getActiveCategories() {
-  return categories.filter((category) => category.isActive);
+  const pairs = getPublishedMakes().flatMap((make) =>
+    getEligibleModelsForMake(make.id).flatMap((model) =>
+      getCategoriesForModel(make.slug, model.slug),
+    ),
+  );
+  return Array.from(new Map(pairs.map((category) => [category.id, category])).values()).map(
+    (category) => ({ ...category, displayName: category.localizedName.en, isActive: true }),
+  );
 }
 
 export function getActiveVehicleModels(brand?: BrandName) {
-  return vehicleModels.filter(
-    (model) => model.isActive && (!brand || model.brand === brand),
+  const makes = brand
+    ? [getPublishedMakeBySlug(brand.toLowerCase())].filter(Boolean)
+    : getPublishedMakes();
+  return makes.flatMap((make) =>
+    make
+      ? getEligibleModelsForMake(make.id).map((model) => ({
+          ...model,
+          brand: make.name,
+          displayName: model.name,
+          isActive: true,
+        }))
+      : [],
   );
 }

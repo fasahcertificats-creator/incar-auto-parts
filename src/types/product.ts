@@ -1,3 +1,5 @@
+import type { Locale } from "@/i18n/types";
+
 export type BrandName = "Toyota" | "Hyundai";
 
 export type ProductCategory =
@@ -7,60 +9,95 @@ export type ProductCategory =
   | "Engine Parts"
   | "Interior Parts";
 
-export type ProductStatus = "active" | "draft";
-export type ProductOrigin = "China";
+export type PublishingStatus = "published" | "draft" | "archived";
+export type PublishingEligibility = "eligible" | "ineligible";
+export type CompatibilityStatus =
+  | "verified"
+  | "requires-confirmation"
+  | "not-verified"
+  | "not-applicable";
+export type RequestEligibility =
+  | "requestable"
+  | "verification-required"
+  | "not-currently-requestable";
+export type ReferenceMatch = "exact" | "possible" | "none";
+export type DataVerificationState = "verified" | "requires-review" | "unverified";
+export type LocalizedProductName = Record<Locale, string>;
 
-export type Brand = {
+export type VerifiedYearRange = {
+  from: number;
+  to: number;
+};
+
+export type Make = {
   id: string;
   slug: string;
   name: BrandName;
-  displayName: string;
-  isActive: boolean;
+  status: PublishingStatus;
+  isSampleData: boolean;
+  description?: Partial<Record<Locale, string>>;
+  publishingEligibility: PublishingEligibility;
 };
 
-export type VehicleModel = {
+export type Model = {
   id: string;
   slug: string;
-  brand: BrandName;
+  makeId: string;
   name: string;
-  displayName: string;
-  isActive: boolean;
+  status: PublishingStatus;
+  isSampleData: boolean;
+  publishingEligibility: PublishingEligibility;
+  verifiedYearRanges?: VerifiedYearRange[];
+  content?: Partial<Record<Locale, string>>;
 };
 
 export type Category = {
   id: string;
   slug: string;
   name: ProductCategory;
-  displayName: string;
-  description: string;
-  isActive: boolean;
+  localizedName: LocalizedProductName;
+  status: PublishingStatus;
+  isSampleData: boolean;
 };
 
-export type ProductFitment = {
-  brand: BrandName;
-  model: string;
-  generation?: string;
-  yearFrom?: number;
-  yearTo?: number;
-  engineNotes?: string;
-  trimNotes?: string;
+export type ProductReferences = {
+  incarPartNumber?: string;
+  oemReferences: string[];
+  verifiedAlternateReferences: string[];
+};
+
+export type ProductVehicleRelationship = {
+  makeId: string;
+  modelId: string;
+  compatibilityStatus: CompatibilityStatus;
+  verifiedYearRanges?: VerifiedYearRange[];
+};
+
+export type ProductImage = {
+  src: string;
+  alt?: Partial<Record<Locale, string>>;
 };
 
 export type Product = {
-  id: string;
+  internalProductId: string;
   slug: string;
-  name: string;
-  brand: BrandName;
-  vehicleModel: string;
-  category: ProductCategory;
-  partNumber: string;
-  oemNumber: string;
-  compatibility: ProductFitment[];
-  imageUrl: string;
-  specifications: Record<string, string>;
-  moq: number;
-  origin: ProductOrigin;
-  privateLabelAvailable: boolean;
-  status: ProductStatus;
+  name: LocalizedProductName;
+  status: PublishingStatus;
   isSampleData: boolean;
+  references: ProductReferences;
+  vehicleRelationships: ProductVehicleRelationship[];
+  category: ProductCategory;
+  compatibilityStatus: CompatibilityStatus;
+  requestEligibility: RequestEligibility;
+  image: ProductImage | null;
+  dataVerificationState: DataVerificationState;
+  possibleReferenceCandidates: string[];
+  hasCriticalDataConflict: boolean;
 };
+
+// Compatibility aliases retained for non-Discovery features while they migrate.
+export type Brand = Make;
+export type VehicleModel = Model;
+export type ProductFitment = ProductVehicleRelationship;
+export type ProductStatus = PublishingStatus;
+export type ProductOrigin = "China";

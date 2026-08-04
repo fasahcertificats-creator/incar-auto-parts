@@ -6,8 +6,8 @@ import { getServerLocale } from "@/i18n/server";
 import { pageMetadata } from "@/lib/seo";
 
 export const metadata = pageMetadata(
-  "RFQ Product Catalog",
-  "Search Toyota and Hyundai wholesale auto parts by part number, OEM number, model, and category for Saudi RFQ sourcing.",
+  "Parts Discovery Workspace",
+  "Search the current INCAR parts workspace by part number, OEM reference, make, model, and category for B2B sourcing review.",
 );
 
 export default async function ProductsPage() {

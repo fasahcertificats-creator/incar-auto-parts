@@ -16,6 +16,10 @@ export async function generateMetadata({
 
   return localizedPageMetadata({
     locale,
+    absoluteTitle:
+      locale === "ar"
+        ? "INCAR | توريد قطع غيار السيارات بالجملة إلى الشرق الأوسط"
+        : "INCAR | Wholesale Auto Parts Sourcing for the Middle East",
     title: dictionary.hero.title,
     description: dictionary.hero.description,
   });

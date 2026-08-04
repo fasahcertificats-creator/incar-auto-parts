@@ -1,6 +1,6 @@
-import type { VehicleModel } from "@/types/product";
+import type { SampleModelRecord } from "@/types/sample-product";
 
-export const vehicleModels: VehicleModel[] = [
+export const vehicleModels: SampleModelRecord[] = [
   { id: "toyota-camry", slug: "toyota-camry", brand: "Toyota", name: "Camry", displayName: "Camry", isActive: true },
   { id: "toyota-corolla", slug: "toyota-corolla", brand: "Toyota", name: "Corolla", displayName: "Corolla", isActive: true },
   { id: "toyota-hilux", slug: "toyota-hilux", brand: "Toyota", name: "Hilux", displayName: "Hilux", isActive: true },
@@ -20,6 +20,5 @@ export const carModels = vehicleModels.reduce(
     models[vehicle.brand] = [...(models[vehicle.brand] ?? []), vehicle.name];
     return models;
   },
-  {} as Record<VehicleModel["brand"], string[]>,
+  {} as Record<SampleModelRecord["brand"], string[]>,
 );
-

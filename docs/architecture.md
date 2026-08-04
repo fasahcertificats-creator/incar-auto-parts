@@ -2,7 +2,7 @@
 
 ## Product Positioning
 
-INCAR AUTO PARTS is positioned as Global Automotive Supply & Private Label Solutions from China to Saudi Arabia. The platform is a China-based B2B lead generation and sourcing website for Saudi wholesale auto parts buyers. It is a professional RFQ workflow, not a consumer shopping storefront: buyers search products, add items to an RFQ list, upload bulk Excel requirements, and submit quotation requests.
+INCAR AUTO PARTS is positioned as Wholesale Auto Parts Sourcing from China for the Middle East. The platform is a China-based B2B discovery and sourcing website for auto parts wholesalers and importers across Middle Eastern markets. It is an RFQ-led workflow, not a consumer shopping storefront; production upload and submission remain inactive until a secure workflow is implemented.
 
 ## Application Structure
 
@@ -31,7 +31,7 @@ RFQ state stores `productId` and `quantity`. This is intentionally separate from
 
 ## Core Components
 
-- `Header`, `Footer`, `FloatingWhatsapp`: global trust and conversion shell.
+- `Header`, `Footer`, `FloatingWhatsapp`: site-wide trust and conversion shell.
 - `Hero`, `TrustIndicators`, `PrivateLabelSection`, `ProcessSection`, `CatalogCard`, `CTAButton`: reusable landing and sourcing sections.
 - `ProductExplorer`: search and filtering by part number, OEM number, model, brand, and category.
 - `ProductCard`, `ProductImage`, `AddToRfqButton`: product discovery and RFQ-only actions.

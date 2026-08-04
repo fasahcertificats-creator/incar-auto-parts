@@ -7,7 +7,7 @@ import { pageMetadata } from "@/lib/seo";
 
 export const metadata = pageMetadata(
   "Contact Us",
-  "Contact INCAR AUTO PARTS by WhatsApp or email for China to Saudi Arabia wholesale auto parts RFQ support.",
+  "Choose the appropriate INCAR request path and provide your company and Middle Eastern target market details.",
 );
 
 export default async function ContactPage() {

@@ -51,14 +51,16 @@ function rfqReducer(state: RFQState, action: RFQAction): RFQState {
       return { ...state, items: action.items };
     case "add-item": {
       const quantity = sanitizeQuantity(action.quantity ?? 1);
-      const existing = state.items.find((item) => item.productId === action.product.id);
+      const existing = state.items.find(
+        (item) => item.productId === action.product.internalProductId,
+      );
 
       if (existing) {
         return {
           ...state,
           status: "draft",
           items: state.items.map((item) =>
-            item.productId === action.product.id
+            item.productId === action.product.internalProductId
               ? { ...item, quantity: item.quantity + quantity }
               : item,
           ),
@@ -101,8 +103,7 @@ function isStoredRFQItem(item: RFQItem) {
     item.productId &&
       item.productName &&
       item.slug &&
-      item.partNumber &&
-      item.oemNumber &&
+      (item.partNumber || item.oemNumber) &&
       item.quantity > 0,
   );
 }

@@ -10,12 +10,12 @@ const nextConfig: NextConfig = {
       { source: "/products", destination: "/ar/parts", permanent: true },
       {
         source: "/products/toyota",
-        destination: "/ar/parts?brand=Toyota",
+        destination: "/ar/parts",
         permanent: true,
       },
       {
         source: "/products/hyundai",
-        destination: "/ar/parts?brand=Hyundai",
+        destination: "/ar/parts",
         permanent: true,
       },
       {

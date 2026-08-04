@@ -37,7 +37,7 @@ export function ContactForm() {
         </label>
         <label className={labelClass}>
           {dictionary.forms.common.whatsapp}
-          <input className={inputClass} placeholder="+966" />
+          <input className={inputClass} />
         </label>
         <label className={`${labelClass} md:col-span-2`}>
           {dictionary.forms.common.inquiryType}

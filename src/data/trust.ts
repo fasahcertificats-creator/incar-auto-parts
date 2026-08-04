@@ -76,7 +76,7 @@ export const trustPillars: TrustPillar[] = [
     proofPoints: [
       "Packaging requirements are collected before sourcing and production coordination.",
       "Barcode, label, and carton marking details can be reviewed with supplier documents.",
-      "Private Label packaging stays aligned with Saudi wholesale market needs.",
+      "Private Label packaging stays aligned with the target wholesale market requirements.",
     ],
     relatedCTA: {
       label: "Private Label Inquiry",
@@ -92,13 +92,13 @@ export const trustPillars: TrustPillar[] = [
     shortDescription:
       "Commercial invoice support, packing list support, product information preparation, and shipment document coordination.",
     longDescription:
-      "INCAR assists with commercial invoice support, packing list support, product information preparation, shipment coordination documents, and communication with Saudi buyers during the export workflow.",
+      "INCAR assists with commercial invoice support, packing list support, product information preparation, shipment coordination documents, and buyer communication during the export workflow.",
     highlights: [
       "Commercial invoice support",
       "Packing list support",
       "Product information preparation",
       "Shipment coordination documents",
-      "Saudi buyer communication support",
+      "Buyer communication support",
     ],
     proofPoints: [
       "Documentation support follows the product list, quantities, and packing details.",
@@ -113,22 +113,22 @@ export const trustPillars: TrustPillar[] = [
     pageUsage: ["home", "about", "private-label", "quality-control", "rfq"],
   },
   {
-    id: "saudi-market-focus",
-    slug: "saudi-market-focus",
-    title: "Saudi Market Focus",
+    id: "middle-east-market-focus",
+    slug: "middle-east-market-focus",
+    title: "Middle Eastern Market Focus",
     shortDescription:
-      "RFQ-based sourcing for Saudi wholesale buyers with Toyota and Hyundai launch focus and WhatsApp-friendly communication.",
+      "RFQ-based sourcing for auto parts wholesalers and importers across Middle Eastern markets.",
     longDescription:
-      "INCAR focuses on Saudi wholesale buyers, RFQ-based sourcing, Toyota and Hyundai launch programs, WhatsApp-friendly communication, and Private Label support for Saudi market requirements.",
+      "INCAR supports wholesalers, importers, distributors, and B2B auto parts buyers across the Middle East through RFQ-based sourcing and Private Label coordination from China.",
     highlights: [
-      "Saudi wholesale buyer focus",
+      "Middle Eastern wholesale buyer focus",
       "Toyota and Hyundai launch focus",
       "RFQ-based sourcing",
       "WhatsApp-friendly communication",
-      "Private Label for Saudi market needs",
+      "Private Label for target-market needs",
     ],
     proofPoints: [
-      "The platform is structured around Saudi wholesale RFQ and inquiry workflows.",
+      "The platform is structured around wholesale RFQ and inquiry workflows.",
       "Launch product data stays focused on Toyota and Hyundai programs.",
       "Buyer communication can continue through WhatsApp or email after inquiry review.",
     ],
@@ -208,7 +208,7 @@ export const trustProcessSteps: TrustProcessStep[] = [
     id: "rfq-export-coordination",
     title: "RFQ / Export Coordination",
     description:
-      "Assist with RFQ follow-up, supplier communication, packing information, and export coordination documents for Saudi buyers.",
+      "Assist with RFQ follow-up, supplier communication, packing information, and export coordination documents for buyers.",
     order: 6,
   },
 ];

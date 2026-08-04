@@ -2,7 +2,7 @@
 
 ## Purpose
 
-The INCAR Trust System helps Saudi wholesale auto parts buyers understand how INCAR supports China-based sourcing before they submit an RFQ, catalog request, sourcing request, or Private Label inquiry.
+The INCAR Trust System helps Middle Eastern wholesale auto parts buyers understand how INCAR supports China-based sourcing before they submit an RFQ, catalog request, sourcing request, or Private Label inquiry.
 
 The system is commercial, but careful. It explains what INCAR helps review, coordinate, prepare, assist with, and compare without inventing certifications, warehouses, client history, completed projects, or guaranteed outcomes.
 
@@ -36,12 +36,12 @@ The system is commercial, but careful. It explains what INCAR helps review, coor
    - Shipment coordination document support.
    - Buyer communication support.
 
-5. Saudi Market Focus
-   - Saudi wholesale buyer focus.
+5. Middle East Market Focus
+   - Middle Eastern wholesale buyer focus.
    - Toyota and Hyundai launch focus.
    - RFQ-based sourcing.
    - WhatsApp-friendly communication.
-   - Private Label support for Saudi market needs.
+   - Private Label support for Middle Eastern market needs.
 
 6. China Advantage
    - China factory access.
@@ -56,7 +56,7 @@ Home:
 Use a concise trust section that shows all six pillars briefly. The primary CTA is Request Quotation and the secondary CTA is Learn About INCAR.
 
 About:
-Use deeper trust narrative around China Advantage, Saudi Market Focus, Factory Verification, Quality Inspection System, Export Documentation, and Private Label capability. The page should build credibility without inventing fake company history.
+Use deeper trust narrative around China Advantage, Middle East Market Focus, Factory Verification, Quality Inspection System, Export Documentation, and Private Label capability. The page should build credibility without inventing fake company history.
 
 Private Label:
 Use Packaging Control, Quality Inspection System, Factory Verification, and Export Documentation to make buyers trust the Private Label process.
@@ -94,7 +94,7 @@ Do not claim the following unless verified proof is added later:
 - Lowest price.
 - Biggest supplier.
 - Official distributor.
-- Warehouse in Saudi.
+- Regional warehouse availability.
 - Guaranteed delivery.
 - Customs guaranteed.
 
@@ -114,7 +114,7 @@ Private Label Inquiry.
 Export Documentation:
 Speak With INCAR.
 
-Saudi Market Focus:
+Middle East Market Focus:
 Request Quotation.
 
 China Advantage:

@@ -14,19 +14,19 @@ Secondary direction: `ltr`
 
 ## Tone
 
-Use professional Gulf business Arabic that feels natural for importers, distributors, workshop suppliers, and wholesale auto parts buyers in Saudi Arabia and the United Arab Emirates.
+Use professional Middle Eastern business Arabic that feels natural for importers, distributors, workshop suppliers, and wholesale auto parts buyers across the region.
 
 The tone should be clear, direct, trust-building, and practical. Avoid academic Arabic, street dialect, exaggerated claims, and literal translation from English.
 
 ## Launch Market Focus
 
-Active market messaging must focus on:
+Active market messaging must focus on the Middle East as one regional B2B market:
 
-- السعودية
-- الإمارات
-- السعودية والإمارات
+- الشرق الأوسط
+- أسواق الشرق الأوسط
+- تجار الجملة والمستوردون في الشرق الأوسط
 
-INCAR may be described as a global company headquartered in China, but launch-market copy should not expand the offer to all countries, the whole Middle East, or the entire world.
+INCAR should be described as a China-based sourcing partner for Middle Eastern markets. Do not narrow public positioning to individual countries or expand it beyond the Middle East.
 
 ## Approved Terms
 
@@ -42,8 +42,7 @@ INCAR may be described as a global company headquartered in China, but launch-ma
 - Factory Verification: التحقق من المصانع
 - Packaging Control: متابعة التغليف
 - Export Documentation: مستندات التصدير
-- Saudi Market Focus: تركيز على السوق السعودي
-- UAE Market Focus: تركيز على السوق الإماراتي
+- Middle East Market Focus: تركيز على أسواق الشرق الأوسط
 - China Advantage: قوة التوريد من الصين
 - Sourcing Request: طلب توريد
 - Wholesale Buyers: عملاء الجملة
@@ -77,8 +76,7 @@ Do not claim:
 - Lowest price
 - Biggest supplier
 - Official distributor
-- Warehouse in Saudi Arabia
-- Warehouse in UAE
+- Regional warehouse availability
 - Guaranteed customs clearance
 - Guaranteed delivery
 
@@ -90,7 +88,7 @@ Use credible wording:
 - نتابع فحص الجودة قبل الشحن
 - نساعد في تجهيز بيانات المنتج والتغليف
 - نرتب معلومات الطلب قبل عرض السعر
-- نركز على احتياجات تجار الجملة في السعودية والإمارات
+- نركز على احتياجات تجار الجملة والمستوردين في الشرق الأوسط
 
 ## RFQ-First Language
 
@@ -121,7 +119,7 @@ Good trust copy is specific:
 - التحقق من المصانع
 - متابعة التغليف والملصقات
 - تجهيز بيانات ومستندات التصدير
-- تركيز على السوق السعودي والإماراتي
+- تركيز على أسواق الشرق الأوسط
 - قوة التوريد من الصين
 
 Every trust statement should be tied to a practical buyer concern: product fit, part numbers, MOQ, supplier communication, packaging details, labels, export documents, or RFQ follow-up.

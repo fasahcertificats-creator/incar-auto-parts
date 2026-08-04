@@ -1,4 +1,4 @@
-import type { BrandName, Product, ProductCategory } from "./index";
+import type { Product, ProductCategory } from "./index";
 import type { UploadedRFQFileMeta } from "./upload";
 
 export type RFQStatus = "draft" | "submitted" | "reviewing" | "quoted" | "closed";
@@ -16,14 +16,12 @@ export type RFQItem = {
   productId: string;
   productName: string;
   slug: string;
-  brand: BrandName;
+  brand: string;
   vehicleModel: string;
   category: ProductCategory;
   partNumber: string;
   oemNumber: string;
   quantity: number;
-  moq: number;
-  privateLabelAvailable: boolean;
 };
 
 export type RFQSubmission = {

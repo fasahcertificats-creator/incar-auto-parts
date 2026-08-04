@@ -1,6 +1,11 @@
-import type { BrandName, Product, ProductFitment } from "@/types/product";
+import type { BrandName } from "@/types/product";
+import type {
+  SampleProductFitmentRecord,
+  SampleProductRecord,
+} from "@/types/sample-product";
 
-export type { BrandName as Brand, Product, ProductCategory } from "@/types/product";
+export type { BrandName as Brand, ProductCategory } from "@/types/product";
+export type { SampleProductRecord as Product } from "@/types/sample-product";
 
 const fitment = (
   brand: BrandName,
@@ -9,8 +14,8 @@ const fitment = (
   yearFrom: number,
   yearTo: number,
   engineNotes = "Confirm by OEM number before quotation.",
-  trimNotes = "Saudi market trim validation required.",
-): ProductFitment => ({
+  trimNotes = "Target-market trim validation required.",
+): SampleProductFitmentRecord => ({
   brand,
   model,
   generation,
@@ -33,7 +38,7 @@ const sampleSpecs = (items: string[]): Record<string, string> =>
   );
 
 // Sample product data for UI and architecture testing only. Verify all part numbers, OEM numbers, and fitment before production use.
-export const products: Product[] = [
+export const products: SampleProductRecord[] = [
   {
     id: "toy-camry-brake-pad-04465",
     slug: "toyota-camry-front-brake-pad-04465",
@@ -87,7 +92,7 @@ export const products: Product[] = [
       fitment("Toyota", "Fortuner", "AN160", 2016, 2023),
     ],
     imageUrl: "/images/part-suspension.svg",
-    specifications: sampleSpecs(["Gas charged", "Salt spray test option", "Heavy duty Saudi road spec"]),
+    specifications: sampleSpecs(["Gas charged", "Salt spray test option", "Heavy-duty road-use sample specification"]),
     moq: 120,
     origin: "China",
     privateLabelAvailable: true,

@@ -7,7 +7,7 @@ export const rfqItems: RFQItem[] = [
     partNumber: "CN-BP-TY-04465",
     oemNumber: "04465-33471",
     quantity: 200,
-    notes: "Private label carton and Saudi-ready barcode label.",
+    notes: "Private label carton and target-market barcode requirements.",
   },
   {
     id: "sample-hyundai-oil-filter",
