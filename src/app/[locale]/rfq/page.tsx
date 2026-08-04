@@ -25,10 +25,6 @@ export default async function RfqWorkspacePage({ params }: Props) {
   const { locale } = await params;
   if (!isLocale(locale)) notFound();
   const dictionary = getDictionary(locale);
-  const notice =
-    locale === "ar"
-      ? "الإرسال ورفع الملفات غير مفعّلين في Sprint 1A. تبقى القطع المختارة مسودة محلية على هذا الجهاز فقط."
-      : "Submission and file upload are not active in Sprint 1A. Selected parts remain a local draft on this device only.";
 
   return (
     <>
@@ -42,9 +38,11 @@ export default async function RfqWorkspacePage({ params }: Props) {
           <RFQList />
           <aside id="upload-parts-list" className="incar-card-elevated rounded-lg p-6 text-white">
             <h2 className="text-2xl font-semibold">
-              {dictionary.navigation.uploadPartsList}
+              {dictionary.pages.rfq.draftStatusTitle}
             </h2>
-            <p className="mt-4 text-sm leading-7 text-metallic-silver">{notice}</p>
+            <p className="mt-4 text-sm leading-7 text-metallic-silver">
+              {dictionary.pages.rfq.draftStatusDescription}
+            </p>
           </aside>
         </div>
       </section>

@@ -114,7 +114,7 @@ export const en = {
       eyebrow: "Browse by Vehicle",
       title: "Choose a make, then a model.",
       description:
-        "Homepage browsing stays focused on make and model. Fitment details are reviewed later with part references.",
+        "This is an initial browsing structure by make and model only. The options do not indicate published products or catalogs, and fitment details are reviewed later with part references.",
     },
     upload: {
       eyebrow: "Upload Parts List",
@@ -304,29 +304,31 @@ export const en = {
       partsAction: "Search Parts",
     },
     products: {
-      eyebrow: "Products",
-      title: "RFQ-ready Toyota and Hyundai parts",
+      eyebrow: "Parts Search",
+      title: "Find Auto Parts",
       description:
-        "Search by part number, OEM number, car model, brand, and category. Add products to your RFQ list or upload your own Excel file.",
+        "Use a Part Number, OEM reference, make, model, or category to browse the current search workspace. Browsing options do not indicate published inventory or confirmed availability.",
       missing:
         "Can't find the part you need? Send the part number, OEM number, vehicle model, or product photo through a sourcing request.",
       cta: "Send Sourcing Request",
-      resultSuffix: "wholesale RFQ-ready products",
-      launchCatalog: "Toyota and Hyundai launch catalog",
-      noProducts: "No products found",
+      resultSuffix: "published products",
+      noProducts: "No matching products",
       noProductsDescription:
-        "Send an RFQ with your OEM number or Excel list and our sourcing team will match factories.",
+        "No currently published products match the selected search criteria.",
+      noPublishedProducts: "No products are currently published",
+      noPublishedProductsDescription:
+        "The makes and models shown are an initial browsing structure only. They do not indicate available parts or published catalogs.",
       searchLabel: "Search part number, OEM, or model",
       brandLabel: "Brand",
       modelLabel: "Model",
       categoryLabel: "Category",
       all: "All",
-      toyotaTitle: "Toyota sourcing catalog for Saudi and UAE wholesalers",
+      toyotaTitle: "Initial Toyota model browsing",
       toyotaDescription:
-        "Focused launch coverage for Camry, Corolla, Hilux, Yaris, Land Cruiser, and Fortuner parts.",
-      hyundaiTitle: "Hyundai sourcing catalog for Saudi and UAE wholesalers",
+        "These models are an initial browsing structure and do not indicate published parts or catalogs.",
+      hyundaiTitle: "Initial Hyundai model browsing",
       hyundaiDescription:
-        "Focused launch coverage for Accent, Elantra, Sonata, Tucson, Santa Fe, and Creta parts.",
+        "These models are an initial browsing structure and do not indicate published parts or catalogs.",
       back: "Back to products",
       detailDescription:
         "RFQ-based wholesale sourcing from China with MOQ, OEM matching, inspection, and private label options.",
@@ -561,10 +563,13 @@ export const en = {
       finalTitle: "Discuss your wholesale sourcing program with the INCAR team.",
     },
     rfq: {
-      eyebrow: "RFQ",
-      title: "Request a professional wholesale quotation",
+      eyebrow: "Local Draft Workspace",
+      title: "Local RFQ Draft Workspace",
       description:
-        "Build an RFQ list from catalog products, add quantities, upload an Excel file, and send a wholesale sourcing request for China-to-Saudi/UAE supply.",
+        "Organize part references and quantities in a draft stored locally on this device. File upload and request submission are not active yet.",
+      draftStatusTitle: "Upload and submission status",
+      draftStatusDescription:
+        "Submission and file upload are not active in Sprint 1A. Selected parts remain a local draft on this device only.",
       reviewEyebrow: "RFQ review support",
       reviewTitle: "Submit with clear sourcing context.",
       notes: [

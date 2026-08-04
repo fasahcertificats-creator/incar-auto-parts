@@ -5,6 +5,7 @@ import {
   filterProducts,
   getActiveBrands,
   getActiveCategories,
+  getActiveProducts,
   getActiveVehicleModels,
 } from "@/lib/products";
 import { useLocale } from "@/contexts/LocaleContext";
@@ -36,6 +37,7 @@ export function ProductExplorer({
 
   const activeBrands = getActiveBrands();
   const activeCategories = getActiveCategories();
+  const hasPublishedProducts = getActiveProducts().length > 0;
 
   const availableModels = fixedBrand
     ? getActiveVehicleModels(fixedBrand)
@@ -121,12 +123,11 @@ export function ProductExplorer({
           </label>
         </div>
 
-        <div className="mt-6 flex items-center justify-between gap-4 text-sm text-muted">
-          <p>
+        {hasPublishedProducts ? (
+          <p className="mt-6 text-sm text-muted">
             {filteredProducts.length} {dictionary.pages.products.resultSuffix}
           </p>
-          <p className="hidden sm:block">{dictionary.pages.products.launchCatalog}</p>
-        </div>
+        ) : null}
 
         <div className="mt-8 grid gap-6 md:grid-cols-2 xl:grid-cols-3">
           {filteredProducts.map((product) => (
@@ -137,10 +138,14 @@ export function ProductExplorer({
         {filteredProducts.length === 0 ? (
           <div className="mt-8 rounded-lg border border-dashed border-metallic-silver/24 bg-surface p-8 text-center">
             <p className="text-lg font-semibold text-white">
-              {dictionary.pages.products.noProducts}
+              {hasPublishedProducts
+                ? dictionary.pages.products.noProducts
+                : dictionary.pages.products.noPublishedProducts}
             </p>
             <p className="mt-2 text-sm text-muted">
-              {dictionary.pages.products.noProductsDescription}
+              {hasPublishedProducts
+                ? dictionary.pages.products.noProductsDescription
+                : dictionary.pages.products.noPublishedProductsDescription}
             </p>
           </div>
         ) : null}
