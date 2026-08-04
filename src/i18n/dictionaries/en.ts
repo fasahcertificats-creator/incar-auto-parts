@@ -24,14 +24,20 @@ export const en = {
   navigation: {
     home: "Home",
     products: "Products",
+    parts: "Parts",
     catalogs: "Catalogs",
     "private-label": "Private Label",
     "quality-control": "Quality Control",
+    "sourcing-services": "Sourcing Services",
     about: "About INCAR",
     rfq: "Request Quotation",
     contact: "Contact",
     menu: "Menu",
     close: "Close",
+    search: "Search",
+    searchPartNumber: "Search by Part Number or OEM",
+    uploadPartsList: "Upload Parts List",
+    continueRfq: "Continue RFQ",
   },
   common: {
     requestQuotation: "Request Quotation",
@@ -92,6 +98,63 @@ export const en = {
     primary: "Request Quotation",
     secondary: "Private Label Solutions",
     tertiary: "Explore Products",
+  },
+  homeFoundation: {
+    search: {
+      eyebrow: "Search & Request Hub",
+      title: "Start with a Part Number or OEM reference.",
+      description:
+        "Search the current parts workspace or prepare an RFQ draft without retail checkout or payment steps.",
+      label: "Part Number / OEM",
+      placeholder: "Enter Part Number or OEM",
+      action: "Search Parts",
+      rfq: "Open RFQ Workspace",
+    },
+    browse: {
+      eyebrow: "Browse by Vehicle",
+      title: "Choose a make, then a model.",
+      description:
+        "Homepage browsing stays focused on make and model. Fitment details are reviewed later with part references.",
+    },
+    upload: {
+      eyebrow: "Upload Parts List",
+      title: "Prepare a multi-part request in one workspace.",
+      description:
+        "Secure file processing is not active yet. The RFQ workspace can hold selected parts while the upload workflow is prepared.",
+      action: "Open RFQ Workspace",
+    },
+    sourcing: {
+      eyebrow: "Sourcing Services",
+      title: "Share enough information for a structured sourcing review.",
+      description:
+        "Part references, vehicle context, quantity ranges, quality expectations, packaging needs, and destination details help organize the review.",
+      items: [
+        "Part and supplier search coordination",
+        "Quality-review checkpoint coordination",
+        "Export information and document coordination",
+      ],
+      action: "View Sourcing Services",
+    },
+    privateLabel: {
+      eyebrow: "Private Label",
+      title: "Plan product and packaging requirements before supplier review.",
+      description:
+        "Define the product category, target market, packaging direction, label languages, and expected quantities without unsupported availability claims.",
+      action: "Explore Private Label",
+    },
+    trust: {
+      eyebrow: "About INCAR",
+      title: "Understand the scope before sending a request.",
+      description:
+        "INCAR presents a sourcing-led workflow for wholesale buyers and keeps commercial confirmation outside the public website until a request is reviewed.",
+      action: "About INCAR",
+    },
+    ready: {
+      eyebrow: "Ready to Request",
+      title: "Prepare the references your sourcing request needs.",
+      description:
+        "Use the parts search or RFQ workspace to organize part numbers and vehicle information.",
+    },
   },
   home: {
     trust: {
@@ -216,6 +279,30 @@ export const en = {
     ],
   },
   pages: {
+    sourcingServices: {
+      eyebrow: "Sourcing Services",
+      title: "A structured path for parts sourcing information.",
+      description:
+        "INCAR helps organize the information needed to review sourcing options. Final commercial terms remain subject to request review.",
+      scopeTitle: "What the sourcing review can cover",
+      scopeDescription:
+        "The scope starts with clear part references and buyer requirements, without guaranteed results or fixed commercial promises.",
+      scopeItems: [
+        "Part Number, OEM reference, product photos, or category details",
+        "Vehicle make and model context when fitment matters",
+        "Estimated quantities, target quality, and packaging direction",
+      ],
+      qualityTitle: "Quality-review coordination",
+      qualityDescription:
+        "Requirements can include sample checks, specification comparison, packaging details, and agreed inspection checkpoints. This is coordination support, not a blanket certification claim.",
+      exportTitle: "Export information coordination",
+      exportDescription:
+        "Destination, packing information, label requirements, and document needs can be organized with the request before supplier follow-up.",
+      statusTitle: "Online sourcing submission is not active yet.",
+      statusDescription:
+        "No request is submitted from this page in Sprint 1A. Use the parts workspace to prepare references while the secure request workflow is being implemented.",
+      partsAction: "Search Parts",
+    },
     products: {
       eyebrow: "Products",
       title: "RFQ-ready Toyota and Hyundai parts",

@@ -1,24 +1,17 @@
 "use client";
 
 import Link from "next/link";
-import { usePathname } from "next/navigation";
 import { useEffect, useId, useState } from "react";
 import { mainNavigation } from "@/config/navigation";
 import { useLocale } from "@/contexts/LocaleContext";
 import { useRfq } from "@/contexts/RfqContext";
 import { getDictionary } from "@/i18n/dictionaries";
-import { brand } from "@/lib/brand";
+import { localizeHref } from "@/i18n/routing";
 import { LanguageSwitcher } from "../LanguageSwitcher";
-
-function isActivePath(pathname: string, href: string) {
-  if (href === "/") return pathname === "/";
-  return pathname === href || pathname.startsWith(`${href}/`);
-}
 
 export function MobileMenu() {
   const [open, setOpen] = useState(false);
   const menuId = useId();
-  const pathname = usePathname();
   const { locale } = useLocale();
   const { itemCount } = useRfq();
   const dictionary = getDictionary(locale);
@@ -27,24 +20,16 @@ export function MobileMenu() {
     if (!open) return;
 
     function handleKeyDown(event: KeyboardEvent) {
-      if (event.key === "Escape") {
-        setOpen(false);
-      }
+      if (event.key === "Escape") setOpen(false);
     }
 
     document.addEventListener("keydown", handleKeyDown);
     document.body.style.overflow = "hidden";
-
     return () => {
       document.removeEventListener("keydown", handleKeyDown);
       document.body.style.overflow = "";
     };
   }, [open]);
-
-  const quoteLabel =
-    itemCount > 0
-      ? dictionary.common.requestQuotationCount.replace("{count}", String(itemCount))
-      : dictionary.common.requestQuotation;
 
   return (
     <div className="lg:hidden">
@@ -54,7 +39,7 @@ export function MobileMenu() {
         aria-controls={menuId}
         aria-expanded={open}
         onClick={() => setOpen(true)}
-        className="incar-focus inline-flex min-h-11 items-center justify-center rounded-md border border-border px-4 text-sm font-semibold text-metallic-silver transition hover:bg-white/[0.04] hover:text-white"
+        className="incar-focus inline-flex size-11 items-center justify-center rounded-md border border-border text-xs font-semibold text-metallic-silver"
       >
         {dictionary.navigation.menu}
       </button>
@@ -66,64 +51,75 @@ export function MobileMenu() {
             role="dialog"
             aria-modal="true"
             aria-label={dictionary.navigation.menu}
-            className="ms-auto flex h-full w-full max-w-sm flex-col border-s border-border bg-surface shadow-[0_28px_80px_rgba(0,0,0,0.52)]"
+            className="ms-auto flex h-full w-full max-w-sm flex-col border-s border-border bg-surface"
           >
-            <div className="flex items-center justify-between gap-4 border-b border-border px-5 py-4">
-              <Link
-                href="/"
-                onClick={() => setOpen(false)}
-                className="incar-focus flex items-center gap-3 rounded-md"
-              >
-                <span className="flex h-10 w-16 items-center justify-center rounded-md border border-metallic-silver/35 bg-surface-elevated text-sm font-black text-white">
-                  {brand.shortName}
-                </span>
-                <span className="text-sm font-bold uppercase tracking-[0.14em] text-white">
-                  {brand.shortName}
-                </span>
-              </Link>
+            <div className="flex items-center justify-between border-b border-border px-5 py-4">
+              <span className="text-sm font-bold text-white">INCAR</span>
               <button
                 type="button"
                 aria-label={dictionary.navigation.close}
                 onClick={() => setOpen(false)}
-                className="incar-focus min-h-10 rounded-md border border-border px-3 text-sm font-semibold text-metallic-silver transition hover:bg-white/[0.04] hover:text-white"
+                className="incar-focus min-h-11 rounded-md border border-border px-4 text-sm font-semibold text-metallic-silver"
               >
                 {dictionary.navigation.close}
               </button>
             </div>
 
-            <nav className="grid gap-1 px-5 py-5 text-base font-semibold text-metallic-silver">
-              {mainNavigation.map((item) => {
-                const active = isActivePath(pathname, item.href);
-
-                return (
-                  <Link
-                    key={item.key}
-                    href={item.href}
-                    onClick={() => setOpen(false)}
-                    aria-current={active ? "page" : undefined}
-                    className={`incar-focus rounded-md px-3 py-3 transition ${
-                      active
-                        ? "border border-metallic-silver/24 bg-background text-white"
-                        : "hover:bg-background hover:text-white"
-                    }`}
-                  >
-                    {dictionary.navigation[item.key]}
-                  </Link>
-                );
-              })}
+            <nav className="grid gap-1 px-5 py-5 text-sm font-semibold text-metallic-silver">
+              <Link
+                href={localizeHref(locale, "/parts")}
+                onClick={() => setOpen(false)}
+                className="incar-focus min-h-11 rounded-md px-3 py-3 hover:bg-background hover:text-white"
+              >
+                {dictionary.navigation.search}
+              </Link>
+              {mainNavigation.slice(0, 2).map((item) => (
+                <Link
+                  key={item.key}
+                  href={localizeHref(locale, item.href)}
+                  onClick={() => setOpen(false)}
+                  className="incar-focus min-h-11 rounded-md px-3 py-3 hover:bg-background hover:text-white"
+                >
+                  {dictionary.navigation[item.key]}
+                </Link>
+              ))}
+              <Link
+                href={localizeHref(locale, "/rfq#upload-parts-list")}
+                onClick={() => setOpen(false)}
+                className="incar-focus min-h-11 rounded-md px-3 py-3 hover:bg-background hover:text-white"
+              >
+                {dictionary.navigation.uploadPartsList}
+              </Link>
+              {mainNavigation.slice(2).map((item) => (
+                <Link
+                  key={item.key}
+                  href={localizeHref(locale, item.href)}
+                  onClick={() => setOpen(false)}
+                  className="incar-focus min-h-11 rounded-md px-3 py-3 hover:bg-background hover:text-white"
+                >
+                  {dictionary.navigation[item.key]}
+                </Link>
+              ))}
+              <Link
+                href={localizeHref(locale, "/contact")}
+                onClick={() => setOpen(false)}
+                className="incar-focus min-h-11 rounded-md px-3 py-3 hover:bg-background hover:text-white"
+              >
+                {dictionary.navigation.contact}
+              </Link>
             </nav>
 
             <div className="mt-auto border-t border-border px-5 py-5">
-              <div className="mb-3">
-                <LanguageSwitcher fullWidth />
-              </div>
-              <Link
-                href="/rfq"
-                onClick={() => setOpen(false)}
-                className="incar-focus inline-flex min-h-12 w-full items-center justify-center rounded-md bg-primary px-4 text-sm font-semibold text-white shadow-[0_14px_34px_rgba(215,25,32,0.24)] transition hover:bg-primary-hover"
-              >
-                {quoteLabel}
-              </Link>
+              <LanguageSwitcher fullWidth />
+              {itemCount > 0 ? (
+                <Link
+                  href={localizeHref(locale, "/rfq")}
+                  onClick={() => setOpen(false)}
+                  className="incar-focus mt-3 inline-flex min-h-12 w-full items-center justify-center rounded-md bg-primary px-4 text-sm font-semibold text-white"
+                >
+                  {dictionary.navigation.continueRfq} ({itemCount})
+                </Link>
+              ) : null}
             </div>
           </div>
         </div>

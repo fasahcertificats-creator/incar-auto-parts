@@ -3,6 +3,7 @@
 import Link from "next/link";
 import { useLocale } from "@/contexts/LocaleContext";
 import { getDictionary } from "@/i18n/dictionaries";
+import { localizeHref } from "@/i18n/routing";
 import { useRFQ } from "../use-rfq";
 
 export function RFQList() {
@@ -42,7 +43,7 @@ export function RFQList() {
               <div className="flex flex-col justify-between gap-4 md:flex-row">
                 <div>
                   <Link
-                    href={`/products/${item.slug}`}
+                    href={localizeHref(locale, `/products/${item.slug}`)}
                     className="incar-focus rounded-sm text-lg font-semibold text-white hover:text-metallic-silver"
                   >
                     {item.productName}
@@ -107,7 +108,7 @@ export function RFQList() {
           <div className="rounded-md border border-dashed border-metallic-silver/24 p-5 text-sm leading-6 text-muted">
             {dictionary.forms.rfq.empty}
             <Link
-              href="/products"
+              href={localizeHref(locale, "/parts")}
               className="incar-focus mt-3 block rounded-sm font-semibold text-metallic-silver hover:text-white"
             >
               {dictionary.common.exploreProducts}

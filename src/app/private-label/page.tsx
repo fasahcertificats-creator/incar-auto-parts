@@ -10,7 +10,6 @@ import {
   PrivateLabelCategoryCard,
   PrivateLabelFinalCTA,
   PrivateLabelHero,
-  PrivateLabelInquiryForm,
   PrivateLabelProcessSteps,
   PrivateLabelQualitySection,
   PrivateLabelServiceCard,
@@ -160,7 +159,11 @@ export default async function PrivateLabelPage() {
             title={dictionary.pages.privateLabel.inquiryTitle}
             description={dictionary.pages.privateLabel.inquiryDescription}
           />
-          <PrivateLabelInquiryForm />
+          <div className="incar-card rounded-lg p-6 text-sm leading-7 text-metallic-silver">
+            {locale === "ar"
+              ? "إرسال طلب العلامة الخاصة عبر الموقع غير مفعّل في Sprint 1A. يمكن تجهيز الفئة والسوق والكميات ومتطلبات التغليف إلى حين ربط مسار آمن."
+              : "Online Private Label submission is not active in Sprint 1A. Prepare the category, market, quantities, and packaging requirements while a secure workflow is connected."}
+          </div>
         </div>
       </section>
 

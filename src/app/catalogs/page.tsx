@@ -8,6 +8,7 @@ import { TrustProofPoints } from "@/features/trust/components";
 import { getDictionary } from "@/i18n/dictionaries";
 import { getServerLocale } from "@/i18n/server";
 import { pageMetadata } from "@/lib/seo";
+import { getPublishedCatalogs } from "@/lib/catalogs";
 
 export const metadata = pageMetadata(
   "Catalogs",
@@ -17,6 +18,7 @@ export const metadata = pageMetadata(
 export default async function CatalogsPage() {
   const locale = await getServerLocale();
   const dictionary = getDictionary(locale);
+  const publishedCatalogs = getPublishedCatalogs(locale);
   const catalogTrustPillars = getTrustPillarsBySlug([
     "saudi-market-focus",
     "packaging-control",
@@ -36,7 +38,7 @@ export default async function CatalogsPage() {
           <CatalogExplorer />
         </div>
       </section>
-      <section className="bg-surface px-4 py-16 sm:px-6 lg:px-8">
+      {publishedCatalogs.length > 0 ? <section className="bg-surface px-4 py-16 sm:px-6 lg:px-8">
         <div className="mx-auto max-w-7xl">
           <SectionHeader
             eyebrow={dictionary.pages.catalogs.trustEyebrow}
@@ -47,8 +49,8 @@ export default async function CatalogsPage() {
             <TrustProofPoints pillars={catalogTrustPillars} />
           </div>
         </div>
-      </section>
-      <section
+      </section> : null}
+      {publishedCatalogs.length > 0 ? <section
         id="catalog-request"
         className="bg-background px-4 py-16 sm:px-6 lg:px-8"
       >
@@ -74,15 +76,15 @@ export default async function CatalogsPage() {
           </div>
           <CatalogRequestForm />
         </div>
-      </section>
-      <FinalCTA
+      </section> : null}
+      {publishedCatalogs.length > 0 ? <FinalCTA
         eyebrow={dictionary.pages.catalogs.finalEyebrow}
         title={dictionary.pages.catalogs.finalTitle}
         primaryHref="/catalogs#catalog-request"
         primaryLabel={dictionary.common.requestCatalog}
         secondaryHref="/contact"
         secondaryLabel={dictionary.common.sourcingRequest}
-      />
+      /> : null}
     </>
   );
 }

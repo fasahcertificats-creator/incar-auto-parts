@@ -1,26 +1,15 @@
 "use client";
 
-import {
-  createContext,
-  useCallback,
-  useContext,
-  useEffect,
-  useMemo,
-  useState,
-} from "react";
+import { createContext, useContext, useMemo } from "react";
 import { defaultLocale, getDirection } from "@/i18n/config";
 import type { Direction, Locale } from "@/i18n/types";
 
 type LocaleContextValue = {
   locale: Locale;
   direction: Direction;
-  setLocale: (locale: Locale) => void;
-  toggleLocale: () => void;
 };
 
 const LocaleContext = createContext<LocaleContextValue | null>(null);
-const storageKey = "incar-locale";
-
 export function LocaleProvider({
   children,
   initialLocale = defaultLocale,
@@ -28,35 +17,12 @@ export function LocaleProvider({
   children: React.ReactNode;
   initialLocale?: Locale;
 }) {
-  const [locale, setLocaleState] = useState<Locale>(initialLocale);
-
-  useEffect(() => {
-    const direction = getDirection(locale);
-    document.documentElement.lang = locale;
-    document.documentElement.dir = direction;
-  }, [locale]);
-
-  const setLocale = useCallback((nextLocale: Locale) => {
-    window.localStorage.setItem(storageKey, nextLocale);
-    setLocaleState(nextLocale);
-  }, []);
-
-  const toggleLocale = useCallback(() => {
-    setLocaleState((current) => {
-      const nextLocale = current === "en" ? "ar" : "en";
-      window.localStorage.setItem(storageKey, nextLocale);
-      return nextLocale;
-    });
-  }, []);
-
   const value = useMemo<LocaleContextValue>(
     () => ({
-      locale,
-      direction: getDirection(locale),
-      setLocale,
-      toggleLocale,
+      locale: initialLocale,
+      direction: getDirection(initialLocale),
     }),
-    [locale, setLocale, toggleLocale],
+    [initialLocale],
   );
 
   return (

@@ -1,33 +1,46 @@
 import type { MetadataRoute } from "next";
-import { brand } from "@/lib/brand";
 import { getActiveProducts } from "@/lib/products";
+import { absoluteSiteUrl } from "@/lib/site-url";
 
 export const dynamic = "force-static";
 
-const staticRoutes = [
+const publicRoutes = [
   "",
-  "/products",
+  "/parts",
+  "/sourcing-services",
   "/private-label",
-  "/quality-control",
   "/catalogs",
-  "/rfq",
   "/about",
   "/contact",
 ];
 
+function localizedEntry(locale: "ar" | "en", route: string) {
+  const arUrl = absoluteSiteUrl(`/ar${route}`);
+  const enUrl = absoluteSiteUrl(`/en${route}`);
+
+  return {
+    url: locale === "ar" ? arUrl : enUrl,
+    alternates: {
+      languages: {
+        ar: arUrl,
+        en: enUrl,
+        "x-default": arUrl,
+      },
+    },
+  };
+}
+
 export default function sitemap(): MetadataRoute.Sitemap {
-  const baseUrl = brand.metadataBase;
-  const now = new Date();
   const products = getActiveProducts();
 
   return [
-    ...staticRoutes.map((route) => ({
-      url: `${baseUrl}${route}`,
-      lastModified: now,
-    })),
-    ...products.map((product) => ({
-      url: `${baseUrl}/products/${product.slug}`,
-      lastModified: now,
-    })),
+    ...publicRoutes.flatMap((route) => [
+      localizedEntry("ar", route),
+      localizedEntry("en", route),
+    ]),
+    ...products.flatMap((product) => [
+      localizedEntry("ar", `/products/${product.slug}`),
+      localizedEntry("en", `/products/${product.slug}`),
+    ]),
   ];
 }

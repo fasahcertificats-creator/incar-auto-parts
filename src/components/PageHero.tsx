@@ -18,6 +18,7 @@ export function PageHero({
       <div className="mx-auto max-w-7xl">
         <SectionHeader
           inverse
+          headingLevel="h1"
           align={align}
           eyebrow={eyebrow}
           title={title}

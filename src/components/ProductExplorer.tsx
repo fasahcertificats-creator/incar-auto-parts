@@ -14,12 +14,22 @@ import { ProductCard } from "./ProductCard";
 
 type ProductExplorerProps = {
   fixedBrand?: BrandName;
+  initialSearch?: string;
+  initialBrand?: BrandName | "All";
+  initialModel?: string;
 };
 
-export function ProductExplorer({ fixedBrand }: ProductExplorerProps) {
-  const [search, setSearch] = useState("");
-  const [brand, setBrand] = useState<BrandName | "All">(fixedBrand ?? "All");
-  const [model, setModel] = useState("All");
+export function ProductExplorer({
+  fixedBrand,
+  initialSearch = "",
+  initialBrand = "All",
+  initialModel = "All",
+}: ProductExplorerProps) {
+  const [search, setSearch] = useState(initialSearch);
+  const [brand, setBrand] = useState<BrandName | "All">(
+    fixedBrand ?? initialBrand,
+  );
+  const [model, setModel] = useState(initialModel);
   const [category, setCategory] = useState<ProductCategory | "All">("All");
   const { locale } = useLocale();
   const dictionary = getDictionary(locale);
@@ -51,7 +61,8 @@ export function ProductExplorer({ fixedBrand }: ProductExplorerProps) {
             <input
               value={search}
               onChange={(event) => setSearch(event.target.value)}
-              placeholder="CN-BP-TY-04465, 04465-33471, Camry"
+              placeholder="Part Number / OEM"
+              dir="ltr"
               className="incar-input px-4 text-sm font-normal"
             />
           </label>

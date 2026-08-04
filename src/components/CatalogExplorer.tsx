@@ -1,9 +1,9 @@
 "use client";
 
 import { useMemo, useState } from "react";
-import { getLocalizedCatalogs } from "@/data/catalogs";
 import { useLocale } from "@/contexts/LocaleContext";
 import { getDictionary } from "@/i18n/dictionaries";
+import { getPublishedCatalogs } from "@/lib/catalogs";
 import { CatalogCard } from "./CatalogCard";
 
 const catalogFilters = ["All", "Toyota", "Hyundai", "Private Label", "General"];
@@ -12,7 +12,7 @@ export function CatalogExplorer() {
   const [filter, setFilter] = useState("All");
   const { locale } = useLocale();
   const dictionary = getDictionary(locale);
-  const catalogs = useMemo(() => getLocalizedCatalogs(locale), [locale]);
+  const catalogs = useMemo(() => getPublishedCatalogs(locale), [locale]);
 
   const filteredCatalogs = useMemo(
     () =>
@@ -53,6 +53,13 @@ export function CatalogExplorer() {
           />
         ))}
       </div>
+      {filteredCatalogs.length === 0 ? (
+        <div className="mt-8 rounded-lg border border-dashed border-metallic-silver/24 bg-surface p-8 text-center text-sm leading-7 text-muted">
+          {locale === "ar"
+            ? "لا توجد كتالوجات منشورة ومعتمدة حاليًا. لن يظهر رابط تنزيل حتى يتوفر ملف حقيقي."
+            : "No verified catalogs are published yet. A download link will appear only when a real file is available."}
+        </div>
+      ) : null}
     </div>
   );
 }

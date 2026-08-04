@@ -1,5 +1,7 @@
 import type { Metadata } from "next";
 import { brand } from "@/lib/brand";
+import type { Locale } from "@/i18n/types";
+import { absoluteSiteUrl } from "./site-url";
 
 const siteName = brand.name;
 const baseDescription =
@@ -25,6 +27,51 @@ export function pageMetadata(title: string, description = baseDescription): Meta
       type: "website",
       siteName,
       images: ["/images/hero-sourcing.png"],
+    },
+  };
+}
+
+type LocalizedPageMetadataOptions = {
+  locale: Locale;
+  path?: string;
+  title: string;
+  description: string;
+  noindex?: boolean;
+};
+
+export function localizedPageMetadata({
+  locale,
+  path = "",
+  title,
+  description,
+  noindex = false,
+}: LocalizedPageMetadataOptions): Metadata {
+  const normalizedPath = path && path !== "/" ? path : "";
+  const arUrl = absoluteSiteUrl(`/ar${normalizedPath}`);
+  const enUrl = absoluteSiteUrl(`/en${normalizedPath}`);
+  const canonical = locale === "ar" ? arUrl : enUrl;
+
+  return {
+    title: `${title} | ${siteName}`,
+    description,
+    alternates: {
+      canonical,
+      languages: {
+        ar: arUrl,
+        en: enUrl,
+        "x-default": arUrl,
+      },
+    },
+    robots: noindex ? { index: false, follow: true } : undefined,
+    openGraph: {
+      title: `${title} | ${siteName}`,
+      description,
+      type: "website",
+      siteName,
+      url: canonical,
+      locale: locale === "ar" ? "ar_SA" : "en_US",
+      alternateLocale: locale === "ar" ? ["en_US"] : ["ar_SA"],
+      images: [absoluteSiteUrl("/images/hero-sourcing.png")],
     },
   };
 }

@@ -1,4 +1,8 @@
+"use client";
+
 import Link from "next/link";
+import { useLocale } from "@/contexts/LocaleContext";
+import { localizeHref } from "@/i18n/routing";
 
 type CTAButtonProps = {
   href: string;
@@ -13,6 +17,7 @@ export function CTAButton({
   variant = "primary",
   className = "",
 }: CTAButtonProps) {
+  const { locale } = useLocale();
   const styles = {
     primary:
       "bg-primary text-white shadow-[0_18px_42px_rgba(215,25,32,0.26)] hover:bg-primary-hover",
@@ -26,7 +31,7 @@ export function CTAButton({
 
   return (
     <Link
-      href={href}
+      href={localizeHref(locale, href)}
       className={`incar-focus inline-flex min-h-12 items-center justify-center rounded-md px-5 py-3 text-sm font-semibold transition ${styles[variant]} ${className}`}
     >
       {children}

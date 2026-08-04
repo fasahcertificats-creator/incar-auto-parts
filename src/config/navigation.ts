@@ -1,30 +1,27 @@
 export type NavigationItem = {
   key:
     | "home"
-    | "products"
+    | "parts"
     | "catalogs"
     | "private-label"
-    | "quality-control"
+    | "sourcing-services"
     | "about"
-    | "rfq"
     | "contact";
   href: string;
 };
 
 export const mainNavigation: NavigationItem[] = [
-  { key: "home", href: "/" },
-  { key: "products", href: "/products" },
+  { key: "parts", href: "/parts" },
   { key: "catalogs", href: "/catalogs" },
+  { key: "sourcing-services", href: "/sourcing-services" },
   { key: "private-label", href: "/private-label" },
-  { key: "quality-control", href: "/quality-control" },
   { key: "about", href: "/about" },
-  { key: "rfq", href: "/rfq" },
-  { key: "contact", href: "/contact" },
 ];
 
-export const footerNavigation = mainNavigation.filter(
-  (item) => item.key !== "home",
-);
+export const footerNavigation: NavigationItem[] = [
+  ...mainNavigation,
+  { key: "contact", href: "/contact" },
+];
 
 export const footerCapabilityKeys = [
   "china-sourcing",

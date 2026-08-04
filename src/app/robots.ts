@@ -1,5 +1,5 @@
 import type { MetadataRoute } from "next";
-import { brand } from "@/lib/brand";
+import { absoluteSiteUrl } from "@/lib/site-url";
 
 export const dynamic = "force-static";
 
@@ -8,7 +8,8 @@ export default function robots(): MetadataRoute.Robots {
     rules: {
       userAgent: "*",
       allow: "/",
+      disallow: ["/ar/rfq", "/en/rfq", "/rfq"],
     },
-    sitemap: `${brand.metadataBase}/sitemap.xml`,
+    sitemap: absoluteSiteUrl("/sitemap.xml"),
   };
 }

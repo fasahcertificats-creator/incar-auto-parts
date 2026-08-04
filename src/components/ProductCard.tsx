@@ -3,6 +3,7 @@
 import Link from "next/link";
 import { useLocale } from "@/contexts/LocaleContext";
 import { getDictionary } from "@/i18n/dictionaries";
+import { localizeHref } from "@/i18n/routing";
 import type { Product } from "@/types/product";
 import { AddToRfqButton } from "./AddToRfqButton";
 import { ProductImage } from "./ProductImage";
@@ -24,7 +25,7 @@ export function ProductCard({ product }: { product: Product }) {
 
   return (
     <article className="incar-card group flex h-full flex-col overflow-hidden rounded-lg transition hover:-translate-y-1 hover:border-metallic-silver/35">
-      <Link href={`/products/${product.slug}`} className="incar-focus block rounded-md">
+      <Link href={localizeHref(locale, `/products/${product.slug}`)} className="incar-focus block rounded-md">
         <ProductImage
           src={product.imageUrl}
           alt={product.name}
@@ -44,7 +45,7 @@ export function ProductCard({ product }: { product: Product }) {
             {dictionary.categories[product.category]}
           </span>
         </div>
-        <Link href={`/products/${product.slug}`} className="incar-focus block rounded-sm">
+        <Link href={localizeHref(locale, `/products/${product.slug}`)} className="incar-focus block rounded-sm">
           <h3 className="text-xl font-semibold text-white group-hover:text-metallic-silver">
             {product.name}
           </h3>
@@ -52,29 +53,15 @@ export function ProductCard({ product }: { product: Product }) {
         <dl className="mt-4 grid gap-2 text-sm text-muted">
           <div className="flex justify-between gap-4">
             <dt>{dictionary.productLabels.partNumber}</dt>
-            <dd className="font-semibold text-white">{product.partNumber}</dd>
+            <dd dir="ltr" className="font-semibold text-white">{product.partNumber}</dd>
           </div>
           <div className="flex justify-between gap-4">
             <dt>{dictionary.productLabels.oemNumber}</dt>
-            <dd className="font-semibold text-white">{product.oemNumber}</dd>
-          </div>
-          <div className="flex justify-between gap-4">
-            <dt>{dictionary.productLabels.moq}</dt>
-            <dd className="font-semibold text-white">
-              {product.moq} {dictionary.common.pcs}
-            </dd>
+            <dd dir="ltr" className="font-semibold text-white">{product.oemNumber}</dd>
           </div>
           <div className="flex justify-between gap-4">
             <dt>{dictionary.productLabels.origin}</dt>
             <dd className="font-semibold text-white">{dictionary.common.china}</dd>
-          </div>
-          <div className="flex justify-between gap-4">
-            <dt>{dictionary.productLabels.privateLabel}</dt>
-            <dd className="font-semibold text-white">
-              {product.privateLabelAvailable
-                ? dictionary.common.available
-                : dictionary.common.byReview}
-            </dd>
           </div>
         </dl>
         <div className="mt-5 flex-1">

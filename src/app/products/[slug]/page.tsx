@@ -13,6 +13,7 @@ import { getDictionary } from "@/i18n/dictionaries";
 import { getServerLocale } from "@/i18n/server";
 import { pageMetadata } from "@/lib/seo";
 import type { ProductFitment } from "@/types/product";
+import { localizeHref } from "@/i18n/routing";
 
 type ProductDetailsPageProps = {
   params: Promise<{ slug: string }>;
@@ -60,7 +61,7 @@ export default async function ProductDetailsPage({ params }: ProductDetailsPageP
     <>
       <section className="bg-background px-4 py-12 text-white sm:px-6 lg:px-8">
         <div className="mx-auto max-w-7xl">
-          <Link href="/products" className="incar-focus rounded-sm text-sm font-semibold text-metallic-silver hover:text-white">
+          <Link href={localizeHref(locale, "/parts")} className="incar-focus rounded-sm text-sm font-semibold text-metallic-silver hover:text-white">
             {dictionary.pages.products.back}
           </Link>
           <h1 className="mt-5 max-w-4xl text-4xl font-semibold md:text-6xl">
@@ -88,7 +89,6 @@ export default async function ProductDetailsPage({ params }: ProductDetailsPageP
                 [dictionary.productLabels.category, dictionary.categories[product.category]],
                 [dictionary.productLabels.partNumber, product.partNumber],
                 [dictionary.productLabels.oemNumber, product.oemNumber],
-                [dictionary.productLabels.moq, `${product.moq} ${dictionary.common.pcs}`],
                 [dictionary.productLabels.origin, dictionary.common.china],
                 [
                   dictionary.productLabels.dataStatus,
@@ -96,18 +96,22 @@ export default async function ProductDetailsPage({ params }: ProductDetailsPageP
                     ? dictionary.common.sampleData
                     : dictionary.common.verified,
                 ],
-                [
-                  dictionary.productLabels.privateLabelAvailable,
-                  product.privateLabelAvailable
-                    ? dictionary.common.yes
-                    : dictionary.common.no,
-                ],
               ].map(([label, value]) => (
                 <div key={label} className="rounded-md bg-background p-4">
                   <p className="text-xs font-bold uppercase tracking-[0.14em] text-muted">
                     {label}
                   </p>
-                  <p className="mt-2 font-semibold text-white">{value}</p>
+                  <p
+                    dir={
+                      label === dictionary.productLabels.partNumber ||
+                      label === dictionary.productLabels.oemNumber
+                        ? "ltr"
+                        : undefined
+                    }
+                    className="mt-2 font-semibold text-white"
+                  >
+                    {value}
+                  </p>
                 </div>
               ))}
             </div>

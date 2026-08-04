@@ -2,6 +2,7 @@ import { brands } from "@/data/brands";
 import { categories } from "@/data/categories";
 import { vehicleModels } from "@/data/models";
 import { products } from "@/data/products";
+import { sampleDataEnabled } from "@/config/sample-data";
 import type { BrandName, Product, ProductCategory } from "@/types/product";
 
 export type ProductFilters = {
@@ -39,7 +40,11 @@ export function getAllProducts() {
 }
 
 export function getActiveProducts() {
-  return products.filter((product) => product.status === "active");
+  return products.filter(
+    (product) =>
+      product.status === "active" &&
+      (!product.isSampleData || sampleDataEnabled),
+  );
 }
 
 export function getProductBySlug(slug: string) {

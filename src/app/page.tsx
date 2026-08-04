@@ -13,7 +13,11 @@ import { TrustSection } from "@/features/trust/components";
 import { getDictionary } from "@/i18n/dictionaries";
 import { getServerLocale } from "@/i18n/server";
 
-export default async function Home() {
+export { HomeFoundation as default } from "@/features/home/HomeFoundation";
+
+// Retained temporarily so the pre-Sprint homepage can be compared during review.
+// eslint-disable-next-line @typescript-eslint/no-unused-vars
+async function LegacyHome() {
   const locale = await getServerLocale();
   const dictionary = getDictionary(locale);
   const trustPillars = getLocalizedTrustPillars(locale);

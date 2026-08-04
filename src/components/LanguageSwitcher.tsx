@@ -1,34 +1,29 @@
 "use client";
 
-import { useRouter } from "next/navigation";
-import { useEffect, useState } from "react";
+import { usePathname } from "next/navigation";
 import { useLocale } from "@/contexts/LocaleContext";
 import { localeCookieName, localeConfig } from "@/i18n/config";
 import { getDictionary } from "@/i18n/dictionaries";
 import type { Locale } from "@/i18n/types";
+import { switchLocalePathname } from "@/i18n/routing";
 
 type LanguageSwitcherProps = {
   fullWidth?: boolean;
 };
 
-const cookieMaxAge = 60 * 60 * 24 * 365;
-
 export function LanguageSwitcher({ fullWidth = false }: LanguageSwitcherProps) {
-  const router = useRouter();
-  const { locale, setLocale } = useLocale();
+  const pathname = usePathname();
+  const { locale } = useLocale();
   const dictionary = getDictionary(locale);
-  const [pendingLocale, setPendingLocale] = useState<Locale | null>(null);
-
-  useEffect(() => {
-    if (!pendingLocale) return;
-
-    document.cookie = `${localeCookieName}=${pendingLocale}; path=/; max-age=${cookieMaxAge}; SameSite=Lax`;
-    setLocale(pendingLocale);
-    router.refresh();
-  }, [pendingLocale, router, setLocale]);
 
   function selectLocale(nextLocale: Locale) {
-    setPendingLocale(nextLocale);
+    if (nextLocale === locale) return;
+
+    window.localStorage.setItem(localeCookieName, nextLocale);
+    const nextPathname = switchLocalePathname(pathname, nextLocale);
+    window.location.assign(
+      `${nextPathname}${window.location.search}${window.location.hash}`,
+    );
   }
 
   return (

@@ -170,7 +170,7 @@ export function RFQProvider({ children }: { children: React.ReactNode }) {
       items: state.items,
       status: state.status,
       submission: state.submission,
-      itemCount: getTotalItems(),
+      itemCount: state.items.length,
       addItem,
       removeItem,
       updateQuantity,

@@ -48,13 +48,17 @@ http://localhost:3000
 
 This is the main local preview URL for development.
 
+Sample products and catalogs are hidden by default. They can be exposed only during local development by setting `NEXT_PUBLIC_ENABLE_SAMPLE_DATA=true`; production builds ignore this flag.
+
 ### Build For Production
 
 ```bash
 npm run build
 ```
 
-This project uses `output: "export"` in `next.config.ts`, so production builds generate static output in `out/`.
+The MVP uses the dynamic Next.js App Router for Vercel. It does not use static export and does not require an `out/` directory.
+
+Set `NEXT_PUBLIC_SITE_URL` in the deployment environment to the public site origin used by canonical URLs, hreflang, the sitemap, and robots metadata. Local development falls back to `http://localhost:3000`.
 
 ### Run Lint
 
@@ -68,7 +72,7 @@ npm run lint
 npm run start
 ```
 
-Use this only after a successful build when you want to test the exported production site from `out/`. For everyday development, use `npm run dev`.
+Use this after a successful build to run the Next.js production server locally. For everyday development, use `npm run dev`.
 
 ### Stop The Server
 
@@ -82,12 +86,11 @@ Then confirm with `Y` if Windows asks.
 
 ### Static Preview Helper
 
-`preview-server.js` is the helper used by `npm run start` for previewing the static `out/` folder after a build. It is not the main development workflow.
+`preview-server.js` is a legacy helper for previewing an existing static `out/` folder. It is not part of the Vercel MVP workflow and is not used by `npm run start`.
 
 Typical use:
 
 ```bash
-npm run build
 node preview-server.js
 ```
 
@@ -97,7 +100,7 @@ Then open:
 http://localhost:8088
 ```
 
-The root-level `START_AUTO_PARTS_PREVIEW.bat` file is also a preview-only helper for the static export. Use `npm run dev` for normal development.
+The root-level static preview helpers are legacy-only. Use `npm run dev` for development and `npm run build` followed by `npm run start` for a local production check.
 
 ## Public Preview Link
 

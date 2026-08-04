@@ -19,5 +19,6 @@ export const brand = {
   whatsapp: "+86 138 0000 0000",
   office: "Guangzhou, China",
   market: "Saudi Arabia wholesale buyers",
-  metadataBase: "https://incarautoparts.example.com",
+  metadataBase: getSiteUrl().toString().replace(/\/$/, ""),
 };
+import { getSiteUrl } from "./site-url";

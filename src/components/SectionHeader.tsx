@@ -4,6 +4,7 @@ type SectionHeaderProps = {
   description?: string;
   align?: "left" | "center";
   inverse?: boolean;
+  headingLevel?: "h1" | "h2";
 };
 
 export function SectionHeader({
@@ -12,7 +13,9 @@ export function SectionHeader({
   description,
   align = "left",
   inverse = false,
+  headingLevel = "h2",
 }: SectionHeaderProps) {
+  const Heading = headingLevel;
   return (
     <div
       className={`mx-auto max-w-3xl ${
@@ -28,13 +31,13 @@ export function SectionHeader({
           {eyebrow}
         </p>
       ) : null}
-      <h2
+      <Heading
         className={`text-3xl font-semibold leading-tight md:text-5xl ${
           inverse ? "text-white" : "text-white"
         }`}
       >
         {title}
-      </h2>
+      </Heading>
       {description ? (
         <p
           className={`mt-4 text-base leading-7 md:text-lg ${
