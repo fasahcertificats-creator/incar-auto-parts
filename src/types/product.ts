@@ -1,13 +1,14 @@
 import type { Locale } from "@/i18n/types";
 
-export type BrandName = "Toyota" | "Hyundai";
+export type BrandName = string;
 
-export type ProductCategory =
+export type KnownProductCategory =
   | "Brake System"
   | "Suspension Parts"
   | "Filters"
   | "Engine Parts"
   | "Interior Parts";
+export type ProductCategory = KnownProductCategory | (string & {});
 
 export type PublishingStatus = "published" | "draft" | "archived";
 export type PublishingEligibility = "eligible" | "ineligible";
@@ -33,6 +34,7 @@ export type Make = {
   id: string;
   slug: string;
   name: BrandName;
+  localizedName?: LocalizedProductName;
   status: PublishingStatus;
   isSampleData: boolean;
   description?: Partial<Record<Locale, string>>;
@@ -44,6 +46,7 @@ export type Model = {
   slug: string;
   makeId: string;
   name: string;
+  localizedName?: LocalizedProductName;
   status: PublishingStatus;
   isSampleData: boolean;
   publishingEligibility: PublishingEligibility;
@@ -82,6 +85,7 @@ export type Product = {
   internalProductId: string;
   slug: string;
   name: LocalizedProductName;
+  description?: Partial<Record<Locale, string>>;
   status: PublishingStatus;
   isSampleData: boolean;
   references: ProductReferences;
@@ -90,6 +94,7 @@ export type Product = {
   compatibilityStatus: CompatibilityStatus;
   requestEligibility: RequestEligibility;
   image: ProductImage | null;
+  specifications?: Record<string, Partial<Record<Locale, string>>>;
   dataVerificationState: DataVerificationState;
   possibleReferenceCandidates: string[];
   hasCriticalDataConflict: boolean;

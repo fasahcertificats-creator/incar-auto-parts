@@ -1,6 +1,6 @@
-import type { ProductCategory } from "./product";
+import type { KnownProductCategory } from "./product";
 
-export type PrivateLabelCategory = ProductCategory;
+export type PrivateLabelCategory = KnownProductCategory;
 
 export type PrivateLabelLogoStatus = "yes" | "no" | "in_progress";
 

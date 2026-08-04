@@ -116,7 +116,9 @@ export function ProductExplorer({
               <option value="All">{dictionary.common.all}</option>
               {activeCategories.map((categoryOption) => (
                 <option key={categoryOption.id} value={categoryOption.name}>
-                  {dictionary.categories[categoryOption.name]}
+                  {dictionary.categories[
+                    categoryOption.name as keyof typeof dictionary.categories
+                  ] ?? categoryOption.name}
                 </option>
               ))}
             </select>

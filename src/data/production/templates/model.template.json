@@ -1,0 +1,5 @@
+{
+  "entity": "model",
+  "requiredFields": ["id", "slug", "makeId", "nameAr", "nameEn", "status", "isSampleData"],
+  "optionalFields": ["descriptionAr", "descriptionEn", "verifiedYearRanges", "provenance"]
+}

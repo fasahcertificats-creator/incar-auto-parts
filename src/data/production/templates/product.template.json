@@ -1,0 +1,35 @@
+{
+  "entity": "product",
+  "requiredFields": [
+    "internalProductId",
+    "slug",
+    "nameAr",
+    "nameEn",
+    "publishingStatus",
+    "isSampleData",
+    "dataVerificationState",
+    "compatibilityStatus",
+    "requestEligibility",
+    "categoryId",
+    "references"
+  ],
+  "referenceFields": ["incarPartNumber", "oemReferences", "verifiedAlternateReferences"],
+  "optionalFields": [
+    "requestEligibilityNotes",
+    "vehicleRelationships",
+    "descriptionAr",
+    "descriptionEn",
+    "image",
+    "specifications",
+    "provenance"
+  ],
+  "prohibitedFields": [
+    "price",
+    "stock",
+    "rating",
+    "reviews",
+    "availability",
+    "moq",
+    "leadTime"
+  ]
+}

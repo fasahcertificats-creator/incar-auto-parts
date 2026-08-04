@@ -1,0 +1,5 @@
+{
+  "entity": "make",
+  "requiredFields": ["id", "slug", "nameAr", "nameEn", "status", "isSampleData"],
+  "optionalFields": ["descriptionAr", "descriptionEn", "provenance"]
+}

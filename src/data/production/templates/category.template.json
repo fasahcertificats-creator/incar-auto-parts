@@ -1,0 +1,5 @@
+{
+  "entity": "category",
+  "requiredFields": ["id", "slug", "nameAr", "nameEn", "status"],
+  "optionalFields": ["descriptionAr", "descriptionEn", "provenance"]
+}

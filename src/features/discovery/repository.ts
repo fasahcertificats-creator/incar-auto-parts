@@ -3,6 +3,7 @@ import { brands as sampleMakeRecords } from "@/data/brands";
 import { categories as sampleCategoryRecords } from "@/data/categories";
 import { vehicleModels as sampleModelRecords } from "@/data/models";
 import { products as sampleProductRecords } from "@/data/products";
+import { productionCatalog } from "@/data/production";
 import type { Locale } from "@/i18n/types";
 import type {
   Category,
@@ -18,6 +19,7 @@ import {
   isProductIndexEligible,
   isProductPublishingEligible,
 } from "./eligibility";
+import { normalizeCatalogReference } from "../catalog-intake/normalization";
 
 export type DiscoverySearchContext = {
   makeSlug?: string;
@@ -39,11 +41,11 @@ export type DiscoverySearchResult = {
   possibleMatches: ProductReferenceMatch[];
 };
 
-// Future backend records enter through these partitions. They remain empty in Sprint 1B.
-const productionMakes: Make[] = [];
-const productionModels: Model[] = [];
-const productionCategories: Category[] = [];
-const productionProducts: Product[] = [];
+// Production records can enter Discovery only through the validated intake pipeline.
+const productionMakes: Make[] = productionCatalog.makes;
+const productionModels: Model[] = productionCatalog.models;
+const productionCategories: Category[] = productionCatalog.categories;
+const productionProducts: Product[] = productionCatalog.products;
 const draftMakes: Make[] = [];
 const draftModels: Model[] = [];
 const draftProducts: Product[] = [];
@@ -168,7 +170,7 @@ function withMakeEligibility(
 }
 
 export function normalizeReference(value: string) {
-  return value.trim().toUpperCase().replace(/[^A-Z0-9]/g, "");
+  return normalizeCatalogReference(value);
 }
 
 export function getPublishedMakes() {
@@ -348,6 +350,7 @@ export const discoveryRecordPartitions = {
   production: {
     makes: productionMakes.length,
     models: productionModels.length,
+    categories: productionCategories.length,
     products: productionProducts.length,
   },
   sampleEnabled: sampleDataEnabled,

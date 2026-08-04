@@ -41,7 +41,9 @@ export function ProductCard({ product }: { product: Product }) {
             {model?.name ?? dictionary.pages.products.reviewRequired}
           </span>
           <span className="rounded-sm border border-primary/24 bg-primary/10 px-2.5 py-1 text-metallic-silver">
-            {dictionary.categories[product.category]}
+            {dictionary.categories[
+              product.category as keyof typeof dictionary.categories
+            ] ?? product.category}
           </span>
         </div>
         <Link href={localizeHref(locale, `/products/${product.slug}`)} className="incar-focus block rounded-sm">
