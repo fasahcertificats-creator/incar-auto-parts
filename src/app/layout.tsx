@@ -15,7 +15,7 @@ export const metadata: Metadata = {
     template: `%s | ${brand.name}`,
   },
   description:
-    "Wholesale auto parts sourcing from China for auto parts wholesalers and importers across the Middle East.",
+    "INCAR is a specialized B2B auto parts supplier serving wholesalers and importers across the Middle East from China.",
 };
 
 export default async function RootLayout({

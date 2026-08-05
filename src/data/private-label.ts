@@ -26,7 +26,7 @@ export const privateLabelServices: PrivateLabelService[] = [
     id: "factory-matching",
     title: "Factory matching",
     description:
-      "Compare factory options by capability, export readiness, sample timing, and packaging support.",
+      "INCAR selects manufacturing sources internally by capability, specification fit, sample timing, and packaging support.",
   },
   {
     id: "custom-packaging",
@@ -38,7 +38,7 @@ export const privateLabelServices: PrivateLabelService[] = [
     id: "logo-printing",
     title: "Logo printing",
     description:
-      "Coordinate logo placement across boxes, labels, product inserts, and approved brand materials.",
+      "Manage logo placement across boxes, labels, product inserts, and approved brand materials.",
   },
   {
     id: "barcode-label-design",
@@ -50,7 +50,7 @@ export const privateLabelServices: PrivateLabelService[] = [
     id: "oem-odm-support",
     title: "OEM / ODM support",
     description:
-      "Support specification alignment, OEM reference matching, sample review, and production coordination.",
+      "Support specification alignment, OEM reference matching, sample review, and production management.",
   },
   {
     id: "quality-inspection",
@@ -62,11 +62,11 @@ export const privateLabelServices: PrivateLabelService[] = [
     id: "export-documentation",
     title: "Export documentation",
     description:
-      "Coordinate invoice, packing list, carton details, and export-ready documentation with suppliers.",
+      "Manage invoice inputs, packing-list details, carton information, and agreed supply documentation.",
   },
   {
-    id: "export-coordination-middle-east",
-    title: "Export coordination for Middle Eastern markets",
+    id: "supply-follow-up-middle-east",
+    title: "Supply follow-up for Middle Eastern markets",
     description:
       "Align production timing, packing details, and destination requirements for a Middle Eastern wholesale market.",
   },
@@ -95,19 +95,19 @@ export const privateLabelProcessSteps: PrivateLabelProcessStep[] = [
     step: "04",
     title: "Sample confirmation",
     description:
-      "Review product samples, packaging samples, label details, and supplier readiness before production.",
+      "Review product samples, packaging samples, label details, and manufacturing readiness before production.",
   },
   {
     step: "05",
     title: "Production and quality inspection",
     description:
-      "Coordinate production checkpoints, packaging inspection, label verification, and consistency checks.",
+      "Manage agreed production checkpoints, packaging inspection, label verification, and consistency checks.",
   },
   {
     step: "06",
-    title: "Export and shipping coordination",
+    title: "Export and shipping follow-up",
     description:
-      "Prepare export documentation, packing details, supplier communication, and destination requirements for the target market.",
+      "Prepare agreed export-document inputs, packing details, internal manufacturing communication, and destination requirements for the target market.",
   },
 ];
 
@@ -120,7 +120,7 @@ export const privateLabelCategories: PrivateLabelCategoryDetail[] = [
   {
     category: "Suspension Parts",
     description:
-      "Suspension programs benefit from durable packaging, consistent supplier checks, and clear wholesale labeling.",
+      "Suspension programs benefit from durable packaging, consistent manufacturing checks, and clear wholesale labeling.",
   },
   {
     category: "Filters",

@@ -8,17 +8,17 @@ export default async function ProductNotFound() {
   const copy =
     locale === "ar"
       ? {
-          eyebrow: "المنتج غير متوفر",
-          title: "هذا المنتج غير متاح في الكتالوج الحالي لطلب التسعير.",
+          eyebrow: "المنتج غير منشور",
+          title: "لا يوجد سجل منتج منشور لهذا الرابط.",
           description:
-            "أرسل رقم القطعة أو رقم OEM إلى INCAR وسنراجع خيارات التوريد المناسبة من مصانع الصين.",
+            "يمكنك الاحتفاظ برقم القطعة أو OEM في مسودة طلب محلية لمراجعة توريد مستقبلية من INCAR.",
           products: "استعراض المنتجات",
         }
       : {
           eyebrow: "Product not found",
-          title: "This RFQ product is not available in the current catalog.",
+          title: "No published product record exists at this link.",
           description:
-            "Send the part number or OEM number to INCAR and the sourcing team can review suitable China factory options.",
+            "You can keep the part or OEM number in a local request draft for a future INCAR supply review.",
           products: "View Products",
         };
 

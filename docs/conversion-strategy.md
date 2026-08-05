@@ -2,14 +2,14 @@
 
 ## Target Visitor
 
-The target visitor is a Middle Eastern wholesale auto parts buyer who needs China-based sourcing support, product matching, Private Label planning, catalog material, or export-ready RFQ coordination.
+The target visitor is a Middle Eastern wholesale auto parts buyer who needs INCAR as a specialized China-based supplier for part review, quotation, Private Label planning, manufacturing management, inspection, packaging, and supply follow-up.
 
 ## Main Conversion Paths
 
-- RFQ request for selected products, part numbers, OEM numbers, or Excel lists.
+- Local RFQ draft for selected published products or part and OEM references.
 - Private Label inquiry for sourcing, packaging, logo, barcode, label, and inspection planning.
 - Catalog request for qualified catalog material.
-- WhatsApp contact for direct B2B conversation.
+- A future approved contact channel for direct B2B conversation.
 - Sourcing request for parts not currently listed.
 
 ## Page-Level CTA Strategy
@@ -30,19 +30,21 @@ Secondary CTAs may support exploration, but they should not visually compete wit
 
 ## RFQ Journey
 
-The RFQ journey starts with a buyer selecting products, entering part numbers manually, or uploading an Excel or CSV file. INCAR reviews the submitted details before quotation preparation and can continue communication through WhatsApp or email. The journey is for wholesale sourcing, not retail checkout.
+The current RFQ journey is a local draft only. A future request should include part or OEM number, product name if known, make/model/year when needed, quantity, reference image when available, and notes. Images are optional when the reference is clear and do not prove compatibility. Future customer details should include company, contact name, country or market, email, and phone or WhatsApp only after the channel is approved.
+
+A future bulk list should use one row per item with part or OEM number, product name, make/model/year when available, quantity, and notes. Upload, email, WhatsApp, and submission are not active.
 
 ## Private Label Journey
 
-The Private Label journey starts with a buyer describing product category, target market, estimated quantity, packaging needs, logo or label requirements, and sample expectations. INCAR then supports sourcing, factory matching, packaging coordination, sample confirmation, quality review, and export preparation.
+The Private Label journey starts with product category, target market, quantity, specifications, packaging, logo or label requirements, and sample expectations. INCAR remains the supplier, selects manufacturing sources internally, and manages the agreed packaging, production, inspection, and supply work.
 
 ## Catalog Request Journey
 
-The catalog request journey qualifies buyer interest before sharing catalog material. Catalogs may include product photos, part numbers, OEM numbers, MOQ, specifications, compatibility notes, and Private Label availability.
+Catalogs are INCAR-approved product catalogs, not factory directories. No catalogs are currently published and no request submission is active.
 
 ## WhatsApp Role
 
-Verified direct contact channels should support RFQ follow-up, catalog clarification, sourcing requests, and Private Label discussion after a buyer shares enough context.
+Only verified and approved direct contact channels may support future RFQ follow-up, catalog clarification, supply requests, and Private Label discussions.
 
 ## Sourcing Request Role
 

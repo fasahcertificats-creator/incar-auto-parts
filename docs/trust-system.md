@@ -2,53 +2,43 @@
 
 ## Purpose
 
-The INCAR Trust System helps Middle Eastern wholesale auto parts buyers understand how INCAR supports China-based sourcing before they submit an RFQ, catalog request, sourcing request, or Private Label inquiry.
+The INCAR Trust System helps Middle Eastern wholesale auto parts buyers understand why they can work with INCAR as the specialized supplier and commercial counterparty.
 
-The system is commercial, but careful. It explains what INCAR helps review, coordinate, prepare, assist with, and compare without inventing certifications, warehouses, client history, completed projects, or guaranteed outcomes.
+INCAR issues quotations under its own name and manages manufacturing-source selection, specifications, production, agreed quality-control checkpoints, packaging, and supply follow-up. Factories remain internal and are not presented as customer-facing choices or contacts.
 
 ## Six Trust Pillars
 
-1. Quality Inspection System
-   - Sample review.
-   - Product consistency checks.
-   - Packaging inspection.
-   - Label verification.
-   - Pre-shipment review support.
+1. Auto Parts Expertise
+   - Part and OEM reference review.
+   - Application context when fitment matters.
+   - Category and wholesale requirement knowledge.
 
-2. Factory Verification
-   - Supplier screening.
+2. Manufacturing and Specification Knowledge
+   - Factory and manufacturing-source screening.
    - Production capability review.
-   - Category matching.
-   - Factory communication support.
-   - Supplier option comparison.
+   - Specification and material alignment.
+   - Internal manufacturing-source selection.
 
-3. Packaging Control
-   - Export carton review.
-   - Private Label packaging coordination.
-   - Barcode and label checks.
-   - Arabic/English packaging readiness.
-   - Carton marking support.
+3. Inspection and Quality Control
+   - Samples when agreed.
+   - Product-consistency checkpoints.
+   - Packaging and label checks.
+   - Pre-shipment review according to order scope.
 
-4. Export Documentation
-   - Commercial invoice support.
-   - Packing list support.
-   - Product information preparation.
-   - Shipment coordination document support.
-   - Buyer communication support.
+4. Attention to Detail
+   - Reference, quantity, and specification review.
+   - Packaging, label, and carton information.
+   - Agreed commercial-document inputs.
 
-5. Middle East Market Focus
-   - Middle Eastern wholesale buyer focus.
-   - Toyota and Hyundai launch focus.
-   - RFQ-based sourcing.
-   - WhatsApp-friendly communication.
-   - Private Label support for Middle Eastern market needs.
+5. China Market Knowledge
+   - Practical manufacturing-market context.
+   - Capability, MOQ, timing, and packaging knowledge.
+   - Application to Middle Eastern wholesale requirements.
 
-6. China Advantage
-   - China factory access.
-   - Supplier comparison.
-   - Product sourcing flexibility.
-   - Private Label support.
-   - Faster communication with Chinese suppliers.
+6. Clear Arabic, English, and Chinese Communication
+   - Arabic and English customer communication.
+   - Chinese manufacturing communication handled internally.
+   - A supporting capability, not the primary value proposition.
 
 ## Page Usage Strategy
 
@@ -56,31 +46,29 @@ Home:
 Use a concise trust section that shows all six pillars briefly. The primary CTA is Request Quotation and the secondary CTA is Learn About INCAR.
 
 About:
-Use deeper trust narrative around China Advantage, Middle East Market Focus, Factory Verification, Quality Inspection System, Export Documentation, and Private Label capability. The page should build credibility without inventing fake company history.
+State that the customer deals with INCAR, factories remain backstage, and INCAR owns the quotation and managed supply relationship. Do not invent company history.
 
 Private Label:
-Use Packaging Control, Quality Inspection System, Factory Verification, and Export Documentation to make buyers trust the Private Label process.
+Use the approved six-pillar hierarchy to explain Private Label manufacturing, packaging, inspection, and supply responsibility.
 
 RFQ:
-Show a small confidence block near the form. Explain that buyers can send selected products, part numbers, OEM numbers, or Excel and CSV files, and that INCAR reviews RFQ details before quotation preparation.
+Explain the future data requirements for part or OEM number, product name when known, make/model/year when needed, quantity, reference image when available, and notes. State that upload and submission are inactive.
 
 Catalogs:
-Explain that catalog requests help buyers review product families, part numbers, MOQ, compatibility notes, and Private Label availability before INCAR sends relevant catalog information.
+Explain that no INCAR-approved catalog is currently published and that future catalogs are not factory or manufacturing-source directories.
 
 Quality Control:
-Use the full Trust System. This is the most detailed trust page and should explain what INCAR helps review, what INCAR coordinates, and what INCAR does not claim to promise.
+Use the full Trust System. Explain what INCAR reviews and manages and what it does not claim to guarantee.
 
 ## Approved Language Style
 
-Use service-oriented language:
+Use direct, responsible language where accurate:
 
-- We help review.
-- We coordinate.
-- We support.
-- We prepare.
-- We assist.
-- We help compare.
-- We focus on.
+- INCAR reviews.
+- INCAR selects manufacturing sources internally.
+- INCAR issues the quotation.
+- INCAR manages the agreed production and inspection scope.
+- INCAR follows packaging and supply requirements.
 
 Avoid absolute or unsupported claims. Trust content should sound premium, technical, industrial, calm, credible, and B2B.
 
@@ -102,22 +90,22 @@ Also avoid implied versions of these claims, such as legal certainty, border-pro
 
 ## CTA Alignment
 
-Quality Inspection System:
+Auto Parts Expertise:
 Request Quotation.
 
-Factory Verification:
+Manufacturing and Specification Knowledge:
 Start Sourcing Request.
 
-Packaging Control:
+Inspection and Quality Control:
 Private Label Inquiry.
 
-Export Documentation:
+Attention to Detail:
 Speak With INCAR.
 
-Middle East Market Focus:
+China Market Knowledge:
 Request Quotation.
 
-China Advantage:
+Clear Arabic, English, and Chinese Communication:
 Explore Services or Request Quotation.
 
 ## Future Proof Assets
@@ -128,12 +116,12 @@ These are future proof placeholders only. Do not display fake proof as if it alr
 
 ## RFQ Conversion Support
 
-The Trust System supports RFQ conversion by reducing uncertainty before a buyer submits product details. It explains that INCAR reviews part numbers, OEM numbers, quantities, packaging preferences, supplier options, and export coordination needs before quotation preparation.
+The Trust System reduces uncertainty before a future request. It explains that INCAR reviews part and OEM numbers, application context, quantities, specifications, packaging preferences, and supply requirements before quotation preparation.
 
 Trust content should guide buyers toward RFQ submission without using retail transaction language or payment-oriented language.
 
 ## Private Label Conversion Support
 
-The Trust System supports Private Label conversion by showing that packaging control, label verification, factory matching, sample review, inspection checkpoints, and export document support are part of the service conversation.
+The Trust System supports Private Label review by showing that INCAR manages manufacturing-source selection, packaging requirements, label verification, sample review, agreed inspection checkpoints, and supply-document inputs.
 
 Private Label trust content must not imply completed brand projects or client outcomes unless verified proof is added later.

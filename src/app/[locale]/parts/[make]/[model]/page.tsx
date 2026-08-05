@@ -142,6 +142,15 @@ export default async function ModelPage({ params, searchParams }: Props) {
               <p className="mt-4 rounded-lg border border-primary/30 bg-background p-5 text-sm text-muted">
                 {copy.search.errorDescription}
               </p>
+            ) : productSection.products.length === 0 ? (
+              <div className="mt-5 rounded-lg border border-dashed border-metallic-silver/25 bg-background p-6">
+                <h3 className="text-xl font-semibold text-white">
+                  {copy.model.noProductsTitle}
+                </h3>
+                <p className="mt-2 max-w-3xl text-sm leading-7 text-muted">
+                  {copy.model.noProductsDescription}
+                </p>
+              </div>
             ) : (
               <div className="mt-5 grid gap-6 md:grid-cols-2 xl:grid-cols-3">
                 {(showAllProducts

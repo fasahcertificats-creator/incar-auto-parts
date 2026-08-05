@@ -22,6 +22,19 @@ export function CatalogExplorer() {
     [catalogs, filter],
   );
 
+  if (catalogs.length === 0) {
+    return (
+      <div className="rounded-lg border border-dashed border-metallic-silver/24 bg-surface p-8 text-center">
+        <h2 className="text-xl font-semibold text-white">
+          {dictionary.pages.catalogs.emptyTitle}
+        </h2>
+        <p className="mt-2 text-sm leading-7 text-muted">
+          {dictionary.pages.catalogs.emptyDescription}
+        </p>
+      </div>
+    );
+  }
+
   return (
     <div>
       <div className="incar-card flex flex-col gap-3 rounded-lg p-4 sm:flex-row sm:items-end sm:justify-between">
@@ -55,9 +68,7 @@ export function CatalogExplorer() {
       </div>
       {filteredCatalogs.length === 0 ? (
         <div className="mt-8 rounded-lg border border-dashed border-metallic-silver/24 bg-surface p-8 text-center text-sm leading-7 text-muted">
-          {locale === "ar"
-            ? "لا توجد كتالوجات منشورة ومعتمدة حاليًا. لن يظهر رابط تنزيل حتى يتوفر ملف حقيقي."
-            : "No verified catalogs are published yet. A download link will appear only when a real file is available."}
+          {dictionary.pages.catalogs.emptyFiltered}
         </div>
       ) : null}
     </div>

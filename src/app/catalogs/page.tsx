@@ -12,7 +12,7 @@ import { getPublishedCatalogs } from "@/lib/catalogs";
 
 export const metadata = pageMetadata(
   "Catalogs",
-  "No verified product catalogs are currently published. Catalog information will appear only when real files are approved.",
+  "No INCAR-approved product catalogs are currently published. Future catalogs will present products reviewed by INCAR, not factory listings.",
 );
 
 export default async function CatalogsPage() {

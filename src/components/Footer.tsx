@@ -50,7 +50,7 @@ export function Footer() {
 
         <div>
           <h3 className="text-sm font-semibold">
-            {locale === "ar" ? "روابط الموقع" : "Platform"}
+            {locale === "ar" ? "روابط الموقع" : "Site links"}
           </h3>
           <ul className="mt-4 grid gap-3 text-sm text-muted">
             {footerNavigation.map((item) => (

@@ -18,10 +18,13 @@ export async function generateMetadata({
     locale,
     absoluteTitle:
       locale === "ar"
-        ? "INCAR | توريد قطع غيار السيارات بالجملة إلى الشرق الأوسط"
-        : "INCAR | Wholesale Auto Parts Sourcing for the Middle East",
+        ? "INCAR | مورد قطع غيار السيارات من الصين إلى الشرق الأوسط"
+        : "INCAR | Auto Parts Supplier from China for the Middle East",
     title: dictionary.hero.title,
-    description: dictionary.hero.description,
+    description:
+      locale === "ar"
+        ? "INCAR مورد متخصص لقطع غيار السيارات بالجملة، يخدم التجار والمستوردين في الشرق الأوسط بخبرة في القطع والتصنيع والفحص وإدارة التوريد من الصين."
+        : "INCAR is a specialized B2B auto parts supplier serving wholesalers and importers across the Middle East with expertise in parts, manufacturing, inspection, and supply from China.",
   });
 }
 

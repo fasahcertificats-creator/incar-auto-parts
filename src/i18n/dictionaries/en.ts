@@ -8,18 +8,18 @@ export const en = {
   brand: {
     name: "INCAR AUTO PARTS",
     shortName: "INCAR",
-    tagline: "Wholesale Auto Parts Sourcing for Middle Eastern Markets",
-    positioning: "Wholesale Auto Parts Sourcing from China for the Middle East",
+    tagline: "B2B Auto Parts Supplier for Middle Eastern Markets",
+    positioning: "Specialized Auto Parts Supplier from China for the Middle East",
     description:
-      "INCAR is a B2B platform supporting auto parts wholesalers and importers across the Middle East with sourcing from China.",
+      "INCAR is a specialized B2B auto parts supplier serving wholesalers and importers across the Middle East from China.",
     coreMessage:
-      "INCAR supports auto parts wholesalers and importers across the Middle East with part discovery, bulk request lists, sourcing, and private label coordination from China.",
-    routeFocus: "China-to-Middle East B2B auto parts sourcing",
+      "Customers buy from INCAR: we review requirements, select manufacturing sources internally, issue quotations under our name, and manage production, quality control, packaging, and supply follow-up.",
+    routeFocus: "China-to-Middle East B2B auto parts supply",
     office: "Guangzhou, China",
     market: "Middle Eastern markets",
     leadDesk: "Lead Desk",
     footerNote:
-      "B2B auto parts sourcing and private label coordination from China for Middle Eastern markets.",
+      "Specialized B2B auto parts supply and private label services from China for Middle Eastern markets.",
   },
   navigation: {
     home: "Home",
@@ -94,7 +94,7 @@ export const en = {
     eyebrow: "INCAR AUTO PARTS",
     title: "Wholesale Auto Parts Sourcing from China for the Middle East",
     description:
-      "INCAR supports auto parts wholesalers and importers across the Middle East with part discovery, bulk request lists, sourcing, and private label coordination from China.",
+      "INCAR is the specialized supplier and commercial counterparty for wholesalers and importers across the Middle East. We issue quotations under the INCAR name and manage manufacturing-source selection, specifications, production, quality-control checkpoints, packaging, and supply follow-up from China.",
     primary: "Request Quotation",
     secondary: "Private Label Solutions",
     tertiary: "Explore Products",
@@ -104,7 +104,7 @@ export const en = {
       eyebrow: "B2B Parts Sourcing",
       title: "Wholesale Auto Parts Sourcing from China for the Middle East",
       description:
-        "INCAR supports auto parts wholesalers and importers across the Middle East with part discovery, bulk request lists, sourcing, and private label coordination from China.",
+        "INCAR is the specialized supplier and commercial counterparty. We review each request, issue the quotation under our name, and manage the approved supply requirements from China.",
       label: "Part Number / OEM",
       placeholder: "Enter Part Number or OEM",
       action: "Search Parts",
@@ -128,80 +128,80 @@ export const en = {
     },
     sourcing: {
       eyebrow: "Sourcing Services",
-      title: "Share enough information for a structured sourcing review.",
+      title: "A managed supply process under the INCAR name.",
       description:
-        "Part references, vehicle context, quantity ranges, quality expectations, packaging needs, and destination details help buyers across Middle Eastern markets organize a sourcing review.",
+        "Customers send their requirements to INCAR. We review the request, select manufacturing sources internally, prepare our quotation, and manage the agreed production, inspection, packaging, and supply steps.",
       items: [
-        "Part and supplier search coordination",
-        "Quality-review checkpoint coordination",
-        "Export information and document coordination",
+        "Auto parts and specification review",
+        "Internal manufacturing-source selection and pricing analysis",
+        "Production, inspection, packaging, and supply follow-up",
       ],
       action: "View Sourcing Services",
     },
     privateLabel: {
       eyebrow: "Private Label",
-      title: "Plan product and packaging requirements before supplier review.",
+      title: "Plan product and packaging requirements with INCAR.",
       description:
-        "Define the product category, target market, packaging direction, label languages, and expected quantities without unsupported availability claims.",
+        "Define the category, specifications, target market, packaging direction, label languages, and expected quantities for INCAR to review and manage as the supply partner.",
       action: "Explore Private Label",
     },
     trust: {
       eyebrow: "About INCAR",
-      title: "Understand the scope before sending a request.",
+      title: "Work with one specialized auto parts supplier.",
       description:
-        "INCAR is a B2B auto parts platform for wholesalers and importers across the Middle East, with commercial confirmation kept outside the public website until a request is reviewed.",
+        "The customer deals with INCAR throughout the commercial relationship. Factories and manufacturing sources are selected and managed internally and are not presented as a customer-facing directory.",
       action: "About INCAR",
     },
     ready: {
       eyebrow: "Ready to Request",
-      title: "Prepare the references your sourcing request needs.",
+      title: "Prepare the references INCAR needs to review your request.",
       description:
-        "Use the parts search or RFQ workspace to prepare a sourcing request from China for your Middle Eastern market.",
+        "Use the parts search or local RFQ draft to organize the part and commercial details for a later request to INCAR.",
     },
   },
   home: {
     trust: {
       eyebrow: "Trust system",
-      title: "Six ways INCAR reduces sourcing uncertainty.",
+      title: "Six capabilities behind INCAR supply decisions.",
       description:
-        "Wholesale buyers need clear sourcing support before submitting RFQs. INCAR explains quality checks, supplier review, packaging control, export support, and China-based coordination for Middle Eastern markets.",
+        "INCAR combines auto parts expertise, manufacturing and specification knowledge, quality-control follow-up, attention to detail, China market knowledge, and clear multilingual communication.",
     },
     why: {
       eyebrow: "Why source with INCAR",
-      title: "A focused sourcing desk for Middle Eastern wholesale buyers.",
+      title: "A specialized supply partner for Middle Eastern wholesale buyers.",
       description:
-        "INCAR focuses on factory screening, practical MOQ planning, private-label readiness, and export details that matter once the order leaves China.",
+        "INCAR takes commercial responsibility for the quotation and supply relationship while managing manufacturing sources and order details internally.",
       reasons: [
-        "China factory network with category-level supplier matching",
-        "Inspection notes, sample review, and export carton control",
-        "OEM number matching for wholesale and workshop supply channels",
-        "RFQ-based workflow built for bulk sourcing orders",
+        "Auto parts review grounded in part and OEM references",
+        "Manufacturing-source selection based on the request requirements",
+        "Agreed inspection, packaging, and specification checkpoints",
+        "INCAR quotation and supply follow-up under one commercial relationship",
       ],
     },
     services: {
       eyebrow: "Service pillars",
       title: "Business services built around wholesale conversion.",
       description:
-        "INCAR supports buyers through RFQ-first sourcing, Private Label planning, inspection support, packaging control, and export coordination from China.",
+        "INCAR supplies wholesale buyers through request review, quotation, Private Label planning, manufacturing management, agreed inspection checkpoints, packaging, and supply follow-up from China.",
       items: [
         {
           title: "Auto Parts Sourcing",
           description:
-            "We help compare China supplier options for Toyota, Hyundai, and future wholesale category expansion.",
+            "INCAR reviews part requirements and selects suitable manufacturing sources internally for each commercial request.",
           ctaLabel: "Send Sourcing Request",
           href: "/contact",
         },
         {
           title: "RFQ-Based Wholesale Supply",
           description:
-            "Buyers send part numbers, OEM numbers, Excel lists, or selected products for quotation review.",
+            "Buyers provide part or OEM numbers, application context, quantities, and notes for INCAR quotation review.",
           ctaLabel: "Request Quotation",
           href: "/rfq",
         },
         {
           title: "Private Label Solutions",
           description:
-            "Support for factory matching, custom packaging, logo printing, labels, barcode details, and samples.",
+            "Support for manufacturing-source selection, custom packaging, logo printing, labels, barcode details, and sample review.",
           ctaLabel: "Start Private Label Inquiry",
           href: "/private-label#private-label-inquiry",
         },
@@ -215,14 +215,14 @@ export const en = {
         {
           title: "Packaging Control",
           description:
-            "Export carton review, Private Label packaging coordination, and Arabic/English readiness support.",
+            "Export carton review, Private Label packaging management, and Arabic/English readiness support.",
           ctaLabel: "Plan Packaging",
           href: "/private-label",
         },
         {
-          title: "Export Coordination",
+          title: "Supply Follow-up",
           description:
-            "Assistance with product information, packing details, invoice and packing list support, and supplier communication.",
+            "Supply follow-up covering product information, packing details, and agreed commercial-document inputs.",
           ctaLabel: "Speak With INCAR",
           href: "/contact",
         },
@@ -232,32 +232,32 @@ export const en = {
       eyebrow: "Quality control preview",
       title: "Trust grows when sourcing checkpoints are clear.",
       description:
-        "INCAR helps review supplier fit, samples, packaging, labels, and export details so buyers can send RFQs with clearer expectations.",
+        "INCAR manages manufacturing fit, samples, specifications, packaging, labels, and agreed inspection points according to the reviewed order requirements.",
       cta: "Review Quality Control",
     },
     catalogsPreview: {
       eyebrow: "Catalogs",
       title: "Catalog requests qualify the next sourcing conversation.",
       description:
-        "Request catalog material with brand, model, MOQ, compatibility, and Private Label context before INCAR follows up through WhatsApp or email.",
+        "Future INCAR-approved catalogs may include brand, model, MOQ, compatibility, and Private Label context. No catalogs are currently published.",
     },
     finalCta: {
       eyebrow: "China-to-Middle East RFQ desk",
-      title: "Send your RFQ list and get factory sourcing options.",
+      title: "Prepare your RFQ list for an INCAR supply review.",
     },
   },
   privateLabelPreview: {
     eyebrow: "Private label",
     title: "Build a market-ready auto parts brand through China sourcing.",
     description:
-      "A preview of INCAR private label support for wholesalers and importers across the Middle East, including sourcing, packaging planning, label requirements, and production coordination from China.",
+      "A preview of INCAR private label supply for wholesalers and importers across the Middle East, including specifications, packaging planning, label requirements, production, and agreed quality-control follow-up.",
     cta: "Explore Private Label Solutions",
   },
   processPreview: {
     eyebrow: "RFQ process",
     title: "From part-number list to export-ready supply.",
     description:
-      "A sourcing workflow for serious wholesale buyers, built around quotation requests and factory matching.",
+      "A supply workflow for wholesale buyers, built around INCAR quotation review and internal manufacturing-source selection.",
     steps: [
       {
         step: "01",
@@ -266,8 +266,8 @@ export const en = {
       },
       {
         step: "02",
-        title: "Factory sourcing",
-        description: "We compare factory options by MOQ, quality grade, pricing, and lead time.",
+        title: "Manufacturing source selection",
+        description: "INCAR evaluates manufacturing sources internally by capability, MOQ, specification, pricing, and lead time.",
       },
       {
         step: "03",
@@ -276,8 +276,8 @@ export const en = {
       },
       {
         step: "04",
-        title: "Export support",
-        description: "Documentation, cartons, and shipping coordination are prepared for buyers.",
+        title: "Supply follow-up",
+        description: "INCAR manages agreed packing, documentation inputs, and supply follow-up for the order.",
       },
     ],
   },
@@ -341,6 +341,9 @@ export const en = {
       yearsTitle: "Verified Year Ranges",
       categoriesTitle: "Linked Parts Categories",
       productsTitle: "Published Product Preview",
+      noProductsTitle: "No products are currently published for this model",
+      noProductsDescription:
+        "This model remains part of the initial browsing structure only. It does not indicate available products, catalog coverage, or quotation readiness.",
       viewAll: "View All Model Products",
       catalogTitle: "Catalog Status",
       catalogNone: "No real catalog is currently published for this model.",
@@ -373,21 +376,21 @@ export const en = {
       eyebrow: "Sourcing Services",
       title: "Auto Parts Sourcing from China for the Middle East",
       description:
-        "INCAR helps auto parts wholesalers and importers across Middle Eastern markets submit part requirements, review references, and coordinate sourcing from China.",
-      scopeTitle: "What the sourcing review can cover",
+        "INCAR is the customer-facing supplier. We review requirements, select manufacturing sources internally, issue quotations under the INCAR name, and manage the agreed production, quality-control, packaging, and supply follow-up.",
+      scopeTitle: "What INCAR reviews for supply",
       scopeDescription:
-        "The scope starts with clear part references and buyer requirements, without guaranteed results or fixed commercial promises.",
+        "The review starts with clear part references and buyer requirements. Availability, pricing, timing, and inspection scope are confirmed only in a reviewed INCAR quotation.",
       scopeItems: [
-        "Part Number, OEM reference, product photos, or category details",
-        "Vehicle make and model context when fitment matters",
-        "Estimated quantities, target quality, and packaging direction",
+        "Part or OEM reference, product name if known, and a reference image when available",
+        "Vehicle make, model, and year when application context is needed",
+        "Quantity, specification or quality requirements, packaging direction, and notes",
       ],
-      qualityTitle: "Quality-review coordination",
+      qualityTitle: "Manufacturing and quality management",
       qualityDescription:
-        "Requirements can include sample checks, specification comparison, packaging details, and agreed inspection checkpoints. This is coordination support, not a blanket certification claim.",
-      exportTitle: "Export information coordination",
+        "INCAR manages manufacturing-source selection, specification review, samples when agreed, packaging details, and order-specific inspection checkpoints. The exact scope depends on the reviewed order and is not a blanket guarantee.",
+      exportTitle: "INCAR quotation and supply relationship",
       exportDescription:
-        "Destination, packing information, label requirements, and document needs can be organized for a Middle Eastern target market before supplier follow-up.",
+        "The customer deals with INCAR, and INCAR issues the quotation under its name. Factory selection, pricing analysis, and manufacturing communication remain internal to our supply process.",
       statusTitle: "Online sourcing submission is not active yet.",
       statusDescription:
         "No request is submitted from this page in Sprint 1A. Use the parts workspace to prepare references while the secure request workflow is being implemented.",
@@ -423,27 +426,31 @@ export const en = {
       detailDescription:
         "Review published part references, compatibility status, and request eligibility in the INCAR discovery workspace.",
       relatedEyebrow: "Related sourcing options",
-      relatedTitle: "Similar RFQ-ready products",
+      relatedTitle: "Related published products",
       compatibilityFallback: "Compatibility details available upon RFQ review.",
       compatibleWith: "Compatible with {fitment}.",
       reviewRequired: "review required",
     },
     catalogs: {
       eyebrow: "Catalogs",
-      title: "Published Product Catalogs",
+      title: "INCAR Product Catalogs",
       description:
-        "No verified product catalogs are currently published. A download link will appear only when a real file is available.",
+        "No INCAR-approved product catalogs are currently published. This area will contain only products and catalog files reviewed and approved by INCAR, not a factory directory or manufacturing-source library.",
+      emptyTitle: "No INCAR catalogs are currently published",
+      emptyDescription:
+        "No approved catalog file or catalog product set is available for public use. This page will remain empty until INCAR reviews and publishes real catalog material.",
+      emptyFiltered: "No published INCAR catalog matches this filter.",
       explorerLabel: "Catalog focus",
       explorerDescription:
-        "Catalog requests can include part numbers, photos, specifications, MOQ, compatibility, and packaging notes.",
+        "Future INCAR catalog material may include part numbers, reference photos, specifications, MOQ, compatibility notes, and packaging details after approval.",
       trustEyebrow: "Catalog trust support",
-      trustTitle: "Catalog requests help qualify the right sourcing conversation.",
+      trustTitle: "INCAR catalogs will support a clearer supply conversation.",
       trustDescription:
-        "INCAR uses catalog interest to understand product families, part numbers, MOQ expectations, compatibility notes, and Private Label needs before sending relevant catalog information.",
+        "When approved catalogs become available, INCAR will use them to present product families and commercial context it is prepared to review as the supplier.",
       leadEyebrow: "Lead path",
-      leadTitle: "Request the right catalog package before quotation.",
+      leadTitle: "No catalog download or request submission is active yet.",
       leadDescription:
-        "INCAR reviews catalog requests so the follow-up can match your brand, category, vehicle model, MOQ, and Private Label interest.",
+        "Catalog files and contact follow-up will be enabled only after real INCAR-approved material and verified communication channels are available.",
       includes: [
         "Product photos",
         "Part numbers",
@@ -460,10 +467,10 @@ export const en = {
       heroEyebrow: "Private Label",
       heroTitle: "Private Label Auto Parts Solutions for Middle Eastern Markets",
       heroDescription:
-        "INCAR supports auto parts wholesalers and importers with private label requirements, packaging, labels, and production coordination from China.",
-      heroPanelEyebrow: "Strategic sourcing program",
+        "INCAR supplies private label auto parts programs for wholesalers and importers, managing requirements, manufacturing-source selection, packaging, labels, production, and agreed quality-control follow-up from China.",
+      heroPanelEyebrow: "Managed supply program",
       heroPanelCopy:
-        "Built for wholesalers and importers across the Middle East who need supplier coordination, controlled packaging, clear review checkpoints, and production coordination from China.",
+        "Built for wholesalers and importers across the Middle East who want INCAR to manage the commercial relationship, manufacturing requirements, packaging, review checkpoints, and production follow-up.",
       whyEyebrow: "Why private label matters",
       whyTitle: "A stronger wholesale position starts with controlled brand development.",
       whyDescription:
@@ -474,16 +481,16 @@ export const en = {
         "Better brand control across product labels, box information, and market presentation.",
         "Less direct price comparison than generic unbranded sourcing programs.",
         "Market differentiation through focused categories, packaging standards, and service support.",
-        "Long-term business value from repeatable sourcing, quality checks, and export coordination.",
+        "Long-term business value from repeatable supply specifications, quality checks, and order follow-up.",
       ],
       scopeEyebrow: "Service scope",
       scopeTitle: "Private Label services for Middle Eastern auto parts markets.",
       scopeDescription:
-        "INCAR supports the commercial, packaging, inspection, and export details needed to prepare a professional wholesale private label program.",
+        "INCAR manages the commercial, manufacturing, packaging, inspection, and supply details needed for a reviewed wholesale private label program.",
       processEyebrow: "Private label process",
       processTitle: "A professional sourcing workflow from category selection to export.",
       processDescription:
-        "Each step is designed for wholesale buyers who need organized requirements, supplier coordination, sample review, quality checkpoints, and shipping support.",
+        "Each step is designed for wholesale buyers who need one supply partner to manage requirements, manufacturing-source selection, samples, agreed quality checkpoints, and order follow-up.",
       categoriesEyebrow: "Suitable categories",
       categoriesTitle: "Initial product categories for private label programs.",
       categoriesDescription:
@@ -491,7 +498,7 @@ export const en = {
       packagingEyebrow: "Packaging and brand development",
       packagingTitle: "Turn sourcing requirements into market-ready packaging plans.",
       packagingDescription:
-        "INCAR helps buyers organize private label packaging requirements without claiming unverified client work or completed brand programs.",
+        "INCAR reviews and manages private label packaging requirements as part of the supply program, without claiming unverified client work or completed brand programs.",
       packagingDetails: [
         "Box design",
         "Logo placement",
@@ -503,9 +510,9 @@ export const en = {
       ],
       trustEyebrow: "Trust support for Private Label",
       trustTitle:
-        "Private Label programs need controlled supplier, packaging, and export details.",
+        "Private Label programs need controlled manufacturing, packaging, and supply details.",
       trustDescription:
-        "INCAR connects packaging control, label verification, quality inspection, factory matching, and export support into one review path for wholesale brand development.",
+        "INCAR brings packaging control, label verification, agreed inspection points, manufacturing-source selection, and supply follow-up into one commercial relationship.",
       inquiryEyebrow: "Start inquiry",
       inquiryTitle: "Tell us about your private label program.",
       inquiryDescription:
@@ -513,7 +520,7 @@ export const en = {
       qualityEyebrow: "Quality control",
       qualityTitle: "Quality support built around private label trust.",
       qualityDescription:
-        "Wholesale buyers need consistent products, accurate labels, and packaging that matches the approved plan. INCAR supports quality checkpoints from supplier screening through pre-shipment review.",
+        "Wholesale buyers need products, labels, and packaging aligned with the approved requirements. INCAR manages agreed quality checkpoints from manufacturing-source review through pre-shipment review.",
       qualityPoints: [
         "Factory screening",
         "Sample check",
@@ -525,41 +532,41 @@ export const en = {
       finalEyebrow: "Private label inquiry",
       finalTitle: "Start a structured brand development conversation.",
       finalDescription:
-        "Share your product category, packaging direction, and target market so INCAR can review sourcing and private label requirements.",
+        "Share your product category, packaging direction, quantity, and target market so INCAR can review the private label supply requirements.",
     },
     quality: {
       eyebrow: "Quality control",
-      title: "Inspection, supplier review, packaging control, and export support.",
+      title: "Inspection, manufacturing review, packaging control, and supply follow-up.",
       description:
-        "INCAR helps wholesale buyers review sourcing details before production and export coordination, using practical checkpoints, supplier communication, and clear service boundaries.",
+        "INCAR manages practical, order-specific checkpoints for manufacturing requirements, production, inspection, packaging, and supply while keeping the commercial relationship with the customer.",
       foundationEyebrow: "Trust foundation",
       foundationTitle: "Six trust pillars for China-to-Middle East sourcing.",
       foundationDescription:
         "The quality-control foundation covers inspection support, factory review, packaging control, export documentation, Middle Eastern market requirements, and the practical China sourcing advantage.",
       workflowEyebrow: "Quality inspection workflow",
       workflowTitle:
-        "A practical review workflow from requirement review to export coordination.",
+        "A practical review workflow from requirements to supply follow-up.",
       workflowDescription:
-        "The trust process helps buyers understand how INCAR organizes requirements, supplier matching, sample or specification checks, packaging review, pre-shipment readiness, and RFQ follow-up.",
+        "The process explains how INCAR organizes requirements, manufacturing-source selection, sample or specification checks, packaging review, pre-shipment readiness, and quotation follow-up.",
       inspectionEyebrow: "Inspection support",
       inspectionTitle: "What INCAR helps review before sourcing moves forward.",
       inspectionDescription:
-        "Quality-control support is built around practical checks that help buyers clarify product expectations, packaging needs, and supplier communication before quotation or shipment coordination.",
+        "Quality-control follow-up is built around practical checks tied to approved product expectations, packaging needs, and the agreed order scope.",
       qualityWorkflow: [
         "Sample review against buyer requirements, category expectations, and shared product details.",
-        "Product consistency checks for repeatable supply conversations and RFQ clarification.",
+        "Product consistency checks for repeatable supply requirements and quotation clarification.",
         "Packaging inspection covering boxes, labels, barcode details, and carton information.",
-        "Pre-shipment readiness support focused on practical review points before export coordination.",
+        "Pre-shipment readiness review focused on the checkpoints agreed for the order.",
       ],
       factoryEyebrow: "Factory verification approach",
-      factoryTitle: "Supplier review stays careful, comparative, and sourcing-led.",
+      factoryTitle: "Manufacturing-source selection stays careful and internal.",
       factoryDescription:
-        "INCAR helps compare supplier options and communication readiness without presenting supplier claims as automatic proof.",
+        "INCAR evaluates factories and manufacturing sources for the request without presenting them as customer-facing options or treating a review as automatic proof.",
       factoryApproach: [
-        "Supplier screening based on category fit, MOQ, communication readiness, and export support.",
-        "Production capability review without claiming blanket approval for every supplier option.",
-        "Factory communication support so buyer requirements are understood before quotation review.",
-        "Supplier option comparison for Middle Eastern wholesale buyers evaluating China sourcing programs.",
+        "Factory screening based on category fit, capability, MOQ, responsiveness, and order requirements.",
+        "Production capability review without claiming blanket approval for every manufacturing source.",
+        "Internal factory communication so customer requirements are understood before INCAR prepares a quotation.",
+        "Manufacturing-source selection remains an internal INCAR responsibility, not a customer-facing directory.",
       ],
       packagingEyebrow: "Packaging and labeling control",
       packagingTitle: "Packaging details matter before a wholesale order leaves China.",
@@ -567,35 +574,35 @@ export const en = {
         "The packaging-control layer supports private label planning, export carton review, barcode checks, and market-appropriate product information.",
       packagingControls: [
         "Export carton review and carton marking support.",
-        "Private Label packaging coordination for logo, label, barcode, and box information.",
+        "Private Label packaging management for logo, label, barcode, and box information.",
         "Arabic/English packaging readiness support for Middle Eastern market requirements.",
-        "Label verification before production or shipment coordination moves forward.",
+        "Label verification before production or shipment follow-up moves forward, when included in the order scope.",
       ],
       exportEyebrow: "Export documentation support",
       exportTitle:
-        "Export coordination needs clean product, packing, and buyer communication details.",
+        "Supply follow-up needs clean product, packing, and customer details.",
       exportDescription:
-        "INCAR assists with document preparation inputs and supplier communication while keeping commercial and border-process language careful.",
+        "INCAR manages agreed document inputs and internal manufacturing communication while avoiding legal, customs, or delivery guarantees.",
       exportSupport: [
         "Commercial invoice and packing list support based on confirmed product and quantity details.",
-        "Product information preparation for supplier communication and buyer review.",
-        "Shipment coordination document support without legal or border-process promises.",
+        "Product information preparation for internal manufacturing communication and customer review.",
+        "Shipment-document input support without legal or border-process promises.",
         "WhatsApp and email follow-up for wholesale purchasing teams.",
       ],
       marketEyebrow: "Middle Eastern wholesale buyer focus",
       marketTitle: "Trust content is organized around RFQ behavior.",
       marketDescription:
-        "The quality-control page supports buyers who need part-number review, Toyota and Hyundai launch focus, Private Label readiness, WhatsApp-friendly follow-up, and China export coordination.",
+        "The quality-control page supports buyers who need part-reference review, Private Label readiness, clear order requirements, and China supply follow-up.",
       boundariesEyebrow: "Service boundaries",
       boundaries: [
-        "INCAR helps review sourcing details and supplier information; it does not present unsupported certifications.",
-        "INCAR coordinates inspection and packaging checkpoints; it does not promise outcomes without real proof.",
+        "INCAR reviews manufacturing and specification details; it does not present unsupported certifications.",
+        "INCAR manages agreed inspection and packaging checkpoints; it does not promise outcomes without real proof.",
         "INCAR assists export preparation; it does not make legal, customs, or delivery-result promises.",
       ],
       proofEyebrow: "Proof points",
-      proofTitle: "What INCAR helps review and coordinate.",
+      proofTitle: "What INCAR reviews and manages.",
       proofDescription:
-        "These points describe service support only. They do not claim certifications, legal outcomes, or completed client projects.",
+        "These points describe INCAR's supply-management scope only. They do not claim certifications, legal outcomes, or completed client projects.",
       futureEyebrow: "Future proof assets",
       futureSuffix:
         "These are placeholders for future real materials, not claims that those assets are already published.",
@@ -605,50 +612,50 @@ export const en = {
     },
     about: {
       eyebrow: "About us",
-      title: "A B2B auto parts sourcing platform for the Middle East.",
+      title: "A specialized B2B auto parts supplier for the Middle East.",
       description:
-        "INCAR is a B2B auto parts platform supporting wholesalers and importers across the Middle East with part discovery, bulk RFQs, sourcing, and private label coordination from China.",
+        "INCAR is the supplier and commercial counterparty for wholesalers and importers across the Middle East. Customers deal with INCAR, and INCAR owns the quotation and supply relationship from China.",
       trustEyebrow: "How INCAR builds trust",
-      trustTitle: "A sourcing partner should make the review process clear.",
+      trustTitle: "A supply partner should make responsibility clear.",
       trustDescription:
-        "INCAR uses practical trust pillars to help wholesale buyers understand what is reviewed, coordinated, and prepared before an RFQ or Private Label inquiry moves forward.",
+        "INCAR explains what it reviews and manages across parts, specifications, manufacturing, quality control, packaging, and supply before a quotation or Private Label order moves forward.",
       narrative: [
         {
-          title: "China sourcing advantage",
-          copy: "INCAR helps buyers compare Chinese supplier options, coordinate samples, and review practical MOQ and packaging requirements.",
+          title: "One commercial counterparty",
+          copy: "The customer deals with INCAR. We issue quotations under our name and remain responsible for managing the agreed supply relationship.",
         },
         {
-          title: "Factory verification",
-          copy: "Supplier review focuses on category fit, production capability, communication readiness, lead time, and export support.",
+          title: "Internal manufacturing-source selection",
+          copy: "INCAR selects and manages factories and manufacturing sources internally based on category fit, capability, specification, lead time, and order requirements.",
         },
         {
           title: "Quality inspection approach",
           copy: "The inspection approach supports sample review, product consistency checks, packaging inspection, label verification, and pre-shipment checking.",
         },
         {
-          title: "Export support",
-          copy: "INCAR assists with product information, packing details, invoice and packing list support, and shipment document coordination.",
+          title: "Supply follow-up",
+          copy: "INCAR manages product information, packing details, agreed commercial-document inputs, and order follow-up as the supply partner.",
         },
         {
           title: "Middle Eastern market focus",
-          copy: "The platform is built for wholesalers, importers, distributors, and B2B auto parts buyers across Middle Eastern markets, with an RFQ-led sourcing workflow.",
+          copy: "The service is built for wholesalers, importers, distributors, and B2B auto parts buyers across Middle Eastern markets, with an RFQ-led supply workflow.",
         },
         {
           title: "Private Label capability",
-          copy: "Private Label support covers packaging coordination, logo placement, barcode and label checks, factory matching, and export preparation.",
+          copy: "Private Label supply covers packaging requirements, logo placement, barcode and label checks, manufacturing-source selection, production, and agreed quality-control follow-up.",
         },
       ],
       journeyTitle: "Our Journey",
       journeyCopy:
-        "INCAR is being built to support auto parts wholesalers and importers across the Middle East with part discovery, bulk requests, sourcing, packaging, and private label coordination from China. This section will later include the real founder journey and project story.",
+        "INCAR is being built as a specialized auto parts supplier for wholesalers and importers across the Middle East. Customers work with INCAR while factories and manufacturing sources remain internal to our managed supply process. This section will later include the real founder journey and project story.",
       pillarsEyebrow: "Trust pillars",
       pillarsTitle: "Structured support for serious wholesale sourcing.",
       pillarsDescription:
-        "The same trust system supports RFQ review, supplier comparison, Private Label planning, and export coordination.",
+        "The same trust system supports quotation review, internal manufacturing decisions, Private Label planning, inspection, packaging, and supply follow-up.",
       workflowEyebrow: "Review workflow",
-      workflowTitle: "A calm sourcing process from requirements to export coordination.",
+      workflowTitle: "A clear supply process from requirements to order follow-up.",
       workflowDescription:
-        "The trust workflow keeps buyer requirements, supplier comparison, sample and packaging checks, and export details connected.",
+        "The workflow keeps customer requirements, internal manufacturing-source selection, sample and packaging checks, and supply details connected under INCAR responsibility.",
       finalEyebrow: "Speak with INCAR",
       finalTitle: "Discuss your wholesale sourcing program with the INCAR team.",
     },
@@ -656,17 +663,17 @@ export const en = {
       eyebrow: "Local Draft Workspace",
       title: "Local RFQ Draft Workspace",
       description:
-        "Organize part references and quantities for sourcing from China to your Middle Eastern market in a draft stored locally on this device. File upload and request submission are not active yet.",
+        "Organize a local draft with part or OEM references, product names when known, vehicle context when needed, quantities, and notes for a future INCAR supply review. File upload and request submission are not active yet.",
       draftStatusTitle: "Upload and submission status",
       draftStatusDescription:
         "Submission and file upload are not active in Sprint 1A. Selected parts remain a local draft on this device only.",
       reviewEyebrow: "RFQ review support",
       reviewTitle: "Submit with clear sourcing context.",
       notes: [
-        "Buyers can send selected products, part numbers, OEM numbers, or Excel and CSV files.",
-        "INCAR reviews RFQ details before quotation preparation and supplier coordination.",
-        "Communication can continue through WhatsApp or email after review.",
-        "The RFQ process is designed for wholesale sourcing and request review.",
+        "Each item should include a part or OEM number, product name if known, make/model/year when needed, quantity, and notes.",
+        "A reference image may be recommended in a future workflow but will remain optional when the part number is clear; an image alone does not prove compatibility.",
+        "Customer details should include company, contact name, country or market, email, and phone or WhatsApp only after that channel is approved.",
+        "INCAR reviews the request, selects manufacturing sources internally, and prepares any later quotation under the INCAR name.",
       ],
     },
     contact: {
@@ -711,20 +718,20 @@ export const en = {
     },
     rfq: {
       eyebrow: "Wholesale Inquiry",
-      title: "Submit RFQ details",
+      title: "Prepare RFQ details",
       description:
-        "Upload an Excel or CSV file, select products from the RFQ list, or enter part numbers manually.",
+        "Prepare part or OEM references, product names when known, make/model/year when needed, quantities, and notes. Live submission and file upload are not active.",
       products: "Interested products / part numbers",
       quantity: "Quantity",
       quantityPlaceholder: "Estimated total quantity",
       productsPlaceholder: "Part numbers, OEM numbers, or categories",
       messagePlaceholder:
-        "Share OEM numbers, target quality, packaging preference, and destination port.",
-      submit: "Submit RFQ",
+        "Share part or OEM numbers, application context, quantity, specifications, packaging preference, and notes.",
+      submit: "Prepare Local Draft",
       received:
-        "Your RFQ has been received. Our sourcing team will review your request and contact you through WhatsApp or email.",
+        "This is a local draft only. Nothing has been submitted to INCAR and no email or WhatsApp message has been sent.",
       receivedWithFile:
-        "Your RFQ has been prepared with the selected file. Our sourcing team will review your request and contact you through WhatsApp or email.",
+        "This is a local draft only. The selected file has not been uploaded or sent to INCAR.",
       errors: {
         fullName: "Full name is required.",
         companyName: "Company name is required.",
@@ -736,23 +743,23 @@ export const en = {
       listEyebrow: "RFQ List",
       listTitle: "Selected quotation products",
       empty:
-        "Your RFQ list is currently empty. Add products from the catalog or upload an Excel file with part numbers.",
+        "Your RFQ list is currently empty. Published products can be added when available; live file upload is not active.",
       brandModel: "Brand / Model",
     },
     upload: {
-      label: "Upload RFQ file",
+      label: "Future bulk-list format",
       description:
-        "Upload an Excel or CSV file with part numbers, OEM numbers, vehicle models, quantities, and notes.",
+        "A future Excel or CSV workflow should use one row per item with the part or OEM number, product name, make/model/year when available, quantity, and notes. Upload is not active.",
       accepted: "Accepted:",
       maxSize: "Max size:",
       columnsTitle: "Recommended columns",
-      columns: "Part Number, OEM Number, Vehicle Model, Quantity, Notes",
+      columns: "Part / OEM Number, Product Name, Make / Model / Year, Quantity, Notes",
       remove: "Remove file",
       typeError: "Please upload a valid Excel or CSV file: .xlsx, .xls, or .csv.",
       sizeError: "File size must be 10 MB or less.",
       mimeFallback: "Browser did not report a MIME type",
       note:
-        "Format is validated by file extension and size in this frontend mock. Browser MIME type is captured as metadata when available.",
+        "This documents the future file format only. No file is uploaded, processed, emailed, or submitted in the current sprint.",
       mimeTypes: "Recognized MIME types include",
     },
     catalog: {
@@ -767,7 +774,7 @@ export const en = {
         "Share part numbers, OEM numbers, MOQ interest, or packaging requirements.",
       submit: "Request Catalog",
       received:
-        "Your catalog request has been received. Our team will review your interest and contact you through WhatsApp or email.",
+        "Catalog request submission is not active. No message has been sent to INCAR.",
       options: [
         "Toyota wholesale parts",
         "Hyundai wholesale parts",
@@ -797,7 +804,7 @@ export const en = {
         "Share target products, quality grade, timing, or sourcing requirements.",
       submit: "Start Private Label Inquiry",
       received:
-        "Your Private Label inquiry has been received. Our sourcing team will review your requirements and contact you through WhatsApp or email.",
+        "Private Label inquiry submission is not active. No message has been sent to INCAR.",
       errors: {
         fullName: "Full name is required.",
         companyName: "Company name is required.",
@@ -814,122 +821,122 @@ export const en = {
       "Future proof assets may include inspection photos, packaging samples, export document examples, and verified case studies.",
     pillars: {
       "quality-inspection-system": {
-        title: "Quality Inspection System",
+        title: "Auto Parts Expertise",
         shortDescription:
-          "Inspection support for samples, product consistency, packaging, labels, and pre-shipment checks.",
+          "Part and OEM reference review grounded in the requirements of wholesale auto parts supply.",
         longDescription:
-          "INCAR helps buyers review product samples, compare production consistency, inspect packaging details, verify label information, and prepare pre-shipment checking points before goods leave China.",
+          "INCAR applies auto parts knowledge when reviewing references, application context, product categories, quantities, and specifications before preparing a quotation.",
         highlights: [
-          "Sample review",
-          "Product consistency checks",
-          "Packaging inspection",
-          "Label verification",
-          "Pre-shipment checking",
+          "Part reference review",
+          "OEM number context",
+          "Application information",
+          "Category knowledge",
+          "Wholesale requirement review",
         ],
         proofPoints: [
-          "Inspection points are tied to the buyer RFQ and product requirements.",
-          "Packaging and label details are reviewed before export coordination.",
-          "Quality notes stay practical and sourcing-focused rather than promotional.",
+          "Part references and application details are reviewed together when fitment context matters.",
+          "Unclear references are not presented as verified compatibility.",
+          "Product availability is confirmed only through a reviewed INCAR quotation.",
         ],
         cta: "Request Quotation",
       },
       "factory-verification": {
-        title: "Factory Verification",
+        title: "Manufacturing and Specification Knowledge",
         shortDescription:
-          "Supplier screening, production capability review, category matching, and factory communication support.",
+          "Internal factory selection, production-capability review, and specification alignment for the request.",
         longDescription:
-          "INCAR helps screen supplier options, compare production capability, match factories by category, coordinate factory communication, and organize supplier comparisons for wholesale sourcing decisions.",
+          "INCAR evaluates factories and manufacturing sources internally, communicates the required specifications, and selects the source it considers suitable for the reviewed order.",
         highlights: [
-          "Supplier screening",
+          "Factory screening",
           "Production capability review",
-          "Category matching",
-          "Factory communication support",
-          "Supplier option comparison",
+          "Specification alignment",
+          "Material requirement review",
+          "Manufacturing-source selection",
         ],
         proofPoints: [
-          "Supplier comparison is based on category fit, MOQ, lead time, and export readiness.",
-          "Factory communication is coordinated around buyer requirements and product details.",
-          "Supplier notes are presented as review support, not as blanket approval claims.",
+          "Manufacturing decisions consider category fit, capability, MOQ, lead time, and order requirements.",
+          "Factory communication remains internal to INCAR's supply process.",
+          "A manufacturing-source review is not a blanket certification or permanent approval.",
         ],
         cta: "Start Sourcing Request",
       },
       "packaging-control": {
-        title: "Packaging Control",
+        title: "Inspection and Quality Control",
         shortDescription:
-          "Support for export carton review, private label packaging, barcode checks, and Arabic/English readiness.",
+          "Order-specific checkpoints for samples, production consistency, packaging, labels, and pre-shipment review.",
         longDescription:
-          "INCAR coordinates packaging requirements across export cartons, private label boxes, product labels, barcode details, Arabic/English information, and carton marking support.",
+          "INCAR manages the inspection and quality-control points agreed for an order, which may cover samples, specifications, product consistency, packaging, labels, and pre-shipment readiness.",
         highlights: [
-          "Export carton review",
-          "Private Label packaging coordination",
-          "Barcode and label checks",
-          "Arabic/English packaging readiness",
-          "Carton marking support",
+          "Sample checks when agreed",
+          "Specification checkpoints",
+          "Product consistency review",
+          "Packaging and label checks",
+          "Pre-shipment readiness",
         ],
         proofPoints: [
-          "Packaging requirements are collected before sourcing and production coordination.",
-          "Barcode, label, and carton marking details can be reviewed with supplier documents.",
-          "Private Label packaging stays aligned with wholesale market needs.",
+          "Inspection points are defined against the reviewed quotation and order requirements.",
+          "The applicable scope can vary by product and order.",
+          "Quality-control language does not create an unsupported blanket guarantee.",
         ],
         cta: "Private Label Inquiry",
       },
       "export-documentation": {
-        title: "Export Documentation",
+        title: "Attention to Detail",
         shortDescription:
-          "Commercial invoice support, packing list support, product information preparation, and shipment document coordination.",
+          "Careful review of references, quantities, specifications, packaging, labels, and agreed document inputs.",
         longDescription:
-          "INCAR assists with commercial invoice support, packing list support, product information preparation, shipment coordination documents, and communication with buyers during the export workflow.",
+          "INCAR keeps product, commercial, packaging, and supply details connected so the customer requirements and the managed manufacturing work remain aligned.",
         highlights: [
-          "Commercial invoice support",
-          "Packing list support",
-          "Product information preparation",
-          "Shipment coordination documents",
-          "Buyer communication support",
+          "Reference accuracy",
+          "Quantity and specification review",
+          "Packaging details",
+          "Label and carton information",
+          "Commercial-document inputs",
         ],
         proofPoints: [
-          "Documentation support follows the product list, quantities, and packing details.",
-          "Export information is coordinated with suppliers and buyer communication needs.",
-          "INCAR assists with sourcing documentation without making legal or border-process guarantees.",
+          "Details are tied back to the reviewed product list and order requirements.",
+          "Changes require review before they are treated as approved supply instructions.",
+          "Document support does not imply legal, customs, or delivery guarantees.",
         ],
         cta: "Speak With INCAR",
       },
       "middle-east-market-focus": {
-        title: "Middle Eastern Market Focus",
+        title: "China Market Knowledge",
         shortDescription:
-          "RFQ-based sourcing for auto parts wholesalers and importers across Middle Eastern markets.",
+          "Practical knowledge of China's manufacturing environment applied to Middle Eastern wholesale requirements.",
         longDescription:
-          "INCAR supports wholesalers, importers, distributors, and B2B auto parts buyers across the Middle East through RFQ-based sourcing and Private Label coordination from China.",
+          "INCAR uses China market and manufacturing knowledge to evaluate sources, clarify production requirements, and manage supply for wholesalers and importers across the Middle East.",
         highlights: [
-          "Middle Eastern wholesale buyer focus",
-          "Toyota and Hyundai launch focus",
-          "RFQ-based sourcing",
-          "WhatsApp-friendly communication",
-          "Private Label market needs",
+          "China manufacturing context",
+          "Factory capability review",
+          "MOQ and lead-time context",
+          "Packaging capability review",
+          "Middle Eastern market requirements",
         ],
         proofPoints: [
-          "The platform is structured around wholesale RFQ and inquiry workflows.",
-          "Launch product data stays focused on Toyota and Hyundai programs.",
-          "Buyer communication can continue through WhatsApp or email after inquiry review.",
+          "Manufacturing sources remain an internal part of INCAR's supply work.",
+          "No factory listing, contact directory, or source identity is offered to customers.",
+          "Commercial terms remain subject to an INCAR review and quotation.",
         ],
         cta: "Submit RFQ",
       },
       "china-advantage": {
-        title: "China Advantage",
+        title: "Clear Arabic, English, and Chinese Communication",
         shortDescription:
-          "China factory access, supplier comparison, flexible sourcing, Private Label support, and faster factory communication.",
+          "Clear communication across customer requirements and internal manufacturing work in three languages.",
         longDescription:
-          "INCAR helps buyers use China factory access, supplier comparison, product sourcing flexibility, Private Label coordination, and closer communication with Chinese factories.",
+          "INCAR communicates with customers in Arabic or English and handles Chinese manufacturing communication internally as a supporting capability within the supply relationship.",
         highlights: [
-          "China factory access",
-          "Supplier comparison",
-          "Product sourcing flexibility",
-          "Private Label support",
-          "Faster factory communication",
+          "Arabic customer communication",
+          "English customer communication",
+          "Chinese manufacturing communication",
+          "Requirement clarification",
+          "Clear commercial follow-up",
         ],
         proofPoints: [
-          "China-based sourcing support helps coordinate supplier communication and samples.",
-          "Supplier options can be compared by category, MOQ, packaging support, and export readiness.",
-          "Private Label requirements can be reviewed close to the sourcing and production workflow.",
+          "Language support strengthens the process but is not presented as INCAR's primary value.",
+          "Customer requirements are translated into internal manufacturing instructions where needed.",
+          "The customer continues to deal commercially with INCAR, not with the factory.",
         ],
         cta: "Explore Services",
       },
@@ -939,21 +946,21 @@ export const en = {
         id: "requirements-review",
         title: "Requirement Review",
         description:
-          "Check part numbers, categories, quantities, packaging needs, and target market details before supplier coordination.",
+          "Check part or OEM numbers, product names, application context, quantities, packaging needs, and target-market details before quotation work begins.",
         order: 1,
       },
       {
-        id: "supplier-product-matching",
-        title: "Supplier / Product Matching",
+        id: "manufacturing-source-selection",
+        title: "Manufacturing Source Selection",
         description:
-          "Help compare factory options and product families by category fit, MOQ, sample readiness, lead time, packaging support, and export readiness.",
+          "INCAR evaluates factories and product families internally by category fit, capability, MOQ, sample readiness, lead time, and order requirements.",
         order: 2,
       },
       {
         id: "sample-specification-check",
         title: "Sample or Specification Check",
         description:
-          "Support sample review, OEM number checks, specification review, and product consistency checkpoints before quotation or production coordination.",
+          "Review samples when agreed, OEM references, specifications, and product-consistency checkpoints before quotation or production approval.",
         order: 3,
       },
       {
@@ -971,10 +978,10 @@ export const en = {
         order: 5,
       },
       {
-        id: "rfq-export-coordination",
-        title: "RFQ / Export Coordination",
+        id: "quotation-supply-follow-up",
+        title: "Quotation and Supply Follow-up",
         description:
-          "Assist with RFQ follow-up, supplier communication, packing information, and export coordination documents for buyers.",
+          "INCAR handles quotation follow-up, internal manufacturing communication, packing information, and agreed supply-document inputs for the customer.",
         order: 6,
       },
     ],
@@ -995,7 +1002,7 @@ export const en = {
       {
         title: "Factory matching",
         description:
-          "Compare factory options by capability, export readiness, sample timing, and packaging support.",
+          "INCAR selects manufacturing sources internally by capability, specification fit, sample timing, and packaging support.",
       },
       {
         title: "Custom packaging",
@@ -1005,7 +1012,7 @@ export const en = {
       {
         title: "Logo printing",
         description:
-          "Coordinate logo placement across boxes, labels, product inserts, and approved brand materials.",
+          "Manage logo placement across boxes, labels, product inserts, and approved brand materials.",
       },
       {
         title: "Barcode and label design",
@@ -1015,7 +1022,7 @@ export const en = {
       {
         title: "OEM / ODM support",
         description:
-          "Support specification alignment, OEM reference matching, sample review, and production coordination.",
+          "Support specification alignment, OEM reference matching, sample review, and production management.",
       },
       {
         title: "Quality inspection",
@@ -1025,12 +1032,12 @@ export const en = {
       {
         title: "Export documentation",
         description:
-          "Coordinate invoice, packing list, carton details, and export-ready documentation with suppliers.",
+          "Manage invoice inputs, packing-list details, carton information, and agreed supply documentation.",
       },
       {
-        title: "Export coordination for Middle Eastern markets",
+        title: "Supply follow-up for Middle Eastern markets",
         description:
-          "Align production timing, packing details, and shipment coordination for wholesale import flows.",
+          "Align production timing, packing details, and shipment follow-up for wholesale import flows.",
       },
     ],
     process: [
@@ -1052,24 +1059,24 @@ export const en = {
       {
         title: "Sample confirmation",
         description:
-          "Review product samples, packaging samples, label details, and supplier readiness before production.",
+          "Review product samples, packaging samples, label details, and manufacturing readiness before production.",
       },
       {
         title: "Production and quality inspection",
         description:
-          "Coordinate production checkpoints, packaging inspection, label verification, and consistency checks.",
+          "Manage agreed production checkpoints, packaging inspection, label verification, and consistency checks.",
       },
       {
-        title: "Export and shipping coordination",
+        title: "Export and shipping follow-up",
         description:
-          "Prepare export documentation, packing details, supplier communication, and destination requirements for a Middle Eastern target market.",
+          "Prepare agreed export-document inputs, packing details, internal manufacturing communication, and destination requirements for a Middle Eastern target market.",
       },
     ],
     categories: {
       "Brake System":
         "Fast-moving brake items can support clear brand positioning when quality grade, fitment, and packaging are controlled.",
       "Suspension Parts":
-        "Suspension programs benefit from durable packaging, consistent supplier checks, and clear wholesale labeling.",
+        "Suspension programs benefit from durable packaging, consistent manufacturing checks, and clear wholesale labeling.",
       Filters:
         "Filter lines are suitable for private label because packaging, barcode labeling, and reorder planning are central to distribution.",
       "Engine Parts":

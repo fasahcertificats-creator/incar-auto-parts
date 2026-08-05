@@ -1,57 +1,47 @@
 # INCAR AUTO PARTS Frontend Foundation
 
-## Product Positioning
+## Commercial Positioning
 
-INCAR AUTO PARTS is positioned as Wholesale Auto Parts Sourcing from China for the Middle East. The platform is a China-based B2B discovery and sourcing website for auto parts wholesalers and importers across Middle Eastern markets. It is an RFQ-led workflow, not a consumer shopping storefront; production upload and submission remain inactive until a secure workflow is implemented.
+INCAR AUTO PARTS is a specialized B2B auto parts supplier serving wholesalers and importers across the Middle East from China. The customer deals with INCAR. INCAR reviews requirements, selects factories and manufacturing sources internally, performs pricing analysis, issues quotations under the INCAR name, and manages the agreed specifications, production, quality-control checkpoints, packaging, and supply follow-up.
+
+The public website is an RFQ-led discovery and request-preparation surface. It is not a marketplace, factory directory, broker, translator, or customer-to-factory connection service. Production upload and submission remain inactive until a secure workflow is implemented.
 
 ## Application Structure
 
-- `src/app`: App Router pages, product detail routes, and SEO metadata.
-- `src/components`: reusable UI and business workflow components.
-- `src/contexts`: client-side RFQ and locale-direction providers.
-- `src/data`: structured mock brands, vehicle models, categories, products, catalogs, RFQ items, and private label services.
-- `src/features`: feature entry points for products, RFQ, private label, and catalogs.
-- `src/lib`: shared helpers such as metadata generation.
+- `src/app`: App Router pages, localized routes, product detail routes, and SEO metadata.
+- `src/components`: reusable UI and commercial-workflow components.
+- `src/contexts`: client-side RFQ draft and locale-direction providers.
+- `src/data/production`: production catalog intake and publication source.
+- `src/data`: structured development fixtures and service content.
+- `src/features`: discovery, local RFQ draft, Private Label, trust, and catalog features.
+- `src/lib`: shared metadata, catalog, discovery, and validation helpers.
 - `src/types`: shared domain models.
-- `public/images`: generated hero and product/category assets.
 
-## Core Data Models
+## Discovery and Catalog Rules
 
-### Product
+Toyota and Hyundai makes and models are an initial browsing structure only. Empty model pages must state that no products are published. Product and catalog records appear publicly only after they pass the existing production intake and publication rules.
 
-Products include `name`, `brand`, `carModel`, `category`, `partNumber`, `oemNumber`, `compatibleVehicles`, `image`, `specifications`, `moq`, `origin`, `privateLabelAvailable`, `leadTime`, and `qualityGrade`.
+Catalogs are INCAR catalogs containing products reviewed and approved by INCAR. They are not factory listings or manufacturing-source libraries. Empty catalog states must remain honest.
 
-### Catalog
+## RFQ Draft Contract
 
-Catalogs include `slug`, `title`, `description`, `brand`, `fileType`, `updated`, `items`, and `audience`.
+RFQ state remains a local device draft. Current request types, request intent, discovery eligibility, and request-item architecture must remain unchanged.
 
-### RFQ Item
+A future product-request item should capture:
 
-RFQ state stores `productId` and `quantity`. This is intentionally separate from retail ordering language and can later map to database-backed quotation line items.
+- Part or OEM number.
+- Product name when known.
+- Make, model, and year when application context is needed.
+- Quantity.
+- Reference image when available.
+- Notes and specification requirements.
 
-## Core Components
-
-- `Header`, `Footer`, `FloatingWhatsapp`: site-wide trust and conversion shell.
-- `Hero`, `TrustIndicators`, `PrivateLabelSection`, `ProcessSection`, `CatalogCard`, `CTAButton`: reusable landing and sourcing sections.
-- `ProductExplorer`: search and filtering by part number, OEM number, model, brand, and category.
-- `ProductCard`, `ProductImage`, `AddToRfqButton`: product discovery and RFQ-only actions.
-- `RFQForm`: quotation lead capture with selected products and Excel upload.
-- `PrivateLabelForm`: dedicated private label inquiry workflow.
-- `SectionHeader`, `ButtonLink`: reusable presentation primitives kept for compatibility.
+A reference image may be recommended, but it is optional when a clear part number is available and never proves compatibility by itself. Future customer details should include company, contact name, country or market, email, and an approved phone or WhatsApp channel. No file upload, email, WhatsApp, or submission is active now.
 
 ## Routing
 
-- `/`: homepage with B2B positioning, trust indicators, process, catalogs, and featured products.
-- `/products`: searchable product catalog.
-- `/products/toyota`: Toyota-focused catalog page.
-- `/products/hyundai`: Hyundai-focused catalog page.
-- `/products/[slug]`: SEO-friendly product details.
-- `/private-label`: core private label business page.
-- `/catalogs`: catalog lead magnets.
-- `/rfq`: request quotation workflow.
-- `/about`: sourcing company positioning.
-- `/contact`: contact and WhatsApp lead capture.
+The localized public routes cover home, About, Sourcing Services, Private Label, Parts, RFQ, Catalogs, and Contact in Arabic and English. Locale routing, the sitemap structure, the Discovery Repository, search contract, eligibility rules, and the production catalog intake pipeline remain authoritative.
 
 ## Future Backend Path
 
-The current mock data can later be replaced by repository functions backed by a database. RFQ submissions should become durable records with related line items and uploaded Excel files. Catalog download requests can become leads. Private label inquiries can become a separate lead type for CRM routing.
+Any future persistence, file processing, messaging, catalog request, or CRM integration requires a separately approved backend phase. This document does not authorize or imply those capabilities.

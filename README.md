@@ -1,20 +1,22 @@
 # INCAR AUTO PARTS
 
-INCAR AUTO PARTS is a B2B auto parts platform supporting wholesalers and importers across the Middle East with sourcing and private label coordination from China.
+INCAR AUTO PARTS is a specialized B2B auto parts supplier serving wholesalers and importers across the Middle East from China.
 
 ## Brand Identity
 
 - Brand name: INCAR AUTO PARTS
 - Short brand name: INCAR
-- Positioning: Wholesale Auto Parts Sourcing for Middle Eastern Markets
-- Extended positioning: Wholesale Auto Parts Sourcing from China for the Middle East
-- Core workflow: RFQ-only B2B sourcing
+- Positioning: B2B Auto Parts Supplier for Middle Eastern Markets
+- Extended positioning: Specialized Auto Parts Supplier from China for the Middle East
+- Core workflow: RFQ-led B2B supply
 
 ## Business Focus
 
-INCAR supports auto parts wholesalers and importers across the Middle East with part discovery, bulk request lists, sourcing, and private label coordination from China.
+Customers deal commercially with INCAR. INCAR reviews requirements, selects factories and manufacturing sources internally, performs pricing analysis, issues quotations under the INCAR name, and manages the agreed specifications, production, quality-control checkpoints, packaging, and supply follow-up.
 
-The platform supports product discovery, local RFQ drafts, sourcing-service review, and private label requirements for Middle Eastern markets. It is built for wholesale sourcing conversations rather than consumer shopping flows.
+The website supports product discovery, local RFQ drafts, supply-service review, and private label requirements for Middle Eastern markets. It is not a marketplace, factory directory, broker, translator, or customer-to-factory connection service. Factory names and contacts remain backstage unless a later approved business process explicitly requires otherwise.
+
+Toyota and Hyundai makes and models currently form an initial browsing structure only. They do not establish published products, catalogs, inventory, availability, or quotation readiness.
 
 ## Local Development
 

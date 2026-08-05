@@ -5,21 +5,21 @@ import { absoluteSiteUrl } from "./site-url";
 
 const siteName = brand.name;
 const baseDescription =
-  "Wholesale auto parts sourcing from China for auto parts wholesalers and importers across the Middle East, including part discovery, bulk request lists, sourcing, and private label coordination.";
+  "INCAR is a specialized B2B auto parts supplier serving wholesalers and importers across the Middle East with expertise in parts, manufacturing, inspection, and supply from China.";
 
 export function pageMetadata(title: string, description = baseDescription): Metadata {
   return {
     title: `${title} | ${siteName}`,
     description,
     keywords: [
-      "auto parts sourcing China",
-      "Middle East wholesale auto parts sourcing",
+      "auto parts supplier China",
+      "Middle East wholesale auto parts supplier",
       "Toyota spare parts China",
       "Hyundai spare parts China",
       "private label auto parts",
       "OEM packaging auto parts",
       "INCAR AUTO PARTS",
-      "China to Middle East B2B sourcing",
+      "China to Middle East B2B auto parts supply",
     ],
     openGraph: {
       title: `${title} | ${siteName}`,

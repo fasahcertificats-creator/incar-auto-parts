@@ -17,7 +17,7 @@ import { pageMetadata } from "@/lib/seo";
 
 export const metadata = pageMetadata(
   "Quality Control and Trust System",
-  "INCAR quality-review coordination, supplier review, packaging control, and export information support for auto parts wholesalers across the Middle East.",
+  "INCAR manages order-specific manufacturing, inspection, quality-control, packaging, and supply checkpoints for auto parts wholesalers across the Middle East.",
 );
 
 export default async function QualityControlPage() {

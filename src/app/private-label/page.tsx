@@ -21,7 +21,7 @@ import { pageMetadata } from "@/lib/seo";
 
 export const metadata = pageMetadata(
   "Private Label Auto Parts for Middle Eastern Markets",
-  "Private Label requirements, packaging, labels, and production coordination from China for auto parts wholesalers and importers across the Middle East.",
+  "INCAR supplies Private Label auto parts programs with managed specifications, manufacturing-source selection, packaging, production, and agreed inspection follow-up.",
 );
 
 export default async function PrivateLabelPage() {
