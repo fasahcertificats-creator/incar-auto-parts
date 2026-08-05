@@ -1,10 +1,7 @@
-import { permanentRedirect } from "next/navigation";
+import { notFound } from "next/navigation";
 
-type Props = {
-  params: Promise<{ slug: string }>;
-};
-
-export default async function LegacyProductDetailsRedirect({ params }: Props) {
-  const { slug } = await params;
-  permanentRedirect(`/ar/products/${encodeURIComponent(slug)}`);
+// `/products/:slug` is redirected centrally before filesystem routing. The
+// localized product route then enforces publication and sample-data rules.
+export default function LegacyProductRouteFallback() {
+  notFound();
 }

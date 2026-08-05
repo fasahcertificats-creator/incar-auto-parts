@@ -1,6 +1,6 @@
 import type { Metadata } from "next";
 import { notFound } from "next/navigation";
-import Home from "@/app/page";
+import { HomeFoundation } from "@/features/home/HomeFoundation";
 import { isLocale } from "@/i18n/config";
 import { getDictionary } from "@/i18n/dictionaries";
 import { localizedPageMetadata } from "@/lib/seo";
@@ -28,4 +28,4 @@ export async function generateMetadata({
   });
 }
 
-export default Home;
+export default HomeFoundation;
