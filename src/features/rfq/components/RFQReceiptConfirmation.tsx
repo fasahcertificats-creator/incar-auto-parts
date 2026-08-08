@@ -69,7 +69,7 @@ export function RFQReceiptConfirmation() {
           <dl className="mt-8 grid gap-4 rounded-md border border-border bg-background p-5 sm:grid-cols-2">
             <div className="sm:col-span-2">
               <dt className="text-xs font-semibold uppercase tracking-[0.14em] text-muted">{copy.reference}</dt>
-              <dd className="mt-2 text-xl font-semibold text-white" dir="ltr">{state.receipt.publicReference}</dd>
+              <dd className="mt-2 break-all text-xl font-semibold text-white" dir="ltr">{state.receipt.publicReference}</dd>
             </div>
             <div>
               <dt className="text-xs font-semibold uppercase tracking-[0.14em] text-muted">{copy.status}</dt>
@@ -96,7 +96,7 @@ export function RFQReceiptConfirmation() {
 
         {state.kind === "unavailable" || state.kind === "recoverable-error" ? (
           <div className="mt-8 rounded-md border border-primary/30 bg-primary/10 p-5 text-sm leading-7 text-white" role="alert">
-            <p>{copy.unavailable}</p>
+            <p>{state.kind === "unavailable" ? copy.unavailable : copy.loadError}</p>
             {state.kind === "recoverable-error" ? (
               <button
                 type="button"

@@ -44,7 +44,7 @@ export function RFQList() {
                 <div>
                   <Link
                     href={localizeHref(locale, `/products/${item.slug}`)}
-                    className="incar-focus rounded-sm text-lg font-semibold text-white hover:text-metallic-silver"
+                    className="incar-focus break-words rounded-sm text-lg font-semibold text-white hover:text-metallic-silver"
                   >
                     {item.productName}
                   </Link>
@@ -61,7 +61,7 @@ export function RFQList() {
                       <dt className="text-xs uppercase tracking-[0.14em] text-metallic-silver">
                         {dictionary.productLabels.partNumber}
                       </dt>
-                      <dd dir="ltr" className="mt-1 font-semibold text-white">
+                      <dd dir="ltr" className="mt-1 break-all font-semibold text-white">
                         {item.partNumber}
                       </dd>
                     </div>
@@ -69,7 +69,7 @@ export function RFQList() {
                       <dt className="text-xs uppercase tracking-[0.14em] text-metallic-silver">
                         {dictionary.productLabels.oemNumber}
                       </dt>
-                      <dd dir="ltr" className="mt-1 font-semibold text-white">
+                      <dd dir="ltr" className="mt-1 break-all font-semibold text-white">
                         {item.oemNumber}
                       </dd>
                     </div>

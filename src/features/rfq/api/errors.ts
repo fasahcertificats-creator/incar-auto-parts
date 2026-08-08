@@ -64,3 +64,8 @@ export function mapRfqError(status: number, code: string | null, retryAfter: str
   if (status >= 500) return new RfqApiError("server", status, code);
   return new RfqApiError("unknown", status, code);
 }
+
+export function retryDelayMilliseconds(error: RfqApiError): number {
+  if (error.kind !== "rate-limit" || error.retryAfterSeconds === null) return 0;
+  return Math.min(2_147_483_647, error.retryAfterSeconds * 1_000);
+}

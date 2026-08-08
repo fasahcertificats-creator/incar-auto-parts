@@ -1,12 +1,19 @@
 import assert from "node:assert/strict";
 import test from "node:test";
 import {
+  clearAttempt,
   fingerprintPayload,
+  getOrCreateAttempt,
+  markAttemptRetryable,
   resolveAttempt,
   shouldClearDraft,
 } from "../src/features/rfq/api/attempt.ts";
 import { getRfqReceipt, submitProductRfq } from "../src/features/rfq/api/client.ts";
-import { mapRfqError, RfqApiError } from "../src/features/rfq/api/errors.ts";
+import {
+  mapRfqError,
+  retryDelayMilliseconds,
+  RfqApiError,
+} from "../src/features/rfq/api/errors.ts";
 import {
   mapProductRfqPayload,
   validateProductRfqDraft,
@@ -94,6 +101,21 @@ test("validates contact, item, quantity, privacy, and compatibility before HTTP"
   );
 });
 
+test("accepts 50 Product RFQ items and rejects 51 before HTTP", () => {
+  const items = Array.from({ length: 51 }, (_, index) => ({
+    ...selectedItem,
+    productId: `candidate-${index + 1}`,
+  }));
+  assert.equal(
+    validateProductRfqDraft({ locale: "en", formData, items: items.slice(0, 50) }).includes("item-limit"),
+    false,
+  );
+  assert.equal(
+    validateProductRfqDraft({ locale: "en", formData, items }).includes("item-limit"),
+    true,
+  );
+});
+
 test("reuses one UUID for retry and creates a new UUID after payload change", async () => {
   const firstFingerprint = await fingerprintPayload(payload);
   const first = resolveAttempt(null, firstFingerprint, () => "00000000-0000-4000-8000-000000000001");
@@ -111,6 +133,40 @@ test("reuses one UUID for retry and creates a new UUID after payload change", as
     () => "00000000-0000-4000-8000-000000000002",
   );
   assert.notEqual(changedAttempt.idempotencyKey, first.idempotencyKey);
+});
+
+test("restores a retryable attempt after refresh and invalidates it after an edit", async () => {
+  const values = new Map();
+  const originalWindow = globalThis.window;
+  globalThis.window = {
+    localStorage: {
+      getItem: (key) => values.get(key) ?? null,
+      setItem: (key, value) => values.set(key, value),
+      removeItem: (key) => values.delete(key),
+    },
+  };
+
+  try {
+    const first = await getOrCreateAttempt(payload);
+    markAttemptRetryable(first);
+    const restored = await getOrCreateAttempt(payload);
+    assert.equal(restored.idempotencyKey, first.idempotencyKey);
+    assert.equal(restored.state, "retryable");
+
+    const editedPayload = mapProductRfqPayload({
+      locale: "ar",
+      formData,
+      items: [{ ...selectedItem, quantity: 11 }],
+    });
+    const edited = await getOrCreateAttempt(editedPayload);
+    assert.notEqual(edited.idempotencyKey, first.idempotencyKey);
+
+    clearAttempt();
+    assert.equal(values.size, 0);
+  } finally {
+    if (originalWindow === undefined) delete globalThis.window;
+    else globalThis.window = originalWindow;
+  }
 });
 
 test("submits with JSON, credentials, and the supplied idempotency key", async () => {
@@ -178,9 +234,13 @@ test("maps backend errors and network failure without exposing raw messages", as
   assert.equal(mapRfqError(409, "RFQ_SUBMISSION_IN_PROGRESS").kind, "submission-in-progress");
   assert.equal(mapRfqError(413, "PAYLOAD_TOO_LARGE").kind, "payload-too-large");
   assert.equal(mapRfqError(415, "UNSUPPORTED_MEDIA_TYPE").kind, "unsupported-media-type");
-  assert.equal(mapRfqError(429, "RATE_LIMIT_EXCEEDED", "7").retryAfterSeconds, 7);
+  const rateLimit = mapRfqError(429, "RATE_LIMIT_EXCEEDED", "7");
+  assert.equal(rateLimit.retryAfterSeconds, 7);
+  assert.equal(retryDelayMilliseconds(rateLimit), 7_000);
   assert.equal(mapRfqError(503, "RFQ_SUBMISSION_CAPACITY_EXCEEDED").kind, "capacity");
   assert.equal(mapRfqError(503, "RFQ_REFERENCE_GENERATION_FAILED").kind, "reference-generation");
+  assert.equal(mapRfqError(500, "INTERNAL_ERROR").kind, "server");
+  assert.equal(mapRfqError(503, null).kind, "server");
   await assert.rejects(
     submitProductRfq(payload, "00000000-0000-4000-8000-000000000001", {
       baseUrl: "http://localhost:4000",
@@ -193,5 +253,5 @@ test("maps backend errors and network failure without exposing raw messages", as
 test("only successful HTTP outcomes clear the draft and attempt", () => {
   assert.equal(shouldClearDraft(201), true);
   assert.equal(shouldClearDraft(200), true);
-  for (const status of [400, 409, 413, 415, 429, 503]) assert.equal(shouldClearDraft(status), false);
+  for (const status of [400, 409, 413, 415, 429, 500, 503]) assert.equal(shouldClearDraft(status), false);
 });

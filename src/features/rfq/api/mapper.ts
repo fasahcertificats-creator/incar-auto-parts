@@ -8,6 +8,7 @@ export type RfqDraftValidationCode =
   | "country-code"
   | "email"
   | "items"
+  | "item-limit"
   | "item-reference"
   | "quantity"
   | "privacy"
@@ -36,6 +37,7 @@ export function validateProductRfqDraft({
   if (!formData.privacyConsent) errors.push("privacy");
   const hasManualReference = formData.interestedProductsText.trim().length > 0;
   if (items.length === 0 && !hasManualReference) errors.push("items");
+  if (items.length > 50) errors.push("item-limit");
   if (items.some((item) => !item.partNumber && !item.oemNumber && !item.productId)) {
     errors.push("item-reference");
   }

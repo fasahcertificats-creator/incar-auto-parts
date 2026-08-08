@@ -2,7 +2,7 @@
 
 import { useRouter } from "next/navigation";
 import type { FormEvent } from "react";
-import { useMemo, useRef, useState } from "react";
+import { useEffect, useMemo, useRef, useState } from "react";
 import { useLocale } from "@/contexts/LocaleContext";
 import { getDictionary } from "@/i18n/dictionaries";
 import { localizeHref } from "@/i18n/routing";
@@ -14,7 +14,11 @@ import {
   markAttemptRetryable,
 } from "../api/attempt.ts";
 import { submitProductRfq } from "../api/client.ts";
-import { RfqApiError, type RfqErrorKind } from "../api/errors.ts";
+import {
+  retryDelayMilliseconds,
+  RfqApiError,
+  type RfqErrorKind,
+} from "../api/errors.ts";
 import {
   mapProductRfqPayload,
   validateProductRfqDraft,
@@ -40,8 +44,14 @@ export function RFQForm() {
   const integration = copy.integration;
   const [state, setState] = useState<SubmissionState>("idle");
   const [errors, setErrors] = useState<string[]>([]);
+  const [retryBlocked, setRetryBlocked] = useState(false);
   const submissionGuardRef = useRef(false);
   const errorSummaryRef = useRef<HTMLDivElement>(null);
+  const retryTimerRef = useRef<number | null>(null);
+
+  useEffect(() => () => {
+    if (retryTimerRef.current !== null) window.clearTimeout(retryTimerRef.current);
+  }, []);
 
   const defaultInterestedProducts = useMemo(
     () => items.map((item) => item.partNumber || item.oemNumber).filter(Boolean).join(", "),
@@ -55,6 +65,7 @@ export function RFQForm() {
       "country-code": integration.errors.countryCode,
       email: integration.errors.email,
       items: integration.errors.items,
+      "item-limit": integration.errors.itemLimit,
       "item-reference": integration.errors.itemReference,
       quantity: integration.errors.quantity,
       privacy: integration.errors.privacy,
@@ -134,7 +145,20 @@ export function RFQForm() {
         const attempt = await getOrCreateAttempt(payload);
         markAttemptRetryable(attempt);
       }
-      showErrors([apiErrorMessage(apiError.kind)]);
+      const nextErrors = [apiErrorMessage(apiError.kind)];
+      const retryDelay = retryDelayMilliseconds(apiError);
+      if (retryDelay > 0 && apiError.retryAfterSeconds !== null) {
+        setRetryBlocked(true);
+        if (retryTimerRef.current !== null) window.clearTimeout(retryTimerRef.current);
+        retryTimerRef.current = window.setTimeout(() => {
+          retryTimerRef.current = null;
+          setRetryBlocked(false);
+        }, retryDelay);
+        nextErrors.push(
+          integration.retryAfter.replace("{seconds}", String(apiError.retryAfterSeconds)),
+        );
+      }
+      showErrors(nextErrors);
     } finally {
       submissionGuardRef.current = false;
     }
@@ -151,11 +175,11 @@ export function RFQForm() {
       <div className="mt-6 grid gap-4 md:grid-cols-2">
         <label className={labelClass} htmlFor="rfq-full-name">
           {dictionary.forms.common.fullName}
-          <input id="rfq-full-name" className={inputClass} name="fullName" autoComplete="name" required />
+          <input id="rfq-full-name" className={inputClass} name="fullName" autoComplete="name" maxLength={150} required />
         </label>
         <label className={labelClass} htmlFor="rfq-company-name">
           {dictionary.forms.common.companyName}
-          <input id="rfq-company-name" className={inputClass} name="companyName" autoComplete="organization" required />
+          <input id="rfq-company-name" className={inputClass} name="companyName" autoComplete="organization" maxLength={200} required />
         </label>
         <label className={labelClass} htmlFor="rfq-country-code">
           {integration.countryCode}
@@ -172,15 +196,15 @@ export function RFQForm() {
         </label>
         <label className={labelClass} htmlFor="rfq-city">
           {dictionary.forms.common.city}
-          <input id="rfq-city" className={inputClass} name="city" autoComplete="address-level2" />
+          <input id="rfq-city" className={inputClass} name="city" autoComplete="address-level2" maxLength={120} />
         </label>
         <label className={labelClass} htmlFor="rfq-email">
           {dictionary.forms.common.email}
-          <input id="rfq-email" className={inputClass} type="email" name="email" autoComplete="email" required />
+          <input id="rfq-email" className={inputClass} type="email" name="email" autoComplete="email" maxLength={320} required />
         </label>
         <label className={labelClass} htmlFor="rfq-whatsapp">
           {dictionary.forms.common.whatsapp}
-          <input id="rfq-whatsapp" className={inputClass} name="whatsapp" autoComplete="tel" placeholder="+966" />
+          <input id="rfq-whatsapp" className={inputClass} name="whatsapp" autoComplete="tel" placeholder="+966" maxLength={50} />
         </label>
         <label className={labelClass} htmlFor="rfq-business-type">
           {integration.businessType}
@@ -202,6 +226,7 @@ export function RFQForm() {
             name="interestedProductsText"
             defaultValue={defaultInterestedProducts}
             placeholder={copy.productsPlaceholder}
+            maxLength={120}
             readOnly={items.length > 0}
           />
           <span className="text-xs font-normal text-muted">{integration.manualReferenceHelp}</span>
@@ -227,6 +252,7 @@ export function RFQForm() {
             className="incar-input min-h-32 px-4 py-3 text-sm"
             name="message"
             placeholder={copy.messagePlaceholder}
+            maxLength={4000}
           />
         </label>
       </div>
@@ -259,7 +285,7 @@ export function RFQForm() {
 
       <button
         type="submit"
-        disabled={state === "submitting" || state === "success"}
+        disabled={state === "submitting" || state === "success" || retryBlocked}
         aria-busy={state === "submitting"}
         className="incar-focus mt-6 min-h-12 w-full rounded-md bg-primary px-5 text-sm font-semibold text-white shadow-[0_14px_34px_rgba(215,25,32,0.24)] transition hover:bg-primary-hover disabled:cursor-not-allowed disabled:opacity-60 md:w-auto"
       >

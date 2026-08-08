@@ -765,6 +765,7 @@ export const en = {
         submit: "Submit Product RFQ",
         submitting: "Submitting request…",
         retry: "Retry the same request",
+        retryAfter: "You can retry after {seconds} seconds.",
         errorTitle: "The request could not be completed",
         errors: {
           contactName: "Contact name is required.",
@@ -772,6 +773,7 @@ export const en = {
           countryCode: "Enter a valid two-letter country code.",
           email: "Enter a valid email address.",
           items: "Add a product or enter a part or OEM reference.",
+          itemLimit: "A Product RFQ can contain up to 50 items.",
           itemReference: "Every item needs a part, OEM, or product candidate reference.",
           quantity: "Quantity must be an integer from 1 to 999999.",
           privacy: "Privacy consent is required before submission.",
@@ -795,6 +797,7 @@ export const en = {
           description: "Keep the public reference when contacting INCAR.",
           loading: "Loading request confirmation…",
           unavailable: "This request confirmation is no longer available in this session.",
+          loadError: "The confirmation could not be loaded temporarily. Please retry.",
           retry: "Reload confirmation",
           reference: "Public reference",
           status: "Status",
