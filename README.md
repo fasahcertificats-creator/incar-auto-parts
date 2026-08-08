@@ -48,6 +48,14 @@ Open:
 http://localhost:3000
 ```
 
+For the closed local Product RFQ integration, set:
+
+```env
+NEXT_PUBLIC_INCAR_API_BASE_URL=http://localhost:4000
+```
+
+Then start the INCAR Backend locally with its exact CORS allowlist set to the frontend origin. See [docs/rfq-local-integration.md](docs/rfq-local-integration.md) for the submission, retry, and receipt-cookie lifecycle.
+
 This is the main local preview URL for development.
 
 Sample products and catalogs are hidden by default. They can be exposed only during local development by setting `NEXT_PUBLIC_ENABLE_SAMPLE_DATA=true`; production builds ignore this flag.

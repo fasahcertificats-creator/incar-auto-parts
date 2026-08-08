@@ -10,13 +10,12 @@ import {
   useRef,
 } from "react";
 import type { Product } from "@/types";
-import type { RFQFormData, RFQItem, RFQStatus, RFQSubmission } from "@/types/rfq";
-import { createRFQItem, createRFQSubmission, sanitizeQuantity } from "./rfq-utils";
+import type { RFQItem, RFQStatus } from "@/types/rfq";
+import { createRFQItem, sanitizeQuantity } from "./rfq-utils";
 
 type RFQState = {
   items: RFQItem[];
   status: RFQStatus;
-  submission: RFQSubmission | null;
 };
 
 type RFQAction =
@@ -24,13 +23,11 @@ type RFQAction =
   | { type: "add-item"; product: Product; quantity?: number }
   | { type: "remove-item"; productId: string }
   | { type: "update-quantity"; productId: string; quantity: number }
-  | { type: "clear-rfq" }
-  | { type: "submit"; submission: RFQSubmission };
+  | { type: "clear-rfq" };
 
 type RFQContextValue = {
   items: RFQItem[];
   status: RFQStatus;
-  submission: RFQSubmission | null;
   itemCount: number;
   addItem: (product: Product, quantity?: number) => void;
   removeItem: (productId: string) => void;
@@ -39,7 +36,6 @@ type RFQContextValue = {
   clearItems: () => void;
   getTotalItems: () => number;
   getRFQItems: () => RFQItem[];
-  submitRFQ: (formData: RFQFormData) => RFQSubmission;
 };
 
 const storageKey = "incar-rfq-items";
@@ -90,9 +86,7 @@ function rfqReducer(state: RFQState, action: RFQAction): RFQState {
         ),
       };
     case "clear-rfq":
-      return { items: [], status: "draft", submission: null };
-    case "submit":
-      return { ...state, status: "submitted", submission: action.submission };
+      return { items: [], status: "draft" };
     default:
       return state;
   }
@@ -113,7 +107,6 @@ export function RFQProvider({ children }: { children: React.ReactNode }) {
   const [state, dispatch] = useReducer(rfqReducer, {
     items: [],
     status: "draft",
-    submission: null,
   });
 
   useEffect(() => {
@@ -157,20 +150,10 @@ export function RFQProvider({ children }: { children: React.ReactNode }) {
 
   const getRFQItems = useCallback(() => state.items, [state.items]);
 
-  const submitRFQ = useCallback(
-    (formData: RFQFormData) => {
-      const submission = createRFQSubmission(formData, state.items);
-      dispatch({ type: "submit", submission });
-      return submission;
-    },
-    [state.items],
-  );
-
   const value = useMemo(
     () => ({
       items: state.items,
       status: state.status,
-      submission: state.submission,
       itemCount: state.items.length,
       addItem,
       removeItem,
@@ -179,7 +162,6 @@ export function RFQProvider({ children }: { children: React.ReactNode }) {
       clearItems: clearRFQ,
       getTotalItems,
       getRFQItems,
-      submitRFQ,
     }),
     [
       addItem,
@@ -189,8 +171,6 @@ export function RFQProvider({ children }: { children: React.ReactNode }) {
       removeItem,
       state.items,
       state.status,
-      state.submission,
-      submitRFQ,
       updateQuantity,
     ],
   );

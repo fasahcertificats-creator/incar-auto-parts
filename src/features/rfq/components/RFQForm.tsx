@@ -1,16 +1,30 @@
 "use client";
 
+import { useRouter } from "next/navigation";
 import type { FormEvent } from "react";
-import { useMemo, useState } from "react";
-import type { RFQFormData } from "@/types/rfq";
-import type { UploadedRFQFileMeta } from "@/types/upload";
+import { useMemo, useRef, useState } from "react";
 import { useLocale } from "@/contexts/LocaleContext";
 import { getDictionary } from "@/i18n/dictionaries";
+import { localizeHref } from "@/i18n/routing";
+import type { RFQFormData } from "@/types/rfq";
+import {
+  clearAttempt,
+  getOrCreateAttempt,
+  invalidateAttempt,
+  markAttemptRetryable,
+} from "../api/attempt.ts";
+import { submitProductRfq } from "../api/client.ts";
+import { RfqApiError, type RfqErrorKind } from "../api/errors.ts";
+import {
+  mapProductRfqPayload,
+  validateProductRfqDraft,
+  type RfqDraftValidationCode,
+} from "../api/mapper.ts";
 import { useRFQ } from "../use-rfq";
-import { RFQExcelUpload } from "./RFQExcelUpload";
 
 const inputClass = "incar-input px-4 text-sm";
 const labelClass = "grid gap-2 text-sm font-semibold text-white";
+type SubmissionState = "idle" | "submitting" | "success" | "recoverable-error";
 
 function getText(formData: FormData, name: string) {
   const value = formData.get(name);
@@ -18,156 +32,242 @@ function getText(formData: FormData, name: string) {
 }
 
 export function RFQForm() {
-  const { items, submitRFQ, submission } = useRFQ();
+  const { items, clearRFQ } = useRFQ();
   const { locale } = useLocale();
+  const router = useRouter();
   const dictionary = getDictionary(locale);
-  const [excelFile, setExcelFile] = useState<UploadedRFQFileMeta | null>(null);
-  const [excelFileError, setExcelFileError] = useState("");
+  const copy = dictionary.forms.rfq;
+  const integration = copy.integration;
+  const [state, setState] = useState<SubmissionState>("idle");
   const [errors, setErrors] = useState<string[]>([]);
+  const submissionGuardRef = useRef(false);
+  const errorSummaryRef = useRef<HTMLDivElement>(null);
 
   const defaultInterestedProducts = useMemo(
-    () => items.map((item) => item.partNumber).join(", "),
+    () => items.map((item) => item.partNumber || item.oemNumber).filter(Boolean).join(", "),
     [items],
   );
 
-  function handleSubmit(event: FormEvent<HTMLFormElement>) {
+  function validationMessage(code: RfqDraftValidationCode) {
+    const messages: Record<RfqDraftValidationCode, string> = {
+      "contact-name": integration.errors.contactName,
+      "company-name": integration.errors.companyName,
+      "country-code": integration.errors.countryCode,
+      email: integration.errors.email,
+      items: integration.errors.items,
+      "item-reference": integration.errors.itemReference,
+      quantity: integration.errors.quantity,
+      privacy: integration.errors.privacy,
+      compatibility: integration.errors.compatibility,
+    };
+    return messages[code];
+  }
+
+  function apiErrorMessage(kind: RfqErrorKind) {
+    const messages: Record<RfqErrorKind, string> = {
+      configuration: integration.errors.configuration,
+      validation: integration.errors.validation,
+      "receipt-unavailable": integration.errors.unknown,
+      "idempotency-conflict": integration.errors.conflict,
+      "submission-in-progress": integration.errors.inProgress,
+      "payload-too-large": integration.errors.payloadTooLarge,
+      "unsupported-media-type": integration.errors.unsupported,
+      "rate-limit": integration.errors.rateLimit,
+      capacity: integration.errors.capacity,
+      "reference-generation": integration.errors.reference,
+      network: integration.errors.network,
+      server: integration.errors.server,
+      unknown: integration.errors.unknown,
+    };
+    return messages[kind];
+  }
+
+  function showErrors(nextErrors: string[]) {
+    setErrors(nextErrors);
+    setState("recoverable-error");
+    window.requestAnimationFrame(() => errorSummaryRef.current?.focus());
+  }
+
+  async function handleSubmit(event: FormEvent<HTMLFormElement>) {
     event.preventDefault();
-    const form = event.currentTarget;
-    const data = new FormData(form);
+    if (submissionGuardRef.current) return;
+
+    const data = new FormData(event.currentTarget);
     const formValues: RFQFormData = {
       fullName: getText(data, "fullName"),
       companyName: getText(data, "companyName"),
-      country: getText(data, "country"),
+      countryCode: getText(data, "countryCode"),
       city: getText(data, "city"),
       email: getText(data, "email"),
       whatsapp: getText(data, "whatsapp"),
+      businessType: getText(data, "businessType") as RFQFormData["businessType"],
       interestedProductsText: getText(data, "interestedProductsText"),
       requestedQuantityText: getText(data, "requestedQuantityText"),
       message: getText(data, "message"),
-      excelFile,
+      privacyConsent: data.get("privacyConsent") === "accepted",
     };
-    const nextErrors: string[] = [];
-
-    if (!formValues.fullName) nextErrors.push(dictionary.forms.rfq.errors.fullName);
-    if (!formValues.companyName) nextErrors.push(dictionary.forms.rfq.errors.companyName);
-    if (!formValues.email && !formValues.whatsapp) {
-      nextErrors.push(dictionary.forms.rfq.errors.contact);
-    }
-    if (
-      items.length === 0 &&
-      !formValues.interestedProductsText &&
-      !formValues.excelFile
-    ) {
-      nextErrors.push(dictionary.forms.rfq.errors.products);
-    }
-    if (excelFileError) nextErrors.push(excelFileError);
-    const requestedQuantity = Number(formValues.requestedQuantityText);
-    if (
-      formValues.requestedQuantityText &&
-      (!Number.isFinite(requestedQuantity) || requestedQuantity <= 0)
-    ) {
-      nextErrors.push(dictionary.forms.rfq.errors.quantity);
+    const validationCodes = validateProductRfqDraft({ locale, formData: formValues, items });
+    if (validationCodes.length > 0) {
+      showErrors(validationCodes.map(validationMessage));
+      return;
     }
 
-    setErrors(nextErrors);
-    if (nextErrors.length > 0) return;
+    const payload = mapProductRfqPayload({ locale, formData: formValues, items });
+    submissionGuardRef.current = true;
+    setState("submitting");
+    setErrors([]);
 
-    submitRFQ(formValues);
+    try {
+      const attempt = await getOrCreateAttempt(payload);
+      await submitProductRfq(payload, attempt.idempotencyKey);
+      setState("success");
+      clearAttempt();
+      clearRFQ();
+      router.push(localizeHref(locale, "/rfq/confirmation"));
+    } catch (error) {
+      const apiError = error instanceof RfqApiError
+        ? error
+        : new RfqApiError("unknown", null, null);
+      if (apiError.kind === "idempotency-conflict") {
+        invalidateAttempt();
+      } else {
+        const attempt = await getOrCreateAttempt(payload);
+        markAttemptRetryable(attempt);
+      }
+      showErrors([apiErrorMessage(apiError.kind)]);
+    } finally {
+      submissionGuardRef.current = false;
+    }
   }
 
   return (
-    <form className="incar-card rounded-lg p-5 md:p-7" onSubmit={handleSubmit}>
+    <form className="incar-card rounded-lg p-5 md:p-7" onSubmit={handleSubmit} noValidate>
       <div>
-        <p className="text-sm font-bold uppercase tracking-[0.16em] text-metallic-silver">
-          {dictionary.forms.rfq.eyebrow}
-        </p>
-        <h2 className="mt-2 text-2xl font-semibold text-white">
-          {dictionary.forms.rfq.title}
-        </h2>
-        <p className="mt-3 text-sm leading-6 text-muted">
-          {dictionary.forms.rfq.description}
-        </p>
+        <p className="text-sm font-bold uppercase tracking-[0.16em] text-metallic-silver">{copy.eyebrow}</p>
+        <h2 className="mt-2 text-2xl font-semibold text-white">{copy.title}</h2>
+        <p className="mt-3 text-sm leading-6 text-muted">{integration.description}</p>
       </div>
 
       <div className="mt-6 grid gap-4 md:grid-cols-2">
-        <label className={labelClass}>
+        <label className={labelClass} htmlFor="rfq-full-name">
           {dictionary.forms.common.fullName}
-          <input className={inputClass} name="fullName" required />
+          <input id="rfq-full-name" className={inputClass} name="fullName" autoComplete="name" required />
         </label>
-        <label className={labelClass}>
+        <label className={labelClass} htmlFor="rfq-company-name">
           {dictionary.forms.common.companyName}
-          <input className={inputClass} name="companyName" required />
+          <input id="rfq-company-name" className={inputClass} name="companyName" autoComplete="organization" required />
         </label>
-        <label className={labelClass}>
-          {dictionary.forms.common.country}
-          <input className={inputClass} name="country" defaultValue={dictionary.forms.common.countryDefault} />
-        </label>
-        <label className={labelClass}>
-          {dictionary.forms.common.city}
-          <input className={inputClass} name="city" placeholder={dictionary.forms.common.cityPlaceholder} />
-        </label>
-        <label className={labelClass}>
-          {dictionary.forms.common.email}
-          <input className={inputClass} type="email" name="email" />
-        </label>
-        <label className={labelClass}>
-          {dictionary.forms.common.whatsapp}
-          <input className={inputClass} name="whatsapp" placeholder="+966" />
-        </label>
-        <label className={labelClass}>
-          {dictionary.forms.rfq.products}
+        <label className={labelClass} htmlFor="rfq-country-code">
+          {integration.countryCode}
           <input
+            id="rfq-country-code"
+            className={inputClass}
+            name="countryCode"
+            placeholder={integration.countryCodePlaceholder}
+            minLength={2}
+            maxLength={2}
+            autoCapitalize="characters"
+            required
+          />
+        </label>
+        <label className={labelClass} htmlFor="rfq-city">
+          {dictionary.forms.common.city}
+          <input id="rfq-city" className={inputClass} name="city" autoComplete="address-level2" />
+        </label>
+        <label className={labelClass} htmlFor="rfq-email">
+          {dictionary.forms.common.email}
+          <input id="rfq-email" className={inputClass} type="email" name="email" autoComplete="email" required />
+        </label>
+        <label className={labelClass} htmlFor="rfq-whatsapp">
+          {dictionary.forms.common.whatsapp}
+          <input id="rfq-whatsapp" className={inputClass} name="whatsapp" autoComplete="tel" placeholder="+966" />
+        </label>
+        <label className={labelClass} htmlFor="rfq-business-type">
+          {integration.businessType}
+          <select id="rfq-business-type" className={inputClass} name="businessType" defaultValue="">
+            <option value="">{integration.businessTypes.empty}</option>
+            <option value="importer">{integration.businessTypes.importer}</option>
+            <option value="wholesaler">{integration.businessTypes.wholesaler}</option>
+            <option value="distributor">{integration.businessTypes.distributor}</option>
+            <option value="workshop">{integration.businessTypes.workshop}</option>
+            <option value="retailer">{integration.businessTypes.retailer}</option>
+            <option value="other">{integration.businessTypes.other}</option>
+          </select>
+        </label>
+        <label className={labelClass} htmlFor="rfq-manual-reference">
+          {integration.manualReference}
+          <input
+            id="rfq-manual-reference"
             className={inputClass}
             name="interestedProductsText"
             defaultValue={defaultInterestedProducts}
-            placeholder={dictionary.forms.rfq.productsPlaceholder}
+            placeholder={copy.productsPlaceholder}
+            readOnly={items.length > 0}
           />
+          <span className="text-xs font-normal text-muted">{integration.manualReferenceHelp}</span>
         </label>
-        <label className={labelClass}>
-          {dictionary.forms.rfq.quantity}
-          <input
-            className={inputClass}
-            name="requestedQuantityText"
-            placeholder={dictionary.forms.rfq.quantityPlaceholder}
-          />
-        </label>
-        <RFQExcelUpload
-          value={excelFile}
-          error={excelFileError}
-          onChange={setExcelFile}
-          onErrorChange={setExcelFileError}
-        />
-        <label className={`${labelClass} md:col-span-2`}>
+        {items.length === 0 ? (
+          <label className={labelClass} htmlFor="rfq-quantity">
+            {copy.quantity}
+            <input
+              id="rfq-quantity"
+              className={inputClass}
+              name="requestedQuantityText"
+              type="number"
+              min="1"
+              max="999999"
+              defaultValue="1"
+            />
+          </label>
+        ) : null}
+        <label className={`${labelClass} md:col-span-2`} htmlFor="rfq-message">
           {dictionary.forms.common.message}
           <textarea
+            id="rfq-message"
             className="incar-input min-h-32 px-4 py-3 text-sm"
             name="message"
-            placeholder={dictionary.forms.rfq.messagePlaceholder}
+            placeholder={copy.messagePlaceholder}
           />
         </label>
       </div>
 
-      {errors.length > 0 ? (
-        <div className="mt-6 rounded-md border border-primary/30 bg-primary/10 p-4 text-sm leading-6 text-white">
-          {errors.map((error) => (
-            <p key={error}>{error}</p>
-          ))}
-        </div>
-      ) : null}
+      <label className="mt-5 flex items-start gap-3 text-sm leading-6 text-white" htmlFor="rfq-privacy-consent">
+        <input
+          id="rfq-privacy-consent"
+          type="checkbox"
+          name="privacyConsent"
+          value="accepted"
+          className="mt-1 size-4 accent-primary"
+        />
+        <span>{integration.privacyConsent}</span>
+      </label>
 
-      {submission ? (
-        <div className="mt-6 rounded-md border border-metallic-silver/24 bg-background p-4 text-sm leading-6 text-metallic-silver">
-          {submission.excelFile
-            ? dictionary.forms.rfq.receivedWithFile
-            : dictionary.forms.rfq.received}
+      {errors.length > 0 ? (
+        <div
+          ref={errorSummaryRef}
+          tabIndex={-1}
+          role="alert"
+          aria-live="assertive"
+          className="incar-focus mt-6 rounded-md border border-primary/30 bg-primary/10 p-4 text-sm leading-6 text-white"
+        >
+          <p className="font-semibold">{integration.errorTitle}</p>
+          <ul className="mt-2 list-disc space-y-1 ps-5">
+            {errors.map((error) => <li key={error}>{error}</li>)}
+          </ul>
         </div>
       ) : null}
 
       <button
         type="submit"
-        className="incar-focus mt-6 min-h-12 w-full rounded-md bg-primary px-5 text-sm font-semibold text-white shadow-[0_14px_34px_rgba(215,25,32,0.24)] transition hover:bg-primary-hover md:w-auto"
+        disabled={state === "submitting" || state === "success"}
+        aria-busy={state === "submitting"}
+        className="incar-focus mt-6 min-h-12 w-full rounded-md bg-primary px-5 text-sm font-semibold text-white shadow-[0_14px_34px_rgba(215,25,32,0.24)] transition hover:bg-primary-hover disabled:cursor-not-allowed disabled:opacity-60 md:w-auto"
       >
-        {dictionary.forms.rfq.submit}
+        {state === "submitting"
+          ? integration.submitting
+          : state === "recoverable-error"
+            ? integration.retry
+            : integration.submit}
       </button>
     </form>
   );

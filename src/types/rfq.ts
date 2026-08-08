@@ -43,14 +43,22 @@ export type RFQSubmission = {
 export type RFQFormData = {
   fullName: string;
   companyName: string;
-  country: string;
+  countryCode: string;
   city: string;
   email: string;
   whatsapp: string;
+  businessType:
+    | ""
+    | "importer"
+    | "wholesaler"
+    | "distributor"
+    | "workshop"
+    | "retailer"
+    | "other";
   interestedProductsText: string;
   requestedQuantityText: string;
   message: string;
-  excelFile: UploadedRFQFileMeta | null;
+  privacyConsent: boolean;
 };
 
 export type RFQProduct = Product;

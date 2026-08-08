@@ -82,6 +82,7 @@ export function RFQList() {
                     <input
                       type="number"
                       min="1"
+                      max="999999"
                       value={item.quantity}
                       onChange={(event) =>
                         updateQuantity(item.productId, Number(event.target.value))
