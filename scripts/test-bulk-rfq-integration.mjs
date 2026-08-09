@@ -125,3 +125,20 @@ test("Bulk implementation has no browser persistence or receipt/token URL constr
   const source = await import("node:fs/promises").then((fs) => fs.readFile(new URL("../src/features/rfq/components/BulkListJourney.tsx", import.meta.url), "utf8"));
   for (const forbidden of ["localStorage", "sessionStorage", "indexedDB", "document.cookie", "dangerouslySetInnerHTML", "Math.random", "receiptToken", "storageKey"]) assert.equal(source.includes(forbidden), false, forbidden);
 });
+
+test("uses an accessible localized presentation for the native file input", async () => {
+  const fs = await import("node:fs/promises");
+  const component = await fs.readFile(new URL("../src/features/rfq/components/BulkListJourney.tsx", import.meta.url), "utf8");
+  const english = await fs.readFile(new URL("../src/i18n/dictionaries/en.ts", import.meta.url), "utf8");
+  const arabic = await fs.readFile(new URL("../src/i18n/dictionaries/ar.ts", import.meta.url), "utf8");
+  assert.match(component, /id="bulk-file" type="file"/u);
+  assert.match(component, /accept=\{BULK_EXTENSIONS\.join\(","\)\}/u);
+  assert.match(component, /aria-describedby="bulk-file-status"/u);
+  assert.match(component, /className="peer sr-only"/u);
+  assert.match(component, /copy\.chooseFile/u);
+  assert.match(component, /file\?\.name \?\? copy\.noFileSelected/u);
+  assert.match(english, /chooseFile: "Choose file"/u);
+  assert.match(english, /noFileSelected: "No file selected"/u);
+  assert.match(arabic, /chooseFile: "اختر الملف"/u);
+  assert.match(arabic, /noFileSelected: "لم يتم اختيار ملف"/u);
+});

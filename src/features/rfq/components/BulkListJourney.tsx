@@ -305,11 +305,22 @@ export function BulkListJourney() {
         {phase === "upload" ? (
           <form onSubmit={upload} className="incar-card-elevated grid gap-5 rounded-lg p-5 text-white sm:p-8" noValidate>
             <div><h2 className="text-2xl font-semibold">{copy.uploadTitle}</h2><p className="mt-2 text-sm leading-6 text-muted">{copy.uploadHelp}</p></div>
-            <label className="grid gap-2 text-sm font-semibold" htmlFor="bulk-file">{copy.file}
-              <input id="bulk-file" type="file" accept={BULK_EXTENSIONS.join(",")} disabled={busy}
-                className="incar-focus min-h-12 rounded-md border border-dashed border-metallic-silver/30 bg-background p-3 text-sm text-muted file:me-4 file:rounded-md file:border-0 file:bg-primary file:px-4 file:py-2 file:font-semibold file:text-white"
-                onChange={(event) => { setFile(event.target.files?.[0] ?? null); setMessage(""); }} />
-            </label>
+            <div className="grid gap-2">
+              <label className="text-sm font-semibold" htmlFor="bulk-file">{copy.file}</label>
+              <div className="flex flex-wrap items-center gap-3">
+                <input id="bulk-file" type="file" accept={BULK_EXTENSIONS.join(",")} disabled={busy}
+                  aria-describedby="bulk-file-status"
+                  className="peer sr-only"
+                  onChange={(event) => { setFile(event.target.files?.[0] ?? null); setMessage(""); }} />
+                <label htmlFor="bulk-file"
+                  className="inline-flex min-h-12 cursor-pointer items-center justify-center rounded-md bg-primary px-5 text-sm font-semibold text-white transition hover:bg-primary-hover peer-disabled:cursor-not-allowed peer-disabled:opacity-50 peer-focus-visible:outline peer-focus-visible:outline-2 peer-focus-visible:outline-offset-2 peer-focus-visible:outline-white">
+                  {copy.chooseFile}
+                </label>
+                <span id="bulk-file-status" className="min-w-0 break-all text-sm text-muted" aria-live="polite">
+                  {file?.name ?? copy.noFileSelected}
+                </span>
+              </div>
+            </div>
             {file ? <div className="flex flex-wrap items-center justify-between gap-3 rounded-md border border-border bg-background p-4 text-sm">
               <p className="min-w-0 break-all"><span className="font-semibold">{copy.selectedFile}:</span> {file.name} · {formatBytes(file.size)}</p>
               <button type="button" className="incar-focus min-h-11 rounded-md border border-border px-4 font-semibold" onClick={() => setFile(null)}>{copy.removeFile}</button>
@@ -397,6 +408,7 @@ function StatusCard({ copy, status, busy, message, onRefresh, onStartNew }: {
     "completed-with-errors": copy.completedErrors, failed: copy.failed, cancelled: copy.failed,
   };
   const help = status.fileStatus === "queued" ? copy.queuedHelp : status.fileStatus === "processing" ? copy.processingHelp :
+    status.fileStatus === "completed-with-errors" ? copy.completedErrorsHelp :
     status.fileStatus === "failed" || status.fileStatus === "cancelled" ? copy.failedHelp : copy.completedHelp;
   return <div className="incar-card-elevated grid gap-6 rounded-lg p-5 text-white sm:p-8" aria-busy={busy}>
     <div><h2 className="text-2xl font-semibold">{copy.statusTitle}</h2><p className="mt-2 text-sm text-muted">{copy.reference}: <bdi>{status.publicReference}</bdi></p></div>
