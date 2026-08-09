@@ -69,3 +69,94 @@ export type RfqSubmissionResponse = {
 };
 
 export type RfqReceiptResponse = RfqSubmissionResponse & { locale: Locale };
+
+export type BulkBusinessType =
+  | "importer" | "wholesaler" | "distributor" | "workshop" | "retailer" | "other";
+
+export type BulkUploadDraft = {
+  companyName: string;
+  contactName: string;
+  countryCode: string;
+  city: string;
+  businessType: BulkBusinessType | "";
+  email: string;
+  phone: string;
+  whatsapp: string;
+  customerNotes: string;
+  privacyConsent: boolean;
+};
+
+export type BulkListMetadata = {
+  requestType: "bulk-list";
+  requestIntent: null;
+  locale: Locale;
+  marketCountryCode: string;
+  customerNotes?: string;
+  contact: {
+    companyName: string;
+    contactName: string;
+    countryCode: string;
+    city?: string;
+    businessType?: BulkBusinessType;
+    email: string;
+    phone?: string;
+    whatsapp?: string;
+    preferredLocale: Locale;
+  };
+  privacyConsent: { accepted: true };
+};
+
+export type BulkFileStatus =
+  | "uploaded" | "awaiting-mapping" | "queued" | "processing"
+  | "completed" | "completed-with-errors" | "failed" | "cancelled";
+export type BulkTargetField =
+  | "partNumber" | "oemReference" | "description" | "quantity" | "unit"
+  | "make" | "model" | "year" | "engine" | "vin" | "frameNumber" | "notes";
+
+export type BulkSubmissionResponse = {
+  publicReference: string;
+  requestType: "bulk-list";
+  requestIntent: null;
+  status: "submitted";
+  submittedAt: string;
+};
+
+export type BulkInspectionResponse = {
+  publicReference: string;
+  requestType: "bulk-list";
+  fileStatus: BulkFileStatus;
+  format: "csv" | "xlsx";
+  sheets: Array<{ index: number; name: string | null; state: "visible" | "hidden" | "veryHidden" }>;
+  selectedSheet: { index: number; name: string | null; state: "visible" | "hidden" | "veryHidden" };
+  headerRowNumber: number;
+  headers: Array<{ index: number; display: string }>;
+  mappingRequirements: {
+    version: 1;
+    targetFields: BulkTargetField[];
+    identificationFields: Array<"partNumber" | "oemReference" | "description">;
+    readOnly: boolean;
+  };
+};
+
+export type BulkMappingPayload = {
+  version: 1;
+  sourceSheetIndex: number;
+  headerRowNumber: number;
+  columns: Array<{ sourceColumn: string; targetField: BulkTargetField }>;
+};
+
+export type BulkMappingResponse = {
+  publicReference: string;
+  fileStatus: BulkFileStatus;
+  mappingAccepted: true;
+};
+
+export type BulkStatusResponse = {
+  publicReference: string;
+  requestStatus: string;
+  fileStatus: BulkFileStatus;
+  processingScope: "parsed-and-validated";
+  summary: { totalRows: number; validRows: number; invalidRows: number; processingErrorRows: number };
+  pollAfterSeconds: 3 | null;
+  failureCode?: "processing-failed";
+};

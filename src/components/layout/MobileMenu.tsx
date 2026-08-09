@@ -84,7 +84,7 @@ export function MobileMenu() {
                 </Link>
               ))}
               <Link
-                href={localizeHref(locale, "/rfq#upload-parts-list")}
+                href={localizeHref(locale, "/rfq/upload-list")}
                 onClick={() => setOpen(false)}
                 className="incar-focus min-h-11 rounded-md px-3 py-3 hover:bg-background hover:text-white"
               >

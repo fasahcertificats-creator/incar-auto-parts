@@ -4,6 +4,9 @@ export type RfqErrorKind =
   | "receipt-unavailable"
   | "idempotency-conflict"
   | "submission-in-progress"
+  | "mapping-locked"
+  | "inspection-invalid"
+  | "mapping-invalid"
   | "payload-too-large"
   | "unsupported-media-type"
   | "rate-limit"
@@ -42,6 +45,12 @@ function parseRetryAfter(value: string | null): number | null {
 
 export function mapRfqError(status: number, code: string | null, retryAfter: string | null = null) {
   const retryAfterSeconds = parseRetryAfter(retryAfter);
+  if (status === 400 && code === "RFQ_BULK_INSPECTION_INVALID") {
+    return new RfqApiError("inspection-invalid", status, code);
+  }
+  if (status === 400 && code === "RFQ_BULK_MAPPING_INVALID") {
+    return new RfqApiError("mapping-invalid", status, code);
+  }
   if (status === 400) return new RfqApiError("validation", status, code);
   if (status === 401 && code === "RFQ_RECEIPT_UNAVAILABLE") {
     return new RfqApiError("receipt-unavailable", status, code);
@@ -52,10 +61,13 @@ export function mapRfqError(status: number, code: string | null, retryAfter: str
   if (status === 409 && code === "RFQ_SUBMISSION_IN_PROGRESS") {
     return new RfqApiError("submission-in-progress", status, code);
   }
+  if (status === 409 && code === "RFQ_BULK_MAPPING_LOCKED") {
+    return new RfqApiError("mapping-locked", status, code);
+  }
   if (status === 413) return new RfqApiError("payload-too-large", status, code);
   if (status === 415) return new RfqApiError("unsupported-media-type", status, code);
   if (status === 429) return new RfqApiError("rate-limit", status, code, retryAfterSeconds);
-  if (status === 503 && code === "RFQ_SUBMISSION_CAPACITY_EXCEEDED") {
+  if (status === 503 && ["RFQ_SUBMISSION_CAPACITY_EXCEEDED", "RFQ_BULK_UPLOAD_CAPACITY_EXCEEDED", "RFQ_BULK_STORAGE_UNAVAILABLE"].includes(code ?? "")) {
     return new RfqApiError("capacity", status, code);
   }
   if (status === 503 && code === "RFQ_REFERENCE_GENERATION_FAILED") {

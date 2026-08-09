@@ -66,7 +66,7 @@ export function Header() {
         <div className="hidden shrink-0 items-center gap-2 lg:flex">
           <HeaderSearch />
           <Link
-            href={localizeHref(locale, "/rfq#upload-parts-list")}
+            href={localizeHref(locale, "/rfq/upload-list")}
             className="incar-focus inline-flex min-h-11 items-center justify-center whitespace-nowrap rounded-md border border-border bg-surface-elevated px-3 text-xs font-semibold text-metallic-silver transition hover:border-metallic-silver/45 hover:text-white"
           >
             {dictionary.navigation.uploadPartsList}
