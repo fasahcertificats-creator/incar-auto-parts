@@ -29,8 +29,29 @@ export function Header() {
 
   return (
     <header className="sticky top-0 z-50 border-b border-border bg-background/95 text-white backdrop-blur">
-      <div className="mx-auto flex max-w-[94rem] items-center justify-between gap-3 px-4 py-3 sm:px-6 lg:px-8">
-        <MobileMenu />
+      <div className="mx-auto grid max-w-[94rem] grid-cols-[1fr_auto_1fr] items-center gap-2 px-4 py-3 sm:px-6 lg:hidden">
+        <div className="justify-self-start">
+          <MobileMenu />
+        </div>
+
+        <Link
+          href={localizeHref(locale, "/")}
+          aria-label={dictionary.brand.name}
+          className="incar-focus rounded-md px-2 py-2 text-sm font-black tracking-[0.14em] text-white"
+        >
+          {brand.shortName}
+        </Link>
+
+        <Link
+          href={localizeHref(locale, "/rfq")}
+          aria-label={quoteLabel}
+          className="incar-focus inline-flex min-h-11 items-center justify-center justify-self-end whitespace-nowrap rounded-md bg-primary px-3 text-xs font-semibold text-white transition hover:bg-primary-hover"
+        >
+          {dictionary.navigation.mobileRfq}
+        </Link>
+      </div>
+
+      <div className="mx-auto hidden max-w-[94rem] items-center justify-between gap-3 px-4 py-3 sm:px-6 lg:flex lg:px-8">
 
         <Link
           href={localizeHref(locale, "/")}
@@ -78,17 +99,6 @@ export function Header() {
             {quoteLabel}
           </Link>
           <LanguageSwitcher />
-        </div>
-
-        <div className="flex items-center gap-2 lg:hidden">
-          <HeaderSearch compact />
-          <Link
-            href={localizeHref(locale, "/rfq")}
-            aria-label={quoteLabel}
-            className="incar-focus inline-flex min-h-11 items-center justify-center rounded-md bg-primary px-3 text-xs font-semibold text-white"
-          >
-            {itemCount > 0 ? `RFQ (${itemCount})` : "RFQ"}
-          </Link>
         </div>
       </div>
     </header>

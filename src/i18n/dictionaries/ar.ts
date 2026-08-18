@@ -34,6 +34,8 @@ export const ar = {
     contact: "التواصل",
     menu: "القائمة",
     close: "إغلاق",
+    closeMenu: "إغلاق القائمة",
+    mobileRfq: "طلب عرض",
     search: "بحث",
     searchPartNumber: "البحث برقم القطعة أو OEM",
     uploadPartsList: "رفع قائمة القطع",

@@ -7,6 +7,7 @@
     "build": "next build",
     "start": "next start",
     "lint": "eslint",
+    "test:mobile-navigation": "node scripts/test-mobile-navigation.mjs",
     "test:rfq": "node --no-warnings --experimental-strip-types scripts/test-rfq-integration.mjs",
     "test:bulk-rfq": "node --no-warnings --experimental-strip-types scripts/test-bulk-rfq-integration.mjs",
     "validate:catalog": "node --no-warnings --experimental-strip-types scripts/validate-catalog.mts"

@@ -34,6 +34,8 @@ export const en = {
     contact: "Contact",
     menu: "Menu",
     close: "Close",
+    closeMenu: "Close menu",
+    mobileRfq: "RFQ",
     search: "Search",
     searchPartNumber: "Search by Part Number or OEM",
     uploadPartsList: "Upload Parts List",
