@@ -189,6 +189,27 @@ test("submits with JSON, credentials, and the supplied idempotency key", async (
   assert.deepEqual(JSON.parse(observed.init.body), payload);
 });
 
+test("uses the frontend origin when no public API URL is configured", async () => {
+  const previous = process.env.NEXT_PUBLIC_INCAR_API_BASE_URL;
+  delete process.env.NEXT_PUBLIC_INCAR_API_BASE_URL;
+  let observedUrl;
+  try {
+    await submitProductRfq(payload, "00000000-0000-4000-8000-000000000001", {
+      fetchImpl: async (url) => {
+        observedUrl = url;
+        return new Response(JSON.stringify(responseBody), {
+          status: 201,
+          headers: { "Content-Type": "application/json" },
+        });
+      },
+    });
+  } finally {
+    if (previous === undefined) delete process.env.NEXT_PUBLIC_INCAR_API_BASE_URL;
+    else process.env.NEXT_PUBLIC_INCAR_API_BASE_URL = previous;
+  }
+  assert.equal(observedUrl, "/v1/rfqs/product");
+});
+
 test("treats a 200 replay as success with the same public reference", async () => {
   const fetchImpl = async () => new Response(JSON.stringify(responseBody), {
     status: 200,

@@ -1,8 +1,21 @@
 import type { NextConfig } from "next";
 
+const apiInternalUrl = (
+  process.env.INCAR_API_INTERNAL_URL ?? "http://localhost:4000"
+).replace(/\/+$/u, "");
+
 const nextConfig: NextConfig = {
+  output: "standalone",
   images: {
     unoptimized: true,
+  },
+  async rewrites() {
+    return [
+      {
+        source: "/v1/:path*",
+        destination: `${apiInternalUrl}/v1/:path*`,
+      },
+    ];
   },
   async redirects() {
     return [

@@ -18,8 +18,7 @@ type ClientOptions = { baseUrl?: string; fetchImpl?: FetchImplementation; signal
 function getApiBaseUrl(override?: string) {
   const configured = override ?? process.env.NEXT_PUBLIC_INCAR_API_BASE_URL;
   const normalized = configured?.trim().replace(/\/+$/u, "");
-  if (!normalized) throw new RfqApiError("configuration", null, "RFQ_API_BASE_URL_MISSING");
-  return normalized;
+  return normalized ?? "";
 }
 async function readErrorCode(response: Response): Promise<string | null> {
   try {
