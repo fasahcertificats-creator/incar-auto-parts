@@ -6,7 +6,7 @@ export const categories: SampleCategoryRecord[] = [
     slug: "brake-system",
     name: "Brake System",
     displayName: "Brake System",
-    description: "Brake pads, discs, and related service items for wholesale RFQ sourcing.",
+    description: "INCAR brake pads, discs, and related service items for wholesale RFQs.",
     isActive: true,
   },
   {
@@ -30,7 +30,7 @@ export const categories: SampleCategoryRecord[] = [
     slug: "engine-parts",
     name: "Engine Parts",
     displayName: "Engine Parts",
-    description: "Selected engine service and mounting parts for quotation-led sourcing.",
+    description: "Selected INCAR engine service and mounting parts available through quotation review.",
     isActive: true,
   },
   {

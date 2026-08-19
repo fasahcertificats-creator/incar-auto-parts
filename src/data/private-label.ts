@@ -9,7 +9,7 @@ import { getDictionary } from "@/i18n/dictionaries";
 import type { Locale } from "@/i18n/types";
 
 export const privateLabelTrustPoints: PrivateLabelTrustPoint[] = [
-  { id: "china-factory-sourcing", label: "China factory sourcing" },
+  { id: "china-factory-sourcing", label: "Product development" },
   { id: "custom-packaging", label: "Custom packaging" },
   { id: "quality-inspection", label: "Quality inspection" },
   { id: "middle-east-wholesale-focus", label: "Middle Eastern wholesale market focus" },
@@ -18,15 +18,15 @@ export const privateLabelTrustPoints: PrivateLabelTrustPoint[] = [
 export const privateLabelServices: PrivateLabelService[] = [
   {
     id: "product-sourcing",
-    title: "Product sourcing",
+    title: "Product planning",
     description:
       "Identify suitable product programs by category, quantity range, quality grade, and target-market demand.",
   },
   {
     id: "factory-matching",
-    title: "Factory matching",
+    title: "Production capability review",
     description:
-      "INCAR selects manufacturing sources internally by capability, specification fit, sample timing, and packaging support.",
+      "INCAR reviews production capability, specification fit, sample timing, and packaging support for the program.",
   },
   {
     id: "custom-packaging",
@@ -48,9 +48,9 @@ export const privateLabelServices: PrivateLabelService[] = [
   },
   {
     id: "oem-odm-support",
-    title: "OEM / ODM support",
+    title: "Product Development / ODM Support",
     description:
-      "Support specification alignment, OEM reference matching, sample review, and production management.",
+      "Support specification alignment, OEM Reference matching, sample review, and production management.",
   },
   {
     id: "quality-inspection",
@@ -62,11 +62,11 @@ export const privateLabelServices: PrivateLabelService[] = [
     id: "export-documentation",
     title: "Export documentation",
     description:
-      "Manage invoice inputs, packing-list details, carton information, and agreed supply documentation.",
+      "Manage invoice inputs, packing-list details, carton information, and agreed order documentation.",
   },
   {
     id: "supply-follow-up-middle-east",
-    title: "Supply follow-up for Middle Eastern markets",
+    title: "Order follow-up for Middle Eastern markets",
     description:
       "Align production timing, packing details, and destination requirements for a Middle Eastern wholesale market.",
   },
@@ -107,7 +107,7 @@ export const privateLabelProcessSteps: PrivateLabelProcessStep[] = [
     step: "06",
     title: "Export and shipping follow-up",
     description:
-      "Prepare agreed export-document inputs, packing details, internal manufacturing communication, and destination requirements for the target market.",
+      "Prepare agreed export-document inputs, packing details, production information, and destination requirements for the target market.",
   },
 ];
 
@@ -130,7 +130,7 @@ export const privateLabelCategories: PrivateLabelCategoryDetail[] = [
   {
     category: "Engine Parts",
     description:
-      "Selected engine service parts can support branded sourcing when OEM references and sample confirmation are handled carefully.",
+      "Selected engine service parts can support a branded product line when OEM References and sample confirmation are handled carefully.",
   },
   {
     category: "Interior Parts",

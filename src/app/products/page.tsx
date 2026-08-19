@@ -6,8 +6,8 @@ import { getServerLocale } from "@/i18n/server";
 import { pageMetadata } from "@/lib/seo";
 
 export const metadata = pageMetadata(
-  "Parts Discovery Workspace",
-  "Search the current INCAR parts workspace by part number, OEM reference, make, model, and category for B2B sourcing review.",
+  "INCAR Auto Parts Products",
+  "Search INCAR products by Part Number, OEM Reference, make, model, and category, then add the required quantities to an RFQ.",
 );
 
 export default async function ProductsPage() {

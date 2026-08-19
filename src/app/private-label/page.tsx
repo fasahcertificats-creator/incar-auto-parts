@@ -21,7 +21,7 @@ import { pageMetadata } from "@/lib/seo";
 
 export const metadata = pageMetadata(
   "Private Label Auto Parts for Middle Eastern Markets",
-  "INCAR supplies Private Label auto parts programs with managed specifications, manufacturing-source selection, packaging, production, and agreed inspection follow-up.",
+  "Develop Private Label auto parts with managed product specifications, packaging, labels, production, and agreed quality inspection.",
 );
 
 export default async function PrivateLabelPage() {
@@ -161,8 +161,8 @@ export default async function PrivateLabelPage() {
           />
           <div className="incar-card rounded-lg p-6 text-sm leading-7 text-metallic-silver">
             {locale === "ar"
-              ? "إرسال طلب العلامة الخاصة عبر الموقع غير مفعّل في Sprint 1A. يمكن تجهيز الفئة والسوق والكميات ومتطلبات التغليف إلى حين ربط مسار آمن."
-              : "Online Private Label submission is not active in Sprint 1A. Prepare the category, market, quantities, and packaging requirements while a secure workflow is connected."}
+              ? "شارك الفئة والسوق والكميات ومتطلبات التغليف لبدء مراجعة برنامج علامتك الخاصة."
+              : "Share the category, market, quantities, and packaging requirements to start reviewing your Private Label program."}
           </div>
         </div>
       </section>

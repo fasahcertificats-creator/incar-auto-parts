@@ -7,7 +7,7 @@ import { pageMetadata } from "@/lib/seo";
 
 export const metadata = pageMetadata(
   "Hyundai Parts Browsing",
-  "Legacy Hyundai browsing route for the INCAR parts discovery workspace. Published coverage is determined by current eligibility rules.",
+  "Browse selected Hyundai applications linked to current INCAR product information.",
 );
 
 export default async function HyundaiProductsPage() {

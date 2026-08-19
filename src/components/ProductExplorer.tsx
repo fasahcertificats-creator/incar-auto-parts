@@ -63,7 +63,7 @@ export function ProductExplorer({
             <input
               value={search}
               onChange={(event) => setSearch(event.target.value)}
-              placeholder="Part Number / OEM"
+              placeholder="Part Number / OEM Reference"
               dir="ltr"
               className="incar-input px-4 text-sm font-normal"
             />

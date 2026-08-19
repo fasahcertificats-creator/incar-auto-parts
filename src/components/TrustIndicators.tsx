@@ -1,10 +1,10 @@
 import { TrustCard } from "./TrustCard";
 
 const indicators = [
-  ["China supply network", "Factory sourcing and category-level matching"],
+  ["Manufacturing knowledge", "Production capability and category review"],
   ["Middle East RFQ focus", "Wholesale import request support"],
   ["Inspection-first", "Sample, packaging, and pre-shipment checks"],
-  ["Private label ready", "Packaging boxes, labels, barcode, and OEM/ODM support"],
+  ["Private label ready", "Packaging, labels, barcodes, and product-development support"],
 ];
 
 export function TrustIndicators() {

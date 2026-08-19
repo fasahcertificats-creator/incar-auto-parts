@@ -11,8 +11,8 @@ import { getServerLocale } from "@/i18n/server";
 import { pageMetadata } from "@/lib/seo";
 
 export const metadata = pageMetadata(
-  "About Us",
-  "INCAR is a specialized B2B auto parts supplier and the commercial counterparty for wholesalers and importers across the Middle East.",
+  "About INCAR",
+  "INCAR provides auto parts products, RFQs, manufacturing and quality support, and Private Label development for wholesalers and importers.",
 );
 
 export default async function AboutPage() {

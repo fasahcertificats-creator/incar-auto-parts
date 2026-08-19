@@ -1,11 +1,11 @@
 export const BRAND_NAME = "INCAR AUTO PARTS";
 export const BRAND_SHORT_NAME = "INCAR";
 export const BRAND_TAGLINE =
-  "B2B Auto Parts Supplier for Middle Eastern Markets";
+  "INCAR Auto Parts for Wholesalers & Importers";
 export const BRAND_POSITIONING =
-  "Specialized Auto Parts Supplier from China for the Middle East";
+  "Specialized Auto Parts Products, Manufacturing & Quality";
 export const BRAND_DESCRIPTION =
-  "INCAR is a specialized B2B auto parts supplier serving wholesalers and importers across the Middle East from China.";
+  "INCAR supplies auto parts products for wholesalers, importers, and distributors across Middle Eastern markets.";
 
 export const brand = {
   name: BRAND_NAME,
@@ -14,8 +14,8 @@ export const brand = {
   positioning: BRAND_POSITIONING,
   description: BRAND_DESCRIPTION,
   coreMessage:
-    "Customers buy from INCAR: we review requirements, select manufacturing sources internally, issue quotations under our name, and manage production, quality-control, packaging, and supply follow-up.",
-  routeFocus: "China-to-Middle East B2B auto parts supply",
+    "Search INCAR products by Part Number or OEM Reference, request quantities and quotations, or discuss a Private Label program.",
+  routeFocus: "INCAR auto parts products and wholesale quotations",
   email: "rfq@incarautoparts.com",
   whatsapp: "+86 138 0000 0000",
   office: "Guangzhou, China",

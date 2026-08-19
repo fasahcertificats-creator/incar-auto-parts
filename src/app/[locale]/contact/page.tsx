@@ -26,8 +26,8 @@ export default async function ContactPage({ params }: Props) {
   const copy = dictionary.pages.contact;
   const unavailable =
     locale === "ar"
-      ? "سيتم نشر قنوات التواصل الرسمية هنا بعد اعتمادها. لا يتم إرسال أي نموذج من هذه الصفحة حاليًا."
-      : "Verified contact channels will appear here after approval. No form is submitted from this page today.";
+      ? "قنوات التواصل الرسمية قيد التحديث. يمكنك الآن إرسال طلب عرض أو رفع قائمة القطع من المسارات المخصصة."
+      : "Official contact channels are being updated. You can use Product RFQ or Upload Parts List now.";
 
   return (
     <>

@@ -11,7 +11,7 @@ type TrustFinalCTAProps = {
 };
 
 export function TrustFinalCTA({
-  eyebrow = "Trust and sourcing",
+  eyebrow = "Products and quality",
   title,
   description,
   primaryLabel,

@@ -115,11 +115,11 @@ export default async function LocalizedProductDetailsPage({ params, searchParams
             <h2 className="text-2xl font-semibold text-white">{copy.product.referencesTitle}</h2>
             <dl className="mt-5 grid gap-4 sm:grid-cols-2">
               <div className="rounded-md bg-background p-4">
-                <dt className="text-xs font-semibold uppercase tracking-[0.14em] text-muted">INCAR Part Number</dt>
+                <dt className="text-xs font-semibold uppercase tracking-[0.14em] text-muted">{dictionary.productLabels.partNumber}</dt>
                 <dd dir="ltr" className="mt-2 font-semibold text-white">{product.references.incarPartNumber ?? "—"}</dd>
               </div>
               <div className="rounded-md bg-background p-4">
-                <dt className="text-xs font-semibold uppercase tracking-[0.14em] text-muted">OEM Reference</dt>
+                <dt className="text-xs font-semibold uppercase tracking-[0.14em] text-muted">{dictionary.productLabels.oemNumber}</dt>
                 <dd dir="ltr" className="mt-2 font-semibold text-white">{product.references.oemReferences.join(", ") || "—"}</dd>
               </div>
               <div className="rounded-md bg-background p-4">

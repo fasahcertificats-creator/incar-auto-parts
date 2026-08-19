@@ -32,7 +32,7 @@ export function HeaderSearch({ compact = false }: { compact?: boolean }) {
         id="header-part-search"
         name="q"
         dir="ltr"
-        placeholder="Part Number / OEM"
+        placeholder="Part Number / OEM Reference"
         className="min-h-11 w-24 min-w-0 rounded-s-md border border-e-0 border-border bg-background px-3 text-xs text-white outline-none focus:border-primary 2xl:w-36"
       />
       <button

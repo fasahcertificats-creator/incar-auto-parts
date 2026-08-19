@@ -7,7 +7,7 @@ export function Hero({ dictionary }: { dictionary: Dictionary }) {
     <section className="relative isolate overflow-hidden bg-background text-white">
       <Image
         src="/images/hero-sourcing.png"
-        alt="INCAR AUTO PARTS sourcing desk and export-ready auto parts"
+        alt="INCAR AUTO PARTS products for wholesalers and importers"
         fill
         priority
         sizes="100vw"

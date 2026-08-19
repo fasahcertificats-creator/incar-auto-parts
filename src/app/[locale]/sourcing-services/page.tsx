@@ -23,8 +23,8 @@ export async function generateMetadata({
     path: "/sourcing-services",
     absoluteTitle:
       locale === "ar"
-        ? "توريد قطع غيار السيارات من الصين إلى الشرق الأوسط | INCAR"
-        : "Auto Parts Sourcing from China for the Middle East | INCAR",
+        ? "التصنيع والجودة | INCAR"
+        : "Manufacturing & Quality | INCAR",
     title: copy.title,
     description: copy.description,
   });

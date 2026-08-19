@@ -58,8 +58,8 @@ const sampleMakes: Make[] = sampleMakeRecords.map((make) => ({
   isSampleData: true,
   publishingEligibility: "ineligible",
   description: {
-    ar: `هيكل تصفح تجريبي لموديلات ${make.displayName}.`,
-    en: `Development browsing structure for ${make.displayName} models.`,
+    ar: `تصفّح تغطية منتجات INCAR لموديلات ${make.displayName}.`,
+    en: `Browse INCAR product coverage for ${make.displayName} models.`,
   },
 }));
 
@@ -72,8 +72,8 @@ const sampleModels: Model[] = sampleModelRecords.map((model) => ({
   isSampleData: true,
   publishingEligibility: "ineligible",
   content: {
-    ar: `${model.displayName} معروض لأغراض اختبار بنية Discovery في بيئة التطوير فقط.`,
-    en: `${model.displayName} is shown only to test the Discovery structure in development.`,
+    ar: `ابحث عن منتجات INCAR المناسبة لموديل ${model.displayName} باستخدام رقم القطعة أو رقم OEM.`,
+    en: `Search INCAR products for ${model.displayName} by Part Number or OEM Reference.`,
   },
 }));
 

@@ -11,8 +11,8 @@ import { pageMetadata } from "@/lib/seo";
 import { getPublishedCatalogs } from "@/lib/catalogs";
 
 export const metadata = pageMetadata(
-  "Catalogs",
-  "No INCAR-approved product catalogs are currently published. Future catalogs will present products reviewed by INCAR, not factory listings.",
+  "INCAR Catalogs",
+  "Browse reviewed INCAR product families, part references, specifications, compatibility notes, and packaging information as catalogs become available.",
 );
 
 export default async function CatalogsPage() {

@@ -13,7 +13,7 @@ export function ProductImage({
   alt,
   brand,
   partNumber,
-  noImageLabel = "No published image",
+  noImageLabel = "Image unavailable",
 }: ProductImageProps) {
   return (
     <div

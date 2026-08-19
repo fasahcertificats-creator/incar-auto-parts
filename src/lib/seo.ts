@@ -5,21 +5,21 @@ import { absoluteSiteUrl } from "./site-url";
 
 const siteName = brand.name;
 const baseDescription =
-  "INCAR is a specialized B2B auto parts supplier serving wholesalers and importers across the Middle East with expertise in parts, manufacturing, inspection, and supply from China.";
+  "Explore INCAR auto parts products by Part Number or OEM Reference, request wholesale quotations, and review manufacturing, quality, packaging, and Private Label capabilities.";
 
 export function pageMetadata(title: string, description = baseDescription): Metadata {
   return {
     title: `${title} | ${siteName}`,
     description,
     keywords: [
-      "auto parts supplier China",
-      "Middle East wholesale auto parts supplier",
+      "INCAR auto parts",
+      "wholesale auto parts Middle East",
       "Toyota spare parts China",
       "Hyundai spare parts China",
       "private label auto parts",
-      "OEM packaging auto parts",
+      "private label packaging auto parts",
       "INCAR AUTO PARTS",
-      "China to Middle East B2B auto parts supply",
+      "auto parts manufacturing and quality inspection",
     ],
     openGraph: {
       title: `${title} | ${siteName}`,
@@ -54,7 +54,7 @@ export function localizedPageMetadata({
   const canonical = locale === "ar" ? arUrl : enUrl;
 
   return {
-    title: absoluteTitle ? { absolute: absoluteTitle } : `${title} | ${siteName}`,
+    title: { absolute: absoluteTitle ?? `${title} | ${siteName}` },
     description,
     alternates: {
       canonical,

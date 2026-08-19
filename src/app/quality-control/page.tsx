@@ -16,8 +16,8 @@ import { getServerLocale } from "@/i18n/server";
 import { pageMetadata } from "@/lib/seo";
 
 export const metadata = pageMetadata(
-  "Quality Control and Trust System",
-  "INCAR manages order-specific manufacturing, inspection, quality-control, packaging, and supply checkpoints for auto parts wholesalers across the Middle East.",
+  "Manufacturing & Quality",
+  "Review INCAR product specifications, production management, quality inspection, packaging, and order-readiness capabilities.",
 );
 
 export default async function QualityControlPage() {

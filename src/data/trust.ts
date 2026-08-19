@@ -22,7 +22,7 @@ export const trustPillars: TrustPillar[] = [
     proofPoints: [
       "Inspection points are tied to the buyer RFQ and product requirements.",
       "Packaging and label details are reviewed against the agreed supply requirements.",
-      "Quality notes stay practical and sourcing-focused rather than promotional.",
+      "Quality notes stay practical and product-focused rather than promotional.",
     ],
     relatedCTA: {
       label: "Request Quotation",
@@ -36,23 +36,23 @@ export const trustPillars: TrustPillar[] = [
     slug: "factory-verification",
     title: "Manufacturing and Specification Knowledge",
     shortDescription:
-      "Internal factory selection, production-capability review, and specification alignment for the request.",
+      "Production-capability review and product-specification alignment for the request.",
     longDescription:
-      "INCAR evaluates factories and manufacturing sources internally, communicates the required specifications, and selects the source it considers suitable for the reviewed order.",
+      "INCAR reviews production capability, communicates the required specifications, and manages the approved production requirements for the order.",
     highlights: [
-      "Factory screening",
+      "Production capability",
       "Production capability review",
       "Category matching",
-      "Factory communication support",
-      "Manufacturing-source selection",
+      "Production communication",
+      "Production planning",
     ],
     proofPoints: [
       "Manufacturing decisions consider category fit, capability, MOQ, lead time, and order requirements.",
-      "Factory communication remains internal to INCAR's supply process.",
-      "A manufacturing-source review is not a blanket certification or permanent approval.",
+      "Production communication stays aligned with approved order requirements.",
+      "A capability review is order-specific and not a blanket certification.",
     ],
     relatedCTA: {
-      label: "Start Sourcing Request",
+      label: "Request an Unlisted Part",
       href: "/contact",
       variant: "secondary",
     },
@@ -92,7 +92,7 @@ export const trustPillars: TrustPillar[] = [
     shortDescription:
       "Commercial invoice support, packing-list support, product information preparation, and shipment-document inputs.",
     longDescription:
-      "INCAR manages agreed invoice and packing-list inputs, product information, shipment-document inputs, and customer communication during supply follow-up.",
+      "INCAR manages agreed invoice and packing-list inputs, product information, shipment-document inputs, and customer communication during order follow-up.",
     highlights: [
       "Commercial invoice support",
       "Packing list support",
@@ -103,7 +103,7 @@ export const trustPillars: TrustPillar[] = [
     proofPoints: [
       "Documentation support follows the product list, quantities, and packing details.",
       "Export information is managed against customer and order requirements.",
-      "INCAR assists with supply documentation without making legal or border-process guarantees.",
+      "INCAR assists with order documentation without making legal or border-process guarantees.",
     ],
     relatedCTA: {
       label: "Speak With INCAR",
@@ -117,19 +117,19 @@ export const trustPillars: TrustPillar[] = [
     slug: "middle-east-market-focus",
     title: "China Market Knowledge",
     shortDescription:
-      "RFQ-based sourcing for auto parts wholesalers and importers across Middle Eastern markets.",
+      "RFQ-based INCAR product review for wholesalers and importers across Middle Eastern markets.",
     longDescription:
-      "INCAR applies China market and manufacturing knowledge while supplying wholesalers, importers, distributors, and B2B auto parts buyers across the Middle East.",
+      "INCAR applies product and manufacturing knowledge for wholesalers, importers, distributors, and auto parts buyers across the Middle East.",
     highlights: [
       "Middle Eastern wholesale buyer focus",
       "Toyota and Hyundai launch focus",
-      "RFQ-based sourcing",
+      "RFQ-based product review",
       "WhatsApp-friendly communication",
       "Private Label for target-market needs",
     ],
     proofPoints: [
       "The service is structured around wholesale RFQ and inquiry workflows.",
-      "Manufacturing sources remain internal to INCAR's supply process.",
+      "Production capability is reviewed against order requirements.",
       "Buyer communication can continue through WhatsApp or email after inquiry review.",
     ],
     relatedCTA: {
@@ -144,20 +144,20 @@ export const trustPillars: TrustPillar[] = [
     slug: "china-advantage",
     title: "Clear Arabic, English, and Chinese Communication",
     shortDescription:
-      "Clear communication across customer requirements and internal manufacturing work in three languages.",
+      "Clear communication across customer requirements and production work in three languages.",
     longDescription:
-      "INCAR communicates with customers in Arabic or English and handles Chinese manufacturing communication internally as a supporting capability within the supply relationship.",
+      "INCAR communicates with customers in Arabic or English and supports Chinese production communication when required.",
     highlights: [
-      "China factory access",
-      "Chinese manufacturing communication",
-      "Product sourcing flexibility",
+      "Production capability insight",
+      "Chinese production communication",
+      "Product development flexibility",
       "Private Label support",
-      "Faster factory communication",
+      "Clear production communication",
     ],
     proofPoints: [
       "Language support strengthens the process but is not INCAR's primary value.",
-      "Customer requirements can be converted into internal manufacturing instructions.",
-      "The customer continues to deal commercially with INCAR, not with the factory.",
+      "Customer requirements can be converted into production instructions.",
+      "Product and quotation communication remains with INCAR.",
     ],
     relatedCTA: {
       label: "Explore Services",
@@ -173,21 +173,21 @@ export const trustProcessSteps: TrustProcessStep[] = [
     id: "requirements-review",
     title: "Requirement Review",
     description:
-      "Check part or OEM numbers, product names, application context, quantities, packaging needs, and target-market details before quotation work begins.",
+      "Check Part Numbers or OEM References, product names, application context, quantities, packaging needs, and target-market details before quotation work begins.",
     order: 1,
   },
   {
     id: "manufacturing-source-selection",
-    title: "Manufacturing Source Selection",
+    title: "Production Planning",
     description:
-      "Help compare factory options and product families by category fit, MOQ, sample readiness, lead time, packaging support, and export readiness.",
+      "Review product families by category fit, production capability, MOQ, sample readiness, timing, packaging support, and order requirements.",
     order: 2,
   },
   {
     id: "sample-specification-check",
     title: "Sample or Specification Check",
     description:
-      "Support agreed sample review, OEM number checks, specification review, and product consistency checkpoints before quotation or production approval.",
+      "Support agreed sample review, OEM Reference checks, specification review, and product consistency checkpoints before quotation or production approval.",
     order: 3,
   },
   {
@@ -206,15 +206,15 @@ export const trustProcessSteps: TrustProcessStep[] = [
   },
   {
     id: "quotation-supply-follow-up",
-    title: "Quotation and Supply Follow-up",
+    title: "Quotation and Order Follow-up",
     description:
-      "Handle quotation follow-up, internal manufacturing communication, packing information, and agreed supply-document inputs for customers.",
+      "Handle quotation follow-up, production communication, packing information, and agreed order-document inputs for customers.",
     order: 6,
   },
 ];
 
 export const futureTrustProofAssets =
-  "Future proof assets may include inspection photos, packaging samples, export document examples, and verified case studies.";
+  "Planned reference materials may include inspection photos, packaging samples, export document examples, and verified case studies.";
 
 export function getLocalizedTrustPillars(locale: Locale = defaultLocale): TrustPillar[] {
   const dictionary = getDictionary(locale);

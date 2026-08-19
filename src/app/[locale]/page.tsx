@@ -18,13 +18,13 @@ export async function generateMetadata({
     locale,
     absoluteTitle:
       locale === "ar"
-        ? "INCAR | مورد قطع غيار السيارات من الصين إلى الشرق الأوسط"
-        : "INCAR | Auto Parts Supplier from China for the Middle East",
+        ? "INCAR | قطع غيار لتجار الجملة والمستوردين"
+        : "INCAR | Auto Parts for Wholesalers & Importers",
     title: dictionary.hero.title,
     description:
       locale === "ar"
-        ? "INCAR مورد متخصص لقطع غيار السيارات بالجملة، يخدم التجار والمستوردين في الشرق الأوسط بخبرة في القطع والتصنيع والفحص وإدارة التوريد من الصين."
-        : "INCAR is a specialized B2B auto parts supplier serving wholesalers and importers across the Middle East with expertise in parts, manufacturing, inspection, and supply from China.",
+        ? "استعرض قطع غيار INCAR وابحث برقم القطعة أو رقم OEM واطلب عرضًا، مع دعم التصنيع والجودة والتغليف والعلامة الخاصة."
+        : "Explore INCAR auto parts by Part Number or OEM Reference, request a quotation, and review manufacturing, quality, packaging, and Private Label capabilities.",
   });
 }
 
