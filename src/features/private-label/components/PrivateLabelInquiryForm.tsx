@@ -10,6 +10,8 @@ import type {
   PrivateLabelInquiry,
   PrivateLabelLogoStatus,
 } from "@/types/private-label";
+import { useInquirySubmission } from "@/features/inquiries/hooks/useInquirySubmission";
+import type { PrivateLabelInquiryPayload } from "@/features/inquiries/api/contracts";
 
 type PrivateLabelInquiryFormState = Omit<
   PrivateLabelInquiry,
@@ -79,6 +81,7 @@ export function PrivateLabelInquiryForm() {
   const [errors, setErrors] = useState<string[]>([]);
   const [submittedInquiry, setSubmittedInquiry] =
     useState<PrivateLabelInquiry | null>(null);
+  const { state, errorMessage, retryBlocked, response, submit } = useInquirySubmission();
 
   function updateField<Field extends keyof PrivateLabelInquiryFormState>(
     field: Field,
@@ -87,8 +90,9 @@ export function PrivateLabelInquiryForm() {
     setForm((current) => ({ ...current, [field]: value }));
   }
 
-  function handleSubmit(event: FormEvent<HTMLFormElement>) {
+  async function handleSubmit(event: FormEvent<HTMLFormElement>) {
     event.preventDefault();
+    if (retryBlocked || state === "submitting") return;
 
     const nextErrors = validateForm(form, dictionary);
     setErrors(nextErrors);
@@ -98,13 +102,34 @@ export function PrivateLabelInquiryForm() {
       return;
     }
 
-    // Future backend phases can persist this typed inquiry and attach logo or packaging mockup uploads.
+    const payload: PrivateLabelInquiryPayload = {
+      type: "private-label",
+      fullName: form.fullName.trim(),
+      companyName: form.companyName.trim(),
+      country: form.country.trim(),
+      city: form.city.trim(),
+      email: form.email.trim() || undefined,
+      whatsapp: form.whatsapp.trim() || undefined,
+      brandName: form.brandName.trim(),
+      productCategory: form.productCategory,
+      targetMarket: form.targetMarket.trim(),
+      estimatedQuantity: form.estimatedQuantity.trim(),
+      logoStatus: form.logoStatus,
+      packagingRequirements: form.packagingRequirements.trim() || undefined,
+      message: form.message.trim() || undefined,
+      locale,
+    };
+
+    const succeeded = await submit(payload);
+    if (!succeeded) return;
+
+    // Local echo of the submitted inquiry for on-page review; the
+    // authoritative record now lives server-side under `response.publicReference`.
     const inquiry: PrivateLabelInquiry = {
       ...form,
       createdAt: new Date().toISOString(),
       status: "submitted",
     };
-
     setSubmittedInquiry(inquiry);
   }
 
@@ -266,17 +291,32 @@ export function PrivateLabelInquiryForm() {
         </div>
       ) : null}
 
-      {submittedInquiry ? (
+      {errorMessage ? (
+        <div
+          role="alert"
+          aria-live="assertive"
+          className="mt-6 rounded-md border border-primary/35 bg-primary/10 p-4 text-sm leading-6 text-soft-silver"
+        >
+          {errorMessage}
+        </div>
+      ) : null}
+
+      {submittedInquiry && response ? (
         <div className="mt-6 rounded-md border border-metallic-silver/24 bg-background p-4 text-sm leading-6 text-metallic-silver">
-          {dictionary.forms.privateLabel.received}
+          <p>{dictionary.forms.privateLabel.received}</p>
+          <p className="mt-2 font-semibold text-white">
+            {dictionary.forms.common.reference}: {response.publicReference}
+          </p>
         </div>
       ) : null}
 
       <button
         type="submit"
-        className="incar-focus mt-6 min-h-12 rounded-md bg-primary px-5 text-sm font-semibold text-white shadow-[0_14px_34px_rgba(215,25,32,0.24)] transition hover:bg-primary-hover"
+        disabled={state === "submitting" || retryBlocked}
+        aria-busy={state === "submitting"}
+        className="incar-focus mt-6 min-h-12 rounded-md bg-primary px-5 text-sm font-semibold text-white shadow-[0_14px_34px_rgba(215,25,32,0.24)] transition hover:bg-primary-hover disabled:cursor-not-allowed disabled:opacity-60"
       >
-        {dictionary.forms.privateLabel.submit}
+        {state === "submitting" ? dictionary.forms.common.submitting : dictionary.forms.privateLabel.submit}
       </button>
     </form>
   );
