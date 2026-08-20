@@ -785,14 +785,17 @@ export const en = {
       message: "Message",
       inquiryType: "Inquiry type",
       submitInquiry: "Submit Inquiry",
-      mockInquiry:
-        "Your inquiry details are ready for review. No message has been sent from this page.",
       submitted: "Your inquiry has been received. INCAR will contact you shortly.",
       countryDefault: "",
       cityPlaceholder: "Enter your city",
       submitting: "Submitting…",
       reference: "Reference",
       retryAfter: "You can retry after {seconds} seconds.",
+      errors: {
+        fullName: "Full name is required.",
+        companyName: "Company name is required.",
+        email: "Enter a valid email address.",
+      },
       submissionErrors: {
         validation: "Review the entered details and try again.",
         idempotencyConflict:

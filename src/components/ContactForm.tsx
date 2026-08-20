@@ -1,6 +1,7 @@
 "use client";
 
 import type { FormEvent } from "react";
+import { useState } from "react";
 import { useLocale } from "@/contexts/LocaleContext";
 import { getDictionary } from "@/i18n/dictionaries";
 import { useInquirySubmission } from "@/features/inquiries/hooks/useInquirySubmission";
@@ -9,11 +10,30 @@ import type { ContactInquiryPayload } from "@/features/inquiries/api/contracts";
 const inputClass =
   "incar-input px-4 text-sm";
 const labelClass = "grid gap-2 text-sm font-semibold text-white";
+const EMAIL_PATTERN = /^[^\s@]+@[^\s@]+\.[^\s@]+$/u;
+
+// Mirrors the backend's contactInquiryShape (fullName/companyName 1-150/200
+// chars, a well-formed email) so obviously invalid input is caught before a
+// round trip, the same way RFQForm validates against the RFQ contract.
+function validateContactForm(
+  payload: Pick<ContactInquiryPayload, "fullName" | "companyName" | "email">,
+  dictionary: ReturnType<typeof getDictionary>,
+) {
+  const errors: string[] = [];
+  const { errors: messages } = dictionary.forms.common;
+
+  if (!payload.fullName || payload.fullName.length > 150) errors.push(messages.fullName);
+  if (!payload.companyName || payload.companyName.length > 200) errors.push(messages.companyName);
+  if (!EMAIL_PATTERN.test(payload.email) || payload.email.length > 320) errors.push(messages.email);
+
+  return errors;
+}
 
 export function ContactForm() {
   const { locale } = useLocale();
   const dictionary = getDictionary(locale);
   const { state, errorMessage, retryBlocked, response, submit } = useInquirySubmission();
+  const [fieldErrors, setFieldErrors] = useState<string[]>([]);
 
   async function handleSubmit(event: FormEvent<HTMLFormElement>) {
     event.preventDefault();
@@ -34,24 +54,28 @@ export function ContactForm() {
       locale,
     };
 
+    const validationErrors = validateContactForm(payload, dictionary);
+    setFieldErrors(validationErrors);
+    if (validationErrors.length > 0) return;
+
     const succeeded = await submit(payload);
     if (succeeded) form.reset();
   }
 
   return (
-    <form className="incar-card rounded-lg p-5 md:p-7" onSubmit={handleSubmit}>
+    <form className="incar-card rounded-lg p-5 md:p-7" onSubmit={handleSubmit} noValidate>
       <div className="grid gap-4 md:grid-cols-2">
         <label className={labelClass}>
           {dictionary.forms.common.fullName}
-          <input className={inputClass} name="fullName" required />
+          <input className={inputClass} name="fullName" maxLength={150} required />
         </label>
         <label className={labelClass}>
           {dictionary.forms.common.company}
-          <input className={inputClass} name="companyName" required />
+          <input className={inputClass} name="companyName" maxLength={200} required />
         </label>
         <label className={labelClass}>
           {dictionary.forms.common.email}
-          <input type="email" className={inputClass} name="email" required />
+          <input type="email" className={inputClass} name="email" maxLength={320} required />
         </label>
         <label className={labelClass}>
           {dictionary.forms.common.whatsapp}
@@ -70,6 +94,20 @@ export function ContactForm() {
           <textarea className="incar-input min-h-32 px-4 py-3 text-sm" name="message" />
         </label>
       </div>
+
+      {fieldErrors.length > 0 ? (
+        <div
+          role="alert"
+          aria-live="assertive"
+          className="mt-6 rounded-md border border-primary/35 bg-primary/10 p-4 text-sm leading-6 text-soft-silver"
+        >
+          <ul className="list-disc space-y-1 ps-5">
+            {fieldErrors.map((error) => (
+              <li key={error}>{error}</li>
+            ))}
+          </ul>
+        </div>
+      ) : null}
 
       {errorMessage ? (
         <div
