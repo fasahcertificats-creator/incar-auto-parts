@@ -11,6 +11,5 @@ export {
   PrivateLabelHero,
   PrivateLabelInquiryForm,
   PrivateLabelProcessSteps,
-  PrivateLabelQualitySection,
   PrivateLabelServiceCard,
 } from "./components";

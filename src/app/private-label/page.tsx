@@ -12,7 +12,6 @@ import {
   PrivateLabelHero,
   PrivateLabelInquiryForm,
   PrivateLabelProcessSteps,
-  PrivateLabelQualitySection,
   PrivateLabelServiceCard,
 } from "@/features/private-label/components";
 import { TrustProofPoints } from "@/features/trust/components";
@@ -32,14 +31,14 @@ export default async function PrivateLabelPage() {
   const privateLabelServices = getPrivateLabelServices(locale);
   const privateLabelProcessSteps = getPrivateLabelProcessSteps(locale);
   const privateLabelCategories = getPrivateLabelCategories(locale);
+  // Reduced from all 5 shared trust pillars to the 3 most directly relevant
+  // to a Private Label buyer specifically; factory-verification and
+  // middle-east-market-focus are more general/RFQ-flavored and already
+  // covered implicitly by the Process and Categories sections below. This
+  // only changes which of the shared pillars this page chooses to display —
+  // the pillar data itself (used on Home/About/Quality Control) is untouched.
   const privateLabelTrustPillars = getTrustPillarsBySlug(
-    [
-      "packaging-control",
-      "quality-inspection-system",
-      "factory-verification",
-      "export-documentation",
-      "middle-east-market-focus",
-    ],
+    ["packaging-control", "quality-inspection-system", "export-documentation"],
     locale,
   );
 
@@ -50,34 +49,26 @@ export default async function PrivateLabelPage() {
         dictionary={dictionary}
       />
 
-      <section className="bg-surface px-4 py-16 sm:px-6 lg:px-8">
-        <div className="mx-auto grid max-w-7xl gap-10 lg:grid-cols-[0.85fr_1.15fr]">
+      <section
+        id="private-label-inquiry"
+        className="bg-surface px-4 py-16 sm:px-6 lg:px-8"
+      >
+        <div className="mx-auto grid max-w-7xl gap-10 lg:grid-cols-[0.8fr_1.2fr]">
           <SectionHeader
-            eyebrow={dictionary.pages.privateLabel.whyEyebrow}
-            title={dictionary.pages.privateLabel.whyTitle}
-            description={dictionary.pages.privateLabel.whyDescription}
+            eyebrow={dictionary.pages.privateLabel.inquiryEyebrow}
+            title={dictionary.pages.privateLabel.inquiryTitle}
+            description={dictionary.pages.privateLabel.inquiryDescription}
           />
-          <div className="grid gap-4 sm:grid-cols-2">
-            {dictionary.pages.privateLabel.reasons.map((reason, index) => (
-              <article key={reason} className="incar-card-elevated rounded-lg p-5">
-                <span className="text-sm font-bold text-primary">
-                  {String(index + 1).padStart(2, "0")}
-                </span>
-                <p className="mt-4 text-sm leading-6 text-metallic-silver">
-                  {reason}
-                </p>
-              </article>
-            ))}
-          </div>
+          <PrivateLabelInquiryForm />
         </div>
       </section>
 
       <section className="bg-background px-4 py-16 sm:px-6 lg:px-8">
         <div className="mx-auto max-w-7xl">
           <SectionHeader
-            eyebrow={dictionary.pages.privateLabel.scopeEyebrow}
-            title={dictionary.pages.privateLabel.scopeTitle}
-            description={dictionary.pages.privateLabel.scopeDescription}
+            eyebrow={dictionary.pages.privateLabel.whyEyebrow}
+            title={dictionary.pages.privateLabel.whyTitle}
+            description={dictionary.pages.privateLabel.whyDescription}
           />
           <div className="mt-10 grid gap-4 md:grid-cols-2 xl:grid-cols-3">
             {privateLabelServices.map((service) => (
@@ -119,23 +110,6 @@ export default async function PrivateLabelPage() {
       </section>
 
       <section className="bg-surface px-4 py-16 sm:px-6 lg:px-8">
-        <div className="mx-auto grid max-w-7xl gap-10 lg:grid-cols-[0.82fr_1.18fr]">
-          <SectionHeader
-            eyebrow={dictionary.pages.privateLabel.packagingEyebrow}
-            title={dictionary.pages.privateLabel.packagingTitle}
-            description={dictionary.pages.privateLabel.packagingDescription}
-          />
-          <div className="grid gap-4 sm:grid-cols-2">
-            {dictionary.pages.privateLabel.packagingDetails.map((detail) => (
-              <div key={detail} className="incar-card rounded-lg p-5">
-                <p className="font-semibold text-white">{detail}</p>
-              </div>
-            ))}
-          </div>
-        </div>
-      </section>
-
-      <section className="bg-background px-4 py-16 sm:px-6 lg:px-8">
         <div className="mx-auto max-w-7xl">
           <SectionHeader
             eyebrow={dictionary.pages.privateLabel.trustEyebrow}
@@ -145,22 +119,13 @@ export default async function PrivateLabelPage() {
           <div className="mt-10">
             <TrustProofPoints pillars={privateLabelTrustPillars} />
           </div>
-        </div>
-      </section>
-
-      <PrivateLabelQualitySection dictionary={dictionary} />
-
-      <section
-        id="private-label-inquiry"
-        className="bg-surface px-4 py-16 sm:px-6 lg:px-8"
-      >
-        <div className="mx-auto grid max-w-7xl gap-10 lg:grid-cols-[0.8fr_1.2fr]">
-          <SectionHeader
-            eyebrow={dictionary.pages.privateLabel.inquiryEyebrow}
-            title={dictionary.pages.privateLabel.inquiryTitle}
-            description={dictionary.pages.privateLabel.inquiryDescription}
-          />
-          <PrivateLabelInquiryForm />
+          <div className="mt-4 grid gap-4 sm:grid-cols-2 lg:grid-cols-3">
+            {dictionary.pages.privateLabel.qualityPoints.map((point) => (
+              <div key={point} className="incar-card rounded-lg p-5">
+                <p className="font-semibold text-white">{point}</p>
+              </div>
+            ))}
+          </div>
         </div>
       </section>
 

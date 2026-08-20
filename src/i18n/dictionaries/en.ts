@@ -474,21 +474,9 @@ export const en = {
       heroPanelCopy:
         "Built for wholesalers and importers who want a structured path from product requirements and packaging design to samples, production, and quality review.",
       whyEyebrow: "Why private label matters",
-      whyTitle: "A stronger wholesale position starts with controlled brand development.",
+      whyTitle: "Controlled brand development can support a stronger wholesale position.",
       whyDescription:
-        "Private Label can help wholesale buyers build a clearer market position when product selection, packaging, quality checks, and export details are managed with discipline.",
-      reasons: [
-        "Higher margin potential through owned brand positioning and controlled packaging.",
-        "Stronger customer loyalty when buyers recognize a consistent wholesale product line.",
-        "Better brand control across product labels, box information, and market presentation.",
-        "Less direct price comparison than generic unbranded product lines.",
-        "Market differentiation through focused categories, packaging standards, and service support.",
-        "Long-term business value from repeatable product specifications, quality checks, and order follow-up.",
-      ],
-      scopeEyebrow: "Service scope",
-      scopeTitle: "Private Label services for Middle Eastern auto parts markets.",
-      scopeDescription:
-        "INCAR manages the product-development, manufacturing, packaging, label, inspection, and order details needed for a reviewed Private Label program.",
+        "Private Label can help wholesale buyers build a clearer market position when product selection, packaging, quality checks, and export details are managed with discipline. INCAR manages the product-development, manufacturing, packaging, label, inspection, and order details needed for a reviewed program.",
       processEyebrow: "Private label process",
       processTitle: "A clear product-development path from category to market-ready packaging.",
       processDescription:
@@ -497,32 +485,15 @@ export const en = {
       categoriesTitle: "Initial product categories for private label programs.",
       categoriesDescription:
         "Private Label programs begin with suitable INCAR product categories so specifications, RFQs, packaging, and product data stay aligned.",
-      packagingEyebrow: "Packaging and brand development",
-      packagingTitle: "Turn brand requirements into market-ready packaging.",
-      packagingDescription:
-        "INCAR reviews box design, logo placement, labels, barcodes, carton marks, and market-language requirements for the program.",
-      packagingDetails: [
-        "Box design",
-        "Logo placement",
-        "Product label",
-        "Barcode",
-        "Carton marking",
-        "Arabic/English packaging readiness",
-        "Market-specific packaging information",
-      ],
       trustEyebrow: "Trust support for Private Label",
       trustTitle:
         "Private Label programs need controlled product, packaging, and quality details.",
       trustDescription:
-        "INCAR connects product specifications, packaging control, label verification, agreed inspection points, production management, and order follow-up.",
+        "INCAR connects product specifications, packaging control, label verification, agreed inspection points, production management, and order follow-up. Quality checkpoints run from sample and specification review through pre-shipment review.",
       inquiryEyebrow: "Start inquiry",
       inquiryTitle: "Tell us about your private label program.",
       inquiryDescription:
         "Share your contact details, brand direction, product category, target market, estimated quantity, and packaging requirements.",
-      qualityEyebrow: "Quality control",
-      qualityTitle: "Quality support built around private label trust.",
-      qualityDescription:
-        "Wholesale buyers need products, labels, and packaging aligned with approved requirements. INCAR manages agreed quality checkpoints from sample and specification review through pre-shipment review.",
       qualityPoints: [
         "Production capability review",
         "Sample check",
