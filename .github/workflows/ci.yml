@@ -1,0 +1,57 @@
+name: CI
+
+on:
+  push:
+    branches: [main]
+  pull_request:
+    branches: [main]
+
+jobs:
+  frontend:
+    name: Lint, typecheck, build, integration scripts
+    runs-on: ubuntu-latest
+
+    # No env vars are set deliberately. NEXT_PUBLIC_INCAR_API_BASE_URL and
+    # INCAR_API_INTERNAL_URL both have working defaults (next.config.ts falls
+    # back to http://localhost:4000, unused at build time since Next.js
+    # doesn't call the rewrite target during a static build). Leaving
+    # NEXT_PUBLIC_WHATSAPP_NUMBER unset is intentional, not an oversight: it
+    # proves in CI, not just by hand, that the build still succeeds and the
+    # WhatsApp CTA compiles away rather than erroring when no real number is
+    # configured yet.
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v4
+
+      - name: Set up Node.js
+        uses: actions/setup-node@v4
+        with:
+          node-version: "24.16.0"
+          cache: "npm"
+
+      - name: Install dependencies
+        run: npm ci
+
+      - name: Lint
+        run: npm run lint
+
+      # package.json has no dedicated "typecheck" script, so this runs the
+      # compiler directly instead of adding one — CI config only, no
+      # application/project-config changes in this phase.
+      - name: Typecheck
+        run: npx tsc --noEmit
+
+      - name: Build
+        run: npm run build
+
+      - name: RFQ integration tests
+        run: npm run test:rfq
+
+      - name: Bulk RFQ integration tests
+        run: npm run test:bulk-rfq
+
+      - name: Mobile navigation tests
+        run: npm run test:mobile-navigation
+
+      - name: Catalog validation self-checks
+        run: npm run validate:catalog
