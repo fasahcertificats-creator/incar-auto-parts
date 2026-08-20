@@ -1,5 +1,4 @@
 export { AddToRfqButton } from "@/components/AddToRfqButton";
-export { RFQExcelUpload } from "./components/RFQExcelUpload";
 export { RFQForm } from "./components/RFQForm";
 export { RFQList } from "./components/RFQList";
 export { RFQProvider } from "./rfq-context";

@@ -90,6 +90,7 @@ export function RFQForm() {
       capacity: integration.errors.capacity,
       "reference-generation": integration.errors.reference,
       network: integration.errors.network,
+      timeout: integration.errors.network,
       server: integration.errors.server,
       unknown: integration.errors.unknown,
     };

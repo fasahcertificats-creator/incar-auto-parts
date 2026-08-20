@@ -28,10 +28,12 @@ export default async function ContactPage() {
               {dictionary.pages.contact.details}
             </p>
             <div className="mt-8 grid gap-6">
-              <div>
-                <p className="text-sm text-muted">{dictionary.pages.contact.whatsapp}</p>
-                <p className="mt-1 text-xl font-semibold">{brand.whatsapp}</p>
-              </div>
+              {brand.whatsapp ? (
+                <div>
+                  <p className="text-sm text-muted">{dictionary.pages.contact.whatsapp}</p>
+                  <p className="mt-1 text-xl font-semibold">{brand.whatsapp}</p>
+                </div>
+              ) : null}
               <div>
                 <p className="text-sm text-muted">{dictionary.pages.contact.email}</p>
                 <p className="mt-1 text-xl font-semibold">{brand.email}</p>
@@ -46,14 +48,16 @@ export default async function ContactPage() {
               </div>
             </div>
             <div className="mt-8 grid gap-3">
-              <a
-                href="https://wa.me/8613800000000"
-                className="incar-focus inline-flex min-h-11 items-center justify-center rounded-md bg-primary px-4 text-sm font-semibold text-white transition hover:bg-primary-hover"
-                target="_blank"
-                rel="noreferrer"
-              >
-                {dictionary.common.contactViaWhatsapp}
-              </a>
+              {brand.whatsappLink ? (
+                <a
+                  href={brand.whatsappLink}
+                  className="incar-focus inline-flex min-h-11 items-center justify-center rounded-md bg-primary px-4 text-sm font-semibold text-white transition hover:bg-primary-hover"
+                  target="_blank"
+                  rel="noreferrer"
+                >
+                  {dictionary.common.contactViaWhatsapp}
+                </a>
+              ) : null}
               <a
                 href={`mailto:${brand.email}`}
                 className="incar-focus inline-flex min-h-11 items-center justify-center rounded-md border border-border bg-surface-elevated px-4 text-sm font-semibold text-metallic-silver transition hover:border-metallic-silver/45 hover:text-white"

@@ -13,6 +13,7 @@ export type RfqErrorKind =
   | "capacity"
   | "reference-generation"
   | "network"
+  | "timeout"
   | "server"
   | "unknown";
 
