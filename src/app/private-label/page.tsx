@@ -10,6 +10,7 @@ import {
   PrivateLabelCategoryCard,
   PrivateLabelFinalCTA,
   PrivateLabelHero,
+  PrivateLabelInquiryForm,
   PrivateLabelProcessSteps,
   PrivateLabelQualitySection,
   PrivateLabelServiceCard,
@@ -159,11 +160,7 @@ export default async function PrivateLabelPage() {
             title={dictionary.pages.privateLabel.inquiryTitle}
             description={dictionary.pages.privateLabel.inquiryDescription}
           />
-          <div className="incar-card rounded-lg p-6 text-sm leading-7 text-metallic-silver">
-            {locale === "ar"
-              ? "شارك الفئة والسوق والكميات ومتطلبات التغليف لبدء مراجعة برنامج علامتك الخاصة."
-              : "Share the category, market, quantities, and packaging requirements to start reviewing your Private Label program."}
-          </div>
+          <PrivateLabelInquiryForm />
         </div>
       </section>
 

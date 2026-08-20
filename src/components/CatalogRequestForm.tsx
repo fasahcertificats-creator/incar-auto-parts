@@ -1,21 +1,44 @@
 "use client";
 
 import type { FormEvent } from "react";
-import { useState } from "react";
 import { useLocale } from "@/contexts/LocaleContext";
 import { getDictionary } from "@/i18n/dictionaries";
+import { useInquirySubmission } from "@/features/inquiries/hooks/useInquirySubmission";
+import type { CatalogRequestInquiryPayload } from "@/features/inquiries/api/contracts";
 
 const inputClass = "incar-input px-4 text-sm";
 const labelClass = "grid gap-2 text-sm font-semibold text-white";
 
 export function CatalogRequestForm() {
-  const [submitted, setSubmitted] = useState(false);
   const { locale } = useLocale();
   const dictionary = getDictionary(locale);
+  const { state, errorMessage, retryBlocked, response, submit } = useInquirySubmission();
 
-  function handleSubmit(event: FormEvent<HTMLFormElement>) {
+  async function handleSubmit(event: FormEvent<HTMLFormElement>) {
     event.preventDefault();
-    setSubmitted(true);
+    if (retryBlocked || state === "submitting") return;
+
+    const form = event.currentTarget;
+    const data = new FormData(form);
+    const getText = (field: string) => String(data.get(field) ?? "").trim();
+
+    const payload: CatalogRequestInquiryPayload = {
+      type: "catalog-request",
+      fullName: getText("fullName"),
+      companyName: getText("companyName"),
+      country: getText("country") || undefined,
+      city: getText("city") || undefined,
+      email: getText("email"),
+      whatsapp: getText("whatsapp") || undefined,
+      catalogInterest: getText("catalogInterest") || dictionary.forms.catalog.options[0],
+      brand: getText("brand") || dictionary.forms.catalog.brandOptions[0],
+      vehicleModelOrCategory: getText("vehicleModelOrCategory") || undefined,
+      message: getText("message") || undefined,
+      locale,
+    };
+
+    const succeeded = await submit(payload);
+    if (succeeded) form.reset();
   }
 
   return (
@@ -103,17 +126,32 @@ export function CatalogRequestForm() {
         </label>
       </div>
 
-      {submitted ? (
+      {errorMessage ? (
+        <div
+          role="alert"
+          aria-live="assertive"
+          className="mt-6 rounded-md border border-primary/35 bg-primary/10 p-4 text-sm leading-6 text-soft-silver"
+        >
+          {errorMessage}
+        </div>
+      ) : null}
+
+      {state === "success" && response ? (
         <div className="mt-6 rounded-md border border-metallic-silver/24 bg-background p-4 text-sm leading-6 text-metallic-silver">
-          {dictionary.forms.catalog.received}
+          <p>{dictionary.forms.catalog.received}</p>
+          <p className="mt-2 font-semibold text-white">
+            {dictionary.forms.common.reference}: {response.publicReference}
+          </p>
         </div>
       ) : null}
 
       <button
         type="submit"
-        className="incar-focus mt-6 min-h-12 w-full rounded-md bg-primary px-5 text-sm font-semibold text-white shadow-[0_14px_34px_rgba(215,25,32,0.24)] transition hover:bg-primary-hover md:w-auto"
+        disabled={state === "submitting" || retryBlocked}
+        aria-busy={state === "submitting"}
+        className="incar-focus mt-6 min-h-12 w-full rounded-md bg-primary px-5 text-sm font-semibold text-white shadow-[0_14px_34px_rgba(215,25,32,0.24)] transition hover:bg-primary-hover disabled:cursor-not-allowed disabled:opacity-60 md:w-auto"
       >
-        {dictionary.forms.catalog.submit}
+        {state === "submitting" ? dictionary.forms.common.submitting : dictionary.forms.catalog.submit}
       </button>
     </form>
   );

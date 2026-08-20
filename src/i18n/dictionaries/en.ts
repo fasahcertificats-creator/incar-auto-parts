@@ -787,8 +787,26 @@ export const en = {
       submitInquiry: "Submit Inquiry",
       mockInquiry:
         "Your inquiry details are ready for review. No message has been sent from this page.",
+      submitted: "Your inquiry has been received. INCAR will contact you shortly.",
       countryDefault: "",
       cityPlaceholder: "Enter your city",
+      submitting: "Submitting…",
+      reference: "Reference",
+      retryAfter: "You can retry after {seconds} seconds.",
+      submissionErrors: {
+        validation: "Review the entered details and try again.",
+        idempotencyConflict:
+          "The submission attempt no longer matches this form. Please try again.",
+        payloadTooLarge: "The request data is larger than allowed.",
+        unsupportedMediaType: "The current request format could not be submitted.",
+        rateLimit: "Too many attempts were made in a short period. Please wait briefly and try again.",
+        capacity: "The request service is temporarily busy. Please retry.",
+        referenceGeneration: "A reference could not be generated temporarily. Please retry.",
+        network: "The submission result could not be confirmed because of the connection. Retry safely.",
+        timeout: "The request took too long to complete. Please check your connection and retry.",
+        server: "The request could not be completed temporarily. Please retry.",
+        unknown: "An unexpected error occurred. Review the request and try again.",
+      },
     },
     rfq: {
       eyebrow: "Product RFQ",
