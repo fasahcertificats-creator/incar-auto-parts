@@ -15,10 +15,37 @@ import { mapRfqError, RfqApiError } from "./errors.ts";
 type FetchImplementation = typeof fetch;
 type ClientOptions = { baseUrl?: string; fetchImpl?: FetchImplementation; signal?: AbortSignal };
 
+const DEFAULT_REQUEST_TIMEOUT_MS = 15_000;
+const DEFAULT_UPLOAD_TIMEOUT_MS = 60_000;
+
 function getApiBaseUrl(override?: string) {
   const configured = override ?? process.env.NEXT_PUBLIC_INCAR_API_BASE_URL;
   const normalized = configured?.trim().replace(/\/+$/u, "");
   return normalized ?? "";
+}
+
+/**
+ * Combines a caller-supplied signal (if any) with an internal request
+ * timeout, so every request aborts on its own even when the caller never
+ * passes one — `fetch` has no timeout by default. Previously none of the
+ * calls below carried any timeout at all.
+ *
+ * Implemented with a plain `AbortController` + event listeners (rather than
+ * `AbortSignal.any`) so it doesn't depend on a very recent lib.dom.d.ts.
+ */
+function withTimeout(callerSignal: AbortSignal | undefined, timeoutMs: number): AbortSignal {
+  const controller = new AbortController();
+  const timeoutSignal = AbortSignal.timeout(timeoutMs);
+
+  if (timeoutSignal.aborted) controller.abort(timeoutSignal.reason);
+  else timeoutSignal.addEventListener("abort", () => controller.abort(timeoutSignal.reason), { once: true });
+
+  if (callerSignal) {
+    if (callerSignal.aborted) controller.abort(callerSignal.reason);
+    else callerSignal.addEventListener("abort", () => controller.abort(callerSignal.reason), { once: true });
+  }
+
+  return controller.signal;
 }
 async function readErrorCode(response: Response): Promise<string | null> {
   try {
@@ -47,7 +74,10 @@ async function requestJson<T>(
   let response: Response;
   try {
     response = await fetchImpl(url, init);
-  } catch {
+  } catch (error) {
+    if (error instanceof DOMException && (error.name === "TimeoutError" || error.name === "AbortError")) {
+      throw new RfqApiError("timeout", null, null);
+    }
     throw new RfqApiError("network", null, null);
   }
   if (!response.ok) {
@@ -117,6 +147,7 @@ export function submitProductRfq(
         "Idempotency-Key": idempotencyKey,
       },
       body: JSON.stringify(payload),
+      signal: withTimeout(options.signal, DEFAULT_REQUEST_TIMEOUT_MS),
     },
     options.fetchImpl ?? fetch,
     isSubmissionResponse,
@@ -126,7 +157,12 @@ export function submitProductRfq(
 export function getRfqReceipt(options: ClientOptions = {}) {
   return requestJson<RfqReceiptResponse>(
     `${getApiBaseUrl(options.baseUrl)}/v1/rfqs/receipt`,
-    { method: "GET", credentials: "include", cache: "no-store" },
+    {
+      method: "GET",
+      credentials: "include",
+      cache: "no-store",
+      signal: withTimeout(options.signal, DEFAULT_REQUEST_TIMEOUT_MS),
+    },
     options.fetchImpl ?? fetch,
     (value): value is RfqReceiptResponse => {
       if (!isSubmissionResponse(value)) return false;
@@ -149,7 +185,7 @@ export function submitBulkList(
       credentials: "include",
       headers: { Accept: "application/json", "Idempotency-Key": idempotencyKey },
       body: makeBulkFormData(metadata, file),
-      signal: options.signal,
+      signal: withTimeout(options.signal, DEFAULT_UPLOAD_TIMEOUT_MS),
     },
     options.fetchImpl ?? fetch,
     isBulkSubmission,
@@ -166,7 +202,12 @@ export function getBulkInspection(
   const suffix = query.size ? `?${query}` : "";
   return requestJson<BulkInspectionResponse>(
     `${getApiBaseUrl(options.baseUrl)}/v1/rfqs/bulk-list/inspection${suffix}`,
-    { method: "GET", credentials: "include", cache: "no-store", signal: options.signal },
+    {
+      method: "GET",
+      credentials: "include",
+      cache: "no-store",
+      signal: withTimeout(options.signal, DEFAULT_REQUEST_TIMEOUT_MS),
+    },
     options.fetchImpl ?? fetch,
     isBulkInspection,
   );
@@ -180,7 +221,7 @@ export function submitBulkMapping(payload: BulkMappingPayload, options: ClientOp
       credentials: "include",
       headers: { Accept: "application/json", "Content-Type": "application/json" },
       body: JSON.stringify(payload),
-      signal: options.signal,
+      signal: withTimeout(options.signal, DEFAULT_REQUEST_TIMEOUT_MS),
     },
     options.fetchImpl ?? fetch,
     isBulkMapping,
@@ -190,7 +231,12 @@ export function submitBulkMapping(payload: BulkMappingPayload, options: ClientOp
 export function getBulkStatus(options: ClientOptions = {}) {
   return requestJson<BulkStatusResponse>(
     `${getApiBaseUrl(options.baseUrl)}/v1/rfqs/bulk-list/status`,
-    { method: "GET", credentials: "include", cache: "no-store", signal: options.signal },
+    {
+      method: "GET",
+      credentials: "include",
+      cache: "no-store",
+      signal: withTimeout(options.signal, DEFAULT_REQUEST_TIMEOUT_MS),
+    },
     options.fetchImpl ?? fetch,
     isBulkStatus,
   );
