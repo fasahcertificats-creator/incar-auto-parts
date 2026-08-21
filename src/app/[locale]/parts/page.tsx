@@ -53,7 +53,7 @@ export default async function PartsPage({ params, searchParams }: PartsPageProps
 
   return (
     <>
-      <section className="bg-background px-4 pb-10 pt-12 text-white sm:px-6 lg:px-8">
+      <section className="bg-background px-4 py-20 text-white sm:px-6 lg:px-8">
         <div className="mx-auto max-w-7xl">
           <DiscoveryBreadcrumbs
             locale={locale}
@@ -81,7 +81,7 @@ export default async function PartsPage({ params, searchParams }: PartsPageProps
         result={searchResult}
       />
 
-      <section className="bg-surface px-4 py-14 sm:px-6 lg:px-8">
+      <section className="bg-surface px-4 py-16 sm:px-6 lg:px-8">
         <div className="mx-auto max-w-7xl">
           <h2 className="text-3xl font-semibold text-white">{copy.parts.browseTitle}</h2>
           <p className="mt-3 max-w-3xl text-sm leading-7 text-muted">

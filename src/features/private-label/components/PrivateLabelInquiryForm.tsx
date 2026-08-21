@@ -314,7 +314,7 @@ export function PrivateLabelInquiryForm() {
         type="submit"
         disabled={state === "submitting" || retryBlocked}
         aria-busy={state === "submitting"}
-        className="incar-focus mt-6 min-h-12 rounded-md bg-primary px-5 text-sm font-semibold text-white shadow-[0_14px_34px_rgba(215,25,32,0.24)] transition hover:bg-primary-hover disabled:cursor-not-allowed disabled:opacity-60"
+        className="incar-focus mt-6 min-h-12 rounded-md bg-primary px-5 text-sm font-semibold text-white shadow-[0_18px_42px_rgba(215,25,32,0.26)] transition hover:bg-primary-hover disabled:cursor-not-allowed disabled:opacity-60"
       >
         {state === "submitting" ? dictionary.forms.common.submitting : dictionary.forms.privateLabel.submit}
       </button>

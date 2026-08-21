@@ -55,7 +55,7 @@ export function ProductExplorer({
   }, [brand, category, fixedBrand, model, search]);
 
   return (
-    <section className="bg-background px-4 py-12 sm:px-6 lg:px-8">
+    <section className="bg-background px-4 py-16 sm:px-6 lg:px-8">
       <div className="mx-auto max-w-7xl">
         <div className="incar-card grid gap-3 rounded-lg p-4 md:grid-cols-[1.4fr_0.8fr_0.8fr_0.8fr]">
           <label className="grid gap-2 text-sm font-semibold text-white">

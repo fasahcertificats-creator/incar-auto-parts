@@ -207,7 +207,7 @@ export async function HomeFoundation() {
           />
           <Link
             href={localizeHref(locale, "/private-label")}
-            className="incar-focus inline-flex min-h-12 w-fit items-center justify-center rounded-md bg-primary px-5 py-3 text-sm font-semibold text-white shadow-[0_10px_24px_rgba(215,25,32,0.16)] transition hover:bg-primary-hover"
+            className="incar-focus inline-flex min-h-12 w-fit items-center justify-center rounded-md bg-primary px-5 py-3 text-sm font-semibold text-white shadow-[0_18px_42px_rgba(215,25,32,0.26)] transition hover:bg-primary-hover"
           >
             {copy.privateLabel.action}
           </Link>
@@ -232,7 +232,7 @@ export async function HomeFoundation() {
         </div>
       </section>
 
-      <section className="bg-background px-4 py-10 sm:px-6 sm:py-20 lg:px-8">
+      <section className="bg-background px-4 py-10 sm:px-6 sm:py-16 lg:px-8">
         <div className="mx-auto max-w-7xl rounded-lg border border-metallic-silver/15 bg-surface-elevated/80 p-5 shadow-[0_18px_48px_rgba(0,0,0,0.22)] sm:p-7 md:p-10">
           <HomeSectionHeader
             isArabic={isArabic}
@@ -243,7 +243,7 @@ export async function HomeFoundation() {
           <div className="mt-4 flex flex-col items-start gap-2 sm:mt-7 sm:flex-row sm:items-center sm:gap-4">
             <Link
               href={localizeHref(locale, "/rfq")}
-              className="incar-focus inline-flex min-h-12 w-full items-center justify-center rounded-md bg-primary px-5 py-3 text-sm font-semibold text-white shadow-[0_10px_24px_rgba(215,25,32,0.16)] transition hover:bg-primary-hover sm:w-auto"
+              className="incar-focus inline-flex min-h-12 w-full items-center justify-center rounded-md bg-primary px-5 py-3 text-sm font-semibold text-white shadow-[0_18px_42px_rgba(215,25,32,0.26)] transition hover:bg-primary-hover sm:w-auto"
             >
               {copy.search.rfq}
             </Link>

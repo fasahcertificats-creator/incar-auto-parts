@@ -7,7 +7,7 @@ export function DiscoveryActions({ locale }: { locale: Locale }) {
   const copy = getDictionary(locale).discovery.actions;
 
   return (
-    <section className="bg-surface px-4 py-14 sm:px-6 lg:px-8">
+    <section className="bg-surface px-4 py-16 sm:px-6 lg:px-8">
       <div className="mx-auto grid max-w-7xl gap-5 md:grid-cols-2">
         <article className="incar-card rounded-lg p-6">
           <h2 className="text-2xl font-semibold text-white">{copy.uploadTitle}</h2>

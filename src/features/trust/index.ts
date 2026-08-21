@@ -9,5 +9,4 @@ export {
   TrustPillarsGrid,
   TrustProcess,
   TrustProofPoints,
-  TrustSection,
 } from "./components";

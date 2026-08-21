@@ -40,7 +40,7 @@ export function AddToRfqButton({
         type="button"
         onClick={handleClick}
         disabled={!rfqProduct}
-        className="incar-focus inline-flex min-h-11 items-center justify-center rounded-md bg-primary px-4 py-2 text-sm font-semibold text-white shadow-[0_14px_30px_rgba(215,25,32,0.22)] transition hover:bg-primary-hover"
+        className="incar-focus inline-flex min-h-11 items-center justify-center rounded-md bg-primary px-4 py-2 text-sm font-semibold text-white shadow-[0_18px_42px_rgba(215,25,32,0.26)] transition hover:bg-primary-hover"
       >
         {added ? dictionary.common.addedToRfq : dictionary.common.addToRfq}
       </button>

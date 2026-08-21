@@ -56,7 +56,7 @@ export default async function MakePage({ params, searchParams }: Props) {
 
   return (
     <>
-      <section className="bg-background px-4 pb-10 pt-12 text-white sm:px-6 lg:px-8">
+      <section className="bg-background px-4 py-20 text-white sm:px-6 lg:px-8">
         <div className="mx-auto max-w-7xl">
           <DiscoveryBreadcrumbs
             locale={locale}
@@ -87,7 +87,7 @@ export default async function MakePage({ params, searchParams }: Props) {
         label={copy.make.searchLabel}
       />
 
-      <section className="bg-surface px-4 py-14 sm:px-6 lg:px-8">
+      <section className="bg-surface px-4 py-16 sm:px-6 lg:px-8">
         <div className="mx-auto max-w-7xl">
           <h2 className="text-3xl font-semibold text-white">{copy.make.modelsTitle}</h2>
           <div className="mt-7 grid gap-4 sm:grid-cols-2 lg:grid-cols-3">

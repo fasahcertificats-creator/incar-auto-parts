@@ -80,7 +80,7 @@ export default async function ModelPage({ params, searchParams }: Props) {
 
   return (
     <>
-      <section className="bg-background px-4 pb-10 pt-12 text-white sm:px-6 lg:px-8">
+      <section className="bg-background px-4 py-20 text-white sm:px-6 lg:px-8">
         <div className="mx-auto max-w-7xl">
           <DiscoveryBreadcrumbs
             locale={locale}
@@ -114,7 +114,7 @@ export default async function ModelPage({ params, searchParams }: Props) {
         label={copy.model.searchLabel}
       />
 
-      <section className="bg-surface px-4 py-14 sm:px-6 lg:px-8">
+      <section className="bg-surface px-4 py-16 sm:px-6 lg:px-8">
         <div className="mx-auto max-w-7xl">
           {model.verifiedYearRanges?.length ? (
             <div>

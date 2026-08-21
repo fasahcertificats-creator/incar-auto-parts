@@ -75,7 +75,7 @@ export default async function LocalizedProductDetailsPage({ params, searchParams
 
   return (
     <>
-      <section className="bg-background px-4 pb-10 pt-12 text-white sm:px-6 lg:px-8">
+      <section className="bg-background px-4 py-20 text-white sm:px-6 lg:px-8">
         <div className="mx-auto max-w-7xl">
           <DiscoveryBreadcrumbs
             locale={locale}
@@ -102,7 +102,7 @@ export default async function LocalizedProductDetailsPage({ params, searchParams
         </div>
       </section>
 
-      <section className="bg-surface px-4 py-14 sm:px-6 lg:px-8">
+      <section className="bg-surface px-4 py-16 sm:px-6 lg:px-8">
         <div className="mx-auto grid max-w-7xl gap-8 lg:grid-cols-[0.9fr_1.1fr]">
           <ProductImage
             src={product.image?.src ?? null}
