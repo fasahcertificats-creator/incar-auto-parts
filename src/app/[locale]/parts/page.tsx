@@ -65,7 +65,7 @@ export default async function PartsPage({ params, searchParams }: PartsPageProps
           <p className="mt-8 text-sm font-bold uppercase tracking-[0.16em] text-primary">
             {copy.parts.eyebrow}
           </p>
-          <h1 className="mt-4 max-w-4xl text-4xl font-semibold md:text-6xl">
+          <h1 className="mt-4 max-w-4xl text-3xl font-semibold leading-tight md:text-5xl">
             {copy.parts.title}
           </h1>
           <p className="mt-5 max-w-3xl text-lg leading-8 text-metallic-silver">

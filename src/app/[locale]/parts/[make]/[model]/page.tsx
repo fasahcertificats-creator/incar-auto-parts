@@ -96,7 +96,7 @@ export default async function ModelPage({ params, searchParams }: Props) {
               {copy.sampleNotice}
             </p>
           ) : null}
-          <h1 className="mt-8 text-4xl font-semibold md:text-6xl">
+          <h1 className="mt-8 text-3xl font-semibold leading-tight md:text-5xl">
             {make.name} {model.name}
           </h1>
           <p className="mt-5 max-w-3xl text-lg leading-8 text-metallic-silver">

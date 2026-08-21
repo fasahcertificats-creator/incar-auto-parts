@@ -90,7 +90,7 @@ export default async function LocalizedProductDetailsPage({ params, searchParams
               {copy.product.sampleNotice}
             </p>
           ) : null}
-          <h1 className="mt-8 max-w-4xl text-4xl font-semibold md:text-6xl">
+          <h1 className="mt-8 max-w-4xl text-3xl font-semibold leading-tight md:text-5xl">
             {product.name[locale]}
           </h1>
           <Link

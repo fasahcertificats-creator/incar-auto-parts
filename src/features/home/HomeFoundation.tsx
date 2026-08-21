@@ -68,11 +68,7 @@ export async function HomeFoundation() {
             >
               {copy.search.eyebrow}
             </p>
-            <h1
-              className={`mt-2 max-w-4xl font-semibold leading-[1.12] text-balance sm:mt-4 sm:text-4xl sm:text-wrap md:text-5xl lg:text-6xl lg:leading-tight ${
-                isArabic ? "text-[25px]" : "text-[27px]"
-              }`}
-            >
+            <h1 className="mt-2 max-w-4xl text-3xl font-semibold leading-tight text-balance sm:mt-4 sm:text-wrap md:text-5xl">
               {copy.search.title}
             </h1>
             <p className="mt-2.5 max-w-xl text-[15px] leading-[1.6] text-metallic-silver sm:mt-5 sm:max-w-2xl sm:text-lg sm:leading-8">

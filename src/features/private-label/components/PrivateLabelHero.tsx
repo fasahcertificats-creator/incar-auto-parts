@@ -15,7 +15,7 @@ export function PrivateLabelHero({ trustPoints, dictionary }: PrivateLabelHeroPr
           <p className="text-xs font-bold uppercase tracking-[0.18em] text-metallic-silver">
             {dictionary.pages.privateLabel.heroEyebrow}
           </p>
-          <h1 className="mt-5 max-w-5xl text-4xl font-semibold leading-tight md:text-6xl">
+          <h1 className="mt-5 max-w-5xl text-3xl font-semibold leading-tight md:text-5xl">
             {dictionary.pages.privateLabel.heroTitle}
           </h1>
           <p className="mt-6 max-w-3xl text-lg leading-8 text-metallic-silver/76">

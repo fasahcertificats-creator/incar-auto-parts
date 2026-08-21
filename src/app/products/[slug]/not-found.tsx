@@ -28,7 +28,7 @@ export default async function ProductNotFound() {
         <p className="text-sm font-bold uppercase tracking-[0.16em] text-metallic-silver">
           {copy.eyebrow}
         </p>
-        <h1 className="mt-4 text-4xl font-semibold md:text-6xl">
+        <h1 className="mt-4 text-3xl font-semibold leading-tight md:text-5xl">
           {copy.title}
         </h1>
         <p className="mt-5 text-lg leading-8 text-muted">
