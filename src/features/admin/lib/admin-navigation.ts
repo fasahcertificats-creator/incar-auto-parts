@@ -9,6 +9,7 @@ export interface AdminNavItem {
 
 export const ADMIN_NAV_ITEMS: AdminNavItem[] = [
   { key: "requests", label: "Requests", href: "/admin/requests", status: "active" },
+  { key: "customers", label: "Customers", href: "/admin/customers", status: "active" },
   { key: "products", label: "Products", href: "/admin/products", status: "coming-soon" },
   { key: "analytics", label: "Analytics", href: "/admin/analytics", status: "coming-soon" },
 ];

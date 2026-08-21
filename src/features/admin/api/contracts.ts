@@ -105,3 +105,62 @@ export const ADMIN_RFQ_STATUSES = [
 ] as const;
 
 export const ADMIN_INQUIRY_STATUSES = ["received", "in-review", "responded", "closed"] as const;
+
+/** Mirrors incar.business_type on the backend — the RFQ contact
+ * classification, reused as the customer category field. */
+export const ADMIN_CUSTOMER_BUSINESS_TYPES = [
+  "importer",
+  "wholesaler",
+  "distributor",
+  "workshop",
+  "retailer",
+  "other",
+] as const;
+
+export type AdminCustomerSummary = {
+  id: string;
+  contactName: string;
+  companyName: string;
+  email: string;
+  phone: string | null;
+  whatsapp: string | null;
+  country: string | null;
+  businessType: string | null;
+  requestCount: number;
+  createdAt: string;
+};
+
+export type AdminCustomerListResponse = {
+  items: AdminCustomerSummary[];
+  total: number;
+  limit: number;
+  offset: number;
+};
+
+export type AdminCustomerDetail = {
+  id: string;
+  contactName: string;
+  companyName: string;
+  email: string;
+  phone: string | null;
+  whatsapp: string | null;
+  country: string | null;
+  businessType: string | null;
+  specialDiscountRate: string | null;
+  internalNotes: string | null;
+  mergedIntoCustomerId: string | null;
+  requestCount: number;
+  createdAt: string;
+  updatedAt: string;
+};
+
+export type AdminCustomerUpdateInput = {
+  businessType: string | null;
+  internalNotes: string | null;
+  specialDiscountRate: number | null;
+};
+
+export type AdminCustomerMergeResponse = {
+  survivor: AdminCustomerDetail;
+  movedRequestCount: number;
+};

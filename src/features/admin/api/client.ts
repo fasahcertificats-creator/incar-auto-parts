@@ -1,4 +1,8 @@
 import type {
+  AdminCustomerDetail,
+  AdminCustomerListResponse,
+  AdminCustomerMergeResponse,
+  AdminCustomerUpdateInput,
   AdminInquiryDetail,
   AdminLoginResponse,
   AdminRequestListResponse,
@@ -70,10 +74,11 @@ export function adminLogout(): Promise<void> {
 export function adminListRequests(
   limit: number,
   offset: number,
+  customerId?: string,
 ): Promise<AdminRequestListResponse> {
-  return request<AdminRequestListResponse>(
-    `/v1/admin/requests?limit=${limit}&offset=${offset}`,
-  );
+  const params = new URLSearchParams({ limit: String(limit), offset: String(offset) });
+  if (customerId) params.set("customerId", customerId);
+  return request<AdminRequestListResponse>(`/v1/admin/requests?${params.toString()}`);
 }
 
 export function adminGetRfqDetail(id: string): Promise<AdminRfqRequestDetail> {
@@ -102,5 +107,38 @@ export function adminUpdateInquiryStatus(
   return request<AdminInquiryDetail>(
     `/v1/admin/requests/inquiry/${id}/status`,
     jsonInit("PATCH", { status }),
+  );
+}
+
+export function adminListCustomers(
+  limit: number,
+  offset: number,
+  search?: string,
+  category?: string,
+): Promise<AdminCustomerListResponse> {
+  const params = new URLSearchParams({ limit: String(limit), offset: String(offset) });
+  if (search) params.set("search", search);
+  if (category) params.set("category", category);
+  return request<AdminCustomerListResponse>(`/v1/admin/customers?${params.toString()}`);
+}
+
+export function adminGetCustomer(id: string): Promise<AdminCustomerDetail> {
+  return request<AdminCustomerDetail>(`/v1/admin/customers/${id}`);
+}
+
+export function adminUpdateCustomer(
+  id: string,
+  payload: AdminCustomerUpdateInput,
+): Promise<AdminCustomerDetail> {
+  return request<AdminCustomerDetail>(`/v1/admin/customers/${id}`, jsonInit("PATCH", payload));
+}
+
+export function adminMergeCustomers(
+  survivorId: string,
+  mergeCustomerId: string,
+): Promise<AdminCustomerMergeResponse> {
+  return request<AdminCustomerMergeResponse>(
+    `/v1/admin/customers/${survivorId}/merge`,
+    jsonInit("POST", { mergeCustomerId }),
   );
 }
