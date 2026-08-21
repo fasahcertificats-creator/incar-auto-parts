@@ -48,10 +48,14 @@ async function request<T>(path: string, init?: RequestInit): Promise<T> {
 }
 
 function jsonInit(method: string, body?: unknown): RequestInit {
+  // Fastify's default JSON parser rejects a request that declares
+  // Content-Type: application/json but sends zero bytes (adminLogout has
+  // no body), so that header must only be set when there's a body to match.
+  if (body === undefined) return { method };
   return {
     method,
     headers: { "Content-Type": "application/json" },
-    body: body === undefined ? undefined : JSON.stringify(body),
+    body: JSON.stringify(body),
   };
 }
 
