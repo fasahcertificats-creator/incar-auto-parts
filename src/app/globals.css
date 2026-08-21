@@ -88,12 +88,17 @@ html {
   color: var(--foreground);
 }
 
-button,
-input,
-select,
-textarea {
-  font: inherit;
-}
+/*
+ * Tailwind's own Preflight (node_modules/tailwindcss/preflight.css) already
+ * applies `font: inherit` to button/input/select/textarea inside `@layer
+ * base`, so utility classes in `@layer utilities` correctly win over it.
+ * A duplicate of that rule used to live here, unlayered — unlayered CSS
+ * beats every `@layer` rule regardless of source order or specificity, so
+ * it silently stripped font-semibold/text-sm etc. off every <button> that
+ * used them (submit buttons on RFQ/Contact/Private Label/Catalog Request).
+ * Removed rather than re-added inside @layer base, since Preflight's
+ * version already does the same job correctly scoped.
+ */
 
 img {
   max-width: 100%;
