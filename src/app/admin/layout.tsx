@@ -1,5 +1,6 @@
 import type { Metadata } from "next";
-import { AdminNav } from "@/features/admin/components/AdminNav";
+import { AdminMobileNav } from "@/features/admin/components/AdminMobileNav";
+import { AdminSidebar } from "@/features/admin/components/AdminSidebar";
 
 // Internal tool only — never indexed, never linked from the public site.
 // robots.ts also disallows /admin, but that only asks well-behaved crawlers
@@ -16,8 +17,18 @@ export default function AdminLayout({ children }: { children: React.ReactNode })
     // getServerLocale() there), so this div forces correct direction for the
     // admin subtree specifically rather than inheriting a stale RTL setting.
     <div dir="ltr" lang="en" className="min-h-screen bg-background text-foreground">
-      <AdminNav />
-      <main className="mx-auto max-w-6xl px-4 py-8 sm:px-6 lg:px-8">{children}</main>
+      <div className="flex min-h-screen flex-col lg:flex-row">
+        {/* AdminSidebar/AdminMobileNav render nothing on /admin/login, so the
+            login page just gets the bare <main> below, centered by its own
+            markup — same as before this restructure. */}
+        <AdminSidebar />
+        <div className="flex flex-1 flex-col">
+          <AdminMobileNav />
+          <main className="flex-1 px-4 py-8 sm:px-6 lg:px-8">
+            <div className="mx-auto max-w-6xl">{children}</div>
+          </main>
+        </div>
+      </div>
     </div>
   );
 }

@@ -4,6 +4,7 @@ import type { FormEvent } from "react";
 import { useState } from "react";
 import { useRouter } from "next/navigation";
 import { AdminApiError, adminLogin } from "@/features/admin/api/client";
+import { setStoredAdminUsername } from "@/features/admin/lib/admin-session-storage";
 
 export default function AdminLoginPage() {
   const router = useRouter();
@@ -21,7 +22,8 @@ export default function AdminLoginPage() {
     setSubmitting(true);
     setError(null);
     try {
-      await adminLogin(username, password);
+      const session = await adminLogin(username, password);
+      setStoredAdminUsername(session.username);
       router.push("/admin/requests");
     } catch (caught) {
       setError(
