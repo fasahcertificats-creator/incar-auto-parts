@@ -1,4 +1,7 @@
 import { notFound } from "next/navigation";
+import { Footer } from "@/components/Footer";
+import { Header } from "@/components/Header";
+import { Providers } from "@/components/Providers";
 import { isLocale, locales } from "@/i18n/config";
 
 export function generateStaticParams() {
@@ -18,5 +21,11 @@ export default async function LocaleLayout({
     notFound();
   }
 
-  return children;
+  return (
+    <Providers initialLocale={locale}>
+      <Header />
+      <main>{children}</main>
+      <Footer />
+    </Providers>
+  );
 }

@@ -1,8 +1,5 @@
 import type { Metadata } from "next";
 import { Cairo } from "next/font/google";
-import { Footer } from "@/components/Footer";
-import { Header } from "@/components/Header";
-import { Providers } from "@/components/Providers";
 import { getDirection } from "@/i18n/config";
 import { getServerLocale } from "@/i18n/server";
 import { brand } from "@/lib/brand";
@@ -39,13 +36,7 @@ export default async function RootLayout({
 
   return (
     <html lang={locale} dir={direction} className={`h-full antialiased ${cairo.variable}`}>
-      <body className="min-h-full bg-background text-foreground">
-        <Providers initialLocale={locale}>
-          <Header />
-          <main>{children}</main>
-          <Footer />
-        </Providers>
-      </body>
+      <body className="min-h-full bg-background text-foreground">{children}</body>
     </html>
   );
 }
