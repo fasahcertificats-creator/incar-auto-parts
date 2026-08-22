@@ -34,15 +34,14 @@ function firstValue(value: string | string[] | undefined) {
 export async function generateMetadata({ params, searchParams }: Props): Promise<Metadata> {
   const { locale, make: makeSlug, model: modelSlug } = await params;
   if (!isLocale(locale)) notFound();
-  const make = getPublishedMakeBySlug(makeSlug);
-  const model = getEligibleModelBySlug(makeSlug, modelSlug);
+  const make = await getPublishedMakeBySlug(makeSlug);
+  const model = await getEligibleModelBySlug(makeSlug, modelSlug);
   if (!make || !model) notFound();
   const queryState = await searchParams;
   const query = firstValue(queryState.q);
   const view = firstValue(queryState.view);
-  const indexEligible = getIndexedModelsForMake(make.id).some(
-    (candidate) => candidate.id === model.id,
-  );
+  const indexedModels = await getIndexedModelsForMake(make.id);
+  const indexEligible = indexedModels.some((candidate) => candidate.id === model.id);
   const copy = getDictionary(locale).discovery;
 
   return localizedPageMetadata({
@@ -57,26 +56,26 @@ export async function generateMetadata({ params, searchParams }: Props): Promise
 export default async function ModelPage({ params, searchParams }: Props) {
   const { locale, make: makeSlug, model: modelSlug } = await params;
   if (!isLocale(locale)) notFound();
-  const make = getPublishedMakeBySlug(makeSlug);
-  const model = getEligibleModelBySlug(makeSlug, modelSlug);
+  const make = await getPublishedMakeBySlug(makeSlug);
+  const model = await getEligibleModelBySlug(makeSlug, modelSlug);
   if (!make || !model) notFound();
   const queryState = await searchParams;
   const query = firstValue(queryState.q);
   const showAllProducts = firstValue(queryState.view) === "all";
   const copy = getDictionary(locale).discovery;
   const searchResult = query
-    ? searchProductsByReference(query, { makeSlug, modelSlug }, locale)
+    ? await searchProductsByReference(query, { makeSlug, modelSlug }, locale)
     : undefined;
 
   let productSection:
-    | { status: "success"; products: ReturnType<typeof getProductsForModel> }
+    | { status: "success"; products: Awaited<ReturnType<typeof getProductsForModel>> }
     | { status: "error"; products: [] };
   try {
-    productSection = { status: "success", products: getProductsForModel(makeSlug, modelSlug) };
+    productSection = { status: "success", products: await getProductsForModel(makeSlug, modelSlug) };
   } catch {
     productSection = { status: "error", products: [] };
   }
-  const categories = getCategoriesForModel(makeSlug, modelSlug);
+  const categories = await getCategoriesForModel(makeSlug, modelSlug);
 
   return (
     <>

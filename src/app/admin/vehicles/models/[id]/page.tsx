@@ -1,0 +1,151 @@
+"use client";
+
+import Link from "next/link";
+import { useParams, useRouter } from "next/navigation";
+import { type FormEvent, useEffect, useState } from "react";
+import { AdminApiError, adminGetModel, adminUpdateModel } from "@/features/admin/api/client";
+import { ADMIN_CATALOG_PUBLISHING_STATUSES, type AdminModel } from "@/features/admin/api/contracts";
+
+type DetailState =
+  | { kind: "loading" }
+  | { kind: "not-found" }
+  | { kind: "error"; message: string }
+  | { kind: "ready"; model: AdminModel };
+
+export default function AdminModelDetailPage() {
+  const params = useParams<{ id: string }>();
+  const router = useRouter();
+  const id = params.id;
+
+  const [state, setState] = useState<DetailState>({ kind: "loading" });
+  const [saving, setSaving] = useState(false);
+  const [saveError, setSaveError] = useState<string | null>(null);
+
+  useEffect(() => {
+    let cancelled = false;
+    adminGetModel(id)
+      .then((model) => !cancelled && setState({ kind: "ready", model }))
+      .catch((caught: unknown) => {
+        if (cancelled) return;
+        if (caught instanceof AdminApiError && caught.status === 401) {
+          router.push("/admin/login");
+          return;
+        }
+        if (caught instanceof AdminApiError && caught.status === 404) {
+          setState({ kind: "not-found" });
+          return;
+        }
+        setState({
+          kind: "error",
+          message: caught instanceof AdminApiError ? caught.message : "Failed to load model.",
+        });
+      });
+    return () => {
+      cancelled = true;
+    };
+  }, [id, router]);
+
+  async function handleSave(event: FormEvent<HTMLFormElement>) {
+    event.preventDefault();
+    if (state.kind !== "ready") return;
+    setSaving(true);
+    setSaveError(null);
+    const data = new FormData(event.currentTarget);
+    const yearFrom = String(data.get("yearFrom") ?? "").trim();
+    const yearTo = String(data.get("yearTo") ?? "").trim();
+    try {
+      const updated = await adminUpdateModel(id, {
+        slug: String(data.get("slug") ?? ""),
+        makeId: state.model.makeId,
+        nameAr: String(data.get("nameAr") ?? ""),
+        nameEn: String(data.get("nameEn") ?? ""),
+        descriptionAr: String(data.get("descriptionAr") ?? "").trim() || null,
+        descriptionEn: String(data.get("descriptionEn") ?? "").trim() || null,
+        status: String(data.get("status") ?? "draft"),
+        verifiedYearRanges:
+          yearFrom && yearTo ? [{ from: Number(yearFrom), to: Number(yearTo) }] : null,
+      });
+      setState({ kind: "ready", model: updated });
+    } catch (caught) {
+      setSaveError(caught instanceof AdminApiError ? caught.message : "Failed to save changes.");
+    } finally {
+      setSaving(false);
+    }
+  }
+
+  if (state.kind === "loading") return <p className="text-sm text-muted">Loading…</p>;
+  if (state.kind === "not-found") return <p className="text-sm text-muted">Model not found.</p>;
+  if (state.kind === "error") {
+    return (
+      <p className="rounded-md border border-primary/35 bg-primary/10 p-4 text-sm text-soft-silver">
+        {state.message}
+      </p>
+    );
+  }
+
+  const model = state.model;
+  const range = model.verifiedYearRanges?.[0];
+
+  return (
+    <div>
+      <Link href="/admin/vehicles" className="incar-focus text-sm text-metallic-silver hover:text-white">
+        ← Back to vehicles
+      </Link>
+      <h1 className="mt-4 text-2xl font-semibold text-white">{model.nameEn}</h1>
+      <p className="mt-1 text-sm text-muted">{model.productCount} linked products.</p>
+
+      <form onSubmit={handleSave} className="incar-card mt-6 grid gap-4 rounded-lg p-6 sm:max-w-2xl sm:grid-cols-2">
+        <label className="grid gap-2 text-sm font-semibold text-white">
+          Slug
+          <input name="slug" defaultValue={model.slug} required className="incar-input px-4 text-sm" />
+        </label>
+        <label className="grid gap-2 text-sm font-semibold text-white">
+          Status
+          <select name="status" defaultValue={model.status} className="incar-input px-4 text-sm">
+            {ADMIN_CATALOG_PUBLISHING_STATUSES.map((status) => (
+              <option key={status} value={status}>
+                {status}
+              </option>
+            ))}
+          </select>
+        </label>
+        <label className="grid gap-2 text-sm font-semibold text-white">
+          Name (Arabic)
+          <input name="nameAr" dir="rtl" defaultValue={model.nameAr} required className="incar-input px-4 text-sm" />
+        </label>
+        <label className="grid gap-2 text-sm font-semibold text-white">
+          Name (English)
+          <input name="nameEn" defaultValue={model.nameEn} required className="incar-input px-4 text-sm" />
+        </label>
+        <label className="grid gap-2 text-sm font-semibold text-white">
+          Verified year from
+          <input name="yearFrom" type="number" min={1900} max={2200} defaultValue={range?.from} className="incar-input px-4 text-sm" />
+        </label>
+        <label className="grid gap-2 text-sm font-semibold text-white">
+          Verified year to
+          <input name="yearTo" type="number" min={1900} max={2200} defaultValue={range?.to} className="incar-input px-4 text-sm" />
+        </label>
+        <label className="grid gap-2 text-sm font-semibold text-white sm:col-span-2">
+          Description (Arabic)
+          <textarea name="descriptionAr" dir="rtl" defaultValue={model.descriptionAr ?? ""} rows={3} className="incar-input px-4 py-3 text-sm" />
+        </label>
+        <label className="grid gap-2 text-sm font-semibold text-white sm:col-span-2">
+          Description (English)
+          <textarea name="descriptionEn" defaultValue={model.descriptionEn ?? ""} rows={3} className="incar-input px-4 py-3 text-sm" />
+        </label>
+        {saveError ? (
+          <p className="sm:col-span-2 rounded-md border border-primary/35 bg-primary/10 p-3 text-sm text-soft-silver">
+            {saveError}
+          </p>
+        ) : null}
+        <button
+          type="submit"
+          disabled={saving}
+          className="incar-focus min-h-11 w-fit rounded-md bg-primary px-5 text-sm font-semibold text-white transition hover:bg-primary-hover disabled:cursor-not-allowed disabled:opacity-60 sm:col-span-2"
+        >
+          {saving ? "Saving…" : "Save changes"}
+        </button>
+      </form>
+    </div>
+  );
+}

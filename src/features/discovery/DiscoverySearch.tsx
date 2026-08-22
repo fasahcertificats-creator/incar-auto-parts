@@ -11,7 +11,7 @@ import {
 import { DiscoveryProductCard } from "./DiscoveryProductCard";
 import { DiscoverySearchForm } from "./DiscoverySearchForm";
 
-export function DiscoverySearch({
+export async function DiscoverySearch({
   locale,
   action,
   query,
@@ -29,11 +29,11 @@ export function DiscoverySearch({
   const copy = getDictionary(locale).discovery.search;
   const sourceHref = `${action}${query ? `?q=${encodeURIComponent(query)}` : ""}`;
   const contextMake = context?.makeSlug
-    ? getPublishedMakeBySlug(context.makeSlug)
+    ? await getPublishedMakeBySlug(context.makeSlug)
     : undefined;
   const contextModel =
     context?.makeSlug && context.modelSlug
-      ? getEligibleModelBySlug(context.makeSlug, context.modelSlug)
+      ? await getEligibleModelBySlug(context.makeSlug, context.modelSlug)
       : undefined;
   const vehicleContext = contextMake
     ? { makeId: contextMake.id, modelId: contextModel?.id }

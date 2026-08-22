@@ -1,6 +1,6 @@
 "use client";
 
-import { useMemo, useState } from "react";
+import { useEffect, useState } from "react";
 import {
   filterProducts,
   getActiveBrands,
@@ -10,7 +10,7 @@ import {
 } from "@/lib/products";
 import { useLocale } from "@/contexts/LocaleContext";
 import { getDictionary } from "@/i18n/dictionaries";
-import type { BrandName, ProductCategory } from "@/types/product";
+import type { BrandName, Product, ProductCategory } from "@/types/product";
 import { ProductCard } from "./ProductCard";
 
 type ProductExplorerProps = {
@@ -20,6 +20,12 @@ type ProductExplorerProps = {
   initialModel?: string;
 };
 
+// This route is permanently redirected away in next.config.ts (/products,
+// /products/toyota, /products/hyundai all redirect to /ar/parts) — kept
+// working rather than deleted, but never actually reached by a visitor.
+// Client-side fetch-on-mount (rather than awaiting the repository directly
+// in render) because filterProducts/getActive* now hit the live backend,
+// which a client component can't await inline.
 export function ProductExplorer({
   fixedBrand,
   initialSearch = "",
@@ -35,23 +41,51 @@ export function ProductExplorer({
   const { locale } = useLocale();
   const dictionary = getDictionary(locale);
 
-  const activeBrands = getActiveBrands();
-  const activeCategories = getActiveCategories();
-  const hasPublishedProducts = getActiveProducts().length > 0;
+  const [activeBrands, setActiveBrands] = useState<Awaited<ReturnType<typeof getActiveBrands>>>([]);
+  const [activeCategories, setActiveCategories] = useState<
+    Awaited<ReturnType<typeof getActiveCategories>>
+  >([]);
+  const [hasPublishedProducts, setHasPublishedProducts] = useState(false);
+  const [availableModels, setAvailableModels] = useState<
+    Awaited<ReturnType<typeof getActiveVehicleModels>>
+  >([]);
+  const [filteredProducts, setFilteredProducts] = useState<Product[]>([]);
 
-  const availableModels = fixedBrand
-    ? getActiveVehicleModels(fixedBrand)
-    : brand === "All"
-      ? getActiveVehicleModels()
-      : getActiveVehicleModels(brand);
+  useEffect(() => {
+    let cancelled = false;
+    Promise.all([getActiveBrands(), getActiveCategories(), getActiveProducts()]).then(
+      ([brands, categories, products]) => {
+        if (cancelled) return;
+        setActiveBrands(brands);
+        setActiveCategories(categories);
+        setHasPublishedProducts(products.length > 0);
+      },
+    );
+    return () => {
+      cancelled = true;
+    };
+  }, []);
 
-  const filteredProducts = useMemo(() => {
-    return filterProducts({
-      brand: fixedBrand ?? brand,
-      model,
-      category,
-      query: search,
+  useEffect(() => {
+    let cancelled = false;
+    getActiveVehicleModels(fixedBrand ?? (brand === "All" ? undefined : brand)).then((models) => {
+      if (!cancelled) setAvailableModels(models);
     });
+    return () => {
+      cancelled = true;
+    };
+  }, [brand, fixedBrand]);
+
+  useEffect(() => {
+    let cancelled = false;
+    filterProducts({ brand: fixedBrand ?? brand, model, category, query: search }).then(
+      (products) => {
+        if (!cancelled) setFilteredProducts(products);
+      },
+    );
+    return () => {
+      cancelled = true;
+    };
   }, [brand, category, fixedBrand, model, search]);
 
   return (

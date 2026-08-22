@@ -13,7 +13,7 @@ export const metadata = pageMetadata(
 export default async function HyundaiProductsPage() {
   const locale = await getServerLocale();
   const dictionary = getDictionary(locale);
-  const hyundaiModels = getActiveVehicleModels("Hyundai");
+  const hyundaiModels = await getActiveVehicleModels("Hyundai");
 
   return (
     <>

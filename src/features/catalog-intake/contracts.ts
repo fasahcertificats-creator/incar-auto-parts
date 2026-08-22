@@ -91,7 +91,7 @@ export type ProductIntake = {
   vehicleRelationships?: VehicleRelationshipIntake[];
   descriptionAr?: string;
   descriptionEn?: string;
-  image?: ProductImageIntake;
+  images?: ProductImageIntake[];
   specifications?: Record<string, ProductSpecificationIntake>;
   provenance?: CatalogProvenance;
 };

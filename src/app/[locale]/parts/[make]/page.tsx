@@ -26,7 +26,7 @@ function firstValue(value: string | string[] | undefined) {
 export async function generateMetadata({ params, searchParams }: Props): Promise<Metadata> {
   const { locale, make: makeSlug } = await params;
   if (!isLocale(locale)) notFound();
-  const make = getPublishedMakeBySlug(makeSlug);
+  const make = await getPublishedMakeBySlug(makeSlug);
   if (!make) notFound();
   const query = firstValue((await searchParams).q);
   const copy = getDictionary(locale).discovery;
@@ -43,15 +43,15 @@ export async function generateMetadata({ params, searchParams }: Props): Promise
 export default async function MakePage({ params, searchParams }: Props) {
   const { locale, make: makeSlug } = await params;
   if (!isLocale(locale)) notFound();
-  const make = getPublishedMakeBySlug(makeSlug);
+  const make = await getPublishedMakeBySlug(makeSlug);
   if (!make) notFound();
   const query = firstValue((await searchParams).q);
-  const models = getEligibleModelsForMake(make.id);
+  const models = await getEligibleModelsForMake(make.id);
   if (!models.length) notFound();
   const dictionary = getDictionary(locale);
   const copy = dictionary.discovery;
   const searchResult = query
-    ? searchProductsByReference(query, { makeSlug: make.slug }, locale)
+    ? await searchProductsByReference(query, { makeSlug: make.slug }, locale)
     : undefined;
 
   return (

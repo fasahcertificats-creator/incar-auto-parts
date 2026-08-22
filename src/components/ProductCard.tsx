@@ -4,7 +4,6 @@ import Link from "next/link";
 import { useLocale } from "@/contexts/LocaleContext";
 import { getDictionary } from "@/i18n/dictionaries";
 import { localizeHref } from "@/i18n/routing";
-import { getMakeById, getModelById } from "@/features/discovery/repository";
 import type { Product } from "@/types/product";
 import { AddToRfqButton } from "./AddToRfqButton";
 import { ProductImage } from "./ProductImage";
@@ -13,8 +12,8 @@ export function ProductCard({ product }: { product: Product }) {
   const { locale } = useLocale();
   const dictionary = getDictionary(locale);
   const relationship = product.vehicleRelationships[0];
-  const make = relationship ? getMakeById(relationship.makeId) : undefined;
-  const model = relationship ? getModelById(relationship.modelId) : undefined;
+  const make = relationship?.makeName ? { name: relationship.makeName } : undefined;
+  const model = relationship?.modelName ? { name: relationship.modelName } : undefined;
   const primaryReference =
     product.references.incarPartNumber ?? product.references.oemReferences[0] ?? "—";
   const canAddToDraft =
@@ -25,8 +24,8 @@ export function ProductCard({ product }: { product: Product }) {
     <article className="incar-card group flex h-full flex-col overflow-hidden rounded-lg transition hover:-translate-y-1 hover:border-metallic-silver/35">
       <Link href={localizeHref(locale, `/products/${product.slug}`)} className="incar-focus block rounded-md">
         <ProductImage
-          src={product.image?.src ?? null}
-          alt={product.image?.alt?.[locale] ?? product.name[locale]}
+          src={product.images[0]?.src ?? null}
+          alt={product.images[0]?.alt?.[locale] ?? product.name[locale]}
           brand={make?.name ?? "INCAR"}
           partNumber={primaryReference}
           noImageLabel={dictionary.discovery.product.noImage}

@@ -50,7 +50,8 @@ export async function HomeFoundation() {
   const locale = await getServerLocale();
   const dictionary = getDictionary(locale);
   const copy = dictionary.homeFoundation;
-  const makes = getPublishedMakes();
+  const makes = await getPublishedMakes();
+  const modelsByMake = await Promise.all(makes.map((make) => getEligibleModelsForMake(make.id)));
   const isArabic = locale === "ar";
 
   return (
@@ -112,7 +113,7 @@ export async function HomeFoundation() {
           />
           {makes.length ? (
             <div className="mt-4 grid gap-3.5 sm:mt-8 sm:gap-5 lg:grid-cols-2">
-              {makes.map((make) => (
+              {makes.map((make, index) => (
                 <article key={make.id} className="incar-card rounded-lg p-4 sm:p-6">
                   {make.isSampleData ? (
                     <p className="mb-3 text-xs font-semibold text-metallic-silver">
@@ -126,7 +127,7 @@ export async function HomeFoundation() {
                     {make.name}
                   </Link>
                   <div className="mt-4 flex flex-wrap gap-2.5 sm:gap-2">
-                    {getEligibleModelsForMake(make.id).map((model) => (
+                    {modelsByMake[index].map((model) => (
                       <Link
                         key={model.id}
                         href={localizeHref(locale, `/parts/${make.slug}/${model.slug}`)}

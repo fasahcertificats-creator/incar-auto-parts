@@ -3,7 +3,7 @@ import { brands as sampleMakeRecords } from "@/data/brands";
 import { categories as sampleCategoryRecords } from "@/data/categories";
 import { vehicleModels as sampleModelRecords } from "@/data/models";
 import { products as sampleProductRecords } from "@/data/products";
-import { productionCatalog } from "@/data/production";
+import { loadProductionCatalog } from "@/data/production";
 import type { Locale } from "@/i18n/types";
 import type {
   Category,
@@ -40,15 +40,6 @@ export type DiscoverySearchResult = {
   exactMatches: ProductReferenceMatch[];
   possibleMatches: ProductReferenceMatch[];
 };
-
-// Production records can enter Discovery only through the validated intake pipeline.
-const productionMakes: Make[] = productionCatalog.makes;
-const productionModels: Model[] = productionCatalog.models;
-const productionCategories: Category[] = productionCatalog.categories;
-const productionProducts: Product[] = productionCatalog.products;
-const draftMakes: Make[] = [];
-const draftModels: Model[] = [];
-const draftProducts: Product[] = [];
 
 const sampleMakes: Make[] = sampleMakeRecords.map((make) => ({
   id: make.id,
@@ -93,9 +84,18 @@ const sampleProducts: Product[] = sampleProductRecords.map((record) => {
       (candidate) =>
         candidate.makeId === makeId && candidate.name === fitment.model,
     );
+    const make = sampleMakes.find((candidate) => candidate.id === makeId);
 
     return model
-      ? [{ makeId, modelId: model.id, compatibilityStatus: "not-verified" as const }]
+      ? [
+          {
+            makeId,
+            modelId: model.id,
+            makeName: make?.name,
+            modelName: model.name,
+            compatibilityStatus: "not-verified" as const,
+          },
+        ]
       : [];
   });
 
@@ -114,58 +114,67 @@ const sampleProducts: Product[] = sampleProductRecords.map((record) => {
     category: record.category,
     compatibilityStatus: "not-verified",
     requestEligibility: "verification-required",
-    image: record.imageUrl ? { src: record.imageUrl } : null,
+    images: record.imageUrl ? [{ src: record.imageUrl }] : [],
     dataVerificationState: "unverified",
     possibleReferenceCandidates: [],
     hasCriticalDataConflict: relationships.length === 0,
   } satisfies Product;
 });
 
-function visibleMakes() {
-  return [...productionMakes, ...(sampleDataEnabled ? sampleMakes : [])].filter(
-    (make) => make.status === "published",
-  );
-}
+type CatalogData = {
+  makes: Make[];
+  models: Model[];
+  categories: Category[];
+  products: Product[];
+};
 
-function visibleModels() {
-  return [...productionModels, ...(sampleDataEnabled ? sampleModels : [])].filter(
-    (model) => model.status === "published",
-  );
-}
-
-function visibleCategories() {
-  return [
-    ...productionCategories,
-    ...(sampleDataEnabled ? sampleCategories : []),
-  ].filter((category) => category.status === "published");
-}
-
-function visibleProducts() {
-  return [
-    ...productionProducts,
-    ...(sampleDataEnabled ? sampleProducts : []),
-  ].filter(isProductPublishingEligible);
-}
-
-function withModelEligibility(model: Model, products = visibleProducts()): Model {
+/**
+ * The one async entry point everything else in this file awaits.
+ * loadProductionCatalog() fetches from the live backend with Next's fetch
+ * cache (deduped within a render, revalidated periodically) — was
+ * previously a synchronous module-level constant read from catalog.json.
+ */
+async function getCatalogData(): Promise<CatalogData> {
+  const { data } = await loadProductionCatalog();
   return {
-    ...model,
-    publishingEligibility: isModelPageEligible(model, products)
-      ? "eligible"
-      : "ineligible",
+    makes: [...data.makes, ...(sampleDataEnabled ? sampleMakes : [])],
+    models: [...data.models, ...(sampleDataEnabled ? sampleModels : [])],
+    categories: [...data.categories, ...(sampleDataEnabled ? sampleCategories : [])],
+    products: [...data.products, ...(sampleDataEnabled ? sampleProducts : [])],
   };
 }
 
-function withMakeEligibility(
-  make: Make,
-  models = visibleModels(),
-  products = visibleProducts(),
-): Make {
+async function visibleMakes() {
+  const { makes } = await getCatalogData();
+  return makes.filter((make) => make.status === "published");
+}
+
+async function visibleModels() {
+  const { models } = await getCatalogData();
+  return models.filter((model) => model.status === "published");
+}
+
+async function visibleCategories() {
+  const { categories } = await getCatalogData();
+  return categories.filter((category) => category.status === "published");
+}
+
+async function visibleProducts() {
+  const { products } = await getCatalogData();
+  return products.filter(isProductPublishingEligible);
+}
+
+function withModelEligibility(model: Model, products: Product[]): Model {
+  return {
+    ...model,
+    publishingEligibility: isModelPageEligible(model, products) ? "eligible" : "ineligible",
+  };
+}
+
+function withMakeEligibility(make: Make, models: Model[], products: Product[]): Make {
   return {
     ...make,
-    publishingEligibility: isMakePageEligible(make, models, products)
-      ? "eligible"
-      : "ineligible",
+    publishingEligibility: isMakePageEligible(make, models, products) ? "eligible" : "ineligible",
   };
 }
 
@@ -173,87 +182,87 @@ export function normalizeReference(value: string) {
   return normalizeCatalogReference(value);
 }
 
-export function getPublishedMakes() {
-  const models = visibleModels();
-  const products = visibleProducts();
-  return visibleMakes()
+export async function getPublishedMakes() {
+  const [makes, models, products] = await Promise.all([
+    visibleMakes(),
+    visibleModels(),
+    visibleProducts(),
+  ]);
+  return makes
     .map((make) => withMakeEligibility(make, models, products))
     .filter((make) => make.publishingEligibility === "eligible");
 }
 
-export function getPublishedMakeBySlug(slug: string) {
-  return getPublishedMakes().find((make) => make.slug === slug);
+export async function getPublishedMakeBySlug(slug: string) {
+  const makes = await getPublishedMakes();
+  return makes.find((make) => make.slug === slug);
 }
 
-export function getEligibleModelsForMake(makeIdOrSlug: string) {
-  const make = visibleMakes().find(
+export async function getEligibleModelsForMake(makeIdOrSlug: string) {
+  const makes = await visibleMakes();
+  const make = makes.find(
     (candidate) => candidate.id === makeIdOrSlug || candidate.slug === makeIdOrSlug,
   );
   if (!make) return [];
 
-  const products = visibleProducts();
-  return visibleModels()
+  const [models, products] = await Promise.all([visibleModels(), visibleProducts()]);
+  return models
     .filter((model) => model.makeId === make.id)
     .map((model) => withModelEligibility(model, products))
     .filter((model) => model.publishingEligibility === "eligible");
 }
 
-export function getEligibleModelBySlug(makeSlug: string, modelSlug: string) {
-  const make = getPublishedMakeBySlug(makeSlug);
+export async function getEligibleModelBySlug(makeSlug: string, modelSlug: string) {
+  const make = await getPublishedMakeBySlug(makeSlug);
   if (!make) return undefined;
-  return getEligibleModelsForMake(make.id).find((model) => model.slug === modelSlug);
+  const models = await getEligibleModelsForMake(make.id);
+  return models.find((model) => model.slug === modelSlug);
 }
 
-export function getPublishedProducts() {
+export async function getPublishedProducts() {
   return visibleProducts();
 }
 
-export function getPublishedProductBySlug(slug: string) {
-  return visibleProducts().find((product) => product.slug === slug);
+export async function getPublishedProductBySlug(slug: string) {
+  const products = await visibleProducts();
+  return products.find((product) => product.slug === slug);
 }
 
-export function getPublishedProductById(internalProductId: string) {
-  return visibleProducts().find(
-    (product) => product.internalProductId === internalProductId,
-  );
+export async function getPublishedProductById(internalProductId: string) {
+  const products = await visibleProducts();
+  return products.find((product) => product.internalProductId === internalProductId);
 }
 
-export function getProductsForModel(makeSlug: string, modelSlug: string) {
-  const make = getPublishedMakeBySlug(makeSlug);
-  const model = getEligibleModelBySlug(makeSlug, modelSlug);
+export async function getProductsForModel(makeSlug: string, modelSlug: string) {
+  const [make, model] = await Promise.all([
+    getPublishedMakeBySlug(makeSlug),
+    getEligibleModelBySlug(makeSlug, modelSlug),
+  ]);
   if (!make || !model) return [];
 
-  return visibleProducts().filter((product) =>
+  const products = await visibleProducts();
+  return products.filter((product) =>
     product.vehicleRelationships.some(
-      (relationship) =>
-        relationship.makeId === make.id && relationship.modelId === model.id,
+      (relationship) => relationship.makeId === make.id && relationship.modelId === model.id,
     ),
   );
 }
 
-export function getCategoriesForModel(makeSlug: string, modelSlug: string) {
-  const productCategories = new Set(
-    getProductsForModel(makeSlug, modelSlug).map((product) => product.category),
-  );
-  return visibleCategories().filter((category) =>
-    productCategories.has(category.name),
-  );
+export async function getCategoriesForModel(makeSlug: string, modelSlug: string) {
+  const [products, categories] = await Promise.all([
+    getProductsForModel(makeSlug, modelSlug),
+    visibleCategories(),
+  ]);
+  const productCategories = new Set(products.map((product) => product.category));
+  return categories.filter((category) => productCategories.has(category.name));
 }
 
-export function getMakeById(makeId: string) {
-  return visibleMakes().find((make) => make.id === makeId);
-}
-
-export function getModelById(modelId: string) {
-  return visibleModels().find((model) => model.id === modelId);
-}
-
-function productMatchesContext(product: Product, context: DiscoverySearchContext) {
+async function productMatchesContext(product: Product, context: DiscoverySearchContext) {
   if (!context.makeSlug && !context.modelSlug) return true;
-  const make = context.makeSlug ? getPublishedMakeBySlug(context.makeSlug) : undefined;
+  const make = context.makeSlug ? await getPublishedMakeBySlug(context.makeSlug) : undefined;
   const model =
     context.makeSlug && context.modelSlug
-      ? getEligibleModelBySlug(context.makeSlug, context.modelSlug)
+      ? await getEligibleModelBySlug(context.makeSlug, context.modelSlug)
       : undefined;
   if (context.makeSlug && !make) return false;
   if (context.modelSlug && !model) return false;
@@ -265,11 +274,11 @@ function productMatchesContext(product: Product, context: DiscoverySearchContext
   );
 }
 
-export function searchProductsByReference(
+export async function searchProductsByReference(
   originalQuery: string,
   context: DiscoverySearchContext = {},
   locale?: Locale,
-): DiscoverySearchResult {
+): Promise<DiscoverySearchResult> {
   void locale;
   const normalizedQuery = normalizeReference(originalQuery);
   const emptyResult: DiscoverySearchResult = {
@@ -283,9 +292,14 @@ export function searchProductsByReference(
   if (!normalizedQuery) return emptyResult;
 
   try {
-    const products = visibleProducts().filter((product) =>
-      productMatchesContext(product, context),
+    const allProducts = await visibleProducts();
+    const matchResults = await Promise.all(
+      allProducts.map(async (product) => ({
+        product,
+        matches: await productMatchesContext(product, context),
+      })),
     );
+    const products = matchResults.filter((entry) => entry.matches).map((entry) => entry.product);
     const exactMatches: ProductReferenceMatch[] = [];
     const possibleMatches: ProductReferenceMatch[] = [];
 
@@ -331,32 +345,20 @@ export function searchProductsByReference(
   }
 }
 
-export function getIndexedMakes() {
-  return getPublishedMakes().filter((make) => !make.isSampleData);
+export async function getIndexedMakes() {
+  const makes = await getPublishedMakes();
+  return makes.filter((make) => !make.isSampleData);
 }
 
-export function getIndexedModelsForMake(makeIdOrSlug: string) {
-  const products = visibleProducts();
-  return getEligibleModelsForMake(makeIdOrSlug).filter((model) =>
-    isModelIndexEligible(model, products),
-  );
+export async function getIndexedModelsForMake(makeIdOrSlug: string) {
+  const [models, products] = await Promise.all([
+    getEligibleModelsForMake(makeIdOrSlug),
+    visibleProducts(),
+  ]);
+  return models.filter((model) => isModelIndexEligible(model, products));
 }
 
-export function getIndexedProducts() {
-  return visibleProducts().filter(isProductIndexEligible);
+export async function getIndexedProducts() {
+  const products = await visibleProducts();
+  return products.filter(isProductIndexEligible);
 }
-
-export const discoveryRecordPartitions = {
-  production: {
-    makes: productionMakes.length,
-    models: productionModels.length,
-    categories: productionCategories.length,
-    products: productionProducts.length,
-  },
-  sampleEnabled: sampleDataEnabled,
-  drafts: {
-    makes: draftMakes.length,
-    models: draftModels.length,
-    products: draftProducts.length,
-  },
-};

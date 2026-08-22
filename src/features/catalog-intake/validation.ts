@@ -815,28 +815,45 @@ function validateProduct(context: ValidationContext, record: UnknownRecord, inde
   }
 
   validateDescription(context, record, "product", id);
-  if (record.image === undefined) {
+  if (record.images === undefined || (Array.isArray(record.images) && record.images.length === 0)) {
     addIssue(context, {
       level: "warning",
       entityType: "product",
       entityId: id,
-      field: "image",
+      field: "images",
       code: "NO_IMAGE",
-      message: "No product image was provided.",
+      message: "No product images were provided.",
     });
-  } else if (!isRecord(record.image) || typeof record.image.src !== "string" || !record.image.src.trim()) {
+  } else if (!Array.isArray(record.images)) {
     addIssue(
       context,
       {
         level: "error",
         entityType: "product",
         entityId: id,
-        field: "image.src",
+        field: "images",
         code: "INVALID_FIELD_TYPE",
-        message: "Product image requires a non-empty src string.",
+        message: "images must be an array when provided.",
       },
       record,
     );
+  } else {
+    record.images.forEach((image, index) => {
+      if (!isRecord(image) || typeof image.src !== "string" || !image.src.trim()) {
+        addIssue(
+          context,
+          {
+            level: "error",
+            entityType: "product",
+            entityId: id,
+            field: `images[${index}].src`,
+            code: "INVALID_FIELD_TYPE",
+            message: "Each product image requires a non-empty src string.",
+          },
+          record,
+        );
+      }
+    });
   }
   if (record.specifications !== undefined) {
     if (!isRecord(record.specifications)) {

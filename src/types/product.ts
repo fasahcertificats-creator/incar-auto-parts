@@ -72,6 +72,12 @@ export type ProductReferences = {
 export type ProductVehicleRelationship = {
   makeId: string;
   modelId: string;
+  /** Resolved once, server-side, when the Product is built — lets
+   * client-side code (the RFQ draft cart, card components) display the
+   * make/model name synchronously instead of looking it up by ID against
+   * data that's now fetched live. */
+  makeName?: string;
+  modelName?: string;
   compatibilityStatus: CompatibilityStatus;
   verifiedYearRanges?: VerifiedYearRange[];
 };
@@ -93,7 +99,7 @@ export type Product = {
   category: ProductCategory;
   compatibilityStatus: CompatibilityStatus;
   requestEligibility: RequestEligibility;
-  image: ProductImage | null;
+  images: ProductImage[];
   specifications?: Record<string, Partial<Record<Locale, string>>>;
   dataVerificationState: DataVerificationState;
   possibleReferenceCandidates: string[];

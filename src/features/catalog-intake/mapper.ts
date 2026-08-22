@@ -64,6 +64,8 @@ function mapCategory(record: CategoryIntake): Category {
 function mapProduct(
   record: ProductIntake,
   categories: Map<string, CategoryIntake>,
+  makes: Map<string, MakeIntake>,
+  models: Map<string, ModelIntake>,
 ): Product {
   const category = categories.get(record.categoryId.trim());
 
@@ -81,32 +83,39 @@ function mapProduct(
         record.references.verifiedAlternateReferences ?? [],
     },
     vehicleRelationships: (record.vehicleRelationships ?? []).map(
-      (relationship) => ({
-        makeId: relationship.makeId.trim(),
-        modelId: relationship.modelId.trim(),
-        compatibilityStatus: relationship.compatibilityStatus,
-        verifiedYearRanges: relationship.verifiedYearRanges,
-      }),
+      (relationship) => {
+        const makeId = relationship.makeId.trim();
+        const modelId = relationship.modelId.trim();
+        const make = makes.get(makeId);
+        const model = models.get(modelId);
+        return {
+          makeId,
+          modelId,
+          // Only denormalize the name when the make/model is still published —
+          // matches the old getMakeById/getModelById lookups' published-only
+          // filtering, so an archived make/model falls back to the caller's
+          // default label instead of leaking its name onto a still-published
+          // product or a filter match that no longer has a visible option.
+          makeName: make?.status === "published" ? make.nameEn.trim() : undefined,
+          modelName: model?.status === "published" ? model.nameEn.trim() : undefined,
+          compatibilityStatus: relationship.compatibilityStatus,
+          verifiedYearRanges: relationship.verifiedYearRanges,
+        };
+      },
     ),
     category: category?.nameEn.trim() ?? "",
     compatibilityStatus: record.compatibilityStatus,
     requestEligibility: record.requestEligibility,
-    image: record.image
-      ? {
-          src: record.image.src.trim(),
-          alt:
-            record.image.altAr || record.image.altEn
-              ? {
-                  ...(record.image.altAr
-                    ? { ar: record.image.altAr.trim() }
-                    : {}),
-                  ...(record.image.altEn
-                    ? { en: record.image.altEn.trim() }
-                    : {}),
-                }
-              : undefined,
-        }
-      : null,
+    images: (record.images ?? []).map((image) => ({
+      src: image.src.trim(),
+      alt:
+        image.altAr || image.altEn
+          ? {
+              ...(image.altAr ? { ar: image.altAr.trim() } : {}),
+              ...(image.altEn ? { en: image.altEn.trim() } : {}),
+            }
+          : undefined,
+    })),
     specifications: record.specifications,
     dataVerificationState: record.dataVerificationState,
     possibleReferenceCandidates: [],
@@ -116,11 +125,13 @@ function mapProduct(
 
 export function mapCatalogIntake(catalog: CatalogIntake): CatalogDomainData {
   const categories = new Map(catalog.categories.map((item) => [item.id.trim(), item]));
+  const makes = new Map(catalog.makes.map((item) => [item.id.trim(), item]));
+  const models = new Map(catalog.models.map((item) => [item.id.trim(), item]));
 
   return {
     makes: catalog.makes.map(mapMake),
     models: catalog.models.map(mapModel),
     categories: catalog.categories.map(mapCategory),
-    products: catalog.products.map((product) => mapProduct(product, categories)),
+    products: catalog.products.map((product) => mapProduct(product, categories, makes, models)),
   };
 }

@@ -5,7 +5,6 @@ import { localizeHref } from "@/i18n/routing";
 import type { Locale } from "@/i18n/types";
 import type { Product, ReferenceMatch } from "@/types/product";
 import { DiscoveryProductAction } from "./DiscoveryProductAction";
-import { getMakeById, getModelById } from "./repository";
 
 export function DiscoveryProductCard({
   locale,
@@ -23,8 +22,8 @@ export function DiscoveryProductCard({
   const dictionary = getDictionary(locale);
   const copy = dictionary.discovery;
   const relationship = product.vehicleRelationships[0];
-  const make = relationship ? getMakeById(relationship.makeId) : undefined;
-  const model = relationship ? getModelById(relationship.modelId) : undefined;
+  const make = relationship?.makeName ? { name: relationship.makeName } : undefined;
+  const model = relationship?.modelName ? { name: relationship.modelName } : undefined;
   const primaryReference =
     product.references.incarPartNumber ?? product.references.oemReferences[0] ?? "—";
   const query = new URLSearchParams();
@@ -34,8 +33,8 @@ export function DiscoveryProductCard({
   return (
     <article className="incar-card flex h-full flex-col overflow-hidden rounded-lg">
       <ProductImage
-        src={product.image?.src ?? null}
-        alt={product.image?.alt?.[locale] ?? product.name[locale]}
+        src={product.images[0]?.src ?? null}
+        alt={product.images[0]?.alt?.[locale] ?? product.name[locale]}
         brand={make?.name ?? "INCAR"}
         partNumber={primaryReference}
         noImageLabel={copy.product.noImage}

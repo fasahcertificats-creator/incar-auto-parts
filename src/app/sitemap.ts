@@ -34,19 +34,22 @@ function localizedEntry(locale: "ar" | "en", route: string) {
   };
 }
 
-export default function sitemap(): MetadataRoute.Sitemap {
-  const makes = getIndexedMakes();
-  const products = getIndexedProducts();
+export default async function sitemap(): Promise<MetadataRoute.Sitemap> {
+  const makes = await getIndexedMakes();
+  const products = await getIndexedProducts();
+  const modelsByMake = await Promise.all(
+    makes.map((make) => getIndexedModelsForMake(make.id)),
+  );
 
   return [
     ...publicRoutes.flatMap((route) => [
       localizedEntry("ar", route),
       localizedEntry("en", route),
     ]),
-    ...makes.flatMap((make) => [
+    ...makes.flatMap((make, index) => [
       localizedEntry("ar", `/parts/${make.slug}`),
       localizedEntry("en", `/parts/${make.slug}`),
-      ...getIndexedModelsForMake(make.id).flatMap((model) => [
+      ...modelsByMake[index].flatMap((model) => [
         localizedEntry("ar", `/parts/${make.slug}/${model.slug}`),
         localizedEntry("en", `/parts/${make.slug}/${model.slug}`),
       ]),

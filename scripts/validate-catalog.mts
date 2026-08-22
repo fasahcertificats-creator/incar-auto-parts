@@ -75,7 +75,7 @@ function validCatalog(): CatalogIntake {
         ],
         descriptionAr: "وصف معتمد.",
         descriptionEn: "Verified description.",
-        image: { src: "/images/verified-product.svg" },
+        images: [{ src: "/images/verified-product.svg" }],
         specifications: {
           material: { ar: "مادة معتمدة", en: "Verified material" },
         },
@@ -190,7 +190,7 @@ function runSelfChecks() {
 
   check("warning for no image", () => {
     const catalog = validCatalog();
-    delete catalog.products[0].image;
+    delete catalog.products[0].images;
     const result = validateCatalogIntake(catalog);
     assert.equal(result.hasErrors, false);
     assert.ok(result.report.issues.some((issue) => issue.code === "NO_IMAGE"));

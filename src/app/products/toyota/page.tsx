@@ -13,7 +13,7 @@ export const metadata = pageMetadata(
 export default async function ToyotaProductsPage() {
   const locale = await getServerLocale();
   const dictionary = getDictionary(locale);
-  const toyotaModels = getActiveVehicleModels("Toyota");
+  const toyotaModels = await getActiveVehicleModels("Toyota");
 
   return (
     <>

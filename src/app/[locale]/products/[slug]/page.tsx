@@ -1,15 +1,11 @@
 import type { Metadata } from "next";
 import Link from "next/link";
 import { notFound } from "next/navigation";
-import { ProductImage } from "@/components/ProductImage";
+import { ProductGallery } from "@/components/ProductGallery";
 import { DiscoveryBreadcrumbs } from "@/features/discovery/DiscoveryBreadcrumbs";
 import { DiscoveryProductAction } from "@/features/discovery/DiscoveryProductAction";
 import { isProductIndexEligible } from "@/features/discovery/eligibility";
-import {
-  getMakeById,
-  getModelById,
-  getPublishedProductBySlug,
-} from "@/features/discovery/repository";
+import { getPublishedProductBySlug } from "@/features/discovery/repository";
 import { isLocale } from "@/i18n/config";
 import { getDictionary } from "@/i18n/dictionaries";
 import { localizeHref } from "@/i18n/routing";
@@ -36,7 +32,7 @@ function safePartsSource(value: string) {
 export async function generateMetadata({ params, searchParams }: Props): Promise<Metadata> {
   const { locale, slug } = await params;
   if (!isLocale(locale)) notFound();
-  const product = getPublishedProductBySlug(slug);
+  const product = await getPublishedProductBySlug(slug);
   const dictionary = getDictionary(locale);
   if (!product) notFound();
   const queryState = await searchParams;
@@ -55,13 +51,13 @@ export async function generateMetadata({ params, searchParams }: Props): Promise
 export default async function LocalizedProductDetailsPage({ params, searchParams }: Props) {
   const { locale, slug } = await params;
   if (!isLocale(locale)) notFound();
-  const product = getPublishedProductBySlug(slug);
+  const product = await getPublishedProductBySlug(slug);
   if (!product) notFound();
   const dictionary = getDictionary(locale);
   const copy = dictionary.discovery;
   const relationship = product.vehicleRelationships[0];
-  const make = relationship ? getMakeById(relationship.makeId) : undefined;
-  const model = relationship ? getModelById(relationship.modelId) : undefined;
+  const make = relationship?.makeName ? { name: relationship.makeName } : undefined;
+  const model = relationship?.modelName ? { name: relationship.modelName } : undefined;
   const queryState = await searchParams;
   const source = safePartsSource(firstValue(queryState.source));
   const returnHref = source || "/parts";
@@ -104,9 +100,11 @@ export default async function LocalizedProductDetailsPage({ params, searchParams
 
       <section className="bg-surface px-4 py-16 sm:px-6 lg:px-8">
         <div className="mx-auto grid max-w-7xl gap-8 lg:grid-cols-[0.9fr_1.1fr]">
-          <ProductImage
-            src={product.image?.src ?? null}
-            alt={product.image?.alt?.[locale] ?? product.name[locale]}
+          <ProductGallery
+            images={product.images.map((image) => ({
+              src: image.src,
+              alt: image.alt?.[locale] ?? product.name[locale],
+            }))}
             brand={make?.name ?? "INCAR"}
             partNumber={primaryReference}
             noImageLabel={copy.product.noImage}

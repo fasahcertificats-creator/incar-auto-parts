@@ -1,10 +1,21 @@
 import type {
+  AdminCategory,
+  AdminCategoryInput,
   AdminCustomerDetail,
   AdminCustomerListResponse,
   AdminCustomerMergeResponse,
   AdminCustomerUpdateInput,
   AdminInquiryDetail,
   AdminLoginResponse,
+  AdminMake,
+  AdminMakeInput,
+  AdminModel,
+  AdminModelInput,
+  AdminProductBulkImportSummary,
+  AdminProductDetail,
+  AdminProductImage,
+  AdminProductInput,
+  AdminProductListResponse,
   AdminRequestListResponse,
   AdminRfqRequestDetail,
 } from "./contracts";
@@ -141,4 +152,140 @@ export function adminMergeCustomers(
     `/v1/admin/customers/${survivorId}/merge`,
     jsonInit("POST", { mergeCustomerId }),
   );
+}
+
+export function adminListMakes(): Promise<AdminMake[]> {
+  return request<AdminMake[]>("/v1/admin/makes");
+}
+
+export function adminGetMake(id: string): Promise<AdminMake> {
+  return request<AdminMake>(`/v1/admin/makes/${id}`);
+}
+
+export function adminCreateMake(payload: AdminMakeInput): Promise<AdminMake> {
+  return request<AdminMake>("/v1/admin/makes", jsonInit("POST", payload));
+}
+
+export function adminUpdateMake(id: string, payload: AdminMakeInput): Promise<AdminMake> {
+  return request<AdminMake>(`/v1/admin/makes/${id}`, jsonInit("PATCH", payload));
+}
+
+export function adminListModels(makeId?: string): Promise<AdminModel[]> {
+  const params = makeId ? `?makeId=${encodeURIComponent(makeId)}` : "";
+  return request<AdminModel[]>(`/v1/admin/models${params}`);
+}
+
+export function adminGetModel(id: string): Promise<AdminModel> {
+  return request<AdminModel>(`/v1/admin/models/${id}`);
+}
+
+export function adminCreateModel(payload: AdminModelInput): Promise<AdminModel> {
+  return request<AdminModel>("/v1/admin/models", jsonInit("POST", payload));
+}
+
+export function adminUpdateModel(id: string, payload: AdminModelInput): Promise<AdminModel> {
+  return request<AdminModel>(`/v1/admin/models/${id}`, jsonInit("PATCH", payload));
+}
+
+export function adminListCategories(): Promise<AdminCategory[]> {
+  return request<AdminCategory[]>("/v1/admin/categories");
+}
+
+export function adminGetCategory(id: string): Promise<AdminCategory> {
+  return request<AdminCategory>(`/v1/admin/categories/${id}`);
+}
+
+export function adminCreateCategory(payload: AdminCategoryInput): Promise<AdminCategory> {
+  return request<AdminCategory>("/v1/admin/categories", jsonInit("POST", payload));
+}
+
+export function adminUpdateCategory(
+  id: string,
+  payload: AdminCategoryInput,
+): Promise<AdminCategory> {
+  return request<AdminCategory>(`/v1/admin/categories/${id}`, jsonInit("PATCH", payload));
+}
+
+export function adminReorderCategories(orderedIds: string[]): Promise<AdminCategory[]> {
+  return request<AdminCategory[]>(
+    "/v1/admin/categories/reorder",
+    jsonInit("POST", { orderedIds }),
+  );
+}
+
+export function adminListProducts(
+  limit: number,
+  offset: number,
+  search?: string,
+  categoryId?: string,
+  status?: string,
+): Promise<AdminProductListResponse> {
+  const params = new URLSearchParams({ limit: String(limit), offset: String(offset) });
+  if (search) params.set("search", search);
+  if (categoryId) params.set("categoryId", categoryId);
+  if (status) params.set("status", status);
+  return request<AdminProductListResponse>(`/v1/admin/products?${params.toString()}`);
+}
+
+export function adminGetProduct(id: string): Promise<AdminProductDetail> {
+  return request<AdminProductDetail>(`/v1/admin/products/${id}`);
+}
+
+export function adminCreateProduct(payload: AdminProductInput): Promise<AdminProductDetail> {
+  return request<AdminProductDetail>("/v1/admin/products", jsonInit("POST", payload));
+}
+
+export function adminUpdateProduct(
+  id: string,
+  payload: AdminProductInput,
+): Promise<AdminProductDetail> {
+  return request<AdminProductDetail>(`/v1/admin/products/${id}`, jsonInit("PATCH", payload));
+}
+
+export function adminUploadProductImage(
+  productId: string,
+  file: File,
+  altAr?: string,
+  altEn?: string,
+): Promise<AdminProductImage[]> {
+  const form = new FormData();
+  form.append("file", file);
+  const params = new URLSearchParams();
+  if (altAr) params.set("altAr", altAr);
+  if (altEn) params.set("altEn", altEn);
+  const query = params.size ? `?${params.toString()}` : "";
+  // No Content-Type header here — the browser sets multipart/form-data with
+  // the correct boundary itself; setting it manually breaks the boundary.
+  return request<AdminProductImage[]>(`/v1/admin/products/${productId}/images${query}`, {
+    method: "POST",
+    body: form,
+  });
+}
+
+export function adminReorderProductImages(
+  productId: string,
+  orderedImageIds: string[],
+): Promise<AdminProductImage[]> {
+  return request<AdminProductImage[]>(
+    `/v1/admin/products/${productId}/images/order`,
+    jsonInit("PATCH", { orderedImageIds }),
+  );
+}
+
+export function adminBulkImportProducts(file: File): Promise<AdminProductBulkImportSummary> {
+  const form = new FormData();
+  form.append("file", file);
+  return request<AdminProductBulkImportSummary>("/v1/admin/products/import", {
+    method: "POST",
+    body: form,
+  });
+}
+
+export function adminDeleteProductImage(
+  productId: string,
+  imageId: string,
+): Promise<AdminProductImage[]> {
+  return request<AdminProductImage[]>(`/v1/admin/products/${productId}/images/${imageId}`, {
+    method: "DELETE",
+  });
 }

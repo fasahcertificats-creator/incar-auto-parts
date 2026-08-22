@@ -6,25 +6,19 @@ import { useRFQ } from "@/features/rfq/use-rfq";
 import { useLocale } from "@/contexts/LocaleContext";
 import { getDictionary } from "@/i18n/dictionaries";
 import { localizeHref } from "@/i18n/routing";
-import { getProductById } from "@/lib/products";
 import type { Product } from "@/types/product";
 
 type AddToRfqButtonProps = {
   product?: Product;
-  productId?: string;
   compact?: boolean;
 };
 
-export function AddToRfqButton({
-  product,
-  productId,
-  compact = false,
-}: AddToRfqButtonProps) {
+export function AddToRfqButton({ product, compact = false }: AddToRfqButtonProps) {
   const { addItem } = useRFQ();
   const { locale } = useLocale();
   const dictionary = getDictionary(locale);
   const [added, setAdded] = useState(false);
-  const rfqProduct = product ?? (productId ? getProductById(productId) : undefined);
+  const rfqProduct = product;
 
   function handleClick() {
     if (!rfqProduct) return;

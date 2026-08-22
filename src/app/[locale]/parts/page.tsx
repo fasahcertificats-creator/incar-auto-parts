@@ -45,10 +45,11 @@ export default async function PartsPage({ params, searchParams }: PartsPageProps
   if (!isLocale(locale)) notFound();
   const dictionary = getDictionary(locale);
   const query = firstValue((await searchParams).q);
-  const makes = getPublishedMakes();
+  const makes = await getPublishedMakes();
   const searchResult = query
-    ? searchProductsByReference(query, {}, locale)
+    ? await searchProductsByReference(query, {}, locale)
     : undefined;
+  const modelsByMake = await Promise.all(makes.map((make) => getEligibleModelsForMake(make.id)));
   const copy = dictionary.discovery;
 
   return (
@@ -90,8 +91,8 @@ export default async function PartsPage({ params, searchParams }: PartsPageProps
 
           {makes.length ? (
             <div className="mt-7 grid gap-5 md:grid-cols-2">
-              {makes.map((make) => {
-                const models = getEligibleModelsForMake(make.id);
+              {makes.map((make, index) => {
+                const models = modelsByMake[index];
                 return (
                   <article key={make.id} className="incar-card rounded-lg p-6">
                     {make.isSampleData ? (
