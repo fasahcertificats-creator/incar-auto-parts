@@ -8,6 +8,7 @@ import {
   ADMIN_CUSTOMER_BUSINESS_TYPES,
   type AdminCustomerListResponse,
 } from "@/features/admin/api/contracts";
+import { AdminPagination } from "@/features/admin/components/AdminPagination";
 
 const PAGE_SIZE = 20;
 const SEARCH_DEBOUNCE_MS = 300;
@@ -141,31 +142,14 @@ export default function AdminCustomersPage() {
       ) : null}
 
       {page ? (
-        <div className="mt-4 flex items-center justify-between text-sm text-muted">
-          <span>
-            {page.total === 0
-              ? "0 customers"
-              : `${offset + 1}–${Math.min(offset + page.items.length, page.total)} of ${page.total}`}
-          </span>
-          <div className="flex gap-2">
-            <button
-              type="button"
-              onClick={() => setOffset(Math.max(0, offset - PAGE_SIZE))}
-              disabled={offset === 0}
-              className="incar-focus min-h-9 rounded-md border border-border px-3 text-xs font-semibold text-metallic-silver hover:text-white disabled:cursor-not-allowed disabled:opacity-40"
-            >
-              Previous
-            </button>
-            <button
-              type="button"
-              onClick={() => setOffset(offset + PAGE_SIZE)}
-              disabled={offset + PAGE_SIZE >= page.total}
-              className="incar-focus min-h-9 rounded-md border border-border px-3 text-xs font-semibold text-metallic-silver hover:text-white disabled:cursor-not-allowed disabled:opacity-40"
-            >
-              Next
-            </button>
-          </div>
-        </div>
+        <AdminPagination
+          total={page.total}
+          itemCount={page.items.length}
+          offset={offset}
+          pageSize={PAGE_SIZE}
+          itemLabel="customers"
+          onOffsetChange={setOffset}
+        />
       ) : null}
     </div>
   );

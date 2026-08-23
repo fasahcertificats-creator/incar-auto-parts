@@ -1,13 +1,13 @@
 import type { CatalogIntake } from "@/features/catalog-intake/contracts";
+import { getApiInternalUrl } from "@/lib/api-internal-url";
 
 // Server-side only: Next's /v1/:path* rewrite in next.config.ts only
 // applies to requests that pass through Next's own HTTP layer (browser
 // fetches, route handlers) — a fetch() made here, during server-component
 // rendering, runs directly in Node and needs the backend's real internal
-// URL, matching next.config.ts's own fallback exactly.
-const apiInternalUrl = (
-  process.env.INCAR_API_INTERNAL_URL ?? "http://localhost:4000"
-).replace(/\/+$/u, "");
+// URL, so it shares getApiInternalUrl() with next.config.ts's rewrite
+// instead of resolving its own separate copy.
+const apiInternalUrl = getApiInternalUrl();
 
 const EMPTY_CATALOG: CatalogIntake = { makes: [], models: [], categories: [], products: [] };
 

@@ -6,6 +6,7 @@ type ProductImageProps = {
   brand: string;
   partNumber: string;
   noImageLabel?: string;
+  priority?: boolean;
 };
 
 export function ProductImage({
@@ -14,6 +15,7 @@ export function ProductImage({
   brand,
   partNumber,
   noImageLabel = "Image unavailable",
+  priority = false,
 }: ProductImageProps) {
   return (
     <div
@@ -28,6 +30,7 @@ export function ProductImage({
           fill
           sizes="(min-width: 1024px) 30vw, 90vw"
           className="object-cover opacity-[0.88] grayscale contrast-110"
+          priority={priority}
         />
       ) : (
         <div className="absolute inset-0 grid place-items-center px-6 text-center text-sm font-semibold text-muted">

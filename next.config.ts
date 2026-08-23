@@ -1,8 +1,7 @@
 import type { NextConfig } from "next";
+import { getApiInternalUrl } from "./src/lib/api-internal-url";
 
-const apiInternalUrl = (
-  process.env.INCAR_API_INTERNAL_URL ?? "http://localhost:4000"
-).replace(/\/+$/u, "");
+const apiInternalUrl = getApiInternalUrl();
 
 const nextConfig: NextConfig = {
   output: "standalone",
