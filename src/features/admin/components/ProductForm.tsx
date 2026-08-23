@@ -14,6 +14,7 @@ import {
   type AdminProductInput,
   type AdminProductVehicleRelationship,
 } from "@/features/admin/api/contracts";
+import { isValidSlug, slugify, SLUG_FORMAT_HINT } from "@/features/admin/lib/slug";
 
 type RelationshipDraft = AdminProductVehicleRelationship & { key: string };
 type SpecDraft = { key: string; ar: string; en: string; draftKey: string };
@@ -90,6 +91,8 @@ export function ProductForm({
   onSubmit: (input: AdminProductInput) => Promise<void>;
 }) {
   const [slug, setSlug] = useState(initial?.slug ?? "");
+  const [slugTouched, setSlugTouched] = useState(Boolean(initial));
+  const slugInvalid = slugTouched && slug.length > 0 && !isValidSlug(slug);
   const [partNumber, setPartNumber] = useState(initial?.partNumber ?? "");
   const [nameAr, setNameAr] = useState(initial?.nameAr ?? "");
   const [nameEn, setNameEn] = useState(initial?.nameEn ?? "");
@@ -157,6 +160,11 @@ export function ProductForm({
 
   async function handleSubmit(event: FormEvent<HTMLFormElement>) {
     event.preventDefault();
+    if (!isValidSlug(slug)) {
+      setSlugTouched(true);
+      setError(SLUG_FORMAT_HINT);
+      return;
+    }
     setSaving(true);
     setError(null);
     try {
@@ -209,7 +217,23 @@ export function ProductForm({
         <h2 className="text-lg font-semibold text-white sm:col-span-2">Identity</h2>
         <label className="grid gap-2 text-sm font-semibold text-white">
           Slug
-          <input value={slug} onChange={(event) => setSlug(event.target.value)} required className="incar-input px-4 text-sm" />
+          <input
+            value={slug}
+            onChange={(event) => {
+              setSlug(event.target.value);
+              setSlugTouched(true);
+            }}
+            required
+            aria-invalid={slugInvalid}
+            className="incar-input px-4 text-sm"
+          />
+          <span className={`text-xs font-normal ${slugInvalid ? "text-primary" : "text-muted"}`}>
+            {slugInvalid
+              ? SLUG_FORMAT_HINT
+              : initial
+                ? "Used in the product's public URL."
+                : "Auto-filled from the English name — edit if needed."}
+          </span>
         </label>
         <label className="grid gap-2 text-sm font-semibold text-white">
           Part number
@@ -221,7 +245,15 @@ export function ProductForm({
         </label>
         <label className="grid gap-2 text-sm font-semibold text-white">
           Name (English)
-          <input value={nameEn} onChange={(event) => setNameEn(event.target.value)} required className="incar-input px-4 text-sm" />
+          <input
+            value={nameEn}
+            onChange={(event) => {
+              setNameEn(event.target.value);
+              if (!slugTouched) setSlug(slugify(event.target.value));
+            }}
+            required
+            className="incar-input px-4 text-sm"
+          />
         </label>
         <label className="grid gap-2 text-sm font-semibold text-white sm:col-span-2">
           Description (Arabic)

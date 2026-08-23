@@ -5,6 +5,7 @@ import { useParams, useRouter } from "next/navigation";
 import { type FormEvent, useEffect, useState } from "react";
 import { AdminApiError, adminGetMake, adminUpdateMake } from "@/features/admin/api/client";
 import { ADMIN_CATALOG_PUBLISHING_STATUSES, type AdminMake } from "@/features/admin/api/contracts";
+import { isValidSlug, SLUG_FORMAT_HINT } from "@/features/admin/lib/slug";
 
 type DetailState =
   | { kind: "loading" }
@@ -20,11 +21,17 @@ export default function AdminMakeDetailPage() {
   const [state, setState] = useState<DetailState>({ kind: "loading" });
   const [saving, setSaving] = useState(false);
   const [saveError, setSaveError] = useState<string | null>(null);
+  const [slug, setSlug] = useState("");
+  const slugInvalid = slug.length > 0 && !isValidSlug(slug);
 
   useEffect(() => {
     let cancelled = false;
     adminGetMake(id)
-      .then((make) => !cancelled && setState({ kind: "ready", make }))
+      .then((make) => {
+        if (cancelled) return;
+        setState({ kind: "ready", make });
+        setSlug(make.slug);
+      })
       .catch((caught: unknown) => {
         if (cancelled) return;
         if (caught instanceof AdminApiError && caught.status === 401) {
@@ -47,12 +54,16 @@ export default function AdminMakeDetailPage() {
 
   async function handleSave(event: FormEvent<HTMLFormElement>) {
     event.preventDefault();
+    if (!isValidSlug(slug)) {
+      setSaveError(SLUG_FORMAT_HINT);
+      return;
+    }
     setSaving(true);
     setSaveError(null);
     const data = new FormData(event.currentTarget);
     try {
       const updated = await adminUpdateMake(id, {
-        slug: String(data.get("slug") ?? ""),
+        slug,
         nameAr: String(data.get("nameAr") ?? ""),
         nameEn: String(data.get("nameEn") ?? ""),
         descriptionAr: String(data.get("descriptionAr") ?? "").trim() || null,
@@ -90,7 +101,15 @@ export default function AdminMakeDetailPage() {
       <form onSubmit={handleSave} className="incar-card mt-6 grid gap-4 rounded-lg p-6 sm:max-w-2xl sm:grid-cols-2">
         <label className="grid gap-2 text-sm font-semibold text-white">
           Slug
-          <input name="slug" defaultValue={make.slug} required className="incar-input px-4 text-sm" />
+          <input
+            name="slug"
+            value={slug}
+            onChange={(event) => setSlug(event.target.value)}
+            required
+            aria-invalid={slugInvalid}
+            className="incar-input px-4 text-sm"
+          />
+          {slugInvalid ? <span className="text-xs font-normal text-primary">{SLUG_FORMAT_HINT}</span> : null}
         </label>
         <label className="grid gap-2 text-sm font-semibold text-white">
           Status

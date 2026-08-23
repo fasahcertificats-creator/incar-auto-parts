@@ -15,6 +15,7 @@ import {
   type AdminMake,
   type AdminModel,
 } from "@/features/admin/api/contracts";
+import { isValidSlug, slugify, SLUG_FORMAT_HINT } from "@/features/admin/lib/slug";
 
 type MakesState =
   | { kind: "loading" }
@@ -37,6 +38,12 @@ export default function AdminVehiclesPage() {
   const [modelSaving, setModelSaving] = useState(false);
   const [makeError, setMakeError] = useState<string | null>(null);
   const [modelError, setModelError] = useState<string | null>(null);
+  const [makeSlug, setMakeSlug] = useState("");
+  const [makeSlugTouched, setMakeSlugTouched] = useState(false);
+  const makeSlugInvalid = makeSlugTouched && makeSlug.length > 0 && !isValidSlug(makeSlug);
+  const [modelSlug, setModelSlug] = useState("");
+  const [modelSlugTouched, setModelSlugTouched] = useState(false);
+  const modelSlugInvalid = modelSlugTouched && modelSlug.length > 0 && !isValidSlug(modelSlug);
 
   function loadMakes() {
     adminListMakes()
@@ -77,13 +84,18 @@ export default function AdminVehiclesPage() {
 
   async function handleCreateMake(event: FormEvent<HTMLFormElement>) {
     event.preventDefault();
+    if (!isValidSlug(makeSlug)) {
+      setMakeSlugTouched(true);
+      setMakeError(SLUG_FORMAT_HINT);
+      return;
+    }
     setMakeSaving(true);
     setMakeError(null);
     const form = event.currentTarget;
     const data = new FormData(form);
     try {
       await adminCreateMake({
-        slug: String(data.get("slug") ?? ""),
+        slug: makeSlug,
         nameAr: String(data.get("nameAr") ?? ""),
         nameEn: String(data.get("nameEn") ?? ""),
         descriptionAr: null,
@@ -91,6 +103,8 @@ export default function AdminVehiclesPage() {
         status: String(data.get("status") ?? "draft"),
       });
       form.reset();
+      setMakeSlug("");
+      setMakeSlugTouched(false);
       setMakeFormOpen(false);
       loadMakes();
     } catch (caught) {
@@ -103,6 +117,11 @@ export default function AdminVehiclesPage() {
   async function handleCreateModel(event: FormEvent<HTMLFormElement>) {
     event.preventDefault();
     if (!selectedMakeId) return;
+    if (!isValidSlug(modelSlug)) {
+      setModelSlugTouched(true);
+      setModelError(SLUG_FORMAT_HINT);
+      return;
+    }
     setModelSaving(true);
     setModelError(null);
     const form = event.currentTarget;
@@ -111,7 +130,7 @@ export default function AdminVehiclesPage() {
     const yearTo = String(data.get("yearTo") ?? "").trim();
     try {
       await adminCreateModel({
-        slug: String(data.get("slug") ?? ""),
+        slug: modelSlug,
         makeId: selectedMakeId,
         nameAr: String(data.get("nameAr") ?? ""),
         nameEn: String(data.get("nameEn") ?? ""),
@@ -122,6 +141,8 @@ export default function AdminVehiclesPage() {
           yearFrom && yearTo ? [{ from: Number(yearFrom), to: Number(yearTo) }] : null,
       });
       form.reset();
+      setModelSlug("");
+      setModelSlugTouched(false);
       setModelFormOpen(false);
       const models = await adminListModels(selectedMakeId);
       setModelsState({ kind: "ready", models });
@@ -142,7 +163,12 @@ export default function AdminVehiclesPage() {
           <h2 className="text-lg font-semibold text-white">Makes</h2>
           <button
             type="button"
-            onClick={() => setMakeFormOpen((open) => !open)}
+            onClick={() => {
+              setMakeFormOpen((open) => !open);
+              setMakeSlug("");
+              setMakeSlugTouched(false);
+              setMakeError(null);
+            }}
             className="incar-focus min-h-10 rounded-md border border-border bg-surface-elevated px-4 text-sm font-semibold text-metallic-silver transition hover:border-metallic-silver/45 hover:text-white"
           >
             {makeFormOpen ? "Cancel" : "Add make"}
@@ -153,7 +179,21 @@ export default function AdminVehiclesPage() {
           <form onSubmit={handleCreateMake} className="incar-card mt-4 grid gap-4 rounded-lg p-6 sm:grid-cols-2">
             <label className="grid gap-2 text-sm font-semibold text-white">
               Slug
-              <input name="slug" required className="incar-input px-4 text-sm" placeholder="toyota" />
+              <input
+                name="slug"
+                required
+                value={makeSlug}
+                onChange={(event) => {
+                  setMakeSlug(event.target.value);
+                  setMakeSlugTouched(true);
+                }}
+                aria-invalid={makeSlugInvalid}
+                className="incar-input px-4 text-sm"
+                placeholder="toyota"
+              />
+              <span className={`text-xs font-normal ${makeSlugInvalid ? "text-primary" : "text-muted"}`}>
+                {makeSlugInvalid ? SLUG_FORMAT_HINT : "Auto-filled from the English name — edit if needed."}
+              </span>
             </label>
             <label className="grid gap-2 text-sm font-semibold text-white">
               Status
@@ -171,7 +211,14 @@ export default function AdminVehiclesPage() {
             </label>
             <label className="grid gap-2 text-sm font-semibold text-white">
               Name (English)
-              <input name="nameEn" required className="incar-input px-4 text-sm" />
+              <input
+                name="nameEn"
+                required
+                className="incar-input px-4 text-sm"
+                onChange={(event) => {
+                  if (!makeSlugTouched) setMakeSlug(slugify(event.target.value));
+                }}
+              />
             </label>
             {makeError ? (
               <p className="sm:col-span-2 rounded-md border border-primary/35 bg-primary/10 p-3 text-sm text-soft-silver">
@@ -260,7 +307,12 @@ export default function AdminVehiclesPage() {
             ) : null}
             <button
               type="button"
-              onClick={() => setModelFormOpen((open) => !open)}
+              onClick={() => {
+                setModelFormOpen((open) => !open);
+                setModelSlug("");
+                setModelSlugTouched(false);
+                setModelError(null);
+              }}
               disabled={!selectedMakeId}
               className="incar-focus min-h-10 rounded-md border border-border bg-surface-elevated px-4 text-sm font-semibold text-metallic-silver transition hover:border-metallic-silver/45 hover:text-white disabled:cursor-not-allowed disabled:opacity-50"
             >
@@ -273,7 +325,21 @@ export default function AdminVehiclesPage() {
           <form onSubmit={handleCreateModel} className="incar-card mt-4 grid gap-4 rounded-lg p-6 sm:grid-cols-2">
             <label className="grid gap-2 text-sm font-semibold text-white">
               Slug
-              <input name="slug" required className="incar-input px-4 text-sm" placeholder="camry" />
+              <input
+                name="slug"
+                required
+                value={modelSlug}
+                onChange={(event) => {
+                  setModelSlug(event.target.value);
+                  setModelSlugTouched(true);
+                }}
+                aria-invalid={modelSlugInvalid}
+                className="incar-input px-4 text-sm"
+                placeholder="camry"
+              />
+              <span className={`text-xs font-normal ${modelSlugInvalid ? "text-primary" : "text-muted"}`}>
+                {modelSlugInvalid ? SLUG_FORMAT_HINT : "Auto-filled from the English name — edit if needed."}
+              </span>
             </label>
             <label className="grid gap-2 text-sm font-semibold text-white">
               Status
@@ -291,7 +357,14 @@ export default function AdminVehiclesPage() {
             </label>
             <label className="grid gap-2 text-sm font-semibold text-white">
               Name (English)
-              <input name="nameEn" required className="incar-input px-4 text-sm" />
+              <input
+                name="nameEn"
+                required
+                className="incar-input px-4 text-sm"
+                onChange={(event) => {
+                  if (!modelSlugTouched) setModelSlug(slugify(event.target.value));
+                }}
+              />
             </label>
             <label className="grid gap-2 text-sm font-semibold text-white">
               Verified year from

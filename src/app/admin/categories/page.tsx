@@ -13,6 +13,7 @@ import {
   ADMIN_CATALOG_PUBLISHING_STATUSES,
   type AdminCategory,
 } from "@/features/admin/api/contracts";
+import { isValidSlug, slugify, SLUG_FORMAT_HINT } from "@/features/admin/lib/slug";
 
 type ListState =
   | { kind: "loading" }
@@ -26,6 +27,9 @@ export default function AdminCategoriesPage() {
   const [formOpen, setFormOpen] = useState(false);
   const [formError, setFormError] = useState<string | null>(null);
   const [reordering, setReordering] = useState<string | null>(null);
+  const [slug, setSlug] = useState("");
+  const [slugTouched, setSlugTouched] = useState(false);
+  const slugInvalid = slugTouched && slug.length > 0 && !isValidSlug(slug);
 
   function load() {
     adminListCategories()
@@ -46,13 +50,18 @@ export default function AdminCategoriesPage() {
 
   async function handleCreate(event: FormEvent<HTMLFormElement>) {
     event.preventDefault();
+    if (!isValidSlug(slug)) {
+      setSlugTouched(true);
+      setFormError(SLUG_FORMAT_HINT);
+      return;
+    }
     setCreating(true);
     setFormError(null);
     const form = event.currentTarget;
     const data = new FormData(form);
     try {
       await adminCreateCategory({
-        slug: String(data.get("slug") ?? ""),
+        slug,
         nameAr: String(data.get("nameAr") ?? ""),
         nameEn: String(data.get("nameEn") ?? ""),
         descriptionAr: null,
@@ -60,6 +69,8 @@ export default function AdminCategoriesPage() {
         status: String(data.get("status") ?? "draft"),
       });
       form.reset();
+      setSlug("");
+      setSlugTouched(false);
       setFormOpen(false);
       load();
     } catch (caught) {
@@ -99,7 +110,12 @@ export default function AdminCategoriesPage() {
         </div>
         <button
           type="button"
-          onClick={() => setFormOpen((open) => !open)}
+          onClick={() => {
+            setFormOpen((open) => !open);
+            setSlug("");
+            setSlugTouched(false);
+            setFormError(null);
+          }}
           className="incar-focus min-h-10 rounded-md border border-border bg-surface-elevated px-4 text-sm font-semibold text-metallic-silver transition hover:border-metallic-silver/45 hover:text-white"
         >
           {formOpen ? "Cancel" : "Add category"}
@@ -113,7 +129,21 @@ export default function AdminCategoriesPage() {
         >
           <label className="grid gap-2 text-sm font-semibold text-white">
             Slug
-            <input name="slug" required className="incar-input px-4 text-sm" placeholder="brake-system" />
+            <input
+              name="slug"
+              required
+              value={slug}
+              onChange={(event) => {
+                setSlug(event.target.value);
+                setSlugTouched(true);
+              }}
+              aria-invalid={slugInvalid}
+              className="incar-input px-4 text-sm"
+              placeholder="brake-system"
+            />
+            <span className={`text-xs font-normal ${slugInvalid ? "text-primary" : "text-muted"}`}>
+              {slugInvalid ? SLUG_FORMAT_HINT : "Auto-filled from the English name — edit if needed."}
+            </span>
           </label>
           <label className="grid gap-2 text-sm font-semibold text-white">
             Status
@@ -131,7 +161,14 @@ export default function AdminCategoriesPage() {
           </label>
           <label className="grid gap-2 text-sm font-semibold text-white">
             Name (English)
-            <input name="nameEn" required className="incar-input px-4 text-sm" />
+            <input
+              name="nameEn"
+              required
+              className="incar-input px-4 text-sm"
+              onChange={(event) => {
+                if (!slugTouched) setSlug(slugify(event.target.value));
+              }}
+            />
           </label>
           {formError ? (
             <p className="sm:col-span-2 rounded-md border border-primary/35 bg-primary/10 p-3 text-sm text-soft-silver">
