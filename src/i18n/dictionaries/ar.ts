@@ -371,6 +371,13 @@ export const ar = {
       returnToSearch: "العودة إلى نتائج البحث",
       returnToModel: "العودة إلى الموديل",
       returnToParts: "العودة إلى مركز القطع",
+      descriptionTitle: "الوصف",
+      specificationsTitle: "المواصفات",
+      compatibleVehiclesTitle: "المركبات المتوافقة",
+      faqTitle: "الأسئلة الشائعة",
+      faqPartNumberQuestion: "ما هو رقم القطعة لهذا المنتج؟",
+      faqCompatibilityQuestion: "ما هي المركبات المتوافقة مع هذه القطعة؟",
+      faqVerificationQuestion: "هل تم التحقق من توافق المركبة؟",
     },
   },
   pages: {

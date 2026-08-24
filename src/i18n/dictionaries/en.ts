@@ -371,6 +371,13 @@ export const en = {
       returnToSearch: "Return to Search Results",
       returnToModel: "Return to Model",
       returnToParts: "Return to Parts Hub",
+      descriptionTitle: "Description",
+      specificationsTitle: "Specifications",
+      compatibleVehiclesTitle: "Compatible Vehicles",
+      faqTitle: "Frequently Asked Questions",
+      faqPartNumberQuestion: "What is the part number for this product?",
+      faqCompatibilityQuestion: "Which vehicles is this part compatible with?",
+      faqVerificationQuestion: "Is the vehicle compatibility verified?",
     },
   },
   pages: {

@@ -38,6 +38,8 @@ type LocalizedPageMetadataOptions = {
   absoluteTitle?: string;
   description: string;
   noindex?: boolean;
+  /** Absolute URL. Falls back to the site-wide hero image when omitted. */
+  image?: string;
 };
 
 export function localizedPageMetadata({
@@ -47,6 +49,7 @@ export function localizedPageMetadata({
   absoluteTitle,
   description,
   noindex = false,
+  image,
 }: LocalizedPageMetadataOptions): Metadata {
   const normalizedPath = path && path !== "/" ? path : "";
   const arUrl = absoluteSiteUrl(`/ar${normalizedPath}`);
@@ -73,7 +76,7 @@ export function localizedPageMetadata({
       url: canonical,
       locale,
       alternateLocale: locale === "ar" ? ["en"] : ["ar"],
-      images: [absoluteSiteUrl("/images/hero-sourcing.png")],
+      images: [image ?? absoluteSiteUrl("/images/hero-sourcing.png")],
     },
   };
 }
