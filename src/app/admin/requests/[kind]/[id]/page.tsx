@@ -5,6 +5,7 @@ import { useParams, useRouter } from "next/navigation";
 import { type FormEvent, useEffect, useState } from "react";
 import {
   AdminApiError,
+  adminCreateQuote,
   adminGetInquiryDetail,
   adminGetRfqDetail,
   adminUpdateInquiryStatus,
@@ -12,6 +13,7 @@ import {
 } from "@/features/admin/api/client";
 import {
   ADMIN_INQUIRY_STATUSES,
+  ADMIN_QUOTE_CURRENCIES,
   ADMIN_RFQ_STATUSES,
   type AdminInquiryDetail,
   type AdminRfqRequestDetail,
@@ -42,6 +44,10 @@ export default function AdminRequestDetailPage() {
   const [internalNote, setInternalNote] = useState("");
   const [saving, setSaving] = useState(false);
   const [saveError, setSaveError] = useState<string | null>(null);
+  const [quoteCurrency, setQuoteCurrency] = useState<string>(ADMIN_QUOTE_CURRENCIES[0]);
+  const [quoteExchangeRate, setQuoteExchangeRate] = useState("");
+  const [creatingQuote, setCreatingQuote] = useState(false);
+  const [createQuoteError, setCreateQuoteError] = useState<string | null>(null);
 
   useEffect(() => {
     let cancelled = false;
@@ -95,6 +101,24 @@ export default function AdminRequestDetailPage() {
       );
     } finally {
       setSaving(false);
+    }
+  }
+
+  async function handleCreateQuote(event: FormEvent<HTMLFormElement>) {
+    event.preventDefault();
+    const exchangeRate = Number(quoteExchangeRate);
+    if (!Number.isFinite(exchangeRate) || exchangeRate <= 0) {
+      setCreateQuoteError("Enter a valid exchange rate greater than 0.");
+      return;
+    }
+    setCreatingQuote(true);
+    setCreateQuoteError(null);
+    try {
+      const quote = await adminCreateQuote({ requestId: id, currency: quoteCurrency, exchangeRate });
+      router.push(`/admin/quotes/${quote.id}`);
+    } catch (caught) {
+      setCreateQuoteError(caught instanceof AdminApiError ? caught.message : "Failed to create quote.");
+      setCreatingQuote(false);
     }
   }
 
@@ -278,6 +302,52 @@ export default function AdminRequestDetailPage() {
         </div>
 
         <div className="incar-card h-fit rounded-lg p-6">
+          {rfq ? (
+            <div className="mb-6 border-b border-border pb-6">
+              <h2 className="text-lg font-semibold text-white">Create quote</h2>
+              <form onSubmit={handleCreateQuote} className="mt-4 grid gap-4">
+                <label className="grid gap-2 text-sm font-semibold text-white">
+                  Currency
+                  <select
+                    value={quoteCurrency}
+                    onChange={(event) => setQuoteCurrency(event.target.value)}
+                    className="incar-input px-4 text-sm"
+                  >
+                    {ADMIN_QUOTE_CURRENCIES.map((currency) => (
+                      <option key={currency} value={currency}>
+                        {currency}
+                      </option>
+                    ))}
+                  </select>
+                </label>
+                <label className="grid gap-2 text-sm font-semibold text-white">
+                  Exchange rate
+                  <input
+                    type="number"
+                    min={0}
+                    step="0.000001"
+                    value={quoteExchangeRate}
+                    onChange={(event) => setQuoteExchangeRate(event.target.value)}
+                    placeholder="e.g. 7.15"
+                    className="incar-input px-4 text-sm"
+                  />
+                </label>
+                {createQuoteError ? (
+                  <p role="alert" className="rounded-md border border-primary/35 bg-primary/10 p-3 text-sm text-soft-silver">
+                    {createQuoteError}
+                  </p>
+                ) : null}
+                <button
+                  type="submit"
+                  disabled={creatingQuote}
+                  className="incar-focus min-h-11 rounded-md border border-border text-sm font-semibold text-metallic-silver transition hover:border-metallic-silver/45 hover:text-white disabled:cursor-not-allowed disabled:opacity-60"
+                >
+                  {creatingQuote ? "Creating…" : "Create quote"}
+                </button>
+              </form>
+            </div>
+          ) : null}
+
           <h2 className="text-lg font-semibold text-white">Change status</h2>
           <form onSubmit={handleStatusSubmit} className="mt-4 grid gap-4">
             <label className="grid gap-2 text-sm font-semibold text-white">

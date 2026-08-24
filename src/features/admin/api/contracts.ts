@@ -336,6 +336,91 @@ export type AdminProductBulkImportSummary = {
   results: AdminProductBulkImportRowResult[];
 };
 
+/** Mirrors quotes/domain/status/quote-status-transition.ts on the backend
+ * — the transition graph, not this list, enforces which of these are
+ * reachable from a given current status. */
+export const ADMIN_QUOTE_STATUSES = [
+  "draft",
+  "sent",
+  "responded",
+  "accepted",
+  "rejected",
+  "cancelled",
+] as const;
+
+export const ADMIN_QUOTE_CURRENCIES = ["USD", "CNY"] as const;
+export const ADMIN_QUOTE_LINE_TYPES = ["product", "manual"] as const;
+
+export type AdminQuoteLineItem = {
+  id: string;
+  lineType: string;
+  productId: string | null;
+  description: string;
+  quantity: number;
+  unitPrice: string;
+  sortOrder: number;
+};
+
+export type AdminQuoteLineItemInput = {
+  lineType: string;
+  productId: string | null;
+  description: string;
+  quantity: number;
+  unitPrice: number;
+};
+
+export type AdminQuoteSummary = {
+  id: string;
+  publicReference: string;
+  requestId: string;
+  customerId: string;
+  customerCompanyName: string;
+  status: string;
+  currency: string;
+  createdAt: string;
+};
+
+export type AdminQuoteListResponse = {
+  items: AdminQuoteSummary[];
+  total: number;
+  limit: number;
+  offset: number;
+};
+
+export type AdminQuoteDetail = {
+  id: string;
+  publicReference: string;
+  requestId: string;
+  customerId: string;
+  customerContactName: string;
+  customerCompanyName: string;
+  customerEmail: string;
+  status: string;
+  currency: string;
+  exchangeRate: string;
+  attachmentFilename: string | null;
+  internalNotes: string | null;
+  lineItems: AdminQuoteLineItem[];
+  sentAt: string | null;
+  respondedAt: string | null;
+  closedAt: string | null;
+  createdAt: string;
+  updatedAt: string;
+};
+
+export type AdminQuoteCreateInput = {
+  requestId: string;
+  currency: string;
+  exchangeRate: number;
+};
+
+/** Deliberately has no currency/exchangeRate fields — see quotes.schema.ts's
+ * freezing comment on the backend. The update form can never send them. */
+export type AdminQuoteUpdateInput = {
+  internalNotes: string | null;
+  lineItems: AdminQuoteLineItemInput[];
+};
+
 export type AdminProductInput = {
   slug: string;
   partNumber: string;

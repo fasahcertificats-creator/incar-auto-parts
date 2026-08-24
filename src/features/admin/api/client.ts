@@ -16,6 +16,10 @@ import type {
   AdminProductImage,
   AdminProductInput,
   AdminProductListResponse,
+  AdminQuoteCreateInput,
+  AdminQuoteDetail,
+  AdminQuoteListResponse,
+  AdminQuoteUpdateInput,
   AdminRequestListResponse,
   AdminRfqRequestDetail,
 } from "./contracts";
@@ -288,4 +292,54 @@ export function adminDeleteProductImage(
   return request<AdminProductImage[]>(`/v1/admin/products/${productId}/images/${imageId}`, {
     method: "DELETE",
   });
+}
+
+export function adminListQuotes(
+  limit: number,
+  offset: number,
+  customerId?: string,
+  requestId?: string,
+  status?: string,
+): Promise<AdminQuoteListResponse> {
+  const params = new URLSearchParams({ limit: String(limit), offset: String(offset) });
+  if (customerId) params.set("customerId", customerId);
+  if (requestId) params.set("requestId", requestId);
+  if (status) params.set("status", status);
+  return request<AdminQuoteListResponse>(`/v1/admin/quotes?${params.toString()}`);
+}
+
+export function adminGetQuote(id: string): Promise<AdminQuoteDetail> {
+  return request<AdminQuoteDetail>(`/v1/admin/quotes/${id}`);
+}
+
+export function adminCreateQuote(payload: AdminQuoteCreateInput): Promise<AdminQuoteDetail> {
+  return request<AdminQuoteDetail>("/v1/admin/quotes", jsonInit("POST", payload));
+}
+
+export function adminUpdateQuote(
+  id: string,
+  payload: AdminQuoteUpdateInput,
+): Promise<AdminQuoteDetail> {
+  return request<AdminQuoteDetail>(`/v1/admin/quotes/${id}`, jsonInit("PATCH", payload));
+}
+
+export function adminUploadQuoteAttachment(id: string, file: File): Promise<AdminQuoteDetail> {
+  const form = new FormData();
+  form.append("file", file);
+  return request<AdminQuoteDetail>(`/v1/admin/quotes/${id}/attachment`, {
+    method: "POST",
+    body: form,
+  });
+}
+
+export function adminDeleteQuoteAttachment(id: string): Promise<AdminQuoteDetail> {
+  return request<AdminQuoteDetail>(`/v1/admin/quotes/${id}/attachment`, { method: "DELETE" });
+}
+
+export function adminSendQuote(id: string): Promise<AdminQuoteDetail> {
+  return request<AdminQuoteDetail>(`/v1/admin/quotes/${id}/send`, { method: "POST" });
+}
+
+export function adminUpdateQuoteStatus(id: string, status: string): Promise<AdminQuoteDetail> {
+  return request<AdminQuoteDetail>(`/v1/admin/quotes/${id}/status`, jsonInit("PATCH", { status }));
 }
