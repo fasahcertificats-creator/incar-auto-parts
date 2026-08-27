@@ -147,10 +147,6 @@ export default async function LocalizedProductDetailsPage({ params, searchParams
                 <dd dir="ltr" className="mt-2 font-semibold text-white">{product.references.oemReferences.join(", ") || "—"}</dd>
               </div>
               <div className="rounded-md bg-background p-4">
-                <dt className="text-xs font-semibold uppercase tracking-[0.14em] text-muted">{copy.product.compatibilityTitle}</dt>
-                <dd className="mt-2 font-semibold text-white">{copy.product.compatibility[product.compatibilityStatus]}</dd>
-              </div>
-              <div className="rounded-md bg-background p-4">
                 <dt className="text-xs font-semibold uppercase tracking-[0.14em] text-muted">{copy.product.requestTitle}</dt>
                 <dd className="mt-2 font-semibold text-white">{copy.product.request[product.requestEligibility]}</dd>
               </div>
@@ -190,9 +186,6 @@ export default async function LocalizedProductDetailsPage({ params, searchParams
                         .join(", ")}
                     </span>
                   ) : null}
-                  <span className="mt-1 block text-xs text-muted">
-                    {copy.product.compatibility[item.compatibilityStatus]}
-                  </span>
                 </li>
               ))}
             </ul>
