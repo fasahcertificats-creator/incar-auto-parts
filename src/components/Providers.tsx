@@ -1,6 +1,7 @@
 "use client";
 
 import { LocaleProvider } from "@/contexts/LocaleContext";
+import { CartProvider } from "@/features/cart/cart-context";
 import { RFQProvider } from "@/features/rfq/rfq-context";
 import type { Locale } from "@/i18n/types";
 
@@ -13,7 +14,9 @@ export function Providers({
 }) {
   return (
     <LocaleProvider initialLocale={initialLocale}>
-      <RFQProvider>{children}</RFQProvider>
+      <RFQProvider>
+        <CartProvider>{children}</CartProvider>
+      </RFQProvider>
     </LocaleProvider>
   );
 }

@@ -5,6 +5,7 @@ import { usePathname } from "next/navigation";
 import { mainNavigation } from "@/config/navigation";
 import { useLocale } from "@/contexts/LocaleContext";
 import { useRfq } from "@/contexts/RfqContext";
+import { useCart } from "@/features/cart/cart-context";
 import { getDictionary } from "@/i18n/dictionaries";
 import { localizeHref, stripLocaleFromPathname } from "@/i18n/routing";
 import { brand } from "@/lib/brand";
@@ -21,11 +22,13 @@ export function Header() {
   const pathname = usePathname();
   const { locale } = useLocale();
   const { itemCount } = useRfq();
+  const { itemCount: cartItemCount } = useCart();
   const dictionary = getDictionary(locale);
   const quoteLabel =
     itemCount > 0
       ? dictionary.common.requestQuotationCount.replace("{count}", String(itemCount))
       : dictionary.common.requestQuotation;
+  const cartLabel = dictionary.cart.navLabel;
 
   return (
     <header className="sticky top-0 z-50 border-b border-border bg-background/95 text-white backdrop-blur">
@@ -86,6 +89,18 @@ export function Header() {
 
         <div className="hidden shrink-0 items-center gap-2 lg:flex">
           <HeaderSearch />
+          <Link
+            href={localizeHref(locale, "/cart")}
+            aria-label={cartLabel}
+            className="incar-focus relative inline-flex min-h-11 items-center justify-center whitespace-nowrap rounded-md border border-border bg-surface-elevated px-3 text-xs font-semibold text-metallic-silver transition hover:border-metallic-silver/45 hover:text-white"
+          >
+            {cartLabel}
+            {cartItemCount > 0 ? (
+              <span className="ms-2 inline-flex h-5 min-w-5 items-center justify-center rounded-full bg-primary px-1.5 text-[11px] font-bold text-white">
+                {cartItemCount}
+              </span>
+            ) : null}
+          </Link>
           <Link
             href={localizeHref(locale, "/rfq/upload-list")}
             className="incar-focus inline-flex min-h-11 items-center justify-center whitespace-nowrap rounded-md border border-border bg-surface-elevated px-3 text-xs font-semibold text-metallic-silver transition hover:border-metallic-silver/45 hover:text-white"

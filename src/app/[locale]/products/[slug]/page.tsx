@@ -7,6 +7,7 @@ import { DiscoveryBreadcrumbs } from "@/features/discovery/DiscoveryBreadcrumbs"
 import { DiscoveryProductAction } from "@/features/discovery/DiscoveryProductAction";
 import { isProductIndexEligible } from "@/features/discovery/eligibility";
 import { getPublishedProductBySlug } from "@/features/discovery/repository";
+import { getProductPricing } from "@/features/cart/api/server-pricing";
 import { isLocale } from "@/i18n/config";
 import { getDictionary } from "@/i18n/dictionaries";
 import { localizeHref } from "@/i18n/routing";
@@ -62,6 +63,7 @@ export default async function LocalizedProductDetailsPage({ params, searchParams
   if (!isLocale(locale)) notFound();
   const product = await getPublishedProductBySlug(slug);
   if (!product) notFound();
+  const pricing = await getProductPricing(slug);
   const dictionary = getDictionary(locale);
   const copy = dictionary.discovery;
   const relationship = product.vehicleRelationships[0];
@@ -87,7 +89,7 @@ export default async function LocalizedProductDetailsPage({ params, searchParams
     .map(([key, value]) => ({ key, text: value[locale]?.trim() }))
     .filter((entry): entry is { key: string; text: string } => Boolean(entry.text));
   const faqEntries = buildProductFaqEntries(product, locale, dictionary);
-  const productJsonLd = buildProductJsonLd(product, locale);
+  const productJsonLd = buildProductJsonLd(product, locale, pricing);
   const faqJsonLd = faqEntries.length ? buildProductFaqJsonLd(faqEntries) : null;
   const galleryAltFallback = [product.name[locale], categoryLabel, primaryReference !== "—" ? primaryReference : ""]
     .filter(Boolean)
@@ -154,7 +156,7 @@ export default async function LocalizedProductDetailsPage({ params, searchParams
             {make && model ? (
               <p className="mt-5 text-sm text-muted">{make.name} · {model.name}</p>
             ) : null}
-            <div className="mt-6"><DiscoveryProductAction product={product} /></div>
+            <div className="mt-6"><DiscoveryProductAction product={product} pricing={pricing} /></div>
           </div>
         </div>
       </section>

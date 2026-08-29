@@ -11,6 +11,8 @@ import type {
   AdminMakeInput,
   AdminModel,
   AdminModelInput,
+  AdminOrderDetail,
+  AdminOrderListResponse,
   AdminProductBulkImportSummary,
   AdminProductDetail,
   AdminProductImage,
@@ -342,4 +344,42 @@ export function adminSendQuote(id: string): Promise<AdminQuoteDetail> {
 
 export function adminUpdateQuoteStatus(id: string, status: string): Promise<AdminQuoteDetail> {
   return request<AdminQuoteDetail>(`/v1/admin/quotes/${id}/status`, jsonInit("PATCH", { status }));
+}
+
+export function adminListOrders(
+  limit: number,
+  offset: number,
+  status?: string,
+): Promise<AdminOrderListResponse> {
+  const params = new URLSearchParams({ limit: String(limit), offset: String(offset) });
+  if (status) params.set("status", status);
+  return request<AdminOrderListResponse>(`/v1/admin/orders?${params.toString()}`);
+}
+
+export function adminGetOrder(id: string): Promise<AdminOrderDetail> {
+  return request<AdminOrderDetail>(`/v1/admin/orders/${id}`);
+}
+
+export function adminUpdateOrderStatus(id: string, status: string): Promise<AdminOrderDetail> {
+  return request<AdminOrderDetail>(`/v1/admin/orders/${id}/status`, jsonInit("PATCH", { status }));
+}
+
+export function adminOrderPaymentProofUrl(orderId: string, proofId: string): string {
+  return `/v1/admin/orders/${orderId}/payment-proof/${proofId}`;
+}
+
+/**
+ * The payment-proof endpoint streams a binary image and requires the admin
+ * session cookie — an `<img src>` alone would send the request without
+ * `credentials: "include"` in some browsers/CORS configurations, so this
+ * fetches the bytes explicitly and hands back an object URL for the caller
+ * to assign to an `<img>` element and revoke when done.
+ */
+export async function adminFetchPaymentProofObjectUrl(orderId: string, proofId: string): Promise<string> {
+  const response = await fetch(adminOrderPaymentProofUrl(orderId, proofId), { credentials: "include" });
+  if (!response.ok) {
+    throw new AdminApiError("Failed to load payment proof image.", response.status, null);
+  }
+  const blob = await response.blob();
+  return URL.createObjectURL(blob);
 }

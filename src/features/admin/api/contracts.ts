@@ -444,3 +444,89 @@ export type AdminProductInput = {
   availableForInstantPurchase: boolean;
   vehicleRelationships: AdminProductVehicleRelationship[];
 };
+
+/** Deliberately excludes 'awaiting-payment-review' as an admin-selectable
+ * status-change target — see admin-orders.schema.ts on the backend: that
+ * transition is only ever reachable via the customer-facing payment-proof
+ * resubmission flow, never direct admin action. */
+export const ADMIN_ORDER_STATUSES = [
+  "awaiting-payment-review",
+  "payment-confirmed",
+  "payment-rejected",
+  "shipped",
+  "delivered",
+  "cancelled",
+] as const;
+
+export const ADMIN_ORDER_STATUS_TARGETS = [
+  "payment-confirmed",
+  "payment-rejected",
+  "shipped",
+  "delivered",
+  "cancelled",
+] as const;
+
+export type AdminOrderLineItem = {
+  id: string;
+  productId: string;
+  nameAr: string;
+  nameEn: string;
+  partNumber: string;
+  quantity: number;
+  unitPriceUsd: string;
+  sortOrder: number;
+};
+
+export type AdminPaymentProof = {
+  id: string;
+  filename: string;
+  uploadedAt: string;
+};
+
+export type AdminOrderSummary = {
+  id: string;
+  publicReference: string;
+  customerId: string;
+  contactName: string;
+  email: string;
+  status: string;
+  totalUsd: string;
+  createdAt: string;
+};
+
+export type AdminOrderListResponse = {
+  items: AdminOrderSummary[];
+  total: number;
+  limit: number;
+  offset: number;
+};
+
+export type AdminOrderDetail = {
+  id: string;
+  publicReference: string;
+  customerId: string;
+  status: string;
+  currency: string;
+  subtotalUsd: string;
+  totalUsd: string;
+  contactName: string;
+  phone: string;
+  whatsapp: string | null;
+  email: string;
+  addressLine1: string;
+  addressLine2: string | null;
+  city: string;
+  country: string;
+  postalCode: string | null;
+  customerNotes: string | null;
+  adminNotes: string | null;
+  lineItems: AdminOrderLineItem[];
+  paymentProofs: AdminPaymentProof[];
+  paymentConfirmedAt: string | null;
+  paymentRejectedAt: string | null;
+  shippedAt: string | null;
+  deliveredAt: string | null;
+  cancelledAt: string | null;
+  createdAt: string;
+  updatedAt: string;
+};

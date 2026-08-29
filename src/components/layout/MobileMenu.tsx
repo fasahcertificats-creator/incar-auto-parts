@@ -7,6 +7,7 @@ import { createPortal } from "react-dom";
 import { mainNavigation } from "@/config/navigation";
 import { useLocale } from "@/contexts/LocaleContext";
 import { useRfq } from "@/contexts/RfqContext";
+import { useCart } from "@/features/cart/cart-context";
 import { getDictionary } from "@/i18n/dictionaries";
 import { localizeHref, stripLocaleFromPathname } from "@/i18n/routing";
 import { LanguageSwitcher } from "../LanguageSwitcher";
@@ -38,6 +39,7 @@ export function MobileMenu() {
   const pathname = usePathname();
   const { locale, direction } = useLocale();
   const { itemCount } = useRfq();
+  const { itemCount: cartItemCount } = useCart();
   const dictionary = getDictionary(locale);
   const triggerRef = useRef<HTMLButtonElement>(null);
   const drawerRef = useRef<HTMLDivElement>(null);
@@ -230,6 +232,15 @@ export function MobileMenu() {
           <div className="my-3 h-px bg-gradient-to-r from-transparent via-metallic-silver/20 to-transparent" />
 
           <div className="grid gap-2">
+            <Link
+              href={localizeHref(locale, "/cart")}
+              aria-label={`${dictionary.cart.navLabel}${cartItemCount > 0 ? ` (${cartItemCount})` : ""}`}
+              onClick={closeMenu}
+              className="incar-focus inline-flex min-h-12 items-center justify-center rounded-md border border-metallic-silver/20 bg-background/45 px-4 text-sm font-semibold text-metallic-silver transition hover:border-metallic-silver/40 hover:bg-surface-elevated hover:text-white"
+            >
+              {dictionary.cart.navLabel}
+              {cartItemCount > 0 ? ` (${cartItemCount})` : ""}
+            </Link>
             <Link
               href={localizeHref(locale, "/rfq/upload-list")}
               onClick={closeMenu}

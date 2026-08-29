@@ -5,14 +5,24 @@ import type { Locale } from "@/i18n/types";
 import type { Product } from "@/types/product";
 
 /**
- * Schema.org Product markup for a product detail page. Deliberately omits
- * `offers`/price/availability — this is a quote-based B2B site with no
- * visible pricing, matching catalog-intake/validation.ts's
- * prohibitedCommercialFields rule on the data side. `isAccessoryOrSparePartFor`
- * is the correct Schema.org property for "this part fits vehicle X" without
- * implying the part is manufactured or endorsed by that vehicle's brand.
+ * Schema.org Product markup for a product detail page. `offers`/price/
+ * availability is omitted for the vast majority of products — this is
+ * still primarily a quote-based B2B site with no visible pricing, matching
+ * catalog-intake/validation.ts's prohibitedCommercialFields rule on the data
+ * side. Phase 3b (guest checkout) introduced a narrow, explicit exception:
+ * when the product carries `availableForInstantPurchase: true` and a real
+ * `directSalePriceUsd` (fetched separately — the public bulk catalog dump
+ * still never carries pricing, only the single-product detail endpoint
+ * does), an `offers` block is emitted for that product only.
+ * `isAccessoryOrSparePartFor` is the correct Schema.org property for "this
+ * part fits vehicle X" without implying the part is manufactured or
+ * endorsed by that vehicle's brand.
  */
-export function buildProductJsonLd(product: Product, locale: Locale) {
+export function buildProductJsonLd(
+  product: Product,
+  locale: Locale,
+  pricing?: { directSalePriceUsd: string; availableForInstantPurchase: true } | null,
+) {
   const url = absoluteSiteUrl(`/${locale}/products/${product.slug}`);
   const description = product.description?.[locale]?.trim();
   const images = product.images.map((image) => absoluteSiteUrl(image.src));
@@ -48,6 +58,17 @@ export function buildProductJsonLd(product: Product, locale: Locale) {
     brand: { "@type": "Brand", name: brand.name },
     ...(compatibleVehicles.length ? { isAccessoryOrSparePartFor: compatibleVehicles } : {}),
     ...(additionalProperty.length ? { additionalProperty } : {}),
+    ...(pricing?.availableForInstantPurchase
+      ? {
+          offers: {
+            "@type": "Offer",
+            url,
+            priceCurrency: "USD",
+            price: pricing.directSalePriceUsd,
+            availability: "https://schema.org/InStock",
+          },
+        }
+      : {}),
   };
 }
 
