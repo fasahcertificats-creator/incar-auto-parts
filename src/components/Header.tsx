@@ -88,7 +88,7 @@ export function Header() {
         </nav>
 
         <div className="hidden shrink-0 items-center gap-2 lg:flex">
-          <HeaderSearch />
+          <HeaderSearch compact />
           <Link
             href={localizeHref(locale, "/cart")}
             aria-label={cartLabel}
@@ -100,12 +100,6 @@ export function Header() {
                 {cartItemCount}
               </span>
             ) : null}
-          </Link>
-          <Link
-            href={localizeHref(locale, "/rfq/upload-list")}
-            className="incar-focus inline-flex min-h-11 items-center justify-center whitespace-nowrap rounded-md border border-border bg-surface-elevated px-3 text-xs font-semibold text-metallic-silver transition hover:border-metallic-silver/45 hover:text-white"
-          >
-            {dictionary.navigation.uploadPartsList}
           </Link>
           <Link
             href={localizeHref(locale, "/rfq")}

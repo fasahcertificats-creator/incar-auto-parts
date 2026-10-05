@@ -1,3 +1,4 @@
+import Image from "next/image";
 import Link from "next/link";
 import { CTAButton } from "@/components/CTAButton";
 import {
@@ -15,6 +16,43 @@ type HomeSectionHeaderProps = {
   isArabic: boolean;
 };
 
+const sourcingStepIcons = [
+  // Specification & part review — clipboard with check
+  <>
+    <rect x="5" y="5" width="14" height="16" rx="2" />
+    <path d="M9 5V4a1 1 0 0 1 1-1h4a1 1 0 0 1 1 1v1" />
+    <path d="m9 13.5 2.2 2.2 4.3-4.7" />
+  </>,
+  // Production follow-up & quality inspection — magnifier with check
+  <>
+    <circle cx="11" cy="11" r="6.5" />
+    <path d="m20.5 20.5-4.6-4.6" />
+    <path d="m8.4 11.1 1.8 1.8 3.3-3.7" />
+  </>,
+  // Packaging & order preparation — box
+  <>
+    <path d="M3.5 8.2 12 3.8l8.5 4.4v7.6L12 20.2l-8.5-4.4Z" />
+    <path d="M3.5 8.2 12 12.6l8.5-4.4" />
+    <path d="M12 12.6v7.6" />
+  </>,
+];
+
+function SourcingStepIcon({ index }: { index: number }) {
+  return (
+    <svg
+      viewBox="0 0 24 24"
+      fill="none"
+      stroke="currentColor"
+      strokeWidth="1.8"
+      strokeLinecap="round"
+      strokeLinejoin="round"
+      className="size-5 md:size-6"
+    >
+      {sourcingStepIcons[index % sourcingStepIcons.length]}
+    </svg>
+  );
+}
+
 function HomeSectionHeader({
   eyebrow,
   title,
@@ -26,8 +64,8 @@ function HomeSectionHeader({
       <p
         className={`mb-1.5 font-bold text-primary ${
           isArabic
-            ? "text-[10px] tracking-[0.05em]"
-            : "text-[11px] uppercase tracking-[0.14em]"
+            ? "text-[13px] tracking-[0.05em]"
+            : "text-[13px] uppercase tracking-[0.16em]"
         }`}
       >
         {eyebrow}
@@ -58,13 +96,26 @@ export async function HomeFoundation() {
     <>
       <section className="relative overflow-hidden border-b border-metallic-silver/10 bg-background px-4 py-10 text-white sm:px-6 sm:py-16 lg:border-b-0 lg:px-8 lg:py-20">
         <div className="pointer-events-none absolute inset-x-0 top-0 h-px bg-gradient-to-r from-transparent via-metallic-silver/20 to-transparent lg:hidden" />
-        <div className="mx-auto grid max-w-7xl gap-5 sm:gap-9 lg:grid-cols-[1fr_0.9fr] lg:items-center lg:gap-10">
+        <div aria-hidden="true" className="pointer-events-none absolute inset-0">
+          <Image
+            src="/images/hero-sourcing.webp"
+            alt=""
+            fill
+            priority
+            sizes="100vw"
+            className="object-cover object-center opacity-55"
+          />
+          <div className="absolute inset-0 bg-background/72" />
+          <div className="absolute inset-0 bg-gradient-to-t from-background via-background/35 to-background/55" />
+          <div className="absolute inset-x-0 bottom-0 h-24 bg-gradient-to-t from-surface to-transparent" />
+        </div>
+        <div className="relative mx-auto grid max-w-7xl gap-5 sm:gap-9 lg:grid-cols-[1fr_0.9fr] lg:items-center lg:gap-10">
           <div>
             <p
               className={`font-bold text-primary sm:text-sm ${
                 isArabic
-                  ? "text-[10px] tracking-[0.06em]"
-                  : "text-[11px] uppercase tracking-[0.16em]"
+                  ? "text-[13px] tracking-[0.06em]"
+                  : "text-[13px] uppercase tracking-[0.16em]"
               }`}
             >
               {copy.search.eyebrow}
@@ -179,8 +230,8 @@ export async function HomeFoundation() {
                 key={item}
                 className="flex min-h-12 items-center gap-3 border-b border-metallic-silver/10 px-2 py-2.5 last:border-b-0 md:block md:min-h-0 md:rounded-lg md:border md:border-border md:bg-surface-elevated/45 md:p-5 md:shadow-[0_22px_64px_rgba(0,0,0,0.24)] md:last:border-b"
               >
-                <span aria-hidden="true" className="shrink-0 font-mono text-[10px] font-bold tracking-[0.12em] text-primary/80 md:hidden">
-                  {String(index + 1).padStart(2, "0")}
+                <span aria-hidden="true" className="flex size-9 shrink-0 items-center justify-center rounded-md border border-primary/35 bg-primary/10 text-primary md:mb-4 md:size-11">
+                  <SourcingStepIcon index={index} />
                 </span>
                 <p className="text-[14px] leading-6 text-metallic-silver md:text-sm md:leading-7">
                   {item}
