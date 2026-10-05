@@ -38,7 +38,7 @@ export default async function RfqWorkspacePage({ params }: Props) {
         <div className="mx-auto grid max-w-7xl gap-8 lg:grid-cols-[0.9fr_1.1fr]">
           <RFQList />
           <div id="upload-parts-list" className="grid gap-5">
-            <aside className="incar-card-elevated rounded-lg p-6 text-white">
+            <aside className="incar-card-elevated rounded-lg p-6 text-ink">
               <h2 className="text-2xl font-semibold">{dictionary.pages.rfq.draftStatusTitle}</h2>
               <p className="mt-4 text-sm leading-7 text-metallic-silver">
                 {dictionary.pages.rfq.draftStatusDescription}

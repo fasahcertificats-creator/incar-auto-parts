@@ -122,7 +122,7 @@ export default async function PrivateLabelPage() {
           <div className="mt-4 grid gap-4 sm:grid-cols-2 lg:grid-cols-3">
             {dictionary.pages.privateLabel.qualityPoints.map((point) => (
               <div key={point} className="incar-card rounded-lg p-5">
-                <p className="font-semibold text-white">{point}</p>
+                <p className="font-semibold text-ink">{point}</p>
               </div>
             ))}
           </div>

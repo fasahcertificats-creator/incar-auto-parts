@@ -7,7 +7,7 @@ import { useInquirySubmission } from "@/features/inquiries/hooks/useInquirySubmi
 import type { CatalogRequestInquiryPayload } from "@/features/inquiries/api/contracts";
 
 const inputClass = "incar-input px-4 text-sm";
-const labelClass = "grid gap-2 text-sm font-semibold text-white";
+const labelClass = "grid gap-2 text-sm font-semibold text-ink";
 
 export function CatalogRequestForm() {
   const { locale } = useLocale();
@@ -47,7 +47,7 @@ export function CatalogRequestForm() {
         <p className="text-sm font-bold uppercase tracking-[0.16em] text-metallic-silver">
           {dictionary.forms.catalog.eyebrow}
         </p>
-        <h2 className="mt-2 text-2xl font-semibold text-white">
+        <h2 className="mt-2 text-2xl font-semibold text-ink">
           {dictionary.forms.catalog.title}
         </h2>
         <p className="mt-3 text-sm leading-6 text-muted">
@@ -139,7 +139,7 @@ export function CatalogRequestForm() {
       {state === "success" && response ? (
         <div className="mt-6 rounded-md border border-metallic-silver/24 bg-background p-4 text-sm leading-6 text-metallic-silver">
           <p>{dictionary.forms.catalog.received}</p>
-          <p className="mt-2 font-semibold text-white">
+          <p className="mt-2 font-semibold text-ink">
             {dictionary.forms.common.reference}: {response.publicReference}
           </p>
         </div>

@@ -23,12 +23,12 @@ export function DiscoveryBreadcrumbs({
             {item.href ? (
               <Link
                 href={localizeHref(locale, item.href)}
-                className="incar-focus rounded-sm font-semibold text-metallic-silver hover:text-white"
+                className="incar-focus rounded-sm font-semibold text-metallic-silver hover:text-ink"
               >
                 {item.label}
               </Link>
             ) : (
-              <span aria-current="page" className="text-white">
+              <span aria-current="page" className="text-ink">
                 {item.label}
               </span>
             )}

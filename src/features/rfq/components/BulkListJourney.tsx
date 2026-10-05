@@ -299,11 +299,11 @@ export function BulkListJourney() {
         {receiptLost ? <div role="alert" className="mb-5 rounded-md border border-primary/40 bg-primary/10 p-4 text-sm text-white">{copy.receiptLost}</div> : null}
 
         {phase === "recovering" ? (
-          <div className="incar-card-elevated rounded-lg p-8 text-center text-white" role="status">{copy.recovering}</div>
+          <div className="incar-card-elevated rounded-lg p-8 text-center text-ink" role="status">{copy.recovering}</div>
         ) : null}
 
         {phase === "upload" ? (
-          <form onSubmit={upload} className="incar-card-elevated grid gap-5 rounded-lg p-5 text-white sm:p-8" noValidate>
+          <form onSubmit={upload} className="incar-card-elevated grid gap-5 rounded-lg p-5 text-ink sm:p-8" noValidate>
             <div><h2 className="text-2xl font-semibold">{copy.uploadTitle}</h2><p className="mt-2 text-sm leading-6 text-muted">{copy.uploadHelp}</p></div>
             <div className="grid gap-2">
               <label className="text-sm font-semibold" htmlFor="bulk-file">{copy.file}</label>
@@ -348,7 +348,7 @@ export function BulkListJourney() {
         ) : null}
 
         {phase === "inspection" && inspection ? (
-          <div className="incar-card-elevated grid gap-6 rounded-lg p-5 text-white sm:p-8">
+          <div className="incar-card-elevated grid gap-6 rounded-lg p-5 text-ink sm:p-8">
             <div><h2 className="text-2xl font-semibold">{copy.inspectionTitle}</h2><p className="mt-2 break-all text-sm text-muted">{copy.reference}: <bdi>{inspection.publicReference}</bdi></p></div>
             <div className="grid gap-4 sm:grid-cols-[1fr_180px_auto] sm:items-end">
               {inspection.format === "xlsx" ? <label className="grid gap-2 text-sm font-semibold" htmlFor="bulk-sheet">{copy.worksheet}
@@ -410,7 +410,7 @@ function StatusCard({ copy, status, busy, message, onRefresh, onStartNew }: {
   const help = status.fileStatus === "queued" ? copy.queuedHelp : status.fileStatus === "processing" ? copy.processingHelp :
     status.fileStatus === "completed-with-errors" ? copy.completedErrorsHelp :
     status.fileStatus === "failed" || status.fileStatus === "cancelled" ? copy.failedHelp : copy.completedHelp;
-  return <div className="incar-card-elevated grid gap-6 rounded-lg p-5 text-white sm:p-8" aria-busy={busy}>
+  return <div className="incar-card-elevated grid gap-6 rounded-lg p-5 text-ink sm:p-8" aria-busy={busy}>
     <div><h2 className="text-2xl font-semibold">{copy.statusTitle}</h2><p className="mt-2 text-sm text-muted">{copy.reference}: <bdi>{status.publicReference}</bdi></p></div>
     <div role="status" aria-live="polite" className="rounded-md border border-primary/35 bg-primary/10 p-5"><p className="text-xl font-semibold">{labels[status.fileStatus]}</p><p className="mt-2 text-sm leading-6 text-metallic-silver">{help}</p></div>
     <dl className="grid grid-cols-2 gap-3 sm:grid-cols-4">

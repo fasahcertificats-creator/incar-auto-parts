@@ -154,6 +154,27 @@ export const en = {
         "INCAR combines product knowledge, specification review, production management, quality inspection, and packaging support for wholesale customers.",
       action: "About INCAR",
     },
+    features: {
+      eyebrow: "Why INCAR",
+      items: [
+        {
+          title: "Pre-shipment QC",
+          description: "Sample review, product consistency, packaging & labels",
+        },
+        {
+          title: "Bilingual Packaging",
+          description: "Arabic & English readiness plus carton markings",
+        },
+        {
+          title: "Trilingual Communication",
+          description: "Arabic & English with you, Chinese with production",
+        },
+        {
+          title: "Order Follow-up",
+          description: "From quotation review to shipment preparation",
+        },
+      ],
+    },
     ready: {
       eyebrow: "INCAR Product Request",
       title: "Ready to Request?",

@@ -22,11 +22,11 @@ export function CTAButton({
     primary:
       "bg-primary text-white shadow-[0_18px_42px_rgba(215,25,32,0.26)] hover:bg-primary-hover",
     secondary:
-      "border border-border bg-surface-elevated text-metallic-silver hover:border-metallic-silver/45 hover:bg-surface-muted hover:text-white",
+      "border border-border bg-surface-elevated text-metallic-silver hover:border-metallic-silver/45 hover:bg-surface-muted hover:text-ink",
     ghost:
-      "border border-border bg-transparent text-metallic-silver hover:border-metallic-silver/40 hover:bg-white/[0.04] hover:text-white",
+      "border border-border bg-transparent text-metallic-silver hover:border-metallic-silver/40 hover:bg-white/[0.04] hover:text-ink",
     dark:
-      "bg-background text-white hover:bg-surface",
+      "bg-background text-ink hover:bg-surface",
   };
 
   return (

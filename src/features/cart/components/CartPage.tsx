@@ -79,7 +79,7 @@ export function CartPage() {
       <section className="bg-background px-4 py-16 sm:px-6 lg:px-8">
         <div className="incar-card-elevated mx-auto max-w-3xl rounded-lg p-6 text-center md:p-9">
           <p className="text-sm font-bold uppercase tracking-[0.16em] text-primary">{copy.eyebrow}</p>
-          <h1 className="mt-3 text-3xl font-semibold text-white">{copy.title}</h1>
+          <h1 className="mt-3 text-3xl font-semibold text-ink">{copy.title}</h1>
           <p className="mt-4 text-sm text-muted">{copy.empty}</p>
           {notices.map((notice) => (
             <p key={notice} className="mt-4 rounded-md border border-primary/30 bg-primary/10 p-4 text-start text-sm text-white" role="alert">
@@ -101,7 +101,7 @@ export function CartPage() {
     <section className="bg-background px-4 py-16 sm:px-6 lg:px-8">
       <div className="mx-auto max-w-4xl">
         <p className="text-sm font-bold uppercase tracking-[0.16em] text-primary">{copy.eyebrow}</p>
-        <h1 className="mt-3 text-3xl font-semibold text-white">{copy.title}</h1>
+        <h1 className="mt-3 text-3xl font-semibold text-ink">{copy.title}</h1>
         <p className="mt-3 text-sm leading-7 text-muted">{copy.description}</p>
 
         {revalidating ? (
@@ -119,7 +119,7 @@ export function CartPage() {
           {items.map((item) => (
             <div key={item.productId} className="flex flex-col gap-3 p-5 sm:flex-row sm:items-center sm:justify-between">
               <div>
-                <p className="font-semibold text-white">{cartItemDisplayName(item, locale)}</p>
+                <p className="font-semibold text-ink">{cartItemDisplayName(item, locale)}</p>
                 <p dir="ltr" className="mt-1 text-xs text-muted">
                   {copy.partNumber}: {item.partNumber || "—"}
                 </p>
@@ -128,7 +128,7 @@ export function CartPage() {
                 </p>
               </div>
               <div className="flex items-center gap-3">
-                <label className="flex items-center gap-2 text-sm font-semibold text-white">
+                <label className="flex items-center gap-2 text-sm font-semibold text-ink">
                   {copy.quantity}
                   <input
                     type="number"
@@ -141,13 +141,13 @@ export function CartPage() {
                     className="incar-input min-h-10 w-20 px-3 text-sm"
                   />
                 </label>
-                <p dir="ltr" className="min-w-20 text-end font-semibold text-white">
+                <p dir="ltr" className="min-w-20 text-end font-semibold text-ink">
                   ${(Number(item.unitPriceUsd) * item.quantity).toFixed(2)}
                 </p>
                 <button
                   type="button"
                   onClick={() => removeItem(item.productId)}
-                  className="incar-focus rounded-md border border-border px-3 py-1.5 text-xs font-semibold text-metallic-silver hover:text-white"
+                  className="incar-focus rounded-md border border-border px-3 py-1.5 text-xs font-semibold text-metallic-silver hover:text-ink"
                 >
                   {copy.remove}
                 </button>
@@ -157,8 +157,8 @@ export function CartPage() {
         </div>
 
         <div className="mt-6 flex flex-wrap items-center justify-between gap-4 rounded-md border border-border bg-surface-elevated p-5">
-          <p className="text-sm font-semibold text-white">{copy.subtotal}</p>
-          <p dir="ltr" className="text-xl font-bold text-white">
+          <p className="text-sm font-semibold text-ink">{copy.subtotal}</p>
+          <p dir="ltr" className="text-xl font-bold text-ink">
             ${subtotalUsd.toFixed(2)} USD
           </p>
         </div>
@@ -166,7 +166,7 @@ export function CartPage() {
         <div className="mt-6 flex flex-wrap gap-3">
           <Link
             href={localizeHref(locale, "/parts")}
-            className="incar-focus inline-flex min-h-11 items-center justify-center rounded-md border border-border px-5 text-sm font-semibold text-metallic-silver hover:text-white"
+            className="incar-focus inline-flex min-h-11 items-center justify-center rounded-md border border-border px-5 text-sm font-semibold text-metallic-silver hover:text-ink"
           >
             {copy.continueShopping}
           </Link>

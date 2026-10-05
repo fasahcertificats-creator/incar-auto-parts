@@ -16,6 +16,78 @@ type HomeSectionHeaderProps = {
   isArabic: boolean;
 };
 
+function HomeSectionHeader({
+  eyebrow,
+  title,
+  description,
+  isArabic,
+}: HomeSectionHeaderProps) {
+  return (
+    <div className="max-w-2xl md:max-w-3xl">
+      <p
+        className={`mb-1.5 font-bold text-primary ${
+          isArabic
+            ? "text-[13px] tracking-[0.05em]"
+            : "text-[13px] uppercase tracking-[0.16em]"
+        }`}
+      >
+        {eyebrow}
+      </p>
+      <h2
+        className={`font-semibold leading-[1.2] text-balance text-ink md:text-4xl md:leading-tight lg:text-5xl lg:text-wrap ${
+          isArabic ? "text-[20px]" : "text-[21px]"
+        }`}
+      >
+        {title}
+      </h2>
+      <p className="mt-2.5 text-[15px] leading-[1.65] text-muted sm:mt-4 sm:text-base sm:leading-7 md:text-lg">
+        {description}
+      </p>
+    </div>
+  );
+}
+
+const featureIcons = [
+  // Pre-shipment QC — shield check
+  <>
+    <path d="M12 3.2 5 6v5.2c0 4.3 3 7.4 7 9.6 4-2.2 7-5.3 7-9.6V6Z" />
+    <path d="m9.2 11.6 2 2 3.6-4" />
+  </>,
+  // Bilingual packaging — box
+  <>
+    <path d="M3.5 8.2 12 3.8l8.5 4.4v7.6L12 20.2l-8.5-4.4Z" />
+    <path d="M3.5 8.2 12 12.6l8.5-4.4" />
+    <path d="M12 12.6v7.6" />
+  </>,
+  // Trilingual communication — chat bubbles
+  <>
+    <path d="M4 5.5h11a2 2 0 0 1 2 2v5a2 2 0 0 1-2 2H9l-3.4 2.8a.6.6 0 0 1-1-.5V7.5a2 2 0 0 1 2-2Z" transform="translate(-0.6 0)" />
+    <path d="M17.5 10H19a2 2 0 0 1 2 2v4.1a.6.6 0 0 1-1 .5L17.4 14H15" transform="translate(-1.2 1)" />
+  </>,
+  // Order follow-up — clipboard check
+  <>
+    <rect x="5" y="5" width="14" height="16" rx="2" />
+    <path d="M9 5V4a1 1 0 0 1 1-1h4a1 1 0 0 1 1 1v1" />
+    <path d="m9 13.5 2.2 2.2 4.3-4.7" />
+  </>,
+];
+
+function FeatureIcon({ index }: { index: number }) {
+  return (
+    <svg
+      viewBox="0 0 24 24"
+      fill="none"
+      stroke="currentColor"
+      strokeWidth="1.7"
+      strokeLinecap="round"
+      strokeLinejoin="round"
+      className="size-6"
+    >
+      {featureIcons[index % featureIcons.length]}
+    </svg>
+  );
+}
+
 const sourcingStepIcons = [
   // Specification & part review — clipboard with check
   <>
@@ -53,37 +125,6 @@ function SourcingStepIcon({ index }: { index: number }) {
   );
 }
 
-function HomeSectionHeader({
-  eyebrow,
-  title,
-  description,
-  isArabic,
-}: HomeSectionHeaderProps) {
-  return (
-    <div className="max-w-2xl md:max-w-3xl">
-      <p
-        className={`mb-1.5 font-bold text-primary ${
-          isArabic
-            ? "text-[13px] tracking-[0.05em]"
-            : "text-[13px] uppercase tracking-[0.16em]"
-        }`}
-      >
-        {eyebrow}
-      </p>
-      <h2
-        className={`font-semibold leading-[1.2] text-balance text-white md:text-4xl md:leading-tight lg:text-5xl lg:text-wrap ${
-          isArabic ? "text-[20px]" : "text-[21px]"
-        }`}
-      >
-        {title}
-      </h2>
-      <p className="mt-2.5 text-[15px] leading-[1.65] text-muted sm:mt-4 sm:text-base sm:leading-7 md:text-lg">
-        {description}
-      </p>
-    </div>
-  );
-}
-
 export async function HomeFoundation() {
   const locale = await getServerLocale();
   const dictionary = getDictionary(locale);
@@ -92,24 +133,35 @@ export async function HomeFoundation() {
   const modelsByMake = await Promise.all(makes.map((make) => getEligibleModelsForMake(make.id)));
   const isArabic = locale === "ar";
 
+  const promoCards = [
+    {
+      eyebrow: copy.upload.eyebrow,
+      title: copy.upload.title,
+      description: copy.upload.description,
+      action: copy.upload.action,
+      href: "/rfq/upload-list",
+    },
+    {
+      eyebrow: copy.privateLabel.eyebrow,
+      title: copy.privateLabel.title,
+      description: copy.privateLabel.description,
+      action: copy.privateLabel.action,
+      href: "/private-label",
+    },
+    {
+      eyebrow: copy.sourcing.eyebrow,
+      title: copy.sourcing.title,
+      description: copy.sourcing.description,
+      action: copy.sourcing.action,
+      href: "/sourcing-services",
+    },
+  ];
+
   return (
     <>
-      <section className="relative overflow-hidden border-b border-metallic-silver/10 bg-background px-4 py-10 text-white sm:px-6 sm:py-16 lg:border-b-0 lg:px-8 lg:py-20">
-        <div className="pointer-events-none absolute inset-x-0 top-0 h-px bg-gradient-to-r from-transparent via-metallic-silver/20 to-transparent lg:hidden" />
-        <div aria-hidden="true" className="pointer-events-none absolute inset-0">
-          <Image
-            src="/images/hero-sourcing.webp"
-            alt=""
-            fill
-            priority
-            sizes="100vw"
-            className="object-cover object-center opacity-55"
-          />
-          <div className="absolute inset-0 bg-background/72" />
-          <div className="absolute inset-0 bg-gradient-to-t from-background via-background/35 to-background/55" />
-          <div className="absolute inset-x-0 bottom-0 h-24 bg-gradient-to-t from-surface to-transparent" />
-        </div>
-        <div className="relative mx-auto grid max-w-7xl gap-5 sm:gap-9 lg:grid-cols-[1fr_0.9fr] lg:items-center lg:gap-10">
+      {/* Hero — Marketo-style promo banner with the sourcing image */}
+      <section className="relative overflow-hidden border-b border-border bg-surface px-4 py-10 text-ink sm:px-6 sm:py-16 lg:px-8 lg:py-20">
+        <div className="mx-auto grid max-w-7xl gap-8 sm:gap-9 lg:grid-cols-[1fr_0.9fr] lg:items-center lg:gap-10">
           <div>
             <p
               className={`font-bold text-primary sm:text-sm ${
@@ -126,35 +178,62 @@ export async function HomeFoundation() {
             <p className="mt-2.5 max-w-xl text-[15px] leading-[1.6] text-metallic-silver sm:mt-5 sm:max-w-2xl sm:text-lg sm:leading-8">
               {copy.search.description}
             </p>
+            <div className="mt-5 flex flex-col gap-2.5 sm:mt-7 sm:flex-row sm:items-center sm:gap-3">
+              <form action={localizeHref(locale, "/parts")} className="flex min-w-0 flex-1 items-stretch sm:max-w-md" role="search">
+                <label htmlFor="home-part-search" className="sr-only">
+                  {copy.search.label}
+                </label>
+                <input
+                  id="home-part-search"
+                  name="q"
+                  dir="auto"
+                  placeholder={copy.search.placeholder}
+                  className="min-h-12 w-full min-w-0 rounded-s-md border border-e-0 border-border bg-white px-4 text-sm text-ink outline-none placeholder:text-muted focus:border-primary"
+                />
+                <button
+                  type="submit"
+                  className="incar-focus min-h-12 shrink-0 rounded-e-md bg-primary px-5 text-sm font-bold text-white transition hover:bg-primary-hover"
+                >
+                  {copy.search.action}
+                </button>
+              </form>
+              <CTAButton href="/rfq" variant="secondary" className="min-h-12">
+                {copy.search.rfq}
+              </CTAButton>
+            </div>
           </div>
-          <div className="incar-card relative overflow-hidden rounded-lg p-4 sm:p-5 md:p-7">
-            <span aria-hidden="true" className="absolute inset-x-0 top-0 h-px bg-gradient-to-r from-primary/80 via-primary/35 to-transparent lg:hidden" />
-            <form action={localizeHref(locale, "/parts")} className="grid gap-3">
-              <label htmlFor="home-part-search" className="text-[14px] font-semibold leading-5 text-white sm:text-sm sm:leading-6">
-                {copy.search.label}
-              </label>
-              <input
-                id="home-part-search"
-                name="q"
-                dir="ltr"
-                placeholder={copy.search.placeholder}
-                className="incar-input px-4 text-base sm:text-sm"
-              />
-              <button
-                type="submit"
-                className="incar-focus min-h-12 rounded-md bg-primary px-5 text-sm font-bold text-white transition hover:bg-primary-hover sm:font-semibold"
-              >
-                {copy.search.action}
-              </button>
-            </form>
-            <CTAButton href="/rfq" variant="secondary" className="mt-2.5 w-full">
-              {copy.search.rfq}
-            </CTAButton>
+          <div className="relative overflow-hidden rounded-xl border border-border shadow-[0_24px_60px_rgba(22,24,29,0.14)]">
+            <Image
+              src="/images/hero-sourcing.webp"
+              alt={copy.search.title}
+              width={1693}
+              height={929}
+              priority
+              className="h-full w-full object-cover"
+            />
           </div>
         </div>
       </section>
 
-      <section className="bg-surface px-4 py-10 sm:px-6 sm:py-16 lg:px-8">
+      {/* Feature strip — Marketo's icon feature row */}
+      <section className="border-b border-border bg-background px-4 py-8 sm:px-6 sm:py-10 lg:px-8">
+        <div className="mx-auto grid max-w-7xl gap-5 sm:grid-cols-2 lg:grid-cols-4">
+          {copy.features.items.map((feature, index) => (
+            <div key={feature.title} className="flex items-start gap-3.5">
+              <span aria-hidden="true" className="flex size-12 shrink-0 items-center justify-center rounded-full border border-primary/30 bg-primary/[0.07] text-primary">
+                <FeatureIcon index={index} />
+              </span>
+              <div>
+                <h3 className="text-[15px] font-bold text-ink">{feature.title}</h3>
+                <p className="mt-1 text-[13px] leading-6 text-muted">{feature.description}</p>
+              </div>
+            </div>
+          ))}
+        </div>
+      </section>
+
+      {/* Browse by vehicle */}
+      <section className="bg-background px-4 py-10 sm:px-6 sm:py-16 lg:px-8">
         <div className="mx-auto max-w-7xl">
           <HomeSectionHeader
             isArabic={isArabic}
@@ -173,7 +252,7 @@ export async function HomeFoundation() {
                   ) : null}
                   <Link
                     href={localizeHref(locale, `/parts/${make.slug}`)}
-                    className="incar-focus rounded-sm text-2xl font-semibold text-white hover:text-metallic-silver"
+                    className="incar-focus rounded-sm text-2xl font-semibold text-ink hover:text-primary"
                   >
                     {make.name}
                   </Link>
@@ -182,7 +261,7 @@ export async function HomeFoundation() {
                       <Link
                         key={model.id}
                         href={localizeHref(locale, `/parts/${make.slug}/${model.slug}`)}
-                        className="incar-focus inline-flex min-h-11 items-center rounded-md border border-border bg-background/30 px-4 text-sm font-semibold text-metallic-silver transition hover:border-metallic-silver/35 hover:text-white lg:bg-transparent"
+                        className="incar-focus inline-flex min-h-11 items-center rounded-md border border-border bg-surface px-4 text-sm font-semibold text-metallic-silver transition hover:border-primary/40 hover:text-primary"
                       >
                         {model.name}
                       </Link>
@@ -192,8 +271,8 @@ export async function HomeFoundation() {
               ))}
             </div>
           ) : (
-            <div className="mt-4 rounded-lg border border-metallic-silver/15 bg-background/50 p-4 sm:mt-8 sm:bg-background sm:p-7">
-              <h2 className="text-base font-semibold leading-6 text-white sm:text-xl sm:leading-7">{copy.browse.emptyTitle}</h2>
+            <div className="mt-4 rounded-lg border border-border bg-surface p-4 sm:mt-8 sm:p-7">
+              <h2 className="text-base font-semibold leading-6 text-ink sm:text-xl sm:leading-7">{copy.browse.emptyTitle}</h2>
               <p className="mt-1.5 max-w-3xl text-[14px] leading-6 text-muted sm:mt-2 sm:text-sm sm:leading-7">
                 {copy.browse.emptyDescription}
               </p>
@@ -202,21 +281,36 @@ export async function HomeFoundation() {
         </div>
       </section>
 
-      <section className="bg-background px-4 py-10 sm:px-6 sm:py-16 lg:px-8">
-        <div className="mx-auto grid max-w-7xl gap-4 sm:gap-8 lg:grid-cols-[1fr_auto] lg:items-end">
-          <HomeSectionHeader
-            isArabic={isArabic}
-            eyebrow={copy.upload.eyebrow}
-            title={copy.upload.title}
-            description={copy.upload.description}
-          />
-          <CTAButton href="/rfq#upload-parts-list" variant="secondary" className="w-fit">
-            {copy.upload.action}
-          </CTAButton>
+      {/* Services promo banners — Marketo's offer cards, adapted to INCAR services */}
+      <section className="bg-surface px-4 py-10 sm:px-6 sm:py-16 lg:px-8">
+        <div className="mx-auto grid max-w-7xl gap-4 sm:gap-5 md:grid-cols-3">
+          {promoCards.map((card) => (
+            <article
+              key={card.href}
+              className="incar-card flex flex-col rounded-lg p-5 sm:p-7"
+            >
+              <p className={`text-[12px] font-bold text-primary ${isArabic ? "" : "uppercase tracking-[0.12em]"}`}>
+                {card.eyebrow}
+              </p>
+              <h3 className="mt-2 text-xl font-semibold leading-snug text-ink">
+                {card.title}
+              </h3>
+              <p className="mt-2 flex-1 text-sm leading-6 text-muted">
+                {card.description}
+              </p>
+              <Link
+                href={localizeHref(locale, card.href)}
+                className="incar-focus mt-5 inline-flex min-h-11 w-fit items-center justify-center rounded-md bg-primary px-5 text-sm font-semibold text-white transition hover:bg-primary-hover"
+              >
+                {card.action}
+              </Link>
+            </article>
+          ))}
         </div>
       </section>
 
-      <section className="bg-surface px-4 py-10 sm:px-6 sm:py-16 lg:px-8">
+      {/* Manufacturing & quality steps */}
+      <section className="bg-background px-4 py-10 sm:px-6 sm:py-16 lg:px-8">
         <div className="mx-auto max-w-7xl">
           <HomeSectionHeader
             isArabic={isArabic}
@@ -224,13 +318,13 @@ export async function HomeFoundation() {
             title={copy.sourcing.title}
             description={copy.sourcing.description}
           />
-          <ol className="mt-4 border-y border-metallic-silver/10 bg-background/30 sm:mt-8 md:grid md:grid-cols-3 md:gap-4 md:border-0 md:bg-transparent">
+          <ol className="mt-4 border-y border-border bg-surface/60 sm:mt-8 md:grid md:grid-cols-3 md:gap-4 md:border-0 md:bg-transparent">
             {copy.sourcing.items.map((item, index) => (
               <li
                 key={item}
-                className="flex min-h-12 items-center gap-3 border-b border-metallic-silver/10 px-2 py-2.5 last:border-b-0 md:block md:min-h-0 md:rounded-lg md:border md:border-border md:bg-surface-elevated/45 md:p-5 md:shadow-[0_22px_64px_rgba(0,0,0,0.24)] md:last:border-b"
+                className="flex min-h-12 items-center gap-3 border-b border-border px-2 py-2.5 last:border-b-0 md:block md:min-h-0 md:rounded-lg md:border md:bg-surface-elevated md:p-5 md:shadow-[0_10px_30px_rgba(22,24,29,0.07)] md:last:border-b"
               >
-                <span aria-hidden="true" className="flex size-9 shrink-0 items-center justify-center rounded-md border border-primary/35 bg-primary/10 text-primary md:mb-4 md:size-11">
+                <span aria-hidden="true" className="flex size-9 shrink-0 items-center justify-center rounded-md border border-primary/35 bg-primary/[0.07] text-primary md:mb-4 md:size-11">
                   <SourcingStepIcon index={index} />
                 </span>
                 <p className="text-[14px] leading-6 text-metallic-silver md:text-sm md:leading-7">
@@ -245,34 +339,33 @@ export async function HomeFoundation() {
         </div>
       </section>
 
-      <section className="bg-background px-4 py-10 sm:px-6 sm:py-16 lg:px-8">
-        <div className="mx-auto grid max-w-7xl gap-4 rounded-lg border border-metallic-silver/12 bg-surface-elevated/55 p-5 sm:gap-8 sm:p-7 lg:grid-cols-[1fr_auto] lg:items-end lg:rounded-none lg:border-0 lg:bg-transparent lg:p-0">
-          <HomeSectionHeader
-            isArabic={isArabic}
-            eyebrow={copy.privateLabel.eyebrow}
-            title={copy.privateLabel.title}
-            description={copy.privateLabel.description}
-          />
-          <Link
-            href={localizeHref(locale, "/private-label")}
-            className="incar-focus inline-flex min-h-12 w-fit items-center justify-center rounded-md bg-primary px-5 py-3 text-sm font-semibold text-white shadow-[0_18px_42px_rgba(215,25,32,0.26)] transition hover:bg-primary-hover"
-          >
-            {copy.privateLabel.action}
-          </Link>
-        </div>
-      </section>
-
-      <section className="bg-surface px-4 py-10 sm:px-6 sm:py-16 lg:px-8">
+      {/* Trust band — navy contrast section */}
+      <section className="bg-navy px-4 py-10 text-white sm:px-6 sm:py-16 lg:px-8">
         <div className="mx-auto grid max-w-7xl gap-4 sm:gap-8 lg:grid-cols-[1fr_auto] lg:items-end">
-          <HomeSectionHeader
-            isArabic={isArabic}
-            eyebrow={copy.trust.eyebrow}
-            title={copy.trust.title}
-            description={copy.trust.description}
-          />
+          <div className="max-w-2xl md:max-w-3xl">
+            <p
+              className={`mb-1.5 font-bold text-primary ${
+                isArabic
+                  ? "text-[13px] tracking-[0.05em]"
+                  : "text-[13px] uppercase tracking-[0.16em]"
+              }`}
+            >
+              {copy.trust.eyebrow}
+            </p>
+            <h2
+              className={`font-semibold leading-[1.2] text-balance text-white md:text-4xl md:leading-tight lg:text-5xl lg:text-wrap ${
+                isArabic ? "text-[20px]" : "text-[21px]"
+              }`}
+            >
+              {copy.trust.title}
+            </h2>
+            <p className="mt-2.5 text-[15px] leading-[1.65] text-white/70 sm:mt-4 sm:text-base sm:leading-7 md:text-lg">
+              {copy.trust.description}
+            </p>
+          </div>
           <Link
             href={localizeHref(locale, "/about")}
-            className="incar-focus inline-flex min-h-11 w-fit items-center gap-2 rounded-sm text-sm font-semibold text-metallic-silver transition hover:text-white md:min-h-12 md:justify-center md:rounded-md md:border md:border-border md:bg-surface-elevated md:px-5 md:py-3 md:hover:border-metallic-silver/45 md:hover:bg-surface-muted"
+            className="incar-focus inline-flex min-h-11 w-fit items-center gap-2 rounded-sm text-sm font-semibold text-white/80 transition hover:text-white md:min-h-12 md:justify-center md:rounded-md md:border md:border-white/25 md:px-5 md:py-3 md:hover:border-white/50"
           >
             <span>{copy.trust.action}</span>
             <span aria-hidden="true" className="md:hidden">{isArabic ? "←" : "→"}</span>
@@ -280,8 +373,9 @@ export async function HomeFoundation() {
         </div>
       </section>
 
-      <section className="bg-background px-4 py-10 sm:px-6 sm:py-16 lg:px-8">
-        <div className="mx-auto max-w-7xl rounded-lg border border-metallic-silver/15 bg-surface-elevated/80 p-5 shadow-[0_18px_48px_rgba(0,0,0,0.22)] sm:p-7 md:p-10">
+      {/* Final CTA */}
+      <section className="bg-surface px-4 py-10 sm:px-6 sm:py-16 lg:px-8">
+        <div className="mx-auto max-w-7xl rounded-lg border border-border bg-surface-elevated p-5 shadow-[0_14px_40px_rgba(22,24,29,0.08)] sm:p-7 md:p-10">
           <HomeSectionHeader
             isArabic={isArabic}
             eyebrow={copy.ready.eyebrow}
@@ -291,13 +385,13 @@ export async function HomeFoundation() {
           <div className="mt-4 flex flex-col items-start gap-2 sm:mt-7 sm:flex-row sm:items-center sm:gap-4">
             <Link
               href={localizeHref(locale, "/rfq")}
-              className="incar-focus inline-flex min-h-12 w-full items-center justify-center rounded-md bg-primary px-5 py-3 text-sm font-semibold text-white shadow-[0_18px_42px_rgba(215,25,32,0.26)] transition hover:bg-primary-hover sm:w-auto"
+              className="incar-focus inline-flex min-h-12 w-full items-center justify-center rounded-md bg-primary px-5 py-3 text-sm font-semibold text-white shadow-[0_14px_34px_rgba(215,25,32,0.28)] transition hover:bg-primary-hover sm:w-auto"
             >
               {copy.search.rfq}
             </Link>
             <Link
               href={localizeHref(locale, "/rfq/upload-list")}
-              className="incar-focus inline-flex min-h-11 w-fit items-center gap-2 rounded-sm text-sm font-semibold text-metallic-silver transition hover:text-white md:min-h-12 md:justify-center md:rounded-md md:border md:border-border md:bg-surface-elevated md:px-5 md:py-3 md:hover:border-metallic-silver/45 md:hover:bg-surface-muted"
+              className="incar-focus inline-flex min-h-11 w-fit items-center gap-2 rounded-sm text-sm font-semibold text-metallic-silver transition hover:text-ink md:min-h-12 md:justify-center md:rounded-md md:border md:border-border md:bg-surface-elevated md:px-5 md:py-3 md:hover:border-metallic-silver/45"
             >
               <span>{copy.upload.action}</span>
               <span aria-hidden="true" className="md:hidden">{isArabic ? "←" : "→"}</span>

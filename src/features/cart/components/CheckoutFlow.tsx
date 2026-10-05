@@ -162,7 +162,7 @@ export function CheckoutFlow() {
     return (
       <section className="bg-background px-4 py-16 sm:px-6 lg:px-8">
         <div className="incar-card-elevated mx-auto max-w-3xl rounded-lg p-6 text-center md:p-9">
-          <h1 className="text-3xl font-semibold text-white">{copy.title}</h1>
+          <h1 className="text-3xl font-semibold text-ink">{copy.title}</h1>
           <p className="mt-4 text-sm text-muted">{copy.emptyCart}</p>
           <Link
             href={localizeHref(locale, "/cart")}
@@ -179,19 +179,19 @@ export function CheckoutFlow() {
     <section className="bg-background px-4 py-16 sm:px-6 lg:px-8">
       <div className="mx-auto max-w-4xl">
         <p className="text-sm font-bold uppercase tracking-[0.16em] text-primary">{copy.eyebrow}</p>
-        <h1 className="mt-3 text-3xl font-semibold text-white">{copy.title}</h1>
+        <h1 className="mt-3 text-3xl font-semibold text-ink">{copy.title}</h1>
         <Link
           href={localizeHref(locale, "/cart")}
-          className="incar-focus mt-4 inline-flex text-sm font-semibold text-metallic-silver hover:text-white"
+          className="incar-focus mt-4 inline-flex text-sm font-semibold text-metallic-silver hover:text-ink"
         >
           {copy.backToCart}
         </Link>
 
         <form onSubmit={handleSubmit} className="mt-8 grid gap-8">
           <fieldset className="incar-card grid gap-4 rounded-lg p-6">
-            <legend className="px-1 text-lg font-semibold text-white">{copy.contact.title}</legend>
+            <legend className="px-1 text-lg font-semibold text-ink">{copy.contact.title}</legend>
             <div className="grid gap-4 sm:grid-cols-2">
-              <label className="grid gap-2 text-sm font-semibold text-white">
+              <label className="grid gap-2 text-sm font-semibold text-ink">
                 {copy.contact.contactName}
                 <input
                   required
@@ -200,7 +200,7 @@ export function CheckoutFlow() {
                   className="incar-input min-h-11 px-4 text-sm"
                 />
               </label>
-              <label className="grid gap-2 text-sm font-semibold text-white">
+              <label className="grid gap-2 text-sm font-semibold text-ink">
                 {copy.contact.phone}
                 <input
                   required
@@ -210,7 +210,7 @@ export function CheckoutFlow() {
                   className="incar-input min-h-11 px-4 text-sm"
                 />
               </label>
-              <label className="grid gap-2 text-sm font-semibold text-white">
+              <label className="grid gap-2 text-sm font-semibold text-ink">
                 {copy.contact.whatsapp}
                 <input
                   dir="ltr"
@@ -219,7 +219,7 @@ export function CheckoutFlow() {
                   className="incar-input min-h-11 px-4 text-sm"
                 />
               </label>
-              <label className="grid gap-2 text-sm font-semibold text-white">
+              <label className="grid gap-2 text-sm font-semibold text-ink">
                 {copy.contact.email}
                 <input
                   required
@@ -230,7 +230,7 @@ export function CheckoutFlow() {
                   className="incar-input min-h-11 px-4 text-sm"
                 />
               </label>
-              <label className="grid gap-2 text-sm font-semibold text-white sm:col-span-2">
+              <label className="grid gap-2 text-sm font-semibold text-ink sm:col-span-2">
                 {copy.contact.addressLine1}
                 <input
                   required
@@ -239,7 +239,7 @@ export function CheckoutFlow() {
                   className="incar-input min-h-11 px-4 text-sm"
                 />
               </label>
-              <label className="grid gap-2 text-sm font-semibold text-white sm:col-span-2">
+              <label className="grid gap-2 text-sm font-semibold text-ink sm:col-span-2">
                 {copy.contact.addressLine2}
                 <input
                   value={form.addressLine2}
@@ -247,7 +247,7 @@ export function CheckoutFlow() {
                   className="incar-input min-h-11 px-4 text-sm"
                 />
               </label>
-              <label className="grid gap-2 text-sm font-semibold text-white">
+              <label className="grid gap-2 text-sm font-semibold text-ink">
                 {copy.contact.city}
                 <input
                   required
@@ -256,7 +256,7 @@ export function CheckoutFlow() {
                   className="incar-input min-h-11 px-4 text-sm"
                 />
               </label>
-              <label className="grid gap-2 text-sm font-semibold text-white">
+              <label className="grid gap-2 text-sm font-semibold text-ink">
                 {copy.contact.country}
                 <select
                   required
@@ -269,7 +269,7 @@ export function CheckoutFlow() {
                   <option value="United Arab Emirates">{copy.contact.countries.AE}</option>
                 </select>
               </label>
-              <label className="grid gap-2 text-sm font-semibold text-white">
+              <label className="grid gap-2 text-sm font-semibold text-ink">
                 {copy.contact.postalCode}
                 <input
                   value={form.postalCode}
@@ -277,7 +277,7 @@ export function CheckoutFlow() {
                   className="incar-input min-h-11 px-4 text-sm"
                 />
               </label>
-              <label className="grid gap-2 text-sm font-semibold text-white sm:col-span-2">
+              <label className="grid gap-2 text-sm font-semibold text-ink sm:col-span-2">
                 {copy.contact.notes}
                 <textarea
                   rows={3}
@@ -290,38 +290,38 @@ export function CheckoutFlow() {
           </fieldset>
 
           <fieldset className="incar-card grid gap-4 rounded-lg p-6">
-            <legend className="px-1 text-lg font-semibold text-white">{copy.payment.title}</legend>
+            <legend className="px-1 text-lg font-semibold text-ink">{copy.payment.title}</legend>
             <p className="text-sm text-muted">{copy.payment.description}</p>
             {bankDetails?.available ? (
               <dl className="grid gap-3 rounded-md bg-background p-4 sm:grid-cols-2">
                 {bankDetails.bankName ? (
                   <div>
                     <dt className="text-xs font-semibold uppercase tracking-[0.14em] text-muted">{copy.payment.bankName}</dt>
-                    <dd className="mt-1 text-white">{bankDetails.bankName}</dd>
+                    <dd className="mt-1 text-ink">{bankDetails.bankName}</dd>
                   </div>
                 ) : null}
                 {bankDetails.accountHolder ? (
                   <div>
                     <dt className="text-xs font-semibold uppercase tracking-[0.14em] text-muted">{copy.payment.accountHolder}</dt>
-                    <dd className="mt-1 text-white">{bankDetails.accountHolder}</dd>
+                    <dd className="mt-1 text-ink">{bankDetails.accountHolder}</dd>
                   </div>
                 ) : null}
                 {bankDetails.accountNumber ? (
                   <div>
                     <dt className="text-xs font-semibold uppercase tracking-[0.14em] text-muted">{copy.payment.accountNumber}</dt>
-                    <dd dir="ltr" className="mt-1 text-white">{bankDetails.accountNumber}</dd>
+                    <dd dir="ltr" className="mt-1 text-ink">{bankDetails.accountNumber}</dd>
                   </div>
                 ) : null}
                 {bankDetails.iban ? (
                   <div>
                     <dt className="text-xs font-semibold uppercase tracking-[0.14em] text-muted">{copy.payment.iban}</dt>
-                    <dd dir="ltr" className="mt-1 text-white">{bankDetails.iban}</dd>
+                    <dd dir="ltr" className="mt-1 text-ink">{bankDetails.iban}</dd>
                   </div>
                 ) : null}
                 {bankDetails.swift ? (
                   <div>
                     <dt className="text-xs font-semibold uppercase tracking-[0.14em] text-muted">{copy.payment.swift}</dt>
-                    <dd dir="ltr" className="mt-1 text-white">{bankDetails.swift}</dd>
+                    <dd dir="ltr" className="mt-1 text-ink">{bankDetails.swift}</dd>
                   </div>
                 ) : null}
               </dl>
@@ -331,7 +331,7 @@ export function CheckoutFlow() {
               </p>
             )}
 
-            <label className="mt-2 grid gap-2 text-sm font-semibold text-white">
+            <label className="mt-2 grid gap-2 text-sm font-semibold text-ink">
               {copy.payment.proofLabel}
               <input
                 ref={fileInputRef}
@@ -345,12 +345,12 @@ export function CheckoutFlow() {
           </fieldset>
 
           <div className="incar-card rounded-lg p-6">
-            <h2 className="text-lg font-semibold text-white">{copy.summary.title}</h2>
+            <h2 className="text-lg font-semibold text-ink">{copy.summary.title}</h2>
             <div className="mt-4 flex items-center justify-between text-sm text-muted">
               <span>{copy.summary.subtotal}</span>
-              <span dir="ltr" className="font-semibold text-white">${subtotalUsd.toFixed(2)} USD</span>
+              <span dir="ltr" className="font-semibold text-ink">${subtotalUsd.toFixed(2)} USD</span>
             </div>
-            <div className="mt-2 flex items-center justify-between text-base font-semibold text-white">
+            <div className="mt-2 flex items-center justify-between text-base font-semibold text-ink">
               <span>{copy.summary.total}</span>
               <span dir="ltr">${subtotalUsd.toFixed(2)} USD</span>
             </div>

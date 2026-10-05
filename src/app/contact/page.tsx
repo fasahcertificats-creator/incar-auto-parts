@@ -23,7 +23,7 @@ export default async function ContactPage() {
       />
       <section className="bg-background px-4 py-16 sm:px-6 lg:px-8">
         <div className="mx-auto grid max-w-7xl gap-8 lg:grid-cols-[0.85fr_1.15fr]">
-          <aside className="incar-card rounded-lg p-7 text-white">
+          <aside className="incar-card rounded-lg p-7 text-ink">
             <p className="text-sm font-bold uppercase tracking-[0.16em] text-metallic-silver">
               {dictionary.pages.contact.details}
             </p>
@@ -60,7 +60,7 @@ export default async function ContactPage() {
               ) : null}
               <a
                 href={`mailto:${brand.email}`}
-                className="incar-focus inline-flex min-h-11 items-center justify-center rounded-md border border-border bg-surface-elevated px-4 text-sm font-semibold text-metallic-silver transition hover:border-metallic-silver/45 hover:text-white"
+                className="incar-focus inline-flex min-h-11 items-center justify-center rounded-md border border-border bg-surface-elevated px-4 text-sm font-semibold text-metallic-silver transition hover:border-metallic-silver/45 hover:text-ink"
               >
                 {dictionary.common.emailIncar}
               </a>

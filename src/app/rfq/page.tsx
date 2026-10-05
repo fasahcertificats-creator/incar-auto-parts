@@ -29,7 +29,7 @@ export default async function RfqPage() {
               <p className="text-sm font-bold uppercase tracking-[0.16em] text-primary">
                 {dictionary.pages.rfq.reviewEyebrow}
               </p>
-              <h2 className="mt-3 text-2xl font-semibold text-white">
+              <h2 className="mt-3 text-2xl font-semibold text-ink">
                 {dictionary.pages.rfq.reviewTitle}
               </h2>
               <div className="mt-5 grid gap-3 text-sm leading-6 text-muted">

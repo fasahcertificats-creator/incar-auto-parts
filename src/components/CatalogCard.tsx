@@ -9,7 +9,7 @@ export function CatalogCard({
   ctaLabel: string;
 }) {
   return (
-    <article className="incar-card rounded-lg p-6 text-white">
+    <article className="incar-card rounded-lg p-6 text-ink">
       <div className="flex flex-wrap items-center justify-between gap-3">
         <p className="text-xs font-bold uppercase tracking-[0.16em] text-metallic-silver">
           {catalog.brand} / {catalog.fileType}
@@ -18,11 +18,11 @@ export function CatalogCard({
           {catalog.updated}
         </span>
       </div>
-      <h2 className="mt-5 text-2xl font-semibold text-white">{catalog.title}</h2>
+      <h2 className="mt-5 text-2xl font-semibold text-ink">{catalog.title}</h2>
       <p className="mt-3 text-sm leading-6 text-muted">{catalog.description}</p>
       <p className="mt-5 text-sm text-metallic-silver">{catalog.audience}</p>
       <div className="mt-6 flex flex-wrap items-center justify-between gap-4">
-        <p className="text-sm font-semibold text-white">{catalog.items}</p>
+        <p className="text-sm font-semibold text-ink">{catalog.items}</p>
         <CTAButton
           href="/catalogs#catalog-request"
           variant="primary"

@@ -33,7 +33,7 @@ export function SectionHeader({
       ) : null}
       <Heading
         className={`text-3xl font-semibold leading-tight md:text-5xl ${
-          inverse ? "text-white" : "text-white"
+          inverse ? "text-ink" : "text-ink"
         }`}
       >
         {title}

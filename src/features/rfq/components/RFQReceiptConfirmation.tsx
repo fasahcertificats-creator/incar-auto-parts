@@ -56,7 +56,7 @@ export function RFQReceiptConfirmation() {
     <section className="bg-background px-4 py-16 sm:px-6 lg:px-8">
       <div className="incar-card-elevated mx-auto max-w-3xl rounded-lg p-6 md:p-9">
         <p className="text-sm font-bold uppercase tracking-[0.16em] text-primary">{copy.eyebrow}</p>
-        <h1 className="mt-3 text-3xl font-semibold text-white">{copy.title}</h1>
+        <h1 className="mt-3 text-3xl font-semibold text-ink">{copy.title}</h1>
         <p className="mt-3 text-sm leading-7 text-muted">{copy.description}</p>
 
         {state.kind === "loading" ? (
@@ -69,15 +69,15 @@ export function RFQReceiptConfirmation() {
           <dl className="mt-8 grid gap-4 rounded-md border border-border bg-background p-5 sm:grid-cols-2">
             <div className="sm:col-span-2">
               <dt className="text-xs font-semibold uppercase tracking-[0.14em] text-muted">{copy.reference}</dt>
-              <dd className="mt-2 break-all text-xl font-semibold text-white" dir="ltr">{state.receipt.publicReference}</dd>
+              <dd className="mt-2 break-all text-xl font-semibold text-ink" dir="ltr">{state.receipt.publicReference}</dd>
             </div>
             <div>
               <dt className="text-xs font-semibold uppercase tracking-[0.14em] text-muted">{copy.status}</dt>
-              <dd className="mt-2 text-white">{copy.submitted}</dd>
+              <dd className="mt-2 text-ink">{copy.submitted}</dd>
             </div>
             <div>
               <dt className="text-xs font-semibold uppercase tracking-[0.14em] text-muted">{copy.submittedAt}</dt>
-              <dd className="mt-2 text-white">
+              <dd className="mt-2 text-ink">
                 {new Intl.DateTimeFormat(locale, { dateStyle: "medium", timeStyle: "short" }).format(
                   new Date(state.receipt.submittedAt),
                 )}
@@ -85,7 +85,7 @@ export function RFQReceiptConfirmation() {
             </div>
             <div>
               <dt className="text-xs font-semibold uppercase tracking-[0.14em] text-muted">{copy.requestType}</dt>
-              <dd className="mt-2 text-white">
+              <dd className="mt-2 text-ink">
                 {state.receipt.requestIntent === "compatibility-verification"
                   ? copy.compatibility
                   : copy.productRfq}

@@ -56,7 +56,7 @@ export default async function MakePage({ params, searchParams }: Props) {
 
   return (
     <>
-      <section className="bg-background px-4 py-20 text-white sm:px-6 lg:px-8">
+      <section className="bg-background px-4 py-20 text-ink sm:px-6 lg:px-8">
         <div className="mx-auto max-w-7xl">
           <DiscoveryBreadcrumbs
             locale={locale}
@@ -89,20 +89,20 @@ export default async function MakePage({ params, searchParams }: Props) {
 
       <section className="bg-surface px-4 py-16 sm:px-6 lg:px-8">
         <div className="mx-auto max-w-7xl">
-          <h2 className="text-3xl font-semibold text-white">{copy.make.modelsTitle}</h2>
+          <h2 className="text-3xl font-semibold text-ink">{copy.make.modelsTitle}</h2>
           <div className="mt-7 grid gap-4 sm:grid-cols-2 lg:grid-cols-3">
             {models.map((model) => (
               <Link
                 key={model.id}
                 href={localizeHref(locale, `/parts/${make.slug}/${model.slug}`)}
-                className="incar-card incar-focus rounded-lg p-5 text-xl font-semibold text-white hover:border-metallic-silver/40"
+                className="incar-card incar-focus rounded-lg p-5 text-xl font-semibold text-ink hover:border-metallic-silver/40"
               >
                 {model.name}
               </Link>
             ))}
           </div>
           <div className="mt-8 rounded-lg border border-border bg-background p-6">
-            <h2 className="text-xl font-semibold text-white">{copy.make.partialCoverageTitle}</h2>
+            <h2 className="text-xl font-semibold text-ink">{copy.make.partialCoverageTitle}</h2>
             <p className="mt-2 text-sm leading-7 text-muted">{copy.make.partialCoverageDescription}</p>
           </div>
         </div>

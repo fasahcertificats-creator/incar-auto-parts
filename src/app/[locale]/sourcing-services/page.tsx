@@ -62,17 +62,17 @@ export default async function SourcingServicesPage({
       <section className="bg-surface px-4 py-16 sm:px-6 lg:px-8">
         <div className="mx-auto grid max-w-7xl gap-5 md:grid-cols-2">
           <article className="incar-card rounded-lg p-6">
-            <h2 className="text-2xl font-semibold text-white">{copy.qualityTitle}</h2>
+            <h2 className="text-2xl font-semibold text-ink">{copy.qualityTitle}</h2>
             <p className="mt-4 text-sm leading-7 text-muted">{copy.qualityDescription}</p>
           </article>
           <article className="incar-card rounded-lg p-6">
-            <h2 className="text-2xl font-semibold text-white">{copy.exportTitle}</h2>
+            <h2 className="text-2xl font-semibold text-ink">{copy.exportTitle}</h2>
             <p className="mt-4 text-sm leading-7 text-muted">{copy.exportDescription}</p>
           </article>
         </div>
       </section>
       <section className="bg-background px-4 py-16 sm:px-6 lg:px-8">
-        <div className="incar-card-elevated mx-auto max-w-4xl rounded-lg p-7 text-white">
+        <div className="incar-card-elevated mx-auto max-w-4xl rounded-lg p-7 text-ink">
           <h2 className="text-2xl font-semibold">{copy.statusTitle}</h2>
           <p className="mt-4 text-sm leading-7 text-metallic-silver">
             {copy.statusDescription}

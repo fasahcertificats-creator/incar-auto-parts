@@ -14,7 +14,7 @@ export function TrustProcess({ steps }: TrustProcessProps) {
             <span className="text-sm font-bold text-primary">
               {String(step.order).padStart(2, "0")}
             </span>
-            <h3 className="mt-4 text-lg font-semibold text-white">
+            <h3 className="mt-4 text-lg font-semibold text-ink">
               {step.title}
             </h3>
             <p className="mt-3 text-sm leading-6 text-muted">

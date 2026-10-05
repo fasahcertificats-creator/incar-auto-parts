@@ -174,7 +174,7 @@ export function MobileMenu() {
       >
         <div className="relative flex min-h-16 items-center justify-between px-5">
           <div>
-            <span className="block text-[13px] font-black tracking-[0.11em] text-white">
+            <span className="block text-[13px] font-black tracking-[0.11em] text-ink">
               INCAR AUTO PARTS
             </span>
             <span aria-hidden="true" className="mt-2 flex items-center gap-2">
@@ -208,8 +208,8 @@ export function MobileMenu() {
                   href={localizeHref(locale, item.href)}
                   aria-current={active ? "page" : undefined}
                   onClick={closeMenu}
-                  className={`incar-focus relative flex min-h-[52px] items-center justify-between border-b border-metallic-silver/[0.08] px-3 py-2.5 transition last:border-b-0 hover:bg-white/[0.025] hover:text-white ${
-                    active ? "font-bold text-white" : "font-semibold"
+                  className={`incar-focus relative flex min-h-[52px] items-center justify-between border-b border-metallic-silver/[0.08] px-3 py-2.5 transition last:border-b-0 hover:bg-white/[0.025] hover:text-ink ${
+                    active ? "font-bold text-ink" : "font-semibold"
                   }`}
                 >
                   {active ? (
@@ -236,7 +236,7 @@ export function MobileMenu() {
               href={localizeHref(locale, "/cart")}
               aria-label={`${dictionary.cart.navLabel}${cartItemCount > 0 ? ` (${cartItemCount})` : ""}`}
               onClick={closeMenu}
-              className="incar-focus inline-flex min-h-12 items-center justify-center rounded-md border border-metallic-silver/20 bg-background/45 px-4 text-sm font-semibold text-metallic-silver transition hover:border-metallic-silver/40 hover:bg-surface-elevated hover:text-white"
+              className="incar-focus inline-flex min-h-12 items-center justify-center rounded-md border border-metallic-silver/20 bg-background/45 px-4 text-sm font-semibold text-metallic-silver transition hover:border-metallic-silver/40 hover:bg-surface-elevated hover:text-ink"
             >
               {dictionary.cart.navLabel}
               {cartItemCount > 0 ? ` (${cartItemCount})` : ""}
@@ -244,7 +244,7 @@ export function MobileMenu() {
             <Link
               href={localizeHref(locale, "/rfq/upload-list")}
               onClick={closeMenu}
-              className="incar-focus inline-flex min-h-12 items-center justify-center rounded-md border border-metallic-silver/20 bg-background/45 px-4 text-sm font-semibold text-metallic-silver transition hover:border-metallic-silver/40 hover:bg-surface-elevated hover:text-white"
+              className="incar-focus inline-flex min-h-12 items-center justify-center rounded-md border border-metallic-silver/20 bg-background/45 px-4 text-sm font-semibold text-metallic-silver transition hover:border-metallic-silver/40 hover:bg-surface-elevated hover:text-ink"
             >
               {dictionary.navigation.uploadPartsList}
             </Link>
@@ -275,7 +275,7 @@ export function MobileMenu() {
         aria-controls={menuId}
         aria-expanded={open}
         onClick={openMenu}
-        className="incar-focus inline-flex min-h-11 items-center gap-2 rounded-md border border-border px-3 text-xs font-semibold text-metallic-silver transition hover:border-metallic-silver/40 hover:text-white"
+        className="incar-focus inline-flex min-h-11 items-center gap-2 rounded-md border border-white/25 px-3 text-xs font-semibold text-white/85 transition hover:border-white/50 hover:text-white"
       >
         <span aria-hidden="true" className="grid w-4 gap-1">
           <span className="h-px w-4 bg-current" />

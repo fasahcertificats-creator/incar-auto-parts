@@ -46,18 +46,18 @@ export function ProductCard({ product }: { product: Product }) {
           </span>
         </div>
         <Link href={localizeHref(locale, `/products/${product.slug}`)} className="incar-focus block rounded-sm">
-          <h3 className="text-xl font-semibold text-white group-hover:text-metallic-silver">
+          <h3 className="text-xl font-semibold text-ink group-hover:text-metallic-silver">
             {product.name[locale]}
           </h3>
         </Link>
         <dl className="mt-4 grid gap-2 text-sm text-muted">
           <div className="flex justify-between gap-4">
             <dt>{dictionary.productLabels.partNumber}</dt>
-            <dd dir="ltr" className="font-semibold text-white">{product.references.incarPartNumber ?? "—"}</dd>
+            <dd dir="ltr" className="font-semibold text-ink">{product.references.incarPartNumber ?? "—"}</dd>
           </div>
           <div className="flex justify-between gap-4">
             <dt>{dictionary.productLabels.oemNumber}</dt>
-            <dd dir="ltr" className="font-semibold text-white">{product.references.oemReferences[0] ?? "—"}</dd>
+            <dd dir="ltr" className="font-semibold text-ink">{product.references.oemReferences[0] ?? "—"}</dd>
           </div>
         </dl>
         <div className="mt-5 flex-1">
@@ -71,7 +71,7 @@ export function ProductCard({ product }: { product: Product }) {
           ) : (
             <Link
               href={localizeHref(locale, `/products/${product.slug}`)}
-              className="incar-focus inline-flex min-h-11 items-center justify-center rounded-md border border-border px-4 text-sm font-semibold text-metallic-silver hover:text-white"
+              className="incar-focus inline-flex min-h-11 items-center justify-center rounded-md border border-border px-4 text-sm font-semibold text-metallic-silver hover:text-ink"
             >
               {dictionary.discovery.search.viewDetails}
             </Link>

@@ -58,7 +58,7 @@ export function CheckoutConfirmation() {
     <section className="bg-background px-4 py-16 sm:px-6 lg:px-8">
       <div className="incar-card-elevated mx-auto max-w-3xl rounded-lg p-6 md:p-9">
         <p className="text-sm font-bold uppercase tracking-[0.16em] text-primary">{copy.eyebrow}</p>
-        <h1 className="mt-3 text-3xl font-semibold text-white">{copy.title}</h1>
+        <h1 className="mt-3 text-3xl font-semibold text-ink">{copy.title}</h1>
         <p className="mt-3 text-sm leading-7 text-muted">{copy.description}</p>
 
         {state.kind === "loading" ? (
@@ -88,7 +88,7 @@ export function CheckoutConfirmation() {
             {state.kind === "unavailable" ? (
               <Link
                 href={localizeHref(locale, "/orders/lookup")}
-                className="incar-focus mt-4 inline-flex min-h-11 items-center justify-center rounded-md border border-border px-4 font-semibold text-white hover:border-metallic-silver/45"
+                className="incar-focus mt-4 inline-flex min-h-11 items-center justify-center rounded-md border border-border px-4 font-semibold text-ink hover:border-metallic-silver/45"
               >
                 {copy.lookupCta}
               </Link>

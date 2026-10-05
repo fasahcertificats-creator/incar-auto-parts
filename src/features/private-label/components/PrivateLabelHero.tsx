@@ -9,7 +9,7 @@ type PrivateLabelHeroProps = {
 
 export function PrivateLabelHero({ trustPoints, dictionary }: PrivateLabelHeroProps) {
   return (
-    <section className="bg-background px-4 py-16 text-white sm:px-6 lg:px-8">
+    <section className="bg-background px-4 py-16 text-ink sm:px-6 lg:px-8">
       <div className="mx-auto grid max-w-7xl gap-10 lg:grid-cols-[1.08fr_0.92fr] lg:items-center">
         <div>
           <p className="text-xs font-bold uppercase tracking-[0.18em] text-metallic-silver">

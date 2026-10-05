@@ -25,7 +25,7 @@ export function CatalogExplorer() {
   if (catalogs.length === 0) {
     return (
       <div className="rounded-lg border border-dashed border-metallic-silver/24 bg-surface p-8 text-center">
-        <h2 className="text-xl font-semibold text-white">
+        <h2 className="text-xl font-semibold text-ink">
           {dictionary.pages.catalogs.emptyTitle}
         </h2>
         <p className="mt-2 text-sm leading-7 text-muted">
@@ -38,7 +38,7 @@ export function CatalogExplorer() {
   return (
     <div>
       <div className="incar-card flex flex-col gap-3 rounded-lg p-4 sm:flex-row sm:items-end sm:justify-between">
-        <label className="grid gap-2 text-sm font-semibold text-white">
+        <label className="grid gap-2 text-sm font-semibold text-ink">
           {dictionary.pages.catalogs.explorerLabel}
           <select
             className="incar-input px-4 text-sm font-normal"

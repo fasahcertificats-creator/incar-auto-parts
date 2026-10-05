@@ -27,7 +27,7 @@ import {
 import { useRFQ } from "../use-rfq";
 
 const inputClass = "incar-input px-4 text-sm";
-const labelClass = "grid gap-2 text-sm font-semibold text-white";
+const labelClass = "grid gap-2 text-sm font-semibold text-ink";
 type SubmissionState = "idle" | "submitting" | "success" | "recoverable-error";
 
 function getText(formData: FormData, name: string) {
@@ -172,7 +172,7 @@ export function RFQForm() {
     <form className="incar-card rounded-lg p-5 md:p-7" onSubmit={handleSubmit} noValidate>
       <div>
         <p className="text-sm font-bold uppercase tracking-[0.16em] text-metallic-silver">{copy.eyebrow}</p>
-        <h2 className="mt-2 text-2xl font-semibold text-white">{copy.title}</h2>
+        <h2 className="mt-2 text-2xl font-semibold text-ink">{copy.title}</h2>
         <p className="mt-3 text-sm leading-6 text-muted">{integration.description}</p>
       </div>
 
@@ -261,7 +261,7 @@ export function RFQForm() {
         </label>
       </div>
 
-      <label className="mt-5 flex items-start gap-3 text-sm leading-6 text-white" htmlFor="rfq-privacy-consent">
+      <label className="mt-5 flex items-start gap-3 text-sm leading-6 text-ink" htmlFor="rfq-privacy-consent">
         <input
           id="rfq-privacy-consent"
           type="checkbox"

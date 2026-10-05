@@ -78,11 +78,11 @@ function BuyBlock({ product, directSalePriceUsd }: { product: Product; directSal
   return (
     <div className="rounded-md border border-border bg-background p-4">
       <p className="text-xs font-semibold uppercase tracking-[0.14em] text-muted">{copy.priceLabel}</p>
-      <p dir="ltr" className="mt-1 text-2xl font-bold text-white">
+      <p dir="ltr" className="mt-1 text-2xl font-bold text-ink">
         ${Number(directSalePriceUsd).toFixed(2)} <span className="text-sm font-medium text-muted">USD</span>
       </p>
       <div className="mt-4 flex flex-wrap items-center gap-3">
-        <label className="flex items-center gap-2 text-sm font-semibold text-white">
+        <label className="flex items-center gap-2 text-sm font-semibold text-ink">
           {copy.quantityLabel}
           <input
             type="number"

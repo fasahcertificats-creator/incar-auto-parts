@@ -39,12 +39,12 @@ export default async function AboutPage() {
           <div className="mt-10 grid gap-6 lg:grid-cols-3">
             {dictionary.pages.about.narrative.map(({ title, copy }) => (
               <div key={title} className="incar-card rounded-lg p-6">
-                <h2 className="text-2xl font-semibold text-white">{title}</h2>
+                <h2 className="text-2xl font-semibold text-ink">{title}</h2>
                 <p className="mt-4 text-sm leading-7 text-muted">{copy}</p>
               </div>
             ))}
             <div className="incar-card rounded-lg p-6">
-              <h2 className="text-2xl font-semibold text-white">
+              <h2 className="text-2xl font-semibold text-ink">
                 {dictionary.pages.about.journeyTitle}
               </h2>
               <p className="mt-4 text-sm leading-7 text-muted">

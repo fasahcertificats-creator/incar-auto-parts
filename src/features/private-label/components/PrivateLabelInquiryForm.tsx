@@ -36,7 +36,7 @@ const initialFormState: PrivateLabelInquiryFormState = {
 
 const inputClass = "incar-input px-4 text-sm";
 const textareaClass = "incar-input min-h-32 px-4 py-3 text-sm";
-const labelClass = "grid gap-2 text-sm font-semibold text-white";
+const labelClass = "grid gap-2 text-sm font-semibold text-ink";
 
 function isNumeric(value: string) {
   return value.trim() !== "" && !Number.isNaN(Number(value));
@@ -304,7 +304,7 @@ export function PrivateLabelInquiryForm() {
       {submittedInquiry && response ? (
         <div className="mt-6 rounded-md border border-metallic-silver/24 bg-background p-4 text-sm leading-6 text-metallic-silver">
           <p>{dictionary.forms.privateLabel.received}</p>
-          <p className="mt-2 font-semibold text-white">
+          <p className="mt-2 font-semibold text-ink">
             {dictionary.forms.common.reference}: {response.publicReference}
           </p>
         </div>

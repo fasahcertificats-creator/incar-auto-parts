@@ -18,7 +18,7 @@ export function FinalCTA({
   secondaryLabel,
 }: FinalCTAProps) {
   return (
-    <section className="bg-background px-4 py-16 text-white sm:px-6 lg:px-8">
+    <section className="bg-background px-4 py-16 text-ink sm:px-6 lg:px-8">
       <div className="mx-auto flex max-w-7xl flex-col justify-between gap-6 md:flex-row md:items-center">
         <div>
           <p className="text-sm font-bold uppercase tracking-[0.16em] text-metallic-silver">

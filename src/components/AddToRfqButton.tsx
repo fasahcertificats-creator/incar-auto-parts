@@ -41,7 +41,7 @@ export function AddToRfqButton({ product, compact = false }: AddToRfqButtonProps
       {!compact ? (
         <Link
           href={localizeHref(locale, "/rfq")}
-          className="incar-focus inline-flex min-h-11 items-center justify-center rounded-md border border-border bg-surface-elevated px-4 py-2 text-sm font-semibold text-metallic-silver transition hover:border-metallic-silver/45 hover:text-white"
+          className="incar-focus inline-flex min-h-11 items-center justify-center rounded-md border border-border bg-surface-elevated px-4 py-2 text-sm font-semibold text-metallic-silver transition hover:border-metallic-silver/45 hover:text-ink"
         >
           {dictionary.common.requestQuotation}
         </Link>

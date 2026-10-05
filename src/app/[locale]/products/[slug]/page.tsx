@@ -99,7 +99,7 @@ export default async function LocalizedProductDetailsPage({ params, searchParams
     <article>
       <JsonLd data={productJsonLd} />
       {faqJsonLd ? <JsonLd data={faqJsonLd} /> : null}
-      <section className="bg-background px-4 py-20 text-white sm:px-6 lg:px-8">
+      <section className="bg-background px-4 py-20 text-ink sm:px-6 lg:px-8">
         <div className="mx-auto max-w-7xl">
           <DiscoveryBreadcrumbs
             locale={locale}
@@ -119,7 +119,7 @@ export default async function LocalizedProductDetailsPage({ params, searchParams
           </h1>
           <Link
             href={localizeHref(locale, returnHref)}
-            className="incar-focus mt-6 inline-flex min-h-11 items-center rounded-md border border-border px-4 text-sm font-semibold text-metallic-silver hover:text-white"
+            className="incar-focus mt-6 inline-flex min-h-11 items-center rounded-md border border-border px-4 text-sm font-semibold text-metallic-silver hover:text-ink"
           >
             {returnLabel}
           </Link>
@@ -138,19 +138,19 @@ export default async function LocalizedProductDetailsPage({ params, searchParams
             noImageLabel={copy.product.noImage}
           />
           <div className="incar-card rounded-lg p-6">
-            <h2 className="text-2xl font-semibold text-white">{copy.product.referencesTitle}</h2>
+            <h2 className="text-2xl font-semibold text-ink">{copy.product.referencesTitle}</h2>
             <dl className="mt-5 grid gap-4 sm:grid-cols-2">
               <div className="rounded-md bg-background p-4">
                 <dt className="text-xs font-semibold uppercase tracking-[0.14em] text-muted">{dictionary.productLabels.partNumber}</dt>
-                <dd dir="ltr" className="mt-2 font-semibold text-white">{product.references.incarPartNumber ?? "—"}</dd>
+                <dd dir="ltr" className="mt-2 font-semibold text-ink">{product.references.incarPartNumber ?? "—"}</dd>
               </div>
               <div className="rounded-md bg-background p-4">
                 <dt className="text-xs font-semibold uppercase tracking-[0.14em] text-muted">{dictionary.productLabels.oemNumber}</dt>
-                <dd dir="ltr" className="mt-2 font-semibold text-white">{product.references.oemReferences.join(", ") || "—"}</dd>
+                <dd dir="ltr" className="mt-2 font-semibold text-ink">{product.references.oemReferences.join(", ") || "—"}</dd>
               </div>
               <div className="rounded-md bg-background p-4">
                 <dt className="text-xs font-semibold uppercase tracking-[0.14em] text-muted">{copy.product.requestTitle}</dt>
-                <dd className="mt-2 font-semibold text-white">{copy.product.request[product.requestEligibility]}</dd>
+                <dd className="mt-2 font-semibold text-ink">{copy.product.request[product.requestEligibility]}</dd>
               </div>
             </dl>
             {make && model ? (
@@ -162,9 +162,9 @@ export default async function LocalizedProductDetailsPage({ params, searchParams
       </section>
 
       {description ? (
-        <section className="bg-background px-4 py-16 text-white sm:px-6 lg:px-8">
+        <section className="bg-background px-4 py-16 text-ink sm:px-6 lg:px-8">
           <div className="mx-auto max-w-7xl">
-            <h2 className="text-2xl font-semibold text-white">{copy.product.descriptionTitle}</h2>
+            <h2 className="text-2xl font-semibold text-ink">{copy.product.descriptionTitle}</h2>
             <p className="mt-4 max-w-3xl text-sm leading-relaxed text-metallic-silver">{description}</p>
           </div>
         </section>
@@ -173,12 +173,12 @@ export default async function LocalizedProductDetailsPage({ params, searchParams
       {compatibleVehicles.length ? (
         <section className="bg-surface px-4 py-16 sm:px-6 lg:px-8">
           <div className="mx-auto max-w-7xl">
-            <h2 className="text-2xl font-semibold text-white">{copy.product.compatibleVehiclesTitle}</h2>
+            <h2 className="text-2xl font-semibold text-ink">{copy.product.compatibleVehiclesTitle}</h2>
             <ul className="mt-5 grid gap-3 sm:grid-cols-2 lg:grid-cols-3">
               {compatibleVehicles.map((item, index) => (
                 <li
                   key={`${item.makeId}-${item.modelId}-${index}`}
-                  className="rounded-md bg-background p-4 text-sm text-white"
+                  className="rounded-md bg-background p-4 text-sm text-ink"
                 >
                   <span className="font-semibold">{item.makeName} {item.modelName}</span>
                   {item.verifiedYearRanges?.length ? (
@@ -196,14 +196,14 @@ export default async function LocalizedProductDetailsPage({ params, searchParams
       ) : null}
 
       {specifications.length ? (
-        <section className="bg-background px-4 py-16 text-white sm:px-6 lg:px-8">
+        <section className="bg-background px-4 py-16 text-ink sm:px-6 lg:px-8">
           <div className="mx-auto max-w-7xl">
-            <h2 className="text-2xl font-semibold text-white">{copy.product.specificationsTitle}</h2>
+            <h2 className="text-2xl font-semibold text-ink">{copy.product.specificationsTitle}</h2>
             <dl className="mt-5 grid gap-4 sm:grid-cols-2 lg:grid-cols-3">
               {specifications.map((entry) => (
                 <div key={entry.key} className="rounded-md bg-surface p-4">
                   <dt className="text-xs font-semibold uppercase tracking-[0.14em] text-muted">{entry.key}</dt>
-                  <dd className="mt-2 font-semibold text-white">{entry.text}</dd>
+                  <dd className="mt-2 font-semibold text-ink">{entry.text}</dd>
                 </div>
               ))}
             </dl>
@@ -214,11 +214,11 @@ export default async function LocalizedProductDetailsPage({ params, searchParams
       {faqEntries.length ? (
         <section className="bg-surface px-4 py-16 sm:px-6 lg:px-8">
           <div className="mx-auto max-w-7xl">
-            <h2 className="text-2xl font-semibold text-white">{copy.product.faqTitle}</h2>
+            <h2 className="text-2xl font-semibold text-ink">{copy.product.faqTitle}</h2>
             <dl className="mt-5 space-y-5">
               {faqEntries.map((entry) => (
                 <div key={entry.question}>
-                  <dt className="text-base font-semibold text-white">{entry.question}</dt>
+                  <dt className="text-base font-semibold text-ink">{entry.question}</dt>
                   <dd className="mt-1 text-sm text-metallic-silver">{entry.answer}</dd>
                 </div>
               ))}

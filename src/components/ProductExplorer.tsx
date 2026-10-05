@@ -92,7 +92,7 @@ export function ProductExplorer({
     <section className="bg-background px-4 py-16 sm:px-6 lg:px-8">
       <div className="mx-auto max-w-7xl">
         <div className="incar-card grid gap-3 rounded-lg p-4 md:grid-cols-[1.4fr_0.8fr_0.8fr_0.8fr]">
-          <label className="grid gap-2 text-sm font-semibold text-white">
+          <label className="grid gap-2 text-sm font-semibold text-ink">
             {dictionary.pages.products.searchLabel}
             <input
               value={search}
@@ -104,7 +104,7 @@ export function ProductExplorer({
           </label>
 
           {!fixedBrand ? (
-            <label className="grid gap-2 text-sm font-semibold text-white">
+            <label className="grid gap-2 text-sm font-semibold text-ink">
               {dictionary.pages.products.brandLabel}
               <select
                 value={brand}
@@ -124,7 +124,7 @@ export function ProductExplorer({
             </label>
           ) : null}
 
-          <label className="grid gap-2 text-sm font-semibold text-white">
+          <label className="grid gap-2 text-sm font-semibold text-ink">
             {dictionary.pages.products.modelLabel}
             <select
               value={model}
@@ -140,7 +140,7 @@ export function ProductExplorer({
             </select>
           </label>
 
-          <label className="grid gap-2 text-sm font-semibold text-white">
+          <label className="grid gap-2 text-sm font-semibold text-ink">
             {dictionary.pages.products.categoryLabel}
             <select
               value={category}
@@ -173,7 +173,7 @@ export function ProductExplorer({
 
         {filteredProducts.length === 0 ? (
           <div className="mt-8 rounded-lg border border-dashed border-metallic-silver/24 bg-surface p-8 text-center">
-            <p className="text-lg font-semibold text-white">
+            <p className="text-lg font-semibold text-ink">
               {hasPublishedProducts
                 ? dictionary.pages.products.noProducts
                 : dictionary.pages.products.noPublishedProducts}

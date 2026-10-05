@@ -10,11 +10,14 @@ import { switchLocalePathname } from "@/i18n/routing";
 type LanguageSwitcherProps = {
   fullWidth?: boolean;
   onSelect?: () => void;
+  /** Renders on dark surfaces (navy header): light inactive text. */
+  dark?: boolean;
 };
 
 export function LanguageSwitcher({
   fullWidth = false,
   onSelect,
+  dark = false,
 }: LanguageSwitcherProps) {
   const pathname = usePathname();
   const { locale } = useLocale();
@@ -37,9 +40,9 @@ export function LanguageSwitcher({
   return (
     <div
       aria-label={dictionary.language.switchLabel}
-      className={`flex rounded-md border border-border bg-background/40 ${
-        fullWidth ? "w-full p-0.5" : "p-1"
-      }`}
+      className={`flex rounded-md border ${
+        dark ? "border-white/20 bg-white/5" : "border-border bg-surface"
+      } ${fullWidth ? "w-full p-0.5" : "p-1"}`}
     >
       {(["ar", "en"] as const).map((item) => {
         const active = locale === item;
@@ -54,7 +57,9 @@ export function LanguageSwitcher({
             } ${
               active
                 ? "bg-primary text-white"
-                : "text-metallic-silver hover:bg-white/[0.04] hover:text-white"
+                : dark
+                  ? "text-white/70 hover:bg-white/10 hover:text-white"
+                  : "text-metallic-silver hover:bg-black/[0.05] hover:text-ink"
             }`}
           >
             {localeConfig[item].label}

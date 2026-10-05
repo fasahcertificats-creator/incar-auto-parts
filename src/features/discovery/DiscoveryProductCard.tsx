@@ -48,20 +48,20 @@ export function DiscoveryProductCard({
         <p className="text-xs font-semibold uppercase tracking-[0.14em] text-muted">
           {[make?.name, model?.name].filter(Boolean).join(" · ")}
         </p>
-        <h3 className="mt-2 text-xl font-semibold text-white">{product.name[locale]}</h3>
+        <h3 className="mt-2 text-xl font-semibold text-ink">{product.name[locale]}</h3>
         <p dir="ltr" className="mt-3 text-sm font-semibold text-metallic-silver">
           {primaryReference}
         </p>
         <dl className="mt-4 grid gap-2 text-sm text-muted">
           <div className="flex justify-between gap-4">
             <dt>{copy.product.compatibilityTitle}</dt>
-            <dd className="font-semibold text-white">
+            <dd className="font-semibold text-ink">
               {copy.product.compatibility[product.compatibilityStatus]}
             </dd>
           </div>
           <div className="flex justify-between gap-4">
             <dt>{copy.product.requestTitle}</dt>
-            <dd className="font-semibold text-white">
+            <dd className="font-semibold text-ink">
               {copy.product.request[product.requestEligibility]}
             </dd>
           </div>
@@ -79,7 +79,7 @@ export function DiscoveryProductCard({
           />
           <Link
             href={localizeHref(locale, detailsHref)}
-            className="incar-focus inline-flex min-h-11 items-center justify-center rounded-md border border-border px-4 text-sm font-semibold text-metallic-silver hover:text-white"
+            className="incar-focus inline-flex min-h-11 items-center justify-center rounded-md border border-border px-4 text-sm font-semibold text-metallic-silver hover:text-ink"
           >
             {copy.search.viewDetails}
           </Link>

@@ -54,25 +54,25 @@ export async function DiscoverySearch({
         {query && result ? (
           <div className="mt-10">
             <p className="text-sm text-muted">
-              {copy.originalQuery}: <bdi dir="ltr" className="font-semibold text-white">{result.originalQuery}</bdi>
+              {copy.originalQuery}: <bdi dir="ltr" className="font-semibold text-ink">{result.originalQuery}</bdi>
             </p>
 
             {result.status === "error" ? (
               <div className="mt-5 rounded-lg border border-primary/30 bg-surface p-6">
-                <h2 className="text-xl font-semibold text-white">{copy.errorTitle}</h2>
+                <h2 className="text-xl font-semibold text-ink">{copy.errorTitle}</h2>
                 <p className="mt-2 text-sm leading-7 text-muted">{copy.errorDescription}</p>
               </div>
             ) : null}
 
             {result.status === "none" ? (
               <div className="mt-5 rounded-lg border border-dashed border-metallic-silver/25 bg-surface p-7">
-                <h2 className="text-xl font-semibold text-white">{copy.noResultsTitle}</h2>
+                <h2 className="text-xl font-semibold text-ink">{copy.noResultsTitle}</h2>
                 <p className="mt-2 max-w-3xl text-sm leading-7 text-muted">{copy.noResultsDescription}</p>
                 <div className="mt-5 flex flex-col gap-3 sm:flex-row">
-                  <a href="#parts-search" className="incar-focus inline-flex min-h-11 items-center justify-center rounded-md border border-border px-4 text-sm font-semibold text-metallic-silver hover:text-white">
+                  <a href="#parts-search" className="incar-focus inline-flex min-h-11 items-center justify-center rounded-md border border-border px-4 text-sm font-semibold text-metallic-silver hover:text-ink">
                     {copy.modify}
                   </a>
-                  <Link href={localizeHref(locale, "/rfq#upload-parts-list")} className="incar-focus inline-flex min-h-11 items-center justify-center rounded-md border border-border px-4 text-sm font-semibold text-metallic-silver hover:text-white">
+                  <Link href={localizeHref(locale, "/rfq#upload-parts-list")} className="incar-focus inline-flex min-h-11 items-center justify-center rounded-md border border-border px-4 text-sm font-semibold text-metallic-silver hover:text-ink">
                     {getDictionary(locale).discovery.actions.uploadAction}
                   </Link>
                   <Link href={localizeHref(locale, "/sourcing-services")} className="incar-focus inline-flex min-h-11 items-center justify-center rounded-md bg-primary px-4 text-sm font-semibold text-white hover:bg-primary-hover">
@@ -84,7 +84,7 @@ export async function DiscoverySearch({
 
             {result.exactMatches.length ? (
               <section className="mt-8">
-                <h2 className="text-2xl font-semibold text-white">{copy.exactTitle}</h2>
+                <h2 className="text-2xl font-semibold text-ink">{copy.exactTitle}</h2>
                 <div className="mt-5 grid gap-6 md:grid-cols-2 xl:grid-cols-3">
                   {result.exactMatches.map((match) => (
                     <DiscoveryProductCard key={match.product.internalProductId} locale={locale} product={match.product} referenceMatch="exact" sourceHref={sourceHref} vehicleContext={vehicleContext} />
@@ -95,7 +95,7 @@ export async function DiscoverySearch({
 
             {result.possibleMatches.length ? (
               <section className="mt-8">
-                <h2 className="text-2xl font-semibold text-white">{copy.possibleTitle}</h2>
+                <h2 className="text-2xl font-semibold text-ink">{copy.possibleTitle}</h2>
                 <div className="mt-5 grid gap-6 md:grid-cols-2 xl:grid-cols-3">
                   {result.possibleMatches.map((match) => (
                     <DiscoveryProductCard key={match.product.internalProductId} locale={locale} product={match.product} referenceMatch="possible" sourceHref={sourceHref} vehicleContext={vehicleContext} />

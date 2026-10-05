@@ -9,7 +9,7 @@ export function TrustProofPoints({ pillars }: TrustProofPointsProps) {
     <div className="grid gap-4 md:grid-cols-2">
       {pillars.map((pillar) => (
         <article key={pillar.id} className="incar-card rounded-lg p-5">
-          <h3 className="text-lg font-semibold text-white">{pillar.title}</h3>
+          <h3 className="text-lg font-semibold text-ink">{pillar.title}</h3>
           <ul className="mt-4 grid gap-3 text-sm leading-6 text-muted">
             {pillar.proofPoints.map((proofPoint) => (
               <li key={proofPoint} className="border-s-2 border-primary/70 ps-3">

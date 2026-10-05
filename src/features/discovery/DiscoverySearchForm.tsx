@@ -27,7 +27,7 @@ export function DiscoverySearchForm({
       onSubmit={() => setIsLoading(true)}
       className="incar-card grid gap-3 rounded-lg p-5 md:grid-cols-[1fr_auto] md:items-end"
     >
-      <label className="grid gap-2 text-sm font-semibold text-white">
+      <label className="grid gap-2 text-sm font-semibold text-ink">
         {label}
         <input
           name="q"

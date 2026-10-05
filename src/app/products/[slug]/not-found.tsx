@@ -23,7 +23,7 @@ export default async function ProductNotFound() {
         };
 
   return (
-    <section className="bg-background px-4 py-24 text-white sm:px-6 lg:px-8">
+    <section className="bg-background px-4 py-24 text-ink sm:px-6 lg:px-8">
       <div className="mx-auto max-w-3xl text-center">
         <p className="text-sm font-bold uppercase tracking-[0.16em] text-metallic-silver">
           {copy.eyebrow}

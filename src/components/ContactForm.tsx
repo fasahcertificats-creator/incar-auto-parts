@@ -9,7 +9,7 @@ import type { ContactInquiryPayload } from "@/features/inquiries/api/contracts";
 
 const inputClass =
   "incar-input px-4 text-sm";
-const labelClass = "grid gap-2 text-sm font-semibold text-white";
+const labelClass = "grid gap-2 text-sm font-semibold text-ink";
 const EMAIL_PATTERN = /^[^\s@]+@[^\s@]+\.[^\s@]+$/u;
 
 // Mirrors the backend's contactInquiryShape (fullName/companyName 1-150/200
@@ -122,7 +122,7 @@ export function ContactForm() {
       {state === "success" && response ? (
         <div className="mt-6 rounded-md border border-metallic-silver/24 bg-background p-4 text-sm leading-6 text-metallic-silver">
           <p>{dictionary.forms.common.submitted}</p>
-          <p className="mt-2 font-semibold text-white">
+          <p className="mt-2 font-semibold text-ink">
             {dictionary.forms.common.reference}: {response.publicReference}
           </p>
         </div>

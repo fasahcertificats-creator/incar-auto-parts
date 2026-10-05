@@ -47,11 +47,11 @@ export function OrderLookupPage() {
     <section className="bg-background px-4 py-16 sm:px-6 lg:px-8">
       <div className="incar-card-elevated mx-auto max-w-2xl rounded-lg p-6 md:p-9">
         <p className="text-sm font-bold uppercase tracking-[0.16em] text-primary">{copy.eyebrow}</p>
-        <h1 className="mt-3 text-3xl font-semibold text-white">{copy.title}</h1>
+        <h1 className="mt-3 text-3xl font-semibold text-ink">{copy.title}</h1>
         <p className="mt-3 text-sm leading-7 text-muted">{copy.description}</p>
 
         <form onSubmit={handleSubmit} className="mt-8 grid gap-4">
-          <label className="grid gap-2 text-sm font-semibold text-white">
+          <label className="grid gap-2 text-sm font-semibold text-ink">
             {copy.referenceLabel}
             <input
               required
@@ -62,7 +62,7 @@ export function OrderLookupPage() {
               className="incar-input min-h-11 px-4 text-sm"
             />
           </label>
-          <label className="grid gap-2 text-sm font-semibold text-white">
+          <label className="grid gap-2 text-sm font-semibold text-ink">
             {copy.emailLabel}
             <input
               required

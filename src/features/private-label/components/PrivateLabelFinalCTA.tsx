@@ -13,7 +13,7 @@ export function PrivateLabelFinalCTA({
           <p className="text-xs font-bold uppercase tracking-[0.18em] text-primary">
             {dictionary.pages.privateLabel.finalEyebrow}
           </p>
-          <h2 className="mt-3 max-w-3xl text-3xl font-semibold leading-tight text-white md:text-5xl">
+          <h2 className="mt-3 max-w-3xl text-3xl font-semibold leading-tight text-ink md:text-5xl">
             {dictionary.pages.privateLabel.finalTitle}
           </h2>
           <p className="mt-4 max-w-2xl text-base leading-7 text-muted">

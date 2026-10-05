@@ -10,7 +10,7 @@ export function PrivateLabelProcessSteps({ steps }: PrivateLabelProcessStepsProp
       {steps.map((step) => (
         <article key={step.step} className="incar-card-elevated rounded-lg p-5">
           <span className="text-sm font-bold text-primary">{step.step}</span>
-          <h3 className="mt-4 text-lg font-semibold text-white">{step.title}</h3>
+          <h3 className="mt-4 text-lg font-semibold text-ink">{step.title}</h3>
           <p className="mt-3 text-sm leading-6 text-muted">{step.description}</p>
         </article>
       ))}

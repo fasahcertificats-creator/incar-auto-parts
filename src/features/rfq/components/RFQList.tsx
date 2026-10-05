@@ -18,7 +18,7 @@ export function RFQList() {
           <p className="text-sm font-bold uppercase tracking-[0.16em] text-metallic-silver">
             {dictionary.forms.rfq.listEyebrow}
           </p>
-          <h2 className="mt-2 text-2xl font-semibold text-white">
+          <h2 className="mt-2 text-2xl font-semibold text-ink">
             {dictionary.forms.rfq.listTitle}
           </h2>
         </div>
@@ -26,7 +26,7 @@ export function RFQList() {
           <button
             type="button"
             onClick={clearRFQ}
-            className="incar-focus rounded-sm text-sm font-semibold text-metallic-silver hover:text-white"
+            className="incar-focus rounded-sm text-sm font-semibold text-metallic-silver hover:text-ink"
           >
             {dictionary.common.clearRfq}
           </button>
@@ -44,7 +44,7 @@ export function RFQList() {
                 <div>
                   <Link
                     href={localizeHref(locale, `/products/${item.slug}`)}
-                    className="incar-focus break-words rounded-sm text-lg font-semibold text-white hover:text-metallic-silver"
+                    className="incar-focus break-words rounded-sm text-lg font-semibold text-ink hover:text-metallic-silver"
                   >
                     {item.productName}
                   </Link>
@@ -53,7 +53,7 @@ export function RFQList() {
                       <dt className="text-xs uppercase tracking-[0.14em] text-metallic-silver">
                         {dictionary.forms.rfq.brandModel}
                       </dt>
-                      <dd className="mt-1 font-semibold text-white">
+                      <dd className="mt-1 font-semibold text-ink">
                         {item.brand} {item.vehicleModel}
                       </dd>
                     </div>
@@ -61,7 +61,7 @@ export function RFQList() {
                       <dt className="text-xs uppercase tracking-[0.14em] text-metallic-silver">
                         {dictionary.productLabels.partNumber}
                       </dt>
-                      <dd dir="ltr" className="mt-1 break-all font-semibold text-white">
+                      <dd dir="ltr" className="mt-1 break-all font-semibold text-ink">
                         {item.partNumber}
                       </dd>
                     </div>
@@ -69,7 +69,7 @@ export function RFQList() {
                       <dt className="text-xs uppercase tracking-[0.14em] text-metallic-silver">
                         {dictionary.productLabels.oemNumber}
                       </dt>
-                      <dd dir="ltr" className="mt-1 break-all font-semibold text-white">
+                      <dd dir="ltr" className="mt-1 break-all font-semibold text-ink">
                         {item.oemNumber}
                       </dd>
                     </div>
@@ -93,7 +93,7 @@ export function RFQList() {
                   <button
                     type="button"
                     onClick={() => removeItem(item.productId)}
-                    className="incar-focus min-h-10 rounded-md border border-border px-3 text-sm font-semibold text-metallic-silver transition hover:border-metallic-silver/45 hover:text-white"
+                    className="incar-focus min-h-10 rounded-md border border-border px-3 text-sm font-semibold text-metallic-silver transition hover:border-metallic-silver/45 hover:text-ink"
                   >
                     {dictionary.common.remove}
                   </button>
@@ -106,7 +106,7 @@ export function RFQList() {
             {dictionary.forms.rfq.empty}
             <Link
               href={localizeHref(locale, "/parts")}
-              className="incar-focus mt-3 block rounded-sm font-semibold text-metallic-silver hover:text-white"
+              className="incar-focus mt-3 block rounded-sm font-semibold text-metallic-silver hover:text-ink"
             >
               {dictionary.common.exploreProducts}
             </Link>

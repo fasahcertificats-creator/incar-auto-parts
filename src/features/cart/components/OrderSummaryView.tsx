@@ -25,17 +25,17 @@ export function OrderSummaryView({
       <dl className="grid gap-4 rounded-md border border-border bg-background p-5 sm:grid-cols-2">
         <div className="sm:col-span-2">
           <dt className="text-xs font-semibold uppercase tracking-[0.14em] text-muted">{copy.reference}</dt>
-          <dd className="mt-2 break-all text-xl font-semibold text-white" dir="ltr">
+          <dd className="mt-2 break-all text-xl font-semibold text-ink" dir="ltr">
             {order.publicReference}
           </dd>
         </div>
         <div>
           <dt className="text-xs font-semibold uppercase tracking-[0.14em] text-muted">{copy.status}</dt>
-          <dd className="mt-2 text-white">{statusLabel}</dd>
+          <dd className="mt-2 text-ink">{statusLabel}</dd>
         </div>
         <div>
           <dt className="text-xs font-semibold uppercase tracking-[0.14em] text-muted">{copy.submittedAt}</dt>
-          <dd className="mt-2 text-white">
+          <dd className="mt-2 text-ink">
             {new Intl.DateTimeFormat(locale, { dateStyle: "medium", timeStyle: "short" }).format(
               new Date(order.createdAt),
             )}
@@ -43,7 +43,7 @@ export function OrderSummaryView({
         </div>
         <div>
           <dt className="text-xs font-semibold uppercase tracking-[0.14em] text-muted">{copy.total}</dt>
-          <dd dir="ltr" className="mt-2 text-white">
+          <dd dir="ltr" className="mt-2 text-ink">
             ${order.totalUsd} USD
           </dd>
         </div>
@@ -55,12 +55,12 @@ export function OrderSummaryView({
           {order.lineItems.map((item) => (
             <li key={item.id} className="flex items-center justify-between gap-3 py-2 text-sm">
               <div>
-                <p className="font-semibold text-white">{locale === "ar" ? item.nameAr : item.nameEn}</p>
+                <p className="font-semibold text-ink">{locale === "ar" ? item.nameAr : item.nameEn}</p>
                 <p dir="ltr" className="text-xs text-muted">
                   {item.partNumber} · ×{item.quantity}
                 </p>
               </div>
-              <p dir="ltr" className="whitespace-nowrap font-semibold text-white">
+              <p dir="ltr" className="whitespace-nowrap font-semibold text-ink">
                 ${(Number(item.unitPriceUsd) * item.quantity).toFixed(2)}
               </p>
             </li>
@@ -115,9 +115,9 @@ function ResubmitBlock({
 
   return (
     <form onSubmit={handleSubmit} className="mt-6 rounded-md border border-border bg-background p-5">
-      <h3 className="text-base font-semibold text-white">{copy.title}</h3>
+      <h3 className="text-base font-semibold text-ink">{copy.title}</h3>
       <p className="mt-1 text-sm text-muted">{copy.description}</p>
-      <label className="mt-4 grid gap-2 text-sm font-semibold text-white">
+      <label className="mt-4 grid gap-2 text-sm font-semibold text-ink">
         {copy.fileLabel}
         <input
           ref={fileInputRef}

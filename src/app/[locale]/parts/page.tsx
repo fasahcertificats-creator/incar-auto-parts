@@ -54,7 +54,7 @@ export default async function PartsPage({ params, searchParams }: PartsPageProps
 
   return (
     <>
-      <section className="bg-background px-4 py-20 text-white sm:px-6 lg:px-8">
+      <section className="bg-background px-4 py-20 text-ink sm:px-6 lg:px-8">
         <div className="mx-auto max-w-7xl">
           <DiscoveryBreadcrumbs
             locale={locale}
@@ -84,7 +84,7 @@ export default async function PartsPage({ params, searchParams }: PartsPageProps
 
       <section className="bg-surface px-4 py-16 sm:px-6 lg:px-8">
         <div className="mx-auto max-w-7xl">
-          <h2 className="text-3xl font-semibold text-white">{copy.parts.browseTitle}</h2>
+          <h2 className="text-3xl font-semibold text-ink">{copy.parts.browseTitle}</h2>
           <p className="mt-3 max-w-3xl text-sm leading-7 text-muted">
             {copy.parts.browseDescription}
           </p>
@@ -100,13 +100,13 @@ export default async function PartsPage({ params, searchParams }: PartsPageProps
                         {copy.sampleNotice}
                       </p>
                     ) : null}
-                    <h3 className="text-2xl font-semibold text-white">{make.name}</h3>
+                    <h3 className="text-2xl font-semibold text-ink">{make.name}</h3>
                     <p className="mt-3 text-sm leading-7 text-muted">
                       {models.map((model) => model.name).join(" · ")}
                     </p>
                     <Link
                       href={localizeHref(locale, `/parts/${make.slug}`)}
-                      className="incar-focus mt-5 inline-flex min-h-11 items-center rounded-md border border-border px-4 text-sm font-semibold text-metallic-silver hover:text-white"
+                      className="incar-focus mt-5 inline-flex min-h-11 items-center rounded-md border border-border px-4 text-sm font-semibold text-metallic-silver hover:text-ink"
                     >
                       {make.name}
                     </Link>
@@ -116,7 +116,7 @@ export default async function PartsPage({ params, searchParams }: PartsPageProps
             </div>
           ) : (
             <div className="mt-7 rounded-lg border border-dashed border-metallic-silver/25 bg-background p-7">
-              <h3 className="text-xl font-semibold text-white">{copy.parts.noMakesTitle}</h3>
+              <h3 className="text-xl font-semibold text-ink">{copy.parts.noMakesTitle}</h3>
               <p className="mt-2 max-w-3xl text-sm leading-7 text-muted">
                 {copy.parts.noMakesDescription}
               </p>
