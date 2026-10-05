@@ -530,3 +530,66 @@ export type AdminOrderDetail = {
   createdAt: string;
   updatedAt: string;
 };
+
+export const ADMIN_ACCOUNT_TRANSACTION_TYPES = [
+  "quote-obligation",
+  "order-payment",
+  "refund",
+  "manual-adjustment",
+] as const;
+export type AdminAccountTransactionType = (typeof ADMIN_ACCOUNT_TRANSACTION_TYPES)[number];
+
+export const ADMIN_COMMISSION_STATES = ["not-applicable", "tracked-separately", "baked-in"] as const;
+export type AdminCommissionState = (typeof ADMIN_COMMISSION_STATES)[number];
+
+export type AdminAccountTransaction = {
+  id: string;
+  customerId: string;
+  type: AdminAccountTransactionType;
+  amount: string;
+  currency: string;
+  exchangeRateToUsd: string;
+  amountUsd: string;
+  quoteId: string | null;
+  orderId: string | null;
+  refundOfTransactionId: string | null;
+  description: string | null;
+  createdByAdmin: string | null;
+  commissionState: AdminCommissionState;
+  commissionAmountUsd: string | null;
+  createdAt: string;
+};
+
+export type AdminAccountBalanceSummary = {
+  customerId: string;
+  balanceUsd: string;
+  outstandingOrdersUsd: string;
+  outstandingQuotesUsd: string;
+  totalCommissionUsd: string;
+};
+
+export type AdminAccountResponse = {
+  summary: AdminAccountBalanceSummary;
+  transactions: {
+    items: AdminAccountTransaction[];
+    total: number;
+    limit: number;
+    offset: number;
+  };
+};
+
+/** Optional on every transition that can create a ledger row (quote -> accepted, order -> payment-confirmed) — omitting both defaults to no commission recorded. */
+export type AdminCommissionInput = {
+  commissionState?: AdminCommissionState;
+  commissionAmountUsd?: number;
+};
+
+export type AdminAccountManualAdjustmentInput = {
+  amountUsd: number;
+  description: string;
+} & AdminCommissionInput;
+
+export type AdminAccountRefundInput = {
+  amountUsd: number;
+  description: string;
+};

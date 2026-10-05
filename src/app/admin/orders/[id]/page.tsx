@@ -9,7 +9,7 @@ import {
   adminGetOrder,
   adminUpdateOrderStatus,
 } from "@/features/admin/api/client";
-import type { AdminOrderDetail } from "@/features/admin/api/contracts";
+import { ADMIN_COMMISSION_STATES, type AdminCommissionState, type AdminOrderDetail } from "@/features/admin/api/contracts";
 
 type DetailState =
   | { kind: "loading" }
@@ -74,6 +74,9 @@ export default function AdminOrderDetailPage() {
   const [state, setState] = useState<DetailState>({ kind: "loading" });
   const [updating, setUpdating] = useState(false);
   const [updateError, setUpdateError] = useState<string | null>(null);
+  const [showPaymentCommission, setShowPaymentCommission] = useState(false);
+  const [paymentCommissionState, setPaymentCommissionState] = useState<AdminCommissionState>("not-applicable");
+  const [paymentCommissionAmount, setPaymentCommissionAmount] = useState("");
 
   useEffect(() => {
     let cancelled = false;
@@ -107,6 +110,26 @@ export default function AdminOrderDetailPage() {
     try {
       const updated = await adminUpdateOrderStatus(id, nextStatus);
       setState({ kind: "ready", order: updated });
+    } catch (caught) {
+      setUpdateError(caught instanceof AdminApiError ? caught.message : "Failed to update order status.");
+    } finally {
+      setUpdating(false);
+    }
+  }
+
+  async function handleConfirmPayment() {
+    setUpdating(true);
+    setUpdateError(null);
+    try {
+      const updated = await adminUpdateOrderStatus(id, "payment-confirmed", {
+        commissionState: paymentCommissionState,
+        commissionAmountUsd:
+          paymentCommissionState === "not-applicable" ? undefined : Number(paymentCommissionAmount),
+      });
+      setState({ kind: "ready", order: updated });
+      setShowPaymentCommission(false);
+      setPaymentCommissionState("not-applicable");
+      setPaymentCommissionAmount("");
     } catch (caught) {
       setUpdateError(caught instanceof AdminApiError ? caught.message : "Failed to update order status.");
     } finally {
@@ -247,17 +270,82 @@ export default function AdminOrderDetailPage() {
 
       {nextStatuses.length > 0 ? (
         <div className="mt-6 flex flex-wrap gap-3">
-          {nextStatuses.map((next) => (
+          {nextStatuses.map((next) =>
+            next === "payment-confirmed" ? (
+              <button
+                key={next}
+                type="button"
+                onClick={() => setShowPaymentCommission((open) => !open)}
+                disabled={updating}
+                className="incar-focus min-h-11 rounded-md border border-border px-5 text-sm font-semibold text-metallic-silver transition hover:border-metallic-silver/45 hover:text-white disabled:cursor-not-allowed disabled:opacity-60"
+              >
+                Mark as payment-confirmed
+              </button>
+            ) : (
+              <button
+                key={next}
+                type="button"
+                onClick={() => void handleStatusChange(next)}
+                disabled={updating}
+                className="incar-focus min-h-11 rounded-md border border-border px-5 text-sm font-semibold text-metallic-silver transition hover:border-metallic-silver/45 hover:text-white disabled:cursor-not-allowed disabled:opacity-60"
+              >
+                {updating ? "Updating…" : `Mark as ${next}`}
+              </button>
+            ),
+          )}
+        </div>
+      ) : null}
+
+      {showPaymentCommission ? (
+        <div className="incar-card mt-4 grid gap-4 rounded-lg p-6 sm:max-w-xl">
+          <p className="text-sm text-muted">
+            This records a payment on the customer&apos;s account. Commission is admin-only and never shown to the customer.
+          </p>
+          <div className="grid gap-3 sm:grid-cols-2">
+            <label className="grid gap-2 text-sm font-semibold text-white">
+              Commission
+              <select
+                value={paymentCommissionState}
+                onChange={(event) => setPaymentCommissionState(event.target.value as AdminCommissionState)}
+                className="incar-input min-h-11 px-4 text-sm"
+              >
+                {ADMIN_COMMISSION_STATES.map((option) => (
+                  <option key={option} value={option}>
+                    {option}
+                  </option>
+                ))}
+              </select>
+            </label>
+            <label className="grid gap-2 text-sm font-semibold text-white">
+              Commission amount (USD)
+              <input
+                type="number"
+                step={0.01}
+                value={paymentCommissionAmount}
+                onChange={(event) => setPaymentCommissionAmount(event.target.value)}
+                disabled={paymentCommissionState === "not-applicable"}
+                placeholder={paymentCommissionState === "not-applicable" ? "N/A" : "0.00"}
+                className="incar-input min-h-11 px-4 text-sm disabled:cursor-not-allowed disabled:opacity-60"
+              />
+            </label>
+          </div>
+          <div className="flex gap-3">
             <button
-              key={next}
               type="button"
-              onClick={() => void handleStatusChange(next)}
-              disabled={updating}
-              className="incar-focus min-h-11 rounded-md border border-border px-5 text-sm font-semibold text-metallic-silver transition hover:border-metallic-silver/45 hover:text-white disabled:cursor-not-allowed disabled:opacity-60"
+              onClick={() => setShowPaymentCommission(false)}
+              className="incar-focus min-h-10 rounded-md border border-border px-4 text-sm font-semibold text-metallic-silver hover:text-white"
             >
-              {updating ? "Updating…" : `Mark as ${next}`}
+              Cancel
             </button>
-          ))}
+            <button
+              type="button"
+              onClick={handleConfirmPayment}
+              disabled={updating}
+              className="incar-focus min-h-10 rounded-md bg-primary px-4 text-sm font-semibold text-white transition hover:bg-primary-hover disabled:cursor-not-allowed disabled:opacity-60"
+            >
+              {updating ? "Updating…" : "Confirm payment"}
+            </button>
+          </div>
         </div>
       ) : null}
     </div>

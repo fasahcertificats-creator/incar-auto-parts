@@ -1,6 +1,12 @@
 import type {
+  AdminAccountManualAdjustmentInput,
+  AdminAccountRefundInput,
+  AdminAccountResponse,
+  AdminAccountTransaction,
+  AdminAccountTransactionType,
   AdminCategory,
   AdminCategoryInput,
+  AdminCommissionInput,
   AdminCustomerDetail,
   AdminCustomerListResponse,
   AdminCustomerMergeResponse,
@@ -342,8 +348,15 @@ export function adminSendQuote(id: string): Promise<AdminQuoteDetail> {
   return request<AdminQuoteDetail>(`/v1/admin/quotes/${id}/send`, { method: "POST" });
 }
 
-export function adminUpdateQuoteStatus(id: string, status: string): Promise<AdminQuoteDetail> {
-  return request<AdminQuoteDetail>(`/v1/admin/quotes/${id}/status`, jsonInit("PATCH", { status }));
+export function adminUpdateQuoteStatus(
+  id: string,
+  status: string,
+  commission?: AdminCommissionInput,
+): Promise<AdminQuoteDetail> {
+  return request<AdminQuoteDetail>(
+    `/v1/admin/quotes/${id}/status`,
+    jsonInit("PATCH", { status, ...commission }),
+  );
 }
 
 export function adminListOrders(
@@ -360,8 +373,15 @@ export function adminGetOrder(id: string): Promise<AdminOrderDetail> {
   return request<AdminOrderDetail>(`/v1/admin/orders/${id}`);
 }
 
-export function adminUpdateOrderStatus(id: string, status: string): Promise<AdminOrderDetail> {
-  return request<AdminOrderDetail>(`/v1/admin/orders/${id}/status`, jsonInit("PATCH", { status }));
+export function adminUpdateOrderStatus(
+  id: string,
+  status: string,
+  commission?: AdminCommissionInput,
+): Promise<AdminOrderDetail> {
+  return request<AdminOrderDetail>(
+    `/v1/admin/orders/${id}/status`,
+    jsonInit("PATCH", { status, ...commission }),
+  );
 }
 
 export function adminOrderPaymentProofUrl(orderId: string, proofId: string): string {
@@ -382,4 +402,38 @@ export async function adminFetchPaymentProofObjectUrl(orderId: string, proofId: 
   }
   const blob = await response.blob();
   return URL.createObjectURL(blob);
+}
+
+export function adminGetAccount(
+  customerId: string,
+  params: { limit?: number; offset?: number; type?: AdminAccountTransactionType } = {},
+): Promise<AdminAccountResponse> {
+  const search = new URLSearchParams();
+  if (params.limit !== undefined) search.set("limit", String(params.limit));
+  if (params.offset !== undefined) search.set("offset", String(params.offset));
+  if (params.type) search.set("type", params.type);
+  const query = search.toString();
+  return request<AdminAccountResponse>(
+    `/v1/admin/customers/${customerId}/account${query ? `?${query}` : ""}`,
+  );
+}
+
+export function adminAddAccountAdjustment(
+  customerId: string,
+  payload: AdminAccountManualAdjustmentInput,
+): Promise<AdminAccountTransaction> {
+  return request<AdminAccountTransaction>(
+    `/v1/admin/customers/${customerId}/account/adjustments`,
+    jsonInit("POST", payload),
+  );
+}
+
+export function adminIssueRefund(
+  transactionId: string,
+  payload: AdminAccountRefundInput,
+): Promise<AdminAccountTransaction> {
+  return request<AdminAccountTransaction>(
+    `/v1/admin/account-transactions/${transactionId}/refund`,
+    jsonInit("POST", payload),
+  );
 }

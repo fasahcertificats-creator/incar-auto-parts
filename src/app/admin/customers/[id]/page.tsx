@@ -5,6 +5,7 @@ import { useParams, useRouter } from "next/navigation";
 import { type FormEvent, useEffect, useState } from "react";
 import { AdminApiError, adminGetCustomer, adminUpdateCustomer } from "@/features/admin/api/client";
 import { ADMIN_CUSTOMER_BUSINESS_TYPES, type AdminCustomerDetail } from "@/features/admin/api/contracts";
+import { AdminCustomerAccountPanel } from "@/features/admin/components/AdminCustomerAccountPanel";
 import { AdminRequestsList } from "@/features/admin/components/AdminRequestsList";
 import { CustomerMergeModal } from "@/features/admin/components/CustomerMergeModal";
 
@@ -236,6 +237,14 @@ export default function AdminCustomerDetailPage() {
           {saveState.kind === "saving" ? "Saving…" : "Save changes"}
         </button>
       </form>
+
+      {!isMerged ? (
+        <>
+          <h2 className="mt-8 text-lg font-semibold text-white">Account</h2>
+          <p className="mt-1 text-sm text-muted">Ledger and balance. Commission fields are never shown to the customer.</p>
+          <AdminCustomerAccountPanel customerId={id} />
+        </>
+      ) : null}
 
       <h2 className="mt-8 text-lg font-semibold text-white">Linked requests</h2>
       <div className="mt-4">

@@ -13,10 +13,12 @@ import {
   adminUpdateQuoteStatus,
   adminUploadQuoteAttachment,
 } from "@/features/admin/api/client";
-import type {
-  AdminProductSummary,
-  AdminQuoteDetail,
-  AdminQuoteLineItemInput,
+import {
+  ADMIN_COMMISSION_STATES,
+  type AdminCommissionState,
+  type AdminProductSummary,
+  type AdminQuoteDetail,
+  type AdminQuoteLineItemInput,
 } from "@/features/admin/api/contracts";
 
 type DetailState =
@@ -64,6 +66,9 @@ export default function AdminQuoteDetailPage() {
   const [products, setProducts] = useState<AdminProductSummary[]>([]);
   const fileInputRef = useRef<HTMLInputElement>(null);
   const [uploadingAttachment, setUploadingAttachment] = useState(false);
+  const [showAcceptCommission, setShowAcceptCommission] = useState(false);
+  const [acceptCommissionState, setAcceptCommissionState] = useState<AdminCommissionState>("not-applicable");
+  const [acceptCommissionAmount, setAcceptCommissionAmount] = useState("");
 
   useEffect(() => {
     let cancelled = false;
@@ -198,6 +203,23 @@ export default function AdminQuoteDetailPage() {
     try {
       const updated = await adminUpdateQuoteStatus(id, nextStatus);
       setState({ kind: "ready", quote: updated });
+    } catch (caught) {
+      setSaveError(caught instanceof AdminApiError ? caught.message : "Failed to update status.");
+    }
+  }
+
+  async function handleConfirmAccept() {
+    setSaveError(null);
+    try {
+      const updated = await adminUpdateQuoteStatus(id, "accepted", {
+        commissionState: acceptCommissionState,
+        commissionAmountUsd:
+          acceptCommissionState === "not-applicable" ? undefined : Number(acceptCommissionAmount),
+      });
+      setState({ kind: "ready", quote: updated });
+      setShowAcceptCommission(false);
+      setAcceptCommissionState("not-applicable");
+      setAcceptCommissionAmount("");
     } catch (caught) {
       setSaveError(caught instanceof AdminApiError ? caught.message : "Failed to update status.");
     }
@@ -441,17 +463,80 @@ export default function AdminQuoteDetailPage() {
             {sending ? "Sending…" : "Send quote by email"}
           </button>
         ) : null}
-        {nextStatuses.map((next) => (
-          <button
-            key={next}
-            type="button"
-            onClick={() => handleStatusChange(next)}
-            className="incar-focus min-h-11 rounded-md border border-border px-5 text-sm font-semibold text-metallic-silver transition hover:border-metallic-silver/45 hover:text-white"
-          >
-            Mark as {next}
-          </button>
-        ))}
+        {nextStatuses.map((next) =>
+          next === "accepted" ? (
+            <button
+              key={next}
+              type="button"
+              onClick={() => setShowAcceptCommission((open) => !open)}
+              className="incar-focus min-h-11 rounded-md border border-border px-5 text-sm font-semibold text-metallic-silver transition hover:border-metallic-silver/45 hover:text-white"
+            >
+              Mark as accepted
+            </button>
+          ) : (
+            <button
+              key={next}
+              type="button"
+              onClick={() => handleStatusChange(next)}
+              className="incar-focus min-h-11 rounded-md border border-border px-5 text-sm font-semibold text-metallic-silver transition hover:border-metallic-silver/45 hover:text-white"
+            >
+              Mark as {next}
+            </button>
+          ),
+        )}
       </div>
+
+      {showAcceptCommission ? (
+        <div className="incar-card mt-4 grid gap-4 rounded-lg p-6 sm:max-w-xl">
+          <p className="text-sm text-muted">
+            This records a quote obligation on the customer&apos;s account. Commission is admin-only and never shown to the customer.
+          </p>
+          <div className="grid gap-3 sm:grid-cols-2">
+            <label className="grid gap-2 text-sm font-semibold text-white">
+              Commission
+              <select
+                value={acceptCommissionState}
+                onChange={(event) => setAcceptCommissionState(event.target.value as AdminCommissionState)}
+                className="incar-input min-h-11 px-4 text-sm"
+              >
+                {ADMIN_COMMISSION_STATES.map((option) => (
+                  <option key={option} value={option}>
+                    {option}
+                  </option>
+                ))}
+              </select>
+            </label>
+            <label className="grid gap-2 text-sm font-semibold text-white">
+              Commission amount (USD)
+              <input
+                type="number"
+                step={0.01}
+                value={acceptCommissionAmount}
+                onChange={(event) => setAcceptCommissionAmount(event.target.value)}
+                disabled={acceptCommissionState === "not-applicable"}
+                placeholder={acceptCommissionState === "not-applicable" ? "N/A" : "0.00"}
+                className="incar-input min-h-11 px-4 text-sm disabled:cursor-not-allowed disabled:opacity-60"
+              />
+            </label>
+          </div>
+          <div className="flex gap-3">
+            <button
+              type="button"
+              onClick={() => setShowAcceptCommission(false)}
+              className="incar-focus min-h-10 rounded-md border border-border px-4 text-sm font-semibold text-metallic-silver hover:text-white"
+            >
+              Cancel
+            </button>
+            <button
+              type="button"
+              onClick={handleConfirmAccept}
+              className="incar-focus min-h-10 rounded-md bg-primary px-4 text-sm font-semibold text-white transition hover:bg-primary-hover"
+            >
+              Confirm accepted
+            </button>
+          </div>
+        </div>
+      ) : null}
     </div>
   );
 }

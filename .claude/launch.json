@@ -1,0 +1,18 @@
+{
+  "version": "0.0.1",
+  "configurations": [
+    {
+      "name": "incar-dev",
+      "runtimeExecutable": "npm",
+      "runtimeArgs": ["run", "dev"],
+      "port": 3000,
+      "autoPort": true
+    },
+    {
+      "name": "incar-backend-dev",
+      "runtimeExecutable": "npm",
+      "runtimeArgs": ["--prefix", "D:\\in car\\incar-backend", "run", "start:dev"],
+      "port": 4000
+    }
+  ]
+}
