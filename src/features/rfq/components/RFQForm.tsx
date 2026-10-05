@@ -278,7 +278,7 @@ export function RFQForm() {
           tabIndex={-1}
           role="alert"
           aria-live="assertive"
-          className="incar-focus mt-6 rounded-md border border-primary/30 bg-primary/10 p-4 text-sm leading-6 text-white"
+          className="incar-focus mt-6 rounded-md border border-primary/30 bg-primary/10 p-4 text-sm leading-6 text-ink"
         >
           <p className="font-semibold">{integration.errorTitle}</p>
           <ul className="mt-2 list-disc space-y-1 ps-5">

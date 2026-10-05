@@ -74,7 +74,7 @@ export function CheckoutConfirmation() {
         ) : null}
 
         {state.kind === "unavailable" || state.kind === "recoverable-error" ? (
-          <div className="mt-8 rounded-md border border-primary/30 bg-primary/10 p-5 text-sm leading-7 text-white" role="alert">
+          <div className="mt-8 rounded-md border border-primary/30 bg-primary/10 p-5 text-sm leading-7 text-ink" role="alert">
             <p>{state.kind === "unavailable" ? copy.unavailable : copy.loadError}</p>
             {state.kind === "recoverable-error" ? (
               <button

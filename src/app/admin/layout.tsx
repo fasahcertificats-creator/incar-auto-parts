@@ -16,7 +16,7 @@ export default function AdminLayout({ children }: { children: React.ReactNode })
     // the root <html> tag is shared with the public site (dir/lang come from
     // getServerLocale() there), so this div forces correct direction for the
     // admin subtree specifically rather than inheriting a stale RTL setting.
-    <div dir="ltr" lang="en" className="min-h-screen bg-background text-foreground">
+    <div dir="ltr" lang="en" className="min-h-screen bg-background text-foreground [--background:#070707] [--border:rgba(238,240,242,0.14)] [--card-light:#151515] [--foreground:#eef0f2] [--ink:#eef0f2] [--metallic-silver:#c7ccd1] [--muted:#9aa0a8] [--muted-foreground:#c7ccd1] [--soft-silver:#eef0f2] [--surface:#151515] [--surface-elevated:#232323] [--surface-muted:#2e2e2e]">
       <div className="flex min-h-screen flex-col lg:flex-row">
         {/* AdminSidebar/AdminMobileNav render nothing on /admin/login, so the
             login page just gets the bare <main> below, centered by its own

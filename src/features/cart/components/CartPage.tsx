@@ -82,7 +82,7 @@ export function CartPage() {
           <h1 className="mt-3 text-3xl font-semibold text-ink">{copy.title}</h1>
           <p className="mt-4 text-sm text-muted">{copy.empty}</p>
           {notices.map((notice) => (
-            <p key={notice} className="mt-4 rounded-md border border-primary/30 bg-primary/10 p-4 text-start text-sm text-white" role="alert">
+            <p key={notice} className="mt-4 rounded-md border border-primary/30 bg-primary/10 p-4 text-start text-sm text-ink" role="alert">
               {notice}
             </p>
           ))}
@@ -110,7 +110,7 @@ export function CartPage() {
           </p>
         ) : null}
         {notices.map((notice) => (
-          <p key={notice} className="mt-4 rounded-md border border-primary/30 bg-primary/10 p-4 text-sm text-white" role="alert">
+          <p key={notice} className="mt-4 rounded-md border border-primary/30 bg-primary/10 p-4 text-sm text-ink" role="alert">
             {notice}
           </p>
         ))}

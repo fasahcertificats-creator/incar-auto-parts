@@ -326,7 +326,7 @@ export function CheckoutFlow() {
                 ) : null}
               </dl>
             ) : (
-              <p className="rounded-md border border-primary/30 bg-primary/10 p-4 text-sm text-white">
+              <p className="rounded-md border border-primary/30 bg-primary/10 p-4 text-sm text-ink">
                 {copy.payment.unavailable}
               </p>
             )}

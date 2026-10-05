@@ -68,7 +68,7 @@ export function OrderSummaryView({
         </ul>
       </div>
 
-      <p className="mt-6 rounded-md border border-primary/30 bg-primary/10 p-5 text-sm leading-7 text-white">
+      <p className="mt-6 rounded-md border border-primary/30 bg-primary/10 p-5 text-sm leading-7 text-ink">
         {copy.teamNote}
       </p>
 

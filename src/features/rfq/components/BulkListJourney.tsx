@@ -288,15 +288,15 @@ export function BulkListJourney() {
       <div className="mx-auto max-w-5xl">
         <ol className="mb-8 grid grid-cols-3 gap-2" aria-label={copy.title}>
           {copy.steps.map((step, index) => (
-            <li key={step} className={`rounded-md border px-3 py-3 text-center text-sm font-semibold ${index <= activeStep ? "border-primary bg-primary/10 text-white" : "border-border text-muted"}`} aria-current={index === activeStep ? "step" : undefined}>
+            <li key={step} className={`rounded-md border px-3 py-3 text-center text-sm font-semibold ${index <= activeStep ? "border-primary bg-primary text-white" : "border-border text-muted"}`} aria-current={index === activeStep ? "step" : undefined}>
               {index + 1}. {step}
             </li>
           ))}
         </ol>
 
         <div aria-live="polite" className="sr-only">{busy ? copy.uploading : message}</div>
-        {message ? <div role="alert" className="mb-5 rounded-md border border-primary/40 bg-primary/10 p-4 text-sm font-semibold text-white">{message}</div> : null}
-        {receiptLost ? <div role="alert" className="mb-5 rounded-md border border-primary/40 bg-primary/10 p-4 text-sm text-white">{copy.receiptLost}</div> : null}
+        {message ? <div role="alert" className="mb-5 rounded-md border border-primary/40 bg-primary/10 p-4 text-sm font-semibold text-ink">{message}</div> : null}
+        {receiptLost ? <div role="alert" className="mb-5 rounded-md border border-primary/40 bg-primary/10 p-4 text-sm text-ink">{copy.receiptLost}</div> : null}
 
         {phase === "recovering" ? (
           <div className="incar-card-elevated rounded-lg p-8 text-center text-ink" role="status">{copy.recovering}</div>

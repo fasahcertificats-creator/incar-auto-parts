@@ -83,17 +83,17 @@ export function OrderLookupPage() {
         </form>
 
         {state.kind === "not-found" ? (
-          <p className="mt-6 rounded-md border border-primary/30 bg-primary/10 p-4 text-sm text-white" role="alert">
+          <p className="mt-6 rounded-md border border-primary/30 bg-primary/10 p-4 text-sm text-ink" role="alert">
             {copy.notFound}
           </p>
         ) : null}
         {state.kind === "rate-limit" ? (
-          <p className="mt-6 rounded-md border border-primary/30 bg-primary/10 p-4 text-sm text-white" role="alert">
+          <p className="mt-6 rounded-md border border-primary/30 bg-primary/10 p-4 text-sm text-ink" role="alert">
             {copy.rateLimit}
           </p>
         ) : null}
         {state.kind === "error" ? (
-          <p className="mt-6 rounded-md border border-primary/30 bg-primary/10 p-4 text-sm text-white" role="alert">
+          <p className="mt-6 rounded-md border border-primary/30 bg-primary/10 p-4 text-sm text-ink" role="alert">
             {copy.genericError}
           </p>
         ) : null}
