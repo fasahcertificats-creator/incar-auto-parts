@@ -782,10 +782,15 @@ function validateProduct(context: ValidationContext, record: UnknownRecord, inde
       );
     }
     if (relationships.length === 0) {
+      // Downgraded from error to warning (2026-10): wholesale catalog imports
+      // (factory catalogs) arrive without structured fitment — their fitment
+      // lives in the description text. Rejecting them hid all 1267 imported
+      // products from the site; discovery eligibility already tolerates an
+      // empty relationship list.
       addIssue(
         context,
         {
-          level: "error",
+          level: "warning",
           entityType: "product",
           entityId: id,
           field: "vehicleRelationships",
