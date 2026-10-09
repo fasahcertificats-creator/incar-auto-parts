@@ -88,6 +88,8 @@ export const ar = {
   categories: {
     "Brake System": "نظام الفرامل",
     "Suspension Parts": "قطع التعليق",
+    "Steering Parts": "قطع التوجيه",
+    "Body Parts": "قطع الهيكل الخارجية",
     Filters: "الفلاتر",
     "Engine Parts": "قطع المحرك",
     "Interior Parts": "قطع داخلية",

@@ -88,6 +88,8 @@ export const en = {
   categories: {
     "Brake System": "Brake System",
     "Suspension Parts": "Suspension Parts",
+    "Steering Parts": "Steering Parts",
+    "Body Parts": "Body Parts",
     Filters: "Filters",
     "Engine Parts": "Engine Parts",
     "Interior Parts": "Interior Parts",
