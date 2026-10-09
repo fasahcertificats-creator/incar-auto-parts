@@ -1,3 +1,5 @@
+import { getPublicApiBaseUrl } from "@/lib/public-api-base-url";
+
 import type {
   BankDetailsResponse,
   OrderCartItemInput,
@@ -15,9 +17,7 @@ const DEFAULT_REQUEST_TIMEOUT_MS = 15_000;
 const DEFAULT_UPLOAD_TIMEOUT_MS = 60_000;
 
 function getApiBaseUrl(override?: string) {
-  const configured = override ?? process.env.NEXT_PUBLIC_INCAR_API_BASE_URL;
-  const normalized = configured?.trim().replace(/\/+$/u, "");
-  return normalized ?? "";
+  return getPublicApiBaseUrl(override);
 }
 
 /** See src/features/rfq/api/client.ts's withTimeout — same rationale, kept
