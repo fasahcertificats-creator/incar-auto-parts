@@ -329,6 +329,30 @@ export async function searchProductsByReference(
       }
     }
 
+    if (!exactMatches.length && !possibleMatches.length) {
+      // Fallback: name / part-number-prefix search so queries like a car
+      // make ("TOYOTA") or a series prefix ("BH-") still surface products.
+      const needle = originalQuery.trim().toLowerCase();
+      if (needle.length >= 2) {
+        for (const product of products) {
+          const nameHit =
+            product.name.en.toLowerCase().includes(needle) ||
+            product.name.ar.includes(originalQuery.trim());
+          const partHit = normalizeReference(
+            product.references.incarPartNumber ?? "",
+          ).startsWith(normalizedQuery);
+          if (nameHit || partHit) {
+            possibleMatches.push({
+              product,
+              referenceMatch: "possible",
+              matchedReference: product.references.incarPartNumber ?? "",
+            });
+            if (possibleMatches.length >= 60) break;
+          }
+        }
+      }
+    }
+
     if (exactMatches.length || possibleMatches.length) {
       return {
         status: "success",
