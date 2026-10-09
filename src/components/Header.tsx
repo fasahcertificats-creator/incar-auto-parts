@@ -121,12 +121,13 @@ export function Header() {
         </div>
       </div>
 
-      {/* Desktop nav row: white strip under the navy header, Marketo-style */}
+      {/* Desktop nav row: white strip under the navy header, sections centered */}
       <div className="hidden border-b border-border bg-background lg:block">
-        <div className="mx-auto flex max-w-[94rem] items-center justify-between px-4 sm:px-6 lg:px-8">
+        <div className="mx-auto grid max-w-[94rem] grid-cols-[1fr_auto_1fr] items-center px-4 sm:px-6 lg:px-8">
+          <span aria-hidden="true" />
           <nav
             aria-label={dictionary.navigation.menu}
-            className="flex items-center gap-1 text-[13px] font-semibold text-ink"
+            className="flex items-center justify-center gap-1 text-[13px] font-semibold text-ink"
           >
             {mainNavigation.map((item) => {
               const active = isActivePath(pathname, item.href);
@@ -147,7 +148,7 @@ export function Header() {
           </nav>
           <Link
             href={localizeHref(locale, "/rfq/upload-list")}
-            className="incar-focus inline-flex min-h-9 items-center whitespace-nowrap rounded-md border border-primary/35 px-3.5 text-xs font-bold text-primary transition hover:bg-primary hover:text-white"
+            className="incar-focus inline-flex min-h-9 items-center justify-self-end whitespace-nowrap rounded-md border border-primary/35 px-3.5 text-xs font-bold text-primary transition hover:bg-primary hover:text-white"
           >
             {dictionary.navigation.uploadPartsList}
           </Link>

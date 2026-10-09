@@ -123,6 +123,38 @@ export const en = {
       emptyDescription:
         "Search by Part Number or OEM Reference, or request an unlisted part for review.",
     },
+    cars: {
+      eyebrow: "Browse by Vehicle",
+      title: "Pick Your Car, See Its Parts",
+      description:
+        "Every make takes you straight to its available parts — hoods, fenders, steering, suspension and more.",
+      partsCount: "{count} parts",
+      viewAll: "View all parts",
+      makes: {
+        toyota: "Toyota",
+        lexus: "Lexus",
+        nissan: "Nissan",
+        mazda: "Mazda",
+        chevrolet: "Chevrolet",
+        buick: "Buick",
+        haima: "Haima",
+        tesla: "Tesla",
+      },
+    },
+    showcaseMech: {
+      eyebrow: "Best Sellers",
+      title: "Steering & Suspension Parts",
+      description:
+        "Tie rods, ball joints, control arms and shock absorbers — the most requested by wholesalers.",
+      viewAll: "View the full section",
+    },
+    showcaseBody: {
+      eyebrow: "Accessories & Exterior",
+      title: "Exterior Body Parts",
+      description:
+        "Hoods, fenders, doors, bumpers and radiator supports — OEM-matching quality.",
+      viewAll: "View the full section",
+    },
     upload: {
       eyebrow: "Multiple parts? Upload Parts List",
       title: "Have a Parts List? Send It in One Request",

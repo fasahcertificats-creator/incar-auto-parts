@@ -1,10 +1,8 @@
 import Image from "next/image";
 import Link from "next/link";
 import { CTAButton } from "@/components/CTAButton";
-import {
-  getEligibleModelsForMake,
-  getPublishedMakes,
-} from "@/features/discovery/repository";
+import { ProductCard } from "@/components/ProductCard";
+import { getPublishedProducts } from "@/features/discovery/repository";
 import { getDictionary } from "@/i18n/dictionaries";
 import { localizeHref } from "@/i18n/routing";
 import { getServerLocale } from "@/i18n/server";
@@ -125,13 +123,37 @@ function SourcingStepIcon({ index }: { index: number }) {
   );
 }
 
+const carMakes = [
+  { key: "toyota", q: "TOYOTA", img: "/images/home/car-toyota.jpg" },
+  { key: "lexus", q: "LEXUS", img: "/images/home/car-lexus.jpg" },
+  { key: "nissan", q: "NISSAN", img: "/images/home/car-nissan.jpg" },
+  { key: "mazda", q: "MAZDA", img: "/images/home/car-mazda.jpg" },
+  { key: "chevrolet", q: "CHEVROLET", img: "/images/home/car-chevrolet.jpg" },
+  { key: "buick", q: "BUICK", img: "/images/home/car-buick.jpg" },
+  { key: "haima", q: "HAIMA", img: "/images/home/car-haima.jpg" },
+  { key: "tesla", q: "TESLA", img: "/images/home/car-tesla.jpg" },
+] as const;
+
 export async function HomeFoundation() {
   const locale = await getServerLocale();
   const dictionary = getDictionary(locale);
   const copy = dictionary.homeFoundation;
-  const makes = await getPublishedMakes();
-  const modelsByMake = await Promise.all(makes.map((make) => getEligibleModelsForMake(make.id)));
+  const products = await getPublishedProducts();
   const isArabic = locale === "ar";
+
+  const makeCounts = new Map(
+    carMakes.map((make) => [
+      make.key,
+      products.filter((product) => product.name.en.toUpperCase().includes(make.q)).length,
+    ]),
+  );
+  const withImages = products.filter((product) => product.images.length > 0);
+  const mechProducts = withImages
+    .filter((product) => product.category === "Steering Parts" || product.category === "Suspension Parts")
+    .slice(0, 4);
+  const bodyProducts = withImages
+    .filter((product) => product.category === "Body Parts")
+    .slice(0, 4);
 
   const promoCards = [
     {
@@ -232,52 +254,111 @@ export async function HomeFoundation() {
         </div>
       </section>
 
-      {/* Browse by vehicle */}
+      {/* Browse by car — Garaze-style category tiles, the car IS the category */}
       <section className="bg-background px-4 py-10 sm:px-6 sm:py-16 lg:px-8">
         <div className="mx-auto max-w-7xl">
           <HomeSectionHeader
             isArabic={isArabic}
-            eyebrow={copy.browse.eyebrow}
-            title={copy.browse.title}
-            description={copy.browse.description}
+            eyebrow={copy.cars.eyebrow}
+            title={copy.cars.title}
+            description={copy.cars.description}
           />
-          {makes.length ? (
-            <div className="mt-4 grid gap-3.5 sm:mt-8 sm:gap-5 lg:grid-cols-2">
-              {makes.map((make, index) => (
-                <article key={make.id} className="incar-card rounded-lg p-4 sm:p-6">
-                  {make.isSampleData ? (
-                    <p className="mb-3 text-xs font-semibold text-metallic-silver">
-                      {dictionary.discovery.sampleNotice}
-                    </p>
-                  ) : null}
-                  <Link
-                    href={localizeHref(locale, `/parts/${make.slug}`)}
-                    className="incar-focus rounded-sm text-2xl font-semibold text-ink hover:text-primary"
-                  >
-                    {make.name}
-                  </Link>
-                  <div className="mt-4 flex flex-wrap gap-2.5 sm:gap-2">
-                    {modelsByMake[index].map((model) => (
-                      <Link
-                        key={model.id}
-                        href={localizeHref(locale, `/parts/${make.slug}/${model.slug}`)}
-                        className="incar-focus inline-flex min-h-11 items-center rounded-md border border-border bg-surface px-4 text-sm font-semibold text-metallic-silver transition hover:border-primary/40 hover:text-primary"
-                      >
-                        {model.name}
-                      </Link>
-                    ))}
-                  </div>
-                </article>
-              ))}
-            </div>
-          ) : (
-            <div className="mt-4 rounded-lg border border-border bg-surface p-4 sm:mt-8 sm:p-7">
-              <h2 className="text-base font-semibold leading-6 text-ink sm:text-xl sm:leading-7">{copy.browse.emptyTitle}</h2>
-              <p className="mt-1.5 max-w-3xl text-[14px] leading-6 text-muted sm:mt-2 sm:text-sm sm:leading-7">
-                {copy.browse.emptyDescription}
+          <div className="mt-4 grid grid-cols-2 gap-3.5 sm:mt-8 sm:gap-5 lg:grid-cols-4">
+            {carMakes.map((make) => (
+              <Link
+                key={make.key}
+                href={localizeHref(locale, `/parts?q=${make.q}`)}
+                className="incar-focus incar-card group relative block overflow-hidden rounded-lg"
+              >
+                <div className="relative aspect-[4/3] overflow-hidden bg-surface-elevated">
+                  <Image
+                    src={make.img}
+                    alt={copy.cars.makes[make.key]}
+                    fill
+                    sizes="(min-width: 1024px) 25vw, 50vw"
+                    className="object-cover transition duration-300 group-hover:scale-105"
+                  />
+                  <div className="absolute inset-0 bg-[linear-gradient(180deg,rgba(19,27,38,0)_45%,rgba(19,27,38,0.82))]" />
+                </div>
+                <div className="absolute inset-x-0 bottom-0 flex items-end justify-between gap-2 p-3.5 sm:p-4">
+                  <h3 className="text-lg font-bold text-white sm:text-xl">
+                    {copy.cars.makes[make.key]}
+                  </h3>
+                  <span className="rounded-full bg-primary px-2.5 py-1 text-[11px] font-bold text-white sm:text-xs">
+                    {copy.cars.partsCount.replace("{count}", String(makeCounts.get(make.key) ?? 0))}
+                  </span>
+                </div>
+              </Link>
+            ))}
+          </div>
+        </div>
+      </section>
+
+      {/* Best sellers — mechanical parts (steering & suspension) with banner card */}
+      <section className="bg-surface px-4 py-10 sm:px-6 sm:py-16 lg:px-8">
+        <div className="mx-auto grid max-w-7xl gap-4 sm:gap-5 lg:grid-cols-[280px_1fr]">
+          <article className="incar-card relative flex min-h-56 flex-col justify-end overflow-hidden rounded-lg p-5 sm:p-6">
+            <Image
+              src="/images/home/banner-mechanical.jpg"
+              alt={copy.showcaseMech.title}
+              fill
+              sizes="(min-width: 1024px) 280px, 90vw"
+              className="object-cover"
+            />
+            <div className="absolute inset-0 bg-[linear-gradient(180deg,rgba(19,27,38,0.25),rgba(19,27,38,0.9))]" />
+            <div className="relative">
+              <p className={`text-[12px] font-bold text-primary ${isArabic ? "" : "uppercase tracking-[0.12em]"}`}>
+                {copy.showcaseMech.eyebrow}
               </p>
+              <h3 className="mt-1.5 text-xl font-bold text-white">{copy.showcaseMech.title}</h3>
+              <p className="mt-1.5 text-[13px] leading-6 text-white/75">{copy.showcaseMech.description}</p>
+              <Link
+                href={localizeHref(locale, "/parts?q=LS-")}
+                className="incar-focus mt-4 inline-flex min-h-10 items-center rounded-md bg-primary px-4 text-[13px] font-bold text-white transition hover:bg-primary-hover"
+              >
+                {copy.showcaseMech.viewAll}
+              </Link>
             </div>
-          )}
+          </article>
+          <div className="grid gap-4 sm:grid-cols-2 sm:gap-5 xl:grid-cols-4">
+            {mechProducts.map((product) => (
+              <ProductCard key={product.slug} product={product} />
+            ))}
+          </div>
+        </div>
+      </section>
+
+      {/* Exterior accessories — body parts with banner card */}
+      <section className="bg-background px-4 py-10 sm:px-6 sm:py-16 lg:px-8">
+        <div className="mx-auto grid max-w-7xl gap-4 sm:gap-5 lg:grid-cols-[1fr_280px]">
+          <div className="order-2 grid gap-4 sm:grid-cols-2 sm:gap-5 xl:grid-cols-4 lg:order-1">
+            {bodyProducts.map((product) => (
+              <ProductCard key={product.slug} product={product} />
+            ))}
+          </div>
+          <article className="incar-card relative order-1 flex min-h-56 flex-col justify-end overflow-hidden rounded-lg p-5 sm:p-6 lg:order-2">
+            <Image
+              src="/images/home/banner-exterior.jpg"
+              alt={copy.showcaseBody.title}
+              fill
+              sizes="(min-width: 1024px) 280px, 90vw"
+              className="object-cover"
+            />
+            <div className="absolute inset-0 bg-[linear-gradient(180deg,rgba(19,27,38,0.25),rgba(19,27,38,0.9))]" />
+            <div className="relative">
+              <p className={`text-[12px] font-bold text-primary ${isArabic ? "" : "uppercase tracking-[0.12em]"}`}>
+                {copy.showcaseBody.eyebrow}
+              </p>
+              <h3 className="mt-1.5 text-xl font-bold text-white">{copy.showcaseBody.title}</h3>
+              <p className="mt-1.5 text-[13px] leading-6 text-white/75">{copy.showcaseBody.description}</p>
+              <Link
+                href={localizeHref(locale, "/parts?q=BH-")}
+                className="incar-focus mt-4 inline-flex min-h-10 items-center rounded-md bg-primary px-4 text-[13px] font-bold text-white transition hover:bg-primary-hover"
+              >
+                {copy.showcaseBody.viewAll}
+              </Link>
+            </div>
+          </article>
         </div>
       </section>
 
