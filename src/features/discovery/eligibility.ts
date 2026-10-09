@@ -17,7 +17,10 @@ export function isProductPublishingEligible(product: Product) {
       hasText(product.name.ar) &&
       hasText(product.name.en) &&
       hasReference &&
-      product.vehicleRelationships.length > 0 &&
+      // vehicleRelationships intentionally NOT required: wholesale catalog
+      // imports (e.g. factory catalogs) arrive without structured fitment —
+      // their fitment lives in the description text. The product page
+      // already renders fine with an empty relationship list.
       product.compatibilityStatus &&
       product.requestEligibility &&
       !product.hasCriticalDataConflict,
